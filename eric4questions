@@ -38,3 +38,14 @@ Once we align on these points, I'll finalize the reduced scope and phased implem
 Thanks,
 
 Daniel
+
+
+Thanks, Eric, that helps. Yes, I am less concerned about hosting and runners now that deployed means working from our laptops. I will build to run from a laptop first and treat the pipeline as a later step. Nov 20 is still my target, counting from the start date you'll send after training.
+Three things I am still watching:
+	1.	Which pair do you want for the gate: (a) two AUTO-188 slices, or (b) one AUTO-188 slice plus one AUTO-56 slice? "Answered above" left me unsure.
+	2.	NULSC. I will build US first and make the Jira instance a setting, so adding NULSC is a config change. Is a US-complete delivery acceptable for the gate if NULSC access is not cleared by then? I hold public trust and cannot tell if NULSC needs more.
+	3.	In use: will your team run it from their own laptops, or use its output (the Confluence page and the emails) while I run it?
+On access, in plain terms: I need to read and search the Jira projects these reports cover and add comments on the period tickets. I also need a Confluence Cloud space with a parent page where I can publish. My own account works for now since I run from my laptop. A service account only matters once this runs unattended.
+For send-as on the team mailbox, please request it for my account. A service account can come later. I will also send the automation team a short list of questions on secrets and hosting.
+Thanks,
+Daniel

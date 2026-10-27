@@ -49,3 +49,7 @@ On access, in plain terms: I need to read and search the Jira projects these rep
 For send-as on the team mailbox, please request it for my account. A service account can come later. I will also send the automation team a short list of questions on secrets and hosting.
 Thanks,
 Daniel
+
+hey there! i saw in that last email from Eric you mentioned wanted to publish to Confluence Cloud. was that just for documentation you are creating? or was that as a repository where you process will send its output?
+ 
+the reason i ask is that we aren't live in Confluence Cloud yet so we don't have any existing spaces. but if you wanted to output to the Cloud, I can see if someone on our team can create a space in the sandbox that you can use for the interim

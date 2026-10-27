@@ -1,0 +1,82 @@
+
+AutomationsAUTO-188 Scheduled adherence reports — weekly field checks, monthly defect adherence and bi-weekly structure reports with automatic team-lead notificationAUTO-320
+Phase 5 — AI-drafted summary of the findings, approved by a person and trained from a guidance file
+ Edit
+ Add comment
+Assign
+More
+Backlog
+Share this issue
+Pivot Report
+ Export
+Details
+Type: Sub-task
+Resolution:Unresolved
+Priority: Medium
+Labels:None
+Description
+AUTOEST v1: oddsquad=65h; engineer=26h; basis=midpoint; savingsPerYear=52
+
+Goal
+Add a short summary of the findings to each published report: trends against earlier periods and notable points about the metrics, drafted by the Claude API from figures the script has already computed, approved by a person with a Jira transition before it is published, and steered by a guidance file that the team can edit to train it for the next run. Part of AUTO-188.
+
+What happens today
+The team writes a summary of these reports by hand with the help of AI, which takes about an hour a week.
+
+Depends on
+AUTO-221, AUTO-223 and AUTO-225 (the reports, the metric records and the Confluence helper), and a Jira administrator to add the approval statuses and transitions to the recurring tickets' workflows (see Design).
+
+Design
+The script computes the facts; the model only writes them up. For each report the script computes the comparisons deterministically: against the previous period (week, fortnight or month) and, for the monthly defect report, against the same month last year; which teams moved most; which teams are new, cleared, or unavailable; and anything outside the documented bound. These computed facts are the only input to the model. The figures are team-level counts and are not private data (Eric).
+History comes from the stored metric records. Each report's figures are stored as metric records (AUTO-188 Phase 1), and the next run reads the earlier records to get the earlier periods. The first period has no history, and the summary says so. Where the viewer (AUTO-327) rolls figures up to a manager, director or segment, the summary may use those rolled-up counts, never owner names or anything below team level.
+The model drafts a short summary in plain words: what rose or fell, what is unusual, and what is unchanged. It describes what changed and does not claim a cause, because workflow diagnosis stays human.
+Every number in the draft is checked against the computed facts. A draft that contains a number not in the facts, or contradicts one, is dropped and the report goes on without a summary, with a note on the ticket.
+A person approves the summary with a Jira transition. The report's figures publish on schedule as they do now. The draft summary is posted as a comment on that period's recurring ticket, with the result of the number check, and the ticket is moved to a status that means a summary is waiting for approval. An Odd Squad team member approves it by running a transition, for example 'Approve summary'. If they want different wording, they first add a comment with the final text, and the agent publishes that text; otherwise it publishes the draft. A second transition, for example 'Decline summary', with a comment giving the reason, means no summary is published this period. After an approval, the agent adds the approved text to the Confluence page, labelled as AI-drafted, and records on the ticket who ran the transition, taken from the ticket's history. Until it is approved the page carries the figures only. For the monthly report, the summary is drafted only after the report is released from any hold.
+Who can approve is a workflow permission. Only the group allowed to run the approval transition (Odd Squad team members) can approve, so there is no separate approver list to keep. A Jira administrator adds the statuses and transitions to the recurring tickets' workflows on both instances, and the transition names are configuration, since the migration to Atlassian Cloud will move the workflows.
+Training by a guidance file. Each report has a Markdown guidance file in the scripts' repository. If the team does not like something in the summary, or wants something shown every time, an Odd Squad team member edits that file, and the next run follows it. The reason given when a summary is declined is the cue to change the file. The file can say what to emphasise, what to always include, wording and tone to use or avoid, and the order of points. The agent never edits the file, and each change is a commit with its reason. Because a person approves every summary, that approval is the control on a bad edit, and no separate review of the file is needed.
+The file steers; the code sets the limits. The fixed rules (the facts are the only input, every number is checked, no cause, no personal names, labelled as AI-drafted) are in the code and cannot be loosened by the file. The file can ask only for things the script already computes. A request it cannot meet, such as a comparison the script does not compute, is listed in the run's comment so that someone can change the request or ask for it to be built.
+Preview. A preview command regenerates the draft for the most recent period with the current guidance file and shows it without posting it, so a change to the file can be tried before the next run.
+The use of AI is recorded in the run's comment on the recurring ticket: that a draft was produced, dropped, approved, edited or declined and by whom, the model, the prompt version, the version of the guidance file used, any requests the script could not meet, and the facts it was given (as a count of items, not the figures).
+The summary uses team-level figures only, never personal names, and is not part of the team-lead notifications, which stay deterministic.
+If the Claude API fails, the report publishes without a summary.
+Non-negotiables
+A summary is never published to the page until a person has approved it by the transition.
+Every statement in the summary traces to a figure the script computed; nothing is stated that the facts do not support.
+The summary never states a cause.
+The guidance file cannot override the fixed rules, and the agent never changes the file.
+The summary is labelled as AI-drafted, and a failure or a wait for approval never blocks or delays the report's figures.
+Only computed team-level figures go to the model: no personal names, no ticket text.
+The use of AI and the approval are recorded on the recurring ticket with the model, the prompt version, the guidance file version and the approver.
+No log files are written to disk.
+Acceptance criteria
+Given a report with an earlier period, the draft states the comparison with it and the largest movements, and each number in it appears in the computed facts.
+Given the first period, the draft says there is no earlier period to compare with.
+Given a draft containing a number that is not in the facts, it is dropped, nothing is posted for approval, and the ticket says so.
+Given a draft posted for approval, the report's figures are already published, the ticket is in the waiting status, and the page carries no summary.
+Given the approval transition, the draft (or the final text the approver commented) is added to the page, labelled as AI-drafted, and the person who ran the transition is recorded on the ticket.
+Given the decline transition, no summary is published and the reason is on the ticket.
+Given no transition, no summary appears on the page.
+Given a person outside the approval group, they cannot run the approval transition.
+Given the Claude API failing, the report publishes without a summary.
+Given an edit to the guidance file that asks for something to be shown every time, the next draft includes it if the script computes it, and the comment records the file version.
+Given a request in the file that the script cannot meet, the run still completes and its comment lists the request as unmet.
+Given a file that tells the model to state a cause or name a person, the fixed rules still hold and neither appears.
+Given the preview command, the draft for the most recent period is shown with the current file and nothing is posted.
+Given a run, the comment on the recurring ticket records the model, the prompt version and the guidance file version, and no log file is written.
+Given a report, no personal name and no ticket text was sent to the model.
+Tests run with no real API calls.
+Estimate
+26 engineer hours (range 20-30), Odd Squad 65 hours. Most of it is the trend computations, the number check, reading the earlier records, detecting the transition and publishing the approved text, and the guidance file with its preview; the model call is small. The Jira administrator's workflow changes are not included.
+
+Savings
+52 hours a year: the roughly hour a week the team spends writing these summaries today (Eric's estimate). Reviewing and approving each draft takes some of that time, so the net saving is lower.
+
+Risks
+A fluent draft can sound more certain than the figures allow; the number check, the no-cause rule and the approver are the controls.
+The approval depends on someone doing it each period; until they do, the page carries figures only.
+The recurring tickets are in more than one project and instance, each with its own workflow to change, and the migration to Atlassian Cloud will move them.
+A guidance file that grows long or contradicts itself will give uneven drafts; it needs periodic review.
+History comes only from stored records, so periods before the records began are not recovered.
+Open questions
+Q1 If nobody approves or declines a summary within the period, does it expire, or stay open? Owner: Odd Squad team lead.
+Q2 Which statuses and transition names go on the recurring tickets' workflows, and which Jira administrator adds them on each instance? Owner: Odd Squad team lead.

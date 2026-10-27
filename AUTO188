@@ -1,0 +1,259 @@
+AutomationsAUTO-188
+Scheduled adherence reports — weekly field checks, monthly defect adherence and bi-weekly structure reports with automatic team-lead notification
+ Edit
+ Add comment
+Assign
+More
+Backlog
+Share this issue
+Pivot Report
+ Export
+Details
+Type: Idea
+Resolution:Unresolved
+Priority: Medium
+Labels:None
+Epic Link:Adherence
+Description
+Goal
+Set up the harness for these reports, and use it to replace the hand-run weekly field adherence checks, the weekly risk adherence report, the monthly US and NULSC Defect Adherence Reports, and the bi-weekly structure adherence report with runs that start when Jira creates that period's ticket, publishing the results to Confluence with an AI-drafted summary of the findings that a person approves and the team can train, and notifying the responsible team lead automatically. People only handle exceptions: a workflow validator that is not working, a count outside expected bounds, or a team with no known lead.
+
+This Idea also builds the one common way to show metrics, used by every Idea that shows a metric (AUTO-106, AUTO-103, AUTO-83's AUTO-84 to AUTO-87, AUTO-290 and AUTO-27): a team map, one metric record, and one viewer where people drill down from the whole IT Org to a segment, a director, a manager and a team. It is built here because this is the first Idea built.
+
+How a run starts
+A Jira automation rule creates the ticket for each period on a schedule (OSC-2855 / OS-9789 weekly, OSC-2856 / OS-9790 monthly defect, OS-9724 bi-weekly structure, and the weekly risk ticket, still to be identified). The harness polls Jira for new tickets of those kinds, and a new ticket starts the matching run. The schedule is the automation rule's schedule, so it is changed in Jira and needs no code change. The ticket is also where the run is logged: every step, decision and result is a comment on it. A ticket created by hand starts an extra run, for a re-run or a one-off. Polling is the working assumption; Phase 0 validates it.
+
+Common metrics display
+Every Idea that shows a metric does it the same way, designed once here.
+
+One team map (Phase 7). Built from the TDIR project: each team's manager, director and segment, and a mapping from Jira projects, repositories, systems and spaces to a team. Anything unmapped is shown as Unassigned.
+One metric record (designed in Phase 0, emitted by the harness from Phase 1). Each value has a metric id, the team, the period, a numerator, a denominator, a count, its source and when it was obtained, and the definition version. There is no field for a person. Counts add up, rates are the sum of numerators over the sum of denominators, and a median is computed from the underlying samples, so a rollup never averages averages.
+One viewer (Phase 8). Five levels of drill-down: IT Org, segment, director, manager and team. It shows the names of managers, directors and segment heads, and never an individual engineer. Everyone can see all levels, and all team sizes are shown. A group with a missing team says 'n of m teams reporting'. Groups are never ranked.
+Each report keeps its Confluence page for its detail (the findings, the issue keys), and links to the viewer for its figures.
+Subject-matter experts
+Stephanie: the weekly required-fields report, the bi-weekly structure report and the weekly risk adherence report. She confirms the rules, filters, exclusions and scope before each is built, and confirms the first results against her own run.
+Nicolette: the monthly defect adherence report. She explains how the figures are produced today, including any manual adjustments to the dashboard, and confirms the generated figures against hers.
+Phase 0 walks each report through with its expert.
+
+Getting started
+This is the first Idea the automation engineer works on, and there is no harness yet. It is built here: Phase 0 designs it from what the reports need, including the metric record and the viewer comparison, and Phase 1 builds it and the first check on it. The earlier process-audit tickets (OSC-2616, OSC-2617, OSC-2700) are reference only, and nothing in the estimates assumes they are reused. Other Ideas that use a harness come after this one.
+
+Start with Phase 0 (AUTO-213). Its output is written findings and a design for the harness, the metric record and the viewer, not code. Nothing is built until each report has been walked through with its expert.
+Ask for these on day one, because they take calendar time:
+Access to the Adherence Report Instructions folder in SharePoint. Owner: Odd Squad team lead.
+The Confluence Cloud space and parent page, and a service identity and token for the unattended run. Owner: Odd Squad team lead.
+Time with Stephanie (weekly, structure and risk reports) and Nicolette (monthly defect report).
+A look at the Jira automation rules that create the period tickets, and a Jira service identity that can read them and search for new tickets. Owner: Jira administrator.
+Read access to the TDIR project on both Jira instances, and a look at RideShare for the viewer comparison.
+Needed later, so raise them early:
+Where the harness runs (AUTO-102). Owner: Eric. Needed before Phase 4.
+Permission to send as the Odd Squad email address. Needed before Phase 3.
+A Jira administrator to add the approval statuses and transitions to the period tickets. Needed before Phase 5.
+Build order: Phase 0, then Phase 1, then Phase 7 (the team map, needed by Phases 3 and 8 and by the notifier), then Phase 8 once records exist, and the other phases in between as their needs are met. The phase numbers are names, not the order.
+The first thing built is Phase 1 (AUTO-221), which builds the harness and the weekly required-fields check on it, after the Phase 0 design. It also builds the Confluence Cloud helper that the later phases reuse.
+Estimate
+Estimated as an automation engineer who is an expert in automation and AI with Claude Code, Java and GitLab experience. The Odd Squad / DPO figure is 2.5 times the engineer figure.
+
+Phase	Ticket	Engineer hours (range)	Midpoint	Odd Squad hours	Savings per year (hours)
+0 Inventory the checks, design the harness, the metric record and the viewer	AUTO-213	22-38	30	75	0
+1 Build the harness, weekly required-fields check	AUTO-221	34-56	44	110	52
+2 Monthly defect adherence report	AUTO-223	20-32	26	65	96
+3 Bi-weekly structure report and notifier	AUTO-225	16-24	20	50	26
+4 Ticket-triggered runs, publication hold, parallel run	AUTO-227	16-24	20	50	0
+5 AI-drafted summary, approved and trained	AUTO-320	20-30	26	65	52
+6 Weekly risk adherence report	AUTO-323	12-20	16	40	52
+7 Team map from TDIR	AUTO-326	14-28	20	50	0
+8 Metrics viewer	AUTO-327	28-56	40	100	0
+Total	182-308	242	605	278
+Totals: automation engineer 182-308 hours (about 23-39 days), midpoint 242 hours; Odd Squad / DPO 455-770 hours, midpoint 605 hours.
+
+Basis and assumptions.
+
+The harness is built from nothing, with no existing code assumed. Phase 1 is the largest build of the reports: the settings-file layout for a check, the Jira fetch with caching and a check that the data is complete, the rules (a field is filled in, a value is in an allowed list, a field is filled in only when another condition holds), the results written as metric records, the run-recording comment, the entry point that takes a ticket, and the Confluence Cloud helper, with tests that make no real API calls.
+The monthly report is the largest later report build, because it generates a new report for two instances, has to match the dashboard, and publishes with a hold; the structure report needs a rule over the Initiative, Milestone and Epic hierarchy; the risk report needs two age rules; the notifier shares a mail helper with AUTO-103; the summary is mostly trend computation, a number check, the approval transition and the guidance file with its preview, with a small model call. Phase 4 polls for new tickets, maps each to its report and period, and avoids running a ticket twice.
+Phases 7 and 8 are the common display. Phase 8's size depends on the platform Phase 0 chooses. The other Ideas that emit records (AUTO-106, AUTO-103, AUTO-84 to AUTO-87, AUTO-290, AUTO-27) have not been re-estimated for emitting records; each Idea's Phase 0 re-checks.
+The hours assume polling works and hosting is available. They do not include the Odd Squad team's time, the experts' time, access to the SharePoint instructions, permission to send as the Odd Squad email address, cleaning up TDIR, or a Jira administrator's work to add the approval statuses and transitions.
+These are judgment estimates, not measurements. Phase 0 re-checks them once the harness is designed.
+What already exists
+Period tickets: OSC-2855 / OS-9789 (weekly), OSC-2856 / OS-9790 (monthly defect), OS-9724 (bi-weekly structure), created on a schedule by Jira automation rules (Eric). The weekly risk report's ticket has not been identified. The rules themselves have not been read. The procedures live in the ticket text and in SharePoint documents (not yet read).
+Earlier process-audit tickets (OSC-2616, OSC-2617, OSC-2700, OSC-2619, OSC-2701) describe a fetch, cache, verify, render pattern and a field-presence runner. They are reference for what the reports need, not code to reuse.
+The TDIR (Team Directory) project on both Jira instances, with a Team issue type that holds the team name, its Jira and development projects, its members, its development and product owner managers and its director.
+Core AI's Datadog build shows DORA metrics (AUTO-84); how far its team breakdown goes is not known.
+RideShare, Nelnet's platform for publishing an internal site behind staff sign-on, which has a data helper; whether it fits is for the Phase 0 comparison.
+The Risk & Opportunities Monthly Audit (OSC-2883 / OS-9828) covers related risk rules; the weekly risk report shares one rule definition with it where the rules are the same (Phase 0 and Phase 6).
+Distinct from AUTO-9 (PAR rewrite, monthly 50-team methodology audit) and AUTO-17..27 (CMMI audit evidence): this Idea covers the weekly, monthly and bi-weekly adherence reports only and consumes one rule definition with PAR if they overlap (Phase 0).
+AUTO-102 lists hosting as undecided and shared.
+The team already writes a summary of these reports by hand with the help of AI, about an hour a week.
+Design and why
+The harness is a small framework this Idea builds. It fetches Jira data, runs rules such as 'this field must be filled in', and publishes the results. Each report is a check on it. Most checks need only a simple settings file that says which rule to apply to which tickets; custom code is added only for a rule the settings file cannot express. Each report publishes its detail as a Confluence Cloud page and its figures as metric records. A Jira ticket is created only when a person needs to act, so a clean weekly run creates no new ticket.
+A new period ticket starts the run. The harness polls Jira on a short interval for new tickets of a configured kind, works out from configuration which report each is for and which period it covers (the weekly check covers the week just ended, the monthly defect report the prior month), and runs it. The ticket is the log: each step is a comment on it. Because the trigger is the ticket, the schedule is changed in the Jira automation rule that creates it, and an extra run is started by creating a ticket. Polling is the assumption because it needs no inbound connection to the host; Phase 0 validates it, and a webhook is the fallback only if polling does not work.
+A ticket is run once. Before starting, the harness looks for its own run comment on the ticket and skips a ticket that already has one. No state is kept outside Jira.
+Notification is separate from the check. The check outputs findings per team; a notifier maps team to lead from the team map and sends one message per lead. Unknown lead goes to a person.
+The monthly defect report is run at the beginning of each month for the prior month. Its distribution list stays configuration, not code.
+Spot-check by exception: each monthly defect report is compared with the prior month; a change beyond a documented bound, or a missing input, holds publication for a person. Everything else publishes.
+Workflow-validator diagnosis stays human. The report names the team, filter and count; it does not claim a cause.
+The weekly risk report lists owners on an unrestricted page (Eric). It lists risks in the PS, PM and PSC projects that were created more than two weeks ago and whose status is not Accept, Mitigate or Closed, and risks whose status is not Closed that have not been updated in 90 days. The owner is the assignee, or the reporter when the assignee is blank. The page lists key, project, owner, status, dates and the check failed, and never a risk's title or description. The run comment on the ticket has counts only, and the AI summary uses counts and never owner names. It shares its rule definitions with the Risk & Opportunities Monthly Audit.
+Summary of the findings, approved and trained. Each report gets a short AI-drafted summary of trends and notable points. The script computes the comparisons (against the previous period, and for the monthly report against the same month last year, the largest movements, and anything outside the bound); the model only writes them up in plain words, from those computed facts and nothing else. Every number in the draft is checked against the facts. The report's figures publish when the run finishes; the draft is posted on that period's ticket, and an Odd Squad team member approves it by running a Jira transition before the text is added to the page, labelled as AI-drafted. A decline transition, with a reason, publishes nothing that period. Only the group allowed to run the transition can approve, and Jira records who did. The summary states no cause and uses team-level figures only, so for the risk report it uses counts and never owner names. Each report has a Markdown guidance file in the scripts' repository, which Odd Squad team members edit to train the next run; the fixed rules in the code cannot be loosened by it, and a preview command shows the draft for the latest period without posting it. Earlier periods are read back from the stored metric records.
+Each run is recorded as comments on its period ticket, linking the Confluence page and recording whether a summary was drafted, approved, declined or dropped, with the model, prompt version, guidance file version and approver.
+The common display. Every figure a report produces is written as a metric record in the format designed in Phase 0, and shown in the viewer built in Phase 8 through the team map from Phase 7. Phase 0 also compares the platforms for the viewer (RideShare, a generated static site, a Confluence page tree, Datadog links) and analyses whether DORA is linked to in Datadog or recomputed. A count rolls up by adding, a rate by dividing the sums, and a median from samples. A past period rolls up through the team structure of its own period.
+Decisions
+A run starts when Jira creates that period's ticket (Eric), so the schedule is a Jira automation rule and the ticket holds the log. A managed host that polls for new tickets, and the shared hosting decision, are still required.
+Polling Jira is the assumed way to notice new tickets (Eric), to be validated in Phase 0.
+Notifications are sent automatically once the template and the team map are approved by Eric. This is deterministic automation, not AI, so there is no per-run approval; a change to either is approved before it is used.
+Reports are published to Confluence Cloud, in the general instance (Eric), as unrestricted pages. There is no Word export. Pages are not restricted, including the weekly risk report (Eric).
+Because the Confluence pages are readable by everyone, they carry team-level figures and issue keys and no personal names. The figures are not private data (Eric). The one exception is the weekly risk report, which lists owners (Eric).
+Each report carries an AI-drafted summary of trends and notable points (Eric). It is generated from figures the script computed, checked, labelled, and never states a cause.
+A person approves each summary before it is published, by a Jira transition on the period's ticket (Eric). The report's figures are not held up by the approval.
+The summary is trainable (Eric): Odd Squad team members edit a Markdown guidance file to change what is emphasised, always shown or avoided, and the next run follows it. The approval of each summary is the control on the file, so a change to it needs no separate review.
+All logging is comments on the period tickets, including that AI was used and with which model, prompt version and guidance file version, and who approved the summary; no log files are written.
+The report names, the filters, the ticket-to-report mapping and the distribution are configuration, because the migration of the Jira projects to Atlassian Cloud will change URLs, field IDs and filter names; the approval transition names are configuration too.
+Stephanie is the expert for the weekly required-fields, bi-weekly structure and weekly risk adherence reports, and Nicolette for the monthly defect adherence report.
+This is the first Idea worked on and there is no existing harness, so the harness is designed in Phase 0 and built in Phase 1 of this Idea.
+The weekly risk adherence report is Phase 6 (AUTO-323) (Eric). It takes about an hour a week today (Eric).
+A risk is 'not assessed' when it is more than two weeks old and its status is not Accept, Mitigate or Closed, and its owner is the assignee, or the reporter when the assignee is blank (Eric).
+There is one common way to show metrics (Eric), designed here and used by AUTO-188, AUTO-106, AUTO-103, AUTO-84 to AUTO-87, AUTO-290 and AUTO-27. It is part of this Idea because this is the first Idea worked on.
+The team map comes from the TDIR project (Eric).
+The viewer shows the names of managers, directors and segment heads (Eric), because names are the easiest. It never shows an individual engineer.
+Everyone can see all levels (Eric).
+All team sizes are shown, with no minimum (Eric).
+The viewer platform is chosen in Phase 0 by comparison; RideShare is the lead option (Eric).
+Whether DORA is linked to in Datadog or recomputed is decided after an analysis in Phase 0 (Eric).
+Non-negotiables
+A check that cannot be computed (source unreachable, empty source) is reported as unavailable with the missing input named; it is never reported as zero findings.
+Every report states its source, the period and when it was obtained.
+A Confluence page that is readable by everyone contains no personal names, except the weekly risk report, which lists owners and never copies a risk's title or description. The viewer shows the names of managers, directors and segment heads, and never an individual engineer or team member.
+Never publish to the defect distribution when the exception bound trips; hold and notify the owner.
+One rule definition shared with PAR and with the Risk & Opportunities audit where the rule is the same; no second, divergent definition.
+No notification is sent without an approved template and a confirmed lead; a failed send is recorded and queued, never silently dropped.
+An AI summary is never published until a person has approved it by the transition. It states only what the computed figures support and never a cause, is labelled as AI-drafted, receives only team-level computed figures (no names, no ticket text), and its failure or a wait for approval never blocks the report's figures. The guidance file cannot override these rules, and the agent never edits it.
+A ticket is never run twice, and a ticket that is not one of the configured kinds never starts a run.
+Logging: comments on the period ticket, with no PII, secrets, recipient addresses, owner names or raw payloads. No log files are written to disk. One helper file per external system.
+No personal credentials in unattended runs.
+A metric record has no field for a person, and no view or code path shows a value for an individual.
+A rollup is computed from counts, numerators and denominators or samples, never by averaging averages, and a group with a missing team says so; a missing team is never counted as zero.
+Teams and groups are never ranked.
+A past period rolls up through the structure of its own period.
+Acceptance criteria
+Given the weekly field check, the count per team equals a manual run of the same saved filter on the same day.
+Given a source that fails, the report for that team shows unavailable and names the missing input.
+Given a clean week, no new ticket is created and the run is recorded as comments on the period ticket.
+Given a team with findings and a known lead, one notification per lead is sent automatically from the approved template; given no known lead, the finding goes to a person.
+Given the start of a month, the defect report is run for the prior month; given a month where the defect figures move beyond the documented bound, publication is held and the owner is notified; given a month within bounds, it publishes without a manual step.
+No notification, ticket or comment contains a recipient address list or a personal name that is not already in an authorised report.
+Given a published Confluence page, it contains no personal names, except the weekly risk report, which lists owners and contains no risk title or description.
+Given the first parallel runs, Stephanie confirms the weekly, structure and risk results and Nicolette confirms the monthly defect figures against their own, or each difference has a recorded reason.
+Given a risk created more than two weeks ago whose status is not Accept, Mitigate or Closed, or a risk not Closed that was last updated more than 90 days ago, the weekly risk report lists it with its owner, the assignee or else the reporter.
+Given a new period ticket, the matching report runs for the right period without anyone starting it; given a ticket that already has a run comment, it is not run again; given a ticket that is not a configured kind, nothing runs.
+Given a change to the schedule in the Jira automation rule, the next run follows the new schedule with no change to the harness.
+Given a report with an earlier period, the drafted summary states the comparison and the largest movements, each number in it appears in the computed facts, and it states no cause; given a draft that fails the number check, nothing is posted for approval.
+Given a drafted summary, the figures are already published and the page carries no summary until a person runs the approval transition; given the transition, the approved text is added, labelled as AI-drafted, and the person who ran it is recorded on the ticket; given the decline transition, nothing is published.
+Given an edit to a report's guidance file asking for something to be shown every time, the next draft includes it if the script computes it, and the run's comment records the file version; given a request the script cannot meet, the run completes and lists it as unmet.
+Given a report run, its figures are stored as metric records, each with its team, period, numerator, denominator, source, when obtained and definition version, and no person.
+Given a metric, the viewer shows it at the IT Org, segment, director, manager and team levels, and a count at one level equals the sum of the level below.
+Given a group where a team has no value, the viewer shows 'n of m teams reporting' and does not count the team as zero.
+Given a team map from TDIR, every team has a manager, director and segment or is listed as incomplete, and anything unmapped is shown as Unassigned.
+Given a reorganisation in TDIR, a past period shows its own structure.
+Given a run, no log file is written.
+Phases
+Phase 0 - AUTO-213: inventory the checks, queries and audiences; design the harness, the metric record and the viewer comparison, and validate polling for new tickets; decide the Confluence layout (gate)
+Phase 1 - AUTO-221: build the harness and the weekly required-fields check on it, emitting metric records; builds the Confluence Cloud helper
+Phase 2 - AUTO-223: monthly defect adherence report generation
+Phase 3 - AUTO-225: bi-weekly structure report and team-lead notifier
+Phase 4 - AUTO-227: ticket-triggered runs, publication hold and parallel run
+Phase 5 - AUTO-320: AI-drafted summary of the findings, approved by a transition and trained from a guidance file
+Phase 6 - AUTO-323: weekly risk adherence report, with owners
+Phase 7 - AUTO-326: team map from TDIR
+Phase 8 - AUTO-327: metrics viewer
+Build order: Phase 0, Phase 1, then Phase 7, which must come before Phase 3's notifier and before Phase 8; Phase 8 needs records from Phase 1. The others follow as their dependencies are met.
+
+Depends on
+Hosting decision (shared with AUTO-9, AUTO-27, AUTO-56). Phase 0 gate. Shares a mail-sending helper and the Odd Squad email address with AUTO-103, and the Confluence Cloud helper with AUTO-290 if that Idea targets the same instance. Phase 5 needs a Jira administrator to add the approval statuses and transitions to the period tickets' workflows on both instances. Phase 6 needs Phase 1. Phases 7 and 8 serve the other Ideas listed in the goal, which depend on them to show their metrics.
+
+Savings
+About 278 hours a year, from the phase estimates: the weekly check 52 hours (about an hour a week), the monthly defect report 96 hours, the bi-weekly structure report 26 hours, the summary 52 hours (the roughly hour a week the team spends writing summaries by hand with AI today, Eric's estimate), and the weekly risk report 52 hours (about an hour a week, Eric's estimate). Reviewing and approving each draft takes some of the summary's time, so its net saving is lower. The team map and the viewer (Phases 7 and 8) carry no savings; their value is that every metric across the Ideas is shown one way and can be drilled into. The catalog's own estimate for the earlier reports is lower than the phase figures: 90 tickets at 1.0 h and 25 tickets at 1.5 h, about 127 hours a year, with 10% remaining, as judgment estimates; Jira Time Spent is empty. Part of the saving is the weekly validator diagnosis, which stays human. Against a build of 242 engineer hours (605 Odd Squad hours), the saving pays back in about ten months on engineer hours and about two years and two months on Odd Squad hours.
+
+Risks
+The procedures are in SharePoint documents that have not been read; undiscovered steps may exist.
+Building the harness is the largest single piece of work, and it is built before any report is useful; the first parallel run is the first proof that it works.
+If a Jira automation rule does not fire, no ticket is created, a report does not run, and nothing says so; a missed ticket needs to be noticed (Q11).
+Polling is an assumption. If the service identity cannot search for new tickets, or the network blocks the host from reaching Jira, Phase 4 changes shape (Q12).
+A ticket created by mistake, or edited after creation, can start a run for the wrong period; the period is taken from configuration, not from free text in the ticket.
+Overlap with PAR rules and with the Risk & Opportunities audit could create two definitions of the same check.
+The weekly risk report lists owner names on a page that is readable by everyone who can read the Confluence instance (Eric's decision).
+Migration of OSC/OS to Atlassian Cloud will change URLs, field IDs, filter names, the automation rules, TDIR and how new tickets are found; keep these in config.
+Hosting is undecided; a run cannot depend on a laptop, and something has to be running to poll for new tickets.
+Sending as the Odd Squad email address from an unattended identity needs permission on that mailbox.
+Confluence pages that are readable by everyone cannot carry names, so any other report that needs individual names to be useful would need an exception; Phase 0 checks whether any does.
+Confluence Cloud has a different interface and authentication from the Confluence the other automation uses, so it needs its own helper and service identity.
+A fluent AI draft can sound more certain than the figures allow; the number check, the no-cause rule and the person who approves are the controls.
+The summary waits for someone to run the approval transition each period; until then the page carries figures only. The period tickets are in more than one project and instance, each with its own workflow to change.
+A guidance file that grows long or contradicts itself will give uneven drafts; it needs periodic review.
+History for the summary comes only from stored records, so the first periods have no trend.
+The build leans on the experts' knowledge of how the reports are produced today; their time is not in the estimates.
+All team sizes are shown, so for a team of one or two the team value is in effect one person's value, which sits uneasily with the rule that metrics are never per person. The record has no person field, but the number can still identify someone.
+Names of managers, directors and segment heads are visible to everyone who can use the viewer (Eric's decision).
+TDIR may be incomplete or stale, and segment may not be a field in it; the viewer is only as good as the team map.
+The viewer platform may limit how much data it can hold or how it can be refreshed from an unattended run.
+Datadog's DORA views may differ from the viewer's and give two answers.
+The common display adds work to the first Idea built, before any of the other Ideas benefit from it.
+Open questions
+Q1 Who consumes the weekly Required Fields results and what do they do when a validator fails? Owner: Stephanie.
+Q2 Do PAR rules already include Client Impact, Acceptance Criteria and Business Description population? Owner: PAR administrator (see AUTO-9 Q8).
+Q3 Where is the defect adherence data defined (JQL or SharePoint dashboard) and can it be queried directly? Owner: Nicolette.
+Q4 Is the defect distribution still the intended audience, and does a recipient review it today? Owner: Nicolette, with Eric.
+Q5 Is there a project-to-team-lead map (and where)? Owner: Phase 0, answered by the team map in Phase 7.
+Q6 What is the bi-weekly structure report's US scope, and what is "Required Field Check for CAB Approval"? Owner: Stephanie.
+Q7 Which space and parent page in the general Confluence Cloud instance hold the reports, and who owns the service identity? Owner: Odd Squad team lead.
+Q8 Does any other report need to name individuals, and if so where is that part published? Owner: Phase 0, with Stephanie and Nicolette.
+Q9 Where does it run? Owner: Eric (the shared hosting decision).
+Q10 Which statuses and transition names go on the period tickets' workflows, who adds them on each instance, and what happens if nobody approves or declines a summary within the period? Owner: Odd Squad team lead.
+Q11 Which Jira automation rule creates each period ticket, who can edit its schedule, and how is a rule that did not fire noticed? Owner: Odd Squad team lead, with a Jira administrator.
+Q12 Does polling work: can a service identity search for new tickets of the configured kinds, how often should it poll, and does the network allow the host to reach each Jira instance? Owner: Phase 0, with a Jira administrator.
+Q13 Which recurring ticket does the weekly risk report run from today, who is told when it is published, which instance holds the PS, PM and PSC projects, and do their risk statuses use the same names? Owner: Stephanie.
+Q14 Which TDIR field holds the segment, and for a team with a development manager and a product owner manager, which is the manager level? Owner: Odd Squad team lead, with Eric.
+Q15 Do the US and NULSC TDIR instances form one hierarchy for the IT Org level? Owner: Eric.
+Q16 Where are the metric records stored (versioned files in GitLab, the RideShare data helper, or another store)? Owner: Phase 0.
+Attachments
+
+Options
+Drop files to attach, or browse.
+Sub-Tasks
+Create Sub-Task
+
+Options
+1.
+Phase 0 — Spike: inventory the checks, design the harness, the metric record and the viewer (gate)	Sub-task	Backlog	Unassigned	 	Actions
+2.
+Phase 1 — Set up the harness and build the weekly required-fields check	Sub-task	Backlog	Unassigned	 	Actions
+3.
+Phase 2 — Monthly defect adherence report generation	Sub-task	Backlog	Unassigned	 	Actions
+4.
+Phase 3 — Bi-weekly structure report and team-lead notifier	Sub-task	Backlog	Unassigned	 	Actions
+5.
+Phase 4 — Ticket-triggered runs, publication hold and parallel run	Sub-task	Backlog	Unassigned	 	Actions
+6.
+Phase 5 — AI-drafted summary of the findings, approved by a person and trained from a guidance file	Sub-task	Backlog	Unassigned	 	Actions
+7.
+Phase 6 — Weekly risk adherence report	Sub-task	Backlog	Unassigned	 	Actions
+8.
+Phase 7 — Team map from TDIR: team, manager, director, segment and IT Org	Sub-task	Backlog	Unassigned	 	Actions
+9.
+Phase 8 — Metrics viewer: one place to drill from IT Org to team	Sub-task	Backlog	Unassigned	 	Actions
+Activity
+All
+Comments
+Work Log
+History
+Activity
+Transitions
+Tasklist History
+
+Newest first
+You can now pin up to five comments to highlight important information. Pinned comments will appear above all other comments, so they're easy to find.
+
+
+Got it
+Learn more about pinned comments
+ Collapse comment: Lozovsky, Daniel (Insight Global) added a comment - 10/27/2026 11:51 AM
+
+Lozovsky, Daniel (Insight Global) added a comment - 9 minutes ago

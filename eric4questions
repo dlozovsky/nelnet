@@ -10,6 +10,11 @@ After reviewing AUTO-188 and AUTO-56 and discussing the workflows with Dave, I h
 
 4. **Timeline:** I understand the four-week clock begins once security training and required access are complete. How should we formally record that date, and is November 20 still a reasonable delivery target given the access dependencies?
 
+A few access items, if you can point me to the right people:
+5. Who should I contact for a Jira service identity, the Confluence Cloud space and parent page, and send-as permission on the Odd Squad email address?
+6. Can a GitLab runner reach Jira, Confluence Cloud and the Claude API, and where should secrets be stored?
+
+
 Once we align on these points, I'll finalize the reduced scope and phased implementation plan.
 
 Thanks,  

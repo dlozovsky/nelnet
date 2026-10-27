@@ -53,3 +53,7 @@ Daniel
 hey there! i saw in that last email from Eric you mentioned wanted to publish to Confluence Cloud. was that just for documentation you are creating? or was that as a repository where you process will send its output?
  
 the reason i ask is that we aren't live in Confluence Cloud yet so we don't have any existing spaces. but if you wanted to output to the Cloud, I can see if someone on our team can create a space in the sandbox that you can use for the interim
+
+
+
+Thanks Dave! It’s for the output. The scripts would publish the report pages there, replacing the pages that are built by hand today. Since Cloud isn’t live yet, I should publish wherever the current reports live. Is that our current (Data Center) Confluence? If so, could I get write access to a test page there? A Cloud sandbox space would also help for testing, so yes please. And do you know roughly when the Cloud move happens?

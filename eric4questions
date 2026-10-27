@@ -19,3 +19,22 @@ Once we align on these points, I'll finalize the reduced scope and phased implem
 
 Thanks,  
 Daniel
+
+answers
+
+Hi Eric,
+
+After reviewing AUTO-188 and AUTO-56 and discussing the workflows with Dave, I have four questions to confirm the direction for the four-week gate.
+Scope: AUTO-188 and AUTO-56 (about 242 and 284 hours per their ticket estimates) are both too large for four weeks, so I would deliver thin slices. Which pair do you want for the gate: (a) two AUTO-188 slices, the weekly required-fields check and the biweekly structure notifier, or (b) one AUTO-188 slice plus one AUTO-56 slice for Velocity proposals?  Answered above
+Acceptance: What qualifies as "deployed" and "in use" for the gate? Who confirms acceptance, and who will maintain each automation after handoff?   We can negotiate this for each phase, but deployed means that it's working off our laptops.   In use, means my team is using the solution (so it's functional).   Maintenance will be my team (Dave is one of the members) long term, but in the beginning it would be you.
+Federal scope: Some reporting appears to involve the federal Jira instance. Can we limit the initial delivery to the non-federal environment? Also, can you confirm whether NULSC is considered the federal side?   I may need to rethink this.  Just about everything touches the federal (NULSC) environment.    If it works for US, it will work for NUSLC, but that is really cludgy.   
+Timeline: I understand the four-week clock begins once security training and required access are complete. How should we formally record that date, and is November 20 still a reasonable delivery target given the access dependencies?   After you complete the training, I will send this to you in an email.    I assume you are not as concerned after my answers above, is that correct?
+A few access items, if you can point me to the right people:
+Who should I contact for a Jira service identity, the Confluence Cloud space and parent page, and send-as permission on the Odd Squad email address?   I can submit the send as request for the odd squad email, but is this you or is this a service account.   I am not sure what you are asking for Jira and Confluence.   
+
+Can a GitLab runner reach Jira, Confluence Cloud and the Claude API, and where should secrets be stored?   I believe we have a team that is using gitlab runner with our jira, I can reach out on that.   For the secrets, let's touch base with the automation team.   We should compile a list of questions that I cannot answer for the automation team to give us guidance on. 
+Once we align on these points, I'll finalize the reduced scope and phased implementation plan.
+
+Thanks,
+
+Daniel

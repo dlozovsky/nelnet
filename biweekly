@@ -1,0 +1,250 @@
+Hello,                                                                                           
+
+ 
+
+As a member of the Program Office, I was asked to produce bi-weekly reports showing initiatives, milestones, epics and stories that do not have the correct linkages or the target dates are invalid.
+
+ 
+
+Why do I care:
+
+It may cause a finding on the CMMI assessments done every 3 years. 
+It may cause reporting of USDS requirements to be incorrect.  
+                                                               
+
+What do I need from you:           
+
+Review the bi-weekly reports (US) for items under your purview and correct them per the instructions on the page.
+Review the bi-weekly reports (NULSC) for items under your purview and correct them per the instructions on the page.
+ 
+
+ 
+
+When does it need to be done:  Within two weeks of receiving this email.
+
+ 
+
+ 
+
+Thank you,
+
+
+Report
+
+Bi-Weekly Initiative/Milestone/Epic Structure Adherence Report (US)
+Created by Anderson, Stephanie, last updated on Mar 31, 2026  5 minute read
+Ticket Structure 
+The ticketing structure that is setup is the following:
+
+Program → Initiative → Milestone → Epic → Story 
+
+See JIRA Guidelines for Initiative Tracking  for more information. 
+
+
+
+Expand/Collapse All
+Filter all tables (case insensitive)
+Initiative 
+Click here to expand...
+Instructions
+
+Control:  All initiatives that are in progress must have at least one milestone linked to it and the dates must be valid.  
+
+Expectation: The issues are corrected within a week of receiving notification.
+
+Accountable Person: Initiative Owner 
+
+Why: This supports the linkage needed to generate reports based on the initiative and will allow it to be rolled up on a Jira roadmap. 
+
+How to correct: 
+
+If this initiative does not have any lower level work or is not work for NDS IT then add the "p/o_not_applicable" label to take it off the report going forward. 
+If the "First Milestone Linked on Ticket" column in has #N/A then our query did not find a milestone linked to the ticket:
+The linkage we are looking for is the child link.   
+Set the Parent Link on the Milestone to the Initiative.  This will appear as a Child Link on the Initiative.
+If the Target Start is in the future:
+An initiative that is in progress should have a start date that is today or in the past. 
+Update the target start date on the initiative so it starts in the past. 
+If the Target End is in the past:
+An initiative that is in progress should have a end date that is today or in the future
+Update the target end date on the initiative so it ends in the future. 
+If the Target End is blank:
+An initiative that is in progress should have an end date that is today or in the future.
+Update the target end date on the initiative so it ends in the future. 
+
+Key	Summary	Assignee	Reporter	Status	Target start	Target end
+PM-10137	FSA CR 6955 REVISED: Borrower Defense Consolidation Adjustments Researc	Unassigned	Goheen, Amy	In Development		
+PM-10687	Skill Builders - Execute on Existing	Unassigned	Ritchie, Eric	In Development	Jan 01, 2025	Dec 31, 2025
+PM-10706	Accessibility Training	Unassigned	Ritchie, Eric	In Development		Apr 30, 2026
+PM-10780	Redesign IT Training Specialist role for AI-era	Unassigned	Ritchie, Eric	In Development	Feb 16, 2026	Aug 14, 2026
+PM-10781	Initiative Planning: Roles, Practices, and Outputs	Unassigned	Ritchie, Eric	In Development	Feb 01, 2026	Mar 13, 2026
+PM-10808	Atlassian Enterprise Cloud Migration	Newsom, David	Newsom, David	In Development		
+PS-333	IBR PFH Regulation Changes 2025	Unassigned	Pruett, Vi	In Development		
+PS-680	Sensitive Config Files	Unassigned	Brady, Dawn	In Development		Jul 31, 2026
+PS-785	SDLC Optimization: CS Payments Team	Unassigned	Schweitzer, Michael	In Development	Jan 01, 2026	Sep 30, 2026
+PS-1013	AI Pod Installation & Configuration	Del Valle, Roberto (Globant)	Polivka, Tamar	In Development	Aug 13, 2026	Oct 15, 2026
+PS-1014	Pay.gov Returns Modernization & Co-existence	Roudebush, Brad	Polivka, Tamar	In Development		
+PS-1016	Modernization Roadmap Development	Obernesser, Daniel (Traverse Consulting)	Polivka, Tamar	In Development		
+PS-1239	Project Bruin - Operational Readiness	Miller, Jade	Miller, Jade	In Development		
+PS-1325	Moving off Silk Arrays	Unassigned	Brady, Dawn	In Development		Dec 31, 2026
+PS-1686	[Placeholder] CR 10634 Servicer Mobile Apps	Unassigned	Black, Giacomo	In Development	Jul 08, 2026	Nov 18, 2026
+PS-1692	[Placeholder] Containerization - Workspace	Unassigned	Black, Giacomo	In Development	Jun 15, 2026	Dec 31, 2026
+PS-1693	[Placeholder] Macro Express Replacement	Unassigned	Black, Giacomo	In Development		
+PSC-345	Technical Operations & Maintenance	Unassigned	Christ, Chase	In Development		
+PSC-905	Payments - Support	Inman, Chad	Christ, Chase	In Development		
+PSC-907	Customer Experience - Support	Inman, Chad	Christ, Chase	In Development		
+PSC-1293	Snowflake as a Product - Velocity	Inman, Chad	Christ, Chase	In Development		
+PSC-1491	On/Off Boarding - Loan Period Templates	Ehrke, Nicholas	Ehrke, Nicholas	In Development		
+PSC-1534	DevOps - Support	Inman, Chad	Christ, Chase	In Development		
+PSC-1680	rFinance New Client Implementation	Smith, Irina	Smith, Irina	In Development		
+PSC-1751	SoFi University of Pennsylvania Implementation	Ehrke, Nicholas	Smith, Irina	In Development		
+PSC-2435	QA Modernization Regression Testing	Unassigned	Inman, Chad	In Development	Apr 01, 2026	Sep 30, 2026
+PSC-2671	Project Bruin - Data Migration	DeVoe, Bob	Matthews, Priyanka	In Development		
+PSC-2674	Reporting and Data Feeds	Unassigned	Matthews, Priyanka	In Development		
+PSC-2868	Outreach Strategy Definition	Fast, Tahra	Schlotfeld, Stephanie	In Development	Sep 01, 2026	
+29 issues  Refresh
+Milestone
+Click here to expand...
+Instructions
+
+Control:  All milestones that are in progress must have at least one epic linked to it and the dates must be valid.
+
+Expectation: The issues are corrected within a week of receiving notification.
+
+Accountable Person: Initiative Owner
+
+Why: This supports the linkage needed to generate reports based on the milestone and will allow it to be rolled up on a Jira roadmap. 
+
+How to correct: 
+
+If this milestones does not have any lower level work or is not work for NDS IT then add the "p/o_not_applicable" label to take it off the report going forward. 
+If the "First Epic Linked on Ticket" field has #N/A then our query did not find an epic linked to the ticket.   
+The linkage we are looking for is the child link.   
+Set the Parent Link on the Epic to the Milestone. This will appear as a Child Link on the Milestone. 
+If the Target Start is in the future 
+A milestone that is in progress should have a start date that is today or in the past. 
+Update the target start date on the milestone so it starts in the past. 
+If the Target End is in the past 
+A milestone that is in progress should have an end date that is today or in the future.
+Update the target end date on the milestone so it ends in the future. 
+If the Target End is blank
+A milestone that is in progress should have am end date that is today or in the future.
+Update the target end date on the milestone so it ends in the future.
+
+Key	Summary	Assignee	Reporter	Status	Target start	Target end
+PM-5056	Support and Maintenance of current masking functionality	Unassigned	Berry, Nathen	In Progress		
+PM-10186	Post go-live: 48000 - Reporting - Procedural Changes	Unassigned	None	In Progress		
+PM-10426	Create License Type Usage Scenarios	Unassigned	Wilson, J [X]	Lagging	Apr 01, 2024	May 17, 2024
+PM-10670	(Release Planning Process) Implement a structured release planning process by defining and documenting release criteria, roles, responsibilities, and timelines	Newsom, David	Newsom, David	In Progress	Aug 05, 2025	Jun 30, 2026
+PM-10684	Migrate Consumer Loans content to Docs like code	Unassigned	Ritchie, Eric	In Progress	Mar 09, 2026	May 29, 2026
+PM-10784	Define problem statement and success criteria for IT Training Specialist role redesign	Unassigned	Ritchie, Eric	In Progress	Feb 16, 2026	Mar 20, 2026
+PM-10794	Expand multimodal documentation capabilities	Unassigned	Ritchie, Eric	In Progress	Mar 02, 2026	Dec 31, 2026
+PM-10799	Retirement and Disposal Process	Newsom, David	Ritchie, Eric	In Progress		
+PM-10800	PAR Control Review	Newsom, David	Ritchie, Eric	In Progress	Mar 02, 2026	
+PM-10801	System Owner Audit	Newsom, David	Ritchie, Eric	In Progress		
+PM-10803	Atlassian Cloud Migration Prep	Newsom, David	Newsom, David	In Progress		
+PM-10811	Consolidate Review List Redesign	Newsom, David	Newsom, David	In Progress		
+12 issues  Refresh
+Epics
+Click here to expand...
+Instructions
+
+Control: All epics for teams that are part of the PAR reporting must be part of a milestone.
+
+Expectation: The issues are corrected within a week of receiving notification.
+
+Accountable Person: Initiative Owner
+
+Why: This supports the linkage needed to generate reports based on the epic and will allow it to be rolled up on a Jira roadmap. 
+
+How to correct: 
+
+If this epic should not be attached to a milestone (should be rare) or is not work for NDS IT then add the "p/o_not_applicable" label to take it off the report going forward.
+The linkage we are looking for is the parent/child link.   
+Set the parent Link on the epic to the Milestone. This will appear as a child link on the Milestone. 
+
+Key	Summary	Reporter	Status
+CU-158	CR 7026 Reamoritization Schedules	Anderson, Nathan	To Do
+CU-2033	Star | 2026 Tax Work	Anderson, Nathan	To Do
+CU-2034	Velocity | 2026 Tax Work	Anderson, Nathan	In Progress
+CU-2226	rFinance New Brand Setup	Anderson, Nathan	To Do
+SAF-180	Prepare SAFSA for Future Needs	Shebesta, Dennis	Backlog
+SAF-261	Enhance Student and IHE Self-Registration and Sign-In Security	Rear, Sherry	Open
+SAF-277	Enhance Project Infrastructure Security and Observability	Rear, Sherry	Open
+SAF-287	Future GrantPro Pathway Enhancements & Features	Rear, Sherry	In Progress
+SAF-288	Enhance SAFSA Application Form (25/26)	Rear, Sherry	In Progress
+SAF-528	MVP 2 UX Review Remediation	Rear, Sherry	In Progress
+SAF-669	Pathway Release 1 Post Implementation	Rear, Sherry	Backlog
+SAF-736	Pathway Release 2 (MVP 3) Post Implementation	Rear, Sherry	Ready for Development
+SAF-923	Accessibility Review Remediation Post 10/1 Release	Rear, Sherry	Backlog
+SAF-938	Identify and Remediate Multi-Tenancy Gaps in GrantPro Pathway	Rear, Sherry	In Progress
+SAF-951	Issues to satisfy gaps noted in the 2025 NDS Self-Assessment	O'Brien, Jerry	Open
+SAF-1065	Provide users the ability to generate and download a PDF copy of the application.	Rear, Sherry	In Progress
+SAF-1223	2026 Q2 Bug Fixes	Rear, Sherry	In Progress
+SAF-1225	Post-implementation Tech Debt Remediation	Rear, Sherry	Backlog
+WILCOM-89	Business Reporting - DR System Recovery Plan	Nelson, Rachel	Backlog
+19 issues  Refresh
+
+Stories 
+Click here to expand...
+Instructions
+
+Control: All story level tickets for teams that are part of the PAR reporting must be linked to an epic. 
+
+Expectation: The issues are corrected within a week of receiving notification.
+
+Accountable Person: Initiative Owner
+
+Why: This supports the linkage needed to generate reports based on the epic and will allow it to be rolled up on a Jira roadmap. 
+
+How to correct: 
+
+If this story should not be included in an epic then add the "p/o_not_applicable" label to take it off the report going forward. This should be rare. 
+The linkage we are looking for is "Epic Link".  
+For each item on the list, add an Epic link to the ticket.   
+How support/run tickets are categorized into epics are up to the team. The use of a generic epic/milestone/initiative for run work is suggested. 
+
+Key	Summary	Assignee	Reporter	Status
+CU-931	Velocity | Sent Email Report	Unassigned	Anderson, Nathan	Backlog
+CU-1010	Velocity | Promote Repayment Letter Updates	Unassigned	Anderson, Nathan	Backlog
+CU-1547	CCM Support | Update scaler jobs using fs.append	Unassigned	Torres, Rachel	Backlog
+CU-1831	Commercial Ltrs | Add logic to remove bad letters and continue processing	Unassigned	Wong, Lanny	Backlog
+CU-1924	Commercial Ltrs| Update CreateEmlControlFiles	Unassigned	Torres, Rachel	Backlog
+CU-1957	Velocity | Automate Bounceback Processing	Unassigned	Anderson, Nathan	Backlog
+CU-2026	Commercial Statement Privacy Policy WFD Access Issue	Unassigned	Sommer, Anthony	Blocked
+CU-2045	Velocity | Create Post Default Process	Unassigned	Anderson, Nathan	Backlog
+CU-2187	Velocity | Lender Monthly Report	Unassigned	Anderson, Nathan	Backlog
+CU-2349	SLOAN | Update URLs in Supp file	Unassigned	Collins, Olena	Backlog
+CU-2390	STAR | Create Data Files for Interactive	Unassigned	Anderson, Nathan	Backlog
+CU-2391	Velocity | Create Data Files for Interactive	Unassigned	Anderson, Nathan	Backlog
+CU-2516	CCM Support | Reduce ICM Version History	Unassigned	Torres, Rachel	Backlog
+CU-2542	Sloan Letters | RAP/TS Denial Letter	Unassigned	Anderson, Nathan	Backlog
+DBEC-14	Create enterprise data dictionary process and ERD standards and process	Monforte, Roderick	Hunsicker, Brenda	Backlog
+DBEC-15	PostgreSQL security model	Unassigned	Hunsicker, Brenda	Backlog
+DBEC-16	Audit logging standards	Voigt, Colleen	Hunsicker, Brenda	Backlog
+DBEC-17	PII data handling standards	Unassigned	Hunsicker, Brenda	Backlog
+DBEC-18	Data retention &amp; purge strategy	Monforte, Roderick	Hunsicker, Brenda	Backlog
+DBEC-19	Performance monitoring standards	Hunsicker, Brenda	Hunsicker, Brenda	In Progress
+DBEC-20	Log access procedures	Voigt, Colleen	Hunsicker, Brenda	Backlog
+DBEC-21	PostgreSQL catalog query repository	Hunsicker, Brenda	Hunsicker, Brenda	In Progress
+DBEC-22	Capacity monitoring and planning	Hunsicker, Brenda	Hunsicker, Brenda	In Progress
+DBEC-23	Incident management process	Voigt, Colleen	Hunsicker, Brenda	Backlog
+DBEC-24	WAL management (log/journal)	Voigt, Colleen	Hunsicker, Brenda	Backlog
+DBEC-25	DDL reconciliation tooling	Severson, Skyler	Hunsicker, Brenda	Backlog
+DBEC-26	SQL review process and explain	Unassigned	Hunsicker, Brenda	In Progress
+DBEC-27	Index review process	Voigt, Colleen	Hunsicker, Brenda	Backlog
+DBEC-28	View strategy	Unassigned	Hunsicker, Brenda	In Progress
+DBEC-29	Partitioning strategy	Hunsicker, Brenda	Hunsicker, Brenda	Backlog
+DBEC-30	Archiving strategy	Unassigned	Hunsicker, Brenda	Backlog
+DBEC-31	Read model strategy	Unassigned	Hunsicker, Brenda	Backlog
+IM-771	Research Expected Number of Calls to Velocity Borrower Endpoint	Unassigned	Gentry, Greg	To Do
+IM-774	FMR Query Automation	King, Jordan	Boardman, Richard	In Progress
+PS-1292	QA Performance Test (full load performance requested)	Guadagnini, Luciano (Globant)	Castillo, Stephanie (Nvisia)	To Do
+PS-1438	tech_stack (tech-stack)	Ortega, Iris (Globant)	Obernesser, Daniel (Traverse Consulting)	To Do
+PS-1696	Create template that can execute siimple commands template within pipeline	Unassigned	Castillo, Stephanie (Nvisia)	To Do
+SAF-1584	Reduce memory used by Find an Application searches	Unassigned	Howansky, Nick	Backlog
+WILCOM-148	Update Config Files and Pipelines for SSIS and LaRS	Segelke, Brandon	Segelke, Brandon	New
+WILCOM-165	WebLaRS – Replace Nelnet membership/Authentication.svc login with Microsoft Entra ID (OIDC)	Unassigned	Segelke, Brandon	New
+WILCOM-166	WebLaRS – Retarget solution to .NET Framework 4.8	Unassigned	Segelke, Brandon	New
+WILCOM-167	WebLaRS – Rotate machineKey values and move them out of source control	Unassigned	Segelke, Brandon	New
+42 issues  Refresh

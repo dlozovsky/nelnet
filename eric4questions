@@ -2,7 +2,7 @@ Hi Eric,
 
 After reviewing AUTO-188 and AUTO-56 and discussing the workflows with Dave, I have four questions to confirm the direction for the four-week gate.
 
-1. **Scope:** AUTO-188 is estimated at roughly 242 engineering hours in total. My recommendation is to deliver two smaller slices: the weekly required-fields check (Phase 1) and the biweekly structure report and notifier (Phase 3). I'd keep Phase 0 focused on those workflows and defer polling, the AI summary, and the metrics viewer. Do these two count as the two gate automations, or would you prefer replacing one with a smaller AUTO-56 slice focused on Velocity proposals?
+1. Scope: AUTO-188 (~242 hours) and AUTO-56 (~284 hours) are both too large for four weeks, so I’d deliver thin slices. Which pair do you want for the gate: (a) two AUTO-188 slices, the weekly required-fields check and the biweekly structure notifier, or (b) one AUTO-188 slice plus one AUTO-56 slice for Velocity proposals?
 
 2. **Acceptance:** What qualifies as "deployed" and "in use" for the gate? Who confirms acceptance, and who will maintain each automation after handoff?
 

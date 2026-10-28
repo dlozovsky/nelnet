@@ -1,0 +1,16 @@
+That's good news: GitLab is escalated, and Anders is the right person for everything on the automation team list. Following his pattern is also the fastest way past the governance concerns. Reply in the chat:
+
+> Thanks Eric, that works. I'll send the questions for Anders here today so you can review them first, then any time that suits you both works for me.
+
+Then the question list, kept short so the meeting stays short:
+
+> **Questions for Anders**
+> 1. **Secrets:** where should the scripts' Jira and Confluence tokens live, both on my laptop now and on a server later? Do you use personal tokens or service accounts?
+> 2. **Where code runs:** how do your Python automations run today (laptop, Windows server, scheduled task, something else)? What would it take for mine to run the same way after the gate?
+> 3. **Email:** how do your automations send email? SMTP relay, Microsoft Graph, a shared mailbox? What's needed to send from the Odd Squad mailbox?
+> 4. **Packages:** is there an internal PyPI mirror, and how do new packages get approved?
+> 5. **Code and CI:** which GitLab group and runners do you use, and what governance applies (reviews, scans, approvals)?
+> 6. **Jira and Confluence access:** any rate limits, service accounts or rules for scripts reading Jira and writing to Confluence Data Center?
+> 7. **Handoff:** is there a standard runbook or doc format your team uses, so the maintenance docs match?
+
+Question 1 is the one blocking you today, so if the meeting is a few days out, ask Eric whether you can message Anders that one directly.

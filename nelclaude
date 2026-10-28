@@ -228,4 +228,54 @@ S11 network block and CI, commit
 
 Fix four things, each with a test, as one commit: (1) --period defaults to the ISO week of the run date (YYYY-Www) for the weekly check, not the ticket key; add a test that two different weeks don't collide. (2) Read settings with utf-8-sig so a BOM is accepted. (3) Unavailable TeamResult counts become None, not 0. (4) Add .gitattributes with * text=auto eol=lf. Then record all choices in docs/03-decision-log.md, rename the branch to main, and continue with the slice 2 parts that need no real answers.
 
+============================================================================================
+Test helper bug: go always passes its own now. I’ll let callers override it.
 
+Committed as 57ef147. Now the decision log, which is local because docs/ is git-ignored, then the branch rename.
+
+Branch is main and the decision log is updated. Now moving to slice 2: implementing the link_exists and date_compare rule types plus the child-link field on Issue, starting with the tests.
+
+PowerShell quoting mangled one line in settings.py. I’m fixing it directly.
+
+Next I’ll build the contacts object and notifier core based on the one-message-per-team-lead design, pulling the lead list and message text from settings while keeping the actual lead list, wording, deadline, and sender as placeholders.
+
+Applied. Now the decision-log rows for slice 2, then the commit.
+
+The four fixes are one commit. The choices are in the decision log, the branch is main, and the slice 2 mechanics that need no real answers are built as two more commits. All 252 tests pass with network blocked. Nothing is pushed.
+
+The four fixes: 57ef147
+Period: --period now defaults to the ISO week of the local run date, as YYYY-Www.
+Week 2026-W44 and week 2026-W45 on one ticket produce two pages, and re-running W44 still needs --rerun.
+It uses the ISO year, so 2027-01-01 is 2026-W53.
+It uses local time, so Sunday evening in Central time stays in the same week.
+Because the page time is now local, the renderer converts it to UTC for display.
+BOM: settings are read as utf-8-sig. A file that isn’t UTF-8 gives a clear settings error.
+Unavailable counts: these are now None. TeamResult also rejects an unavailable result that carries counts, one with no named missing input, or an ok result with no counts.
+Line endings: .gitattributes has * text=auto eol=lf. The commit shows no line-ending noise.
+
+Known edge: a --resume run in a later week looks for the new week’s record and finds nothing. The operator must pass --period with the original week.
+
+Decision log and branch
+
+I added 20 rows to docs/03-decision-log.md. That covers the S4 to S11 choices, the four fixes, Auto 3, and the slice 2 choices below. docs/ is git-ignored, so the log stays on this laptop only. The branch is now main.
+
+Slice 2
+af32819 rules: link_exists and date_compare rules, and a links field on Issue. Any rule can carry a when_field and when_equals condition. Tests cover the structure-report cases on synthetic data: initiatives, milestones, epics, stories, and the exclusion label.
+8816642 notifier:
+It sends one message per team lead, from a lead list in the settings that holds opaque ids only. Teams with no lead go to an unknown-lead message. A lead with no findings gets nothing, and message totals equal the finding count.
+A dry run sends nothing and records nothing.
+A failed send becomes a [gate-queued] comment with the exception type name only, and the other sends continue. A retry skips recorded sends and resends the queued ones.
+A send that was delivered but couldn’t be recorded is reported as uncertain, not retried.
+The notifier plans nothing if any team result is unavailable.
+Choices for you to confirm
+Finding: one rule failed by one issue, so an issue failing two rules counts as two findings.
+date_compare: it needs an explicit on_blank of pass or fail with no default. A date it can’t read always fails.
+Conditions: a rule gets one when condition only. A rule set that needs issue type and status together can’t be written yet.
+Unknown lead: if unknown_lead_id is also a real lead, the findings merge into one message.
+Held, not built
+The real lead list and who is notified (Expert 7, Dave 7).
+Message wording and the one- or two-week deadline (Expert 8).
+How the page finds the first linked child (Expert 9), which teams report (Expert 10), the comparison run (Expert 11), and where pages live (Expert 12).
+The sender (Auto 2, Dave 5).
+
+The notifier is not wired into run.py, and there is no structure report id yet. All real values in settings.example.toml are still TBD.

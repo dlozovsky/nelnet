@@ -1,0 +1,23 @@
+My earlier summary is superseded. It was built on the old files, so the newsletter and NIST picks, Q1 to Q29, and the API-key dependency no longer apply.
+
+**What is settled**
+- **Gate pair:** AUTO-188 Phase 1 (weekly required-fields check) and Phase 3 (biweekly structure check plus team-lead notifier). Eric confirmed it in writing. AUTO-56, the newsletter, NIST, and the monthly defect report are out until after the gate.
+- **Definitions:** deployed means it runs from a Nelnet laptop. In use means Eric's team uses the page and emails while you run it. You maintain it first, then Eric's team including Dave.
+- **Clock:** it starts on the date Eric emails after security training, and you keep that email. Target is both in use by November 20.
+- **Build:** laptop-first Python 3.13, standard library plus pytest, TOML settings, Confluence Data Center first, US first, no model call. Code goes in the team's GitLab group. Runs are recorded as ticket comments, with sends tracked in a separate record.
+
+**What is still open on the critical path**
+- **Eric:** S0 (is building before the clock starts allowed), whether US-only counts for acceptance, NULSC authorization for the laptop, Confluence, and email, and the sent-messages limitation. Eric 2 (what evidence of use he wants) is only partly answered.
+- **Access:** Jira, Confluence, and send-as are requested but nothing has landed. Dave 2, Dave 4, and Auto 1 to 3 are all unanswered.
+- **Expert answers:** who gets notified (Expert 7) and one week or two to fix (Expert 8) hold up the notifier. Expert 12 holds up the real publish target.
+
+**What I noticed**
+1. **Slice 2 may get exactly one real send before November 20.** If the structure report still runs every two weeks, sends fall near November 4 and November 18, then December 2. November 4 is too early, and December 2 is past the gate. A failed first send leaves no second chance inside the window. Expert 3 settles this, so I would push it up the list.
+2. **The fallback is weaker than it looks.** The AUTO-56 slice needs a Claude API key, a labeled evaluation set, an unattended GitLab identity, and a Jira administrator. The API key route is still open and nothing else on that list is in hand. If a slice stalls, there is no ready replacement, so unblocking the two slices matters more than planning around them.
+3. **The NULSC acceptance question can sink the gate.** Nearly everything touches NULSC. If Eric requires it, both slices wait on written authorization, and that authorization is an unanswered item.
+4. **Most of the work is waiting, not coding.** Everything before the clock starts is scaffolding on synthetic data, and only S0 makes that allowed.
+5. **The hour estimates don't reconcile.** The 64-hour floor sits against ticket ranges of 34 to 56 and 16 to 24, which sum to 50 to 80. The 12 to 16 hours for the short Phase 0 is your guess, not the ticket's.
+6. **The files are stamped October 28, but my calendar says October 27.** I'll go by the file dates for cutoffs unless you tell me otherwise.
+7. **I'm keeping the strict data rule.** Dave 6 is still open, so you give me counts, field names, rules, and sanitized samples only.
+
+Has S0 gone to Eric yet? If not, I can draft one Teams message that batches every item marked "Today" in file 08.

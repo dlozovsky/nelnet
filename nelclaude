@@ -61,4 +61,39 @@ Decision log entries for you to paste:
 
 The other "Today" items in file 08 are for Dave, not Eric: the Confluence space and parent page, plus Dave 2 and Dave 4. Do you want a separate short message to Dave for those?
 
+
+---------
+Only one of the three is settled.
+
+**1. S0 is answered: yes.** Eric said to go for it, and he named no off-limits items. Keep your own limit anyway: synthetic data only, and every real rule, field name, and filter waits for the expert walk-through. Dave 6 is still open, so the strict data rule stays.
+
+**2. US-only is not answered.** Eric's leaning is to build and prove it on US, then connect NULSC afterward. That fits the design, since NULSC is a second source entry. But it doesn't say whether a US-only release counts for the gate, and "after it works on US" has no date. Treat it as a direction, not a decision.
+
+**3. NULSC authorization is not answered.** He offered to talk it through, which is not written confirmation. No NULSC data touches the laptop, Confluence, or email until you have it in writing.
+
+**What this unlocks now**
+- S1, S2 and S6 to S11 on synthetic data, plus generic rule mechanics in S3 to S5.
+- A6 (the GitLab project) still needs permission to create a project in the team's group.
+- S1 passes only with pytest on the laptop, and Auto 3 is still open. If pip is blocked, that's your first blocker to raise.
+
+**For tomorrow, leave with these**
+1. **A yes or no on acceptance, plus a date.** "If both slices are live on US by Nov 20 and NULSC is added afterward, is the gate met? By what date does he expect NULSC?"
+2. **Shared terms for NULSC.** Bring three concrete cases:
+   - Does an issue key from a NULSC project count as NULSC information?
+   - Is your laptop approved to hold NULSC data at all?
+   - Can the published page and the emails carry NULSC keys and team counts?
+3. **Who the security owner is.** Ask Eric to follow the call with a short Teams message or email summarizing what was agreed. The call alone is not a record.
+4. **Whether the NULSC Jira access needs requesting now.** If NULSC is expected inside the gate window, access has to be in the queue in week 1 because it takes calendar time. I don't know whether your current requests cover NULSC, so that's UNKNOWN.
+
+**Decision log**
+
+| Date | Decision | Why | Rejected alternatives | Owner |
+|---|---|---|---|---|
+| 2026-10-27 | [SETTLED] Building before the clock starts is authorized. Synthetic data only. Real rules, field names, and filters wait for the expert walk-through | Eric's reply to S0: "go for it" | Waiting for T0 | Eric |
+| 2026-10-27 | [PROPOSED, discuss Oct 28] Eric's current thought: build and prove on US, then connect NULSC. Acceptance for US-only is still open | Eric did not yet say whether US-only counts | Assuming US-only qualifies | Eric |
+
+For file 08, mark S0 as answered. Leave the US-only row and the NULSC authorization row open, with "discuss Oct 28" noted.
+
+Do you want to start S1 now, or draft the sanitized agenda for tomorrow's call first?
+
 The draft is ready to copy into Teams. Once Eric replies, paste his answers here and I'll update the open items and the decision log lines.

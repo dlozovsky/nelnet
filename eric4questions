@@ -64,3 +64,17 @@ Building before the clock starts: is it OK for me to build scaffolding now (repo
 US-only first release: if NULSC is not cleared in time, does a US-only release count for the gate? My proposal: US first, with NULSC validated separately and added once access is authorized. If you require NULSC for acceptance, I will move that validation to week 1 and both slices will wait on authorization.   Let's discuss some strategies for this tomorrow.   My current thought is develop on the US doimain and then we will hook it up to the NUSLC one after you get it working on US.   it will be a little clumsy but doable. 
 NULSC handling: can you or the security owner confirm in writing what NULSC information may be handled on my laptop, in Confluence, and in email? Until I have that, no NULSC data touches any of them and NULSC stays out of the build.   yep, I can help here, let's talk about it so I make sure we are talking the same language. 
 If any of these is better answered by someone else, point me to them and I will ask directly.
+
+=================#
+Quick progress update on AUTO-188, plus a few things I need.
+Done so far (synthetic data only, per Eric's OK):
+	•	Python, pytest and Git set up on my laptop, with Claude Code working
+	•	Slice 1 (weekly required-fields check) fully built against fake data: rules, team counts, Confluence page output, run tracking. 250+ automated tests pass.
+	•	Slice 2 (structure notifier) core built: the structure rules and the one-message-per-team-lead logic
+What I need to go live:
+	1.	Dave: an intro to Stephanie so I can book the walk-through. Her rules replace my placeholders.
+	2.	Dave: permission to create a project in the team's GitLab group, plus which Confluence space and parent page the reports go under
+	3.	Eric / access: status of my Jira and Confluence read access. Nothing real runs without it.
+	4.	Eric: NULSC and US-only acceptance, for our talk today
+Once access and the walk-through land, I can do the first real run within a day or two.
+

@@ -223,3 +223,9 @@ S9 run_record.py, commit
 S10 run.py entry point, commit
 
 S11 network block and CI, commit
+
+=================
+
+Fix four things, each with a test, as one commit: (1) --period defaults to the ISO week of the run date (YYYY-Www) for the weekly check, not the ticket key; add a test that two different weeks don't collide. (2) Read settings with utf-8-sig so a BOM is accepted. (3) Unavailable TeamResult counts become None, not 0. (4) Add .gitattributes with * text=auto eol=lf. Then record all choices in docs/03-decision-log.md, rename the branch to main, and continue with the slice 2 parts that need no real answers.
+
+

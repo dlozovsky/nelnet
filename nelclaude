@@ -140,3 +140,86 @@ Decision log entry:
 | 2026-10-27 | S1 repo skeleton drafted with a smoke test and a tests-only CI file. Local pytest on 3.13 and a green CI job are not yet confirmed | No pytest in the drafting environment; GitLab project permission not yet granted | Marking S1 passed on an unrun check | Daniel |
 
 Next is S2 (models and the TOML loader, with five bad-file tests). Send me S2 in the step runner format when you've run S1 on the laptop, or tell me to start it now.
+
+===============================================================================
+
+Working through the steps in order. S4 to S6 are committed, and I’m starting S7, the page renderer.
+
+Test bug, not code: the token pattern in the test matched the long report=weekly_required_fields field. I’m narrowing the test pattern.
+
+Found a real gap: clean_detail was leaving “Bearer” in the text and can’t strip free-text names, so I’ll have run.py only pass detail from our own token-free exception messages (or the type name otherwise), while I tighten the cleaner and its test.
+
+Another real gap: with the @ replaced, the address’s local part (pexample) stayed in the text. The cleaner should drop whole addresses.
+
+S9 is committed—moving on to S10 now. This step needs two small support changes: an optional base_url in settings and a public error switch on the fake publisher to simulate failure and recovery in tests.
+
+Those changes are mine. Now the entry point and its tests.
+
+PowerShell 5.1’s -Encoding utf8 writes a BOM, which tomllib rejects. I’ll strip it from the files I rewrote that way.
+
+The publisher rightly refuses the "TBD" parent id that my synthetic settings used. The test settings need a synthetic parent id of "100".
+
+Passing. I’ll add quick tests for the new settings helpers before committing.
+
+S10 is committed. Now S11: block real network in every test, prove it, and finish the CI file.
+
+S4 to S11 are built, each as its own commit. All 173 tests passed before every commit, with real network blocked, and no step needed your input. Nothing is pushed.
+
+The entry point also refuses cleanly with the example file. A real or dry run exits with “source.base_url in the settings file is not set” because every real value is still TBD.
+
+Step	Commit	What it adds
+S4	047b145	check.py: groups by team, skips the excluded label, counts each key once, Unassigned last. Counts match a checked-in expected JSON.
+S5	40d862a	run_check: a source that raises, or returns fewer unique issues than its total, gives unavailable and names the missing input. A total of zero is a valid zero.
+S6	b262cc6	jira_source.py: file fake and HTTP client with paging, 429 retry, and no token in error messages. Person fields are refused.
+S7	c32ebf4	render.py: escaped HTML from a field allowlist tied to the data model by a test.
+S8	2be3b21	confluence.py: fake and Data Center client. A missing or TBD parent id is refused before any request.
+S9	bf6a7d0	run_record.py: state and sent-record comments with a strict line shape, plus the comment scan test.
+S10	205530d	run.py: dry run, STARTED, PUBLISHED and COMPLETED, --resume, --rerun, and skipping sends already recorded.
+S11	42c6f40	Network blocked in every test, repo rule checks, and the Commands section in CLAUDE.md and the README.
+
+The scan test found two leaks in the free-text FAILED detail, a “Bearer” word and the local part of an email address. I fixed both in clean_detail. It can’t remove a free-text name, so run.py records only this package’s own error messages, or the exception type name for anything else.
+
+Choices the plan left open
+
+These change behavior, so please confirm or correct them.
+
+Unavailable counts: TeamResult keeps integer counts, so an unavailable team carries checked=0, failed=0 as placeholders. The renderer prints “unavailable” and never the numbers. It is one row called “All teams” because a failed read doesn’t tell us the teams.
+Unavailable run: the page is published showing unavailable, then the run records FAILED at step read, never COMPLETED. Sends are skipped, and --resume retries.
+Period: CLAUDE.md has no period argument. I added optional --period LABEL, defaulting to the ticket key. The label is limited to letters, digits, ., _ and -.
+Resume: it re-runs every step instead of resuming at the failed one. That is safe because the page upsert is idempotent and recorded sends are skipped.
+Run gating:
+--resume or --rerun with no earlier run is refused.
+--rerun is refused unless the last state is COMPLETED.
+A run at FAILED, or stuck at STARTED or PUBLISHED, is refused without --resume.
+--rerun and --resume together are refused.
+Sends in slice 1: S10’s “never repeats a recorded send” check needed something to send, so run.py has a small Send(recipient_id, deliver) hook that slice 2’s notifier can fill. Slice 1 passes none. If a send raises, the run records FAILED at notify and stops.
+Definition version: it is an 8-character hash of the source filter, team field, exclude label, and rules. It is not a setting.
+Rule semantics from S3: these still need the expert’s confirmation.
+field_filled_when uses when_field and when_equals.
+value_in_list is an exact, case-sensitive match after trimming whitespace.
+Settings and env names:
+I added optional base_url to [source] and [publish], so a real run needs them set.
+Token variable names JIRA_TOKEN and CONFLUENCE_TOKEN are placeholders until Auto 1.
+Only publish.target = "dc" works. cloud is refused with a message.
+Jira API details: the client uses /rest/api/2/search with filter = <id>, and a Bearer personal token. It sends the team field, labels, and the rule fields only. All of this is unverified against the real instance until S12.
+Not done
+Local docs: the S0, Auto 3 and S4 to S11 notes are not in docs/03-decision-log.md. docs/ is git-ignored, so those edits stay on this laptop only. Say if you want the choices above added there.
+Maintenance guide: CLAUDE.md says to update it in the same change as code, but the guide is a Confluence page written at S15. The README link is still a placeholder.
+CI and remote: .gitlab-ci.yml has never run, and no remote is set.
+Line endings: git warns about LF to CRLF on each add. It’s harmless.
+
+S4 check.py, commit
+
+S5 unavailable handling, commit
+
+S6 jira_source.py, commit
+
+S7 render.py, commit
+
+S8 confluence.py, commit
+
+S9 run_record.py, commit
+
+S10 run.py entry point, commit
+
+S11 network block and CI, commit

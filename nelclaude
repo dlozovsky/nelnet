@@ -38,3 +38,27 @@ Yes, let it draft the message to Eric, but keep it to three asks. He just answer
 - NULSC authorization for the laptop, Confluence and email
 
 Mention the sent-messages limitation in your weekly status instead.
+
+
+
+---------------------------------------------------------------------------------------------------------
+The draft for Eric is in the card above, with the three asks only. Each ask comes with a proposal he can approve in one line.
+
+Notes:
+
+- **Names:** the tracker calls this person "the expert" (Expert 3), and the data rule allows names only for Eric and Dave. I'll use "the expert" in anything that goes in the files. The first ask to them is the next scheduled structure send date, then how many hours a run takes today.
+- **Nov 4 dry run:** it only works if Jira read access has landed and the expert has walked you through the rules by then. If either is missing, there is nothing real to dry-run against. Chase the access requests on Oct 30 and Nov 2 as planned, and treat the Nov 4 dry run as a bonus, not a commitment.
+- **Dates:** I'll go by Central time, so today is Oct 27 and I'll read the "2026-10-28" file stamps as the date you updated them.
+- **Sent-messages limitation:** it moves to your weekly status. File 08 needs Eric's answer by Nov 6, so ask him in the first status. It holds the first real send until he answers.
+
+Decision log entries for you to paste:
+
+| Date | Decision | Why | Rejected alternatives | Owner |
+|---|---|---|---|---|
+| 2026-10-27 | [SETTLED] Next structure-send date is the first question to the expert. If a send lands near Nov 4, run the notifier in dry run alongside it, so the first real send is not the first try | Slice 2 may get only one real send before Nov 20 | Waiting until week 3 to test the notifier | Daniel |
+| 2026-10-27 | [SETTLED] Spend effort unblocking the two slices, not planning a replacement. The AUTO-56 fallback stays as listed, with no further work | The fallback needs a Claude API key, a labeled evaluation set, an unattended GitLab identity, and a Jira administrator, none of which are in hand | Building a backup slice in parallel | Daniel |
+| 2026-10-27 | [SETTLED] Message to Eric limited to three asks: S0, US-only acceptance, NULSC authorization. The sent-messages limitation goes in the weekly status | Eric just answered a long list | Batching every "Today" item in one message | Daniel |
+
+The other "Today" items in file 08 are for Dave, not Eric: the Confluence space and parent page, plus Dave 2 and Dave 4. Do you want a separate short message to Dave for those?
+
+The draft is ready to copy into Teams. Once Eric replies, paste his answers here and I'll update the open items and the decision log lines.

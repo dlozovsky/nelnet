@@ -97,3 +97,46 @@ For file 08, mark S0 as answered. Leave the US-only row and the NULSC authorizat
 Do you want to start S1 now, or draft the sanitized agenda for tomorrow's call first?
 
 The draft is ready to copy into Teams. Once Eric replies, paste his answers here and I'll update the open items and the decision log lines.
+
+-----------------------
+I'll take "yes" as both: the agenda first, then S1 built on synthetic data.
+
+**Agenda for tomorrow with Eric (nothing sensitive in it)**
+1. **Acceptance:** if both slices are live on US by Nov 20 and NULSC comes afterward, is the gate met? What date does he expect NULSC?
+2. **NULSC terms:** does an issue key from a NULSC project count as NULSC information? Is the laptop approved to hold it? Can the published page and emails carry NULSC keys and team counts?
+3. **Security owner:** who is it, and will Eric send a short written summary of what was agreed?
+4. **Access:** do the Jira and Confluence requests already cover NULSC, or does NULSC need its own request now?
+
+Now S1.
+
+pytest isn't installed here and the network is off, so I can't run the real pass check. I'll build the skeleton, then check the test logic with a plain Python call and say so plainly.
+
+**S1: FAIL against the check as written, but only on the part I couldn't run.**
+
+**Check 1: pytest passes locally on the approved Python.**
+- **Not met.** This sandbox has Python 3.12.3 with no pytest, and the network is off.
+- What I did run: the three smoke test functions called directly, and all three passed. That confirms the test logic, not pytest on 3.13.
+- You run `py -3.13 -m pytest` from the repo root on your laptop. If it prints 3 passed, this part is met.
+
+**Check 2: the CI job is green once pushed.**
+- **Not met.** It needs permission to create a project in the team's GitLab group (A6).
+- The CI file runs tests only. `image: python:3.13` and the `pip install pytest` line are guesses, because the runner type and image at Nelnet are UNKNOWN. They depend on Auto 3 and Auto 5.
+
+**What is in adherence-repo-s1.zip**
+- The package at the repo root with one stub module per file in the layout (the notifier stub is there but not built).
+- `settings.example.toml` with synthetic values and TBDs.
+- `tests/test_smoke.py`, which checks the imports and that the example settings parse with `tomllib`.
+- `.gitlab-ci.yml`, `.gitignore` (blocks log files and `.env`), and a short README with a [TBD] link to the Confluence maintenance doc.
+
+**Missing or UNKNOWN**
+- Whether pip can install pytest on the laptop (Auto 3). If it can't, tests can't run at all, so send that question to the automation team if it hasn't gone yet.
+- Whether the `py` launcher exists on the laptop.
+- Whether code written here may be copied onto the laptop. It is synthetic scaffolding, but that depends on the Dave 6 answer about approved tools.
+
+Decision log entry:
+
+| Date | Decision | Why | Rejected alternatives | Owner |
+|---|---|---|---|---|
+| 2026-10-27 | S1 repo skeleton drafted with a smoke test and a tests-only CI file. Local pytest on 3.13 and a green CI job are not yet confirmed | No pytest in the drafting environment; GitLab project permission not yet granted | Marking S1 passed on an unrun check | Daniel |
+
+Next is S2 (models and the TOML loader, with five bad-file tests). Send me S2 in the step runner format when you've run S1 on the laptop, or tell me to start it now.

@@ -81,4 +81,13 @@ Once access and the walk-through land, I can do the first real run within a day 
 ===####======
 4.	Eric: two questions from last night, in writing when you can: (a) if both slices are live on US by Nov 20 and NULSC follows, is the gate met? (b) what NULSC information, if any, may be on my laptop, in the Confluence pages and in the emails? Until I hear back, NULSC stays out.
 
+=============#==#===
+#2:
+
+One project for AUTO-188. Both gate slices and the later phases share the same code (the rules, Confluence publishing, run tracking), so splitting them would mean copying it. Unrelated automations, like AUTO-56, would get their own project.
+
+#3:
+
+I have browser access to both, sorry for the confusion. What I need is for the scripts to read Jira and publish to Confluence, so a personal access token (or whatever the automation team prefers) plus where to store it on the laptop. I'm checking whether I can create the token myself and will ask the automation team about storage.
+
 

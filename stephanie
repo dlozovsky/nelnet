@@ -22,3 +22,37 @@ Timing
 17. Who should be able to view the automated pages?
 Thanks,
 Daniel
+
+==================================================================
+
+Hi Stephanie,
+
+I'm automating the weekly required-fields report and the biweekly structure report under AUTO-188. Before I connect it to real data, I want to be sure it does what you do today, so I'm copying your process first.
+
+One question I need answered before tomorrow, and a reply by email is fine: when are the next two structure sends, and when is the next weekly run?
+
+The rest can wait for tomorrow's meeting. Short answers are fine, and you don't need to write anything down.
+
+Weekly required-fields report
+1. Who reads the results, and what do they do when an item fails a check?
+2. Which filter and required fields does it use, and where is the saved filter defined?
+3. Does a field holding only spaces, or a value like "N/A", count as empty?
+4. Are allowed values case-sensitive?
+5. Is any field required only when another field has a certain value?
+6. If one ticket is missing three required fields, does your report count 1 problem (one ticket) or 3 (one per field)?
+
+Biweekly structure report
+7. What is the structure report's US scope, and which field is the required check for CAB approval?
+8. Who gets the notice for each flagged item: the assignee, the reporter, or the initiative owner? Many items are unassigned.
+9. How do you decide today which lead gets which finding, and where does that list live? What should happen to a finding with no known lead?
+10. Is the fix deadline one week or two? The page says one and the email says two.
+11. How does the page find the first linked child item, and what does it show when there is none?
+12. Which teams count as program-reporting teams, and where is that list?
+
+Timing and pages
+13. Roughly how long does each report take you today?
+14. Which recent run can I compare my output against?
+15. Where do the pages live today (space and parent page), and who should be able to view the automated ones?
+
+Thanks,
+Daniel

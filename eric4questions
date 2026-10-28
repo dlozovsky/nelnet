@@ -91,3 +91,12 @@ One project for AUTO-188. Both gate slices and the later phases share the same c
 I have browser access to both, sorry for the confusion. What I need is for the scripts to read Jira and publish to Confluence, so a personal access token (or whatever the automation team prefers) plus where to store it on the laptop. I'm checking whether I can create the token myself and will ask the automation team about storage.
 
 
+
+===============================================
+Hi Eric, thanks for the quick answers. Three questions to keep the two AUTO-188 slices moving. Each can be answered in a line.
+Building before the clock starts: is it OK for me to build scaffolding now (repo, tests, interfaces) using synthetic data only? I would hold every real rule, field name, and filter until the clock starts and I have walked through the reports with the expert. If anything is off limits during onboarding, tell me what.   Go for it, the more work we get through the better!
+US-only first release: if NULSC is not cleared in time, does a US-only release count for the gate? My proposal: US first, with NULSC validated separately and added once access is authorized. If you require NULSC for acceptance, I will move that validation to week 1 and both slices will wait on authorization.   Let's discuss some strategies for this tomorrow.   My current thought is develop on the US doimain and then we will hook it up to the NUSLC one after you get it working on US.   it will be a little clumsy but doable. 
+NULSC handling: can you or the security owner confirm in writing what NULSC information may be handled on my laptop, in Confluence, and in email? Until I have that, no NULSC data touches any of them and NULSC stays out of the build.   yep, I can help here, let's talk about it so I make sure we are talking the same language. 
+If any of these is better answered by someone else, point me to them and I will ask directly.
+
+

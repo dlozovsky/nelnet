@@ -1,0 +1,24 @@
+Hi Stephanie,
+I'm automating the weekly required-fields report and the biweekly structure report under AUTO-188. Before I wire it to real data, I want to make sure it does exactly what you do today. Short answers are fine, and if a 30-minute walk-through is easier, I'm happy to set one up.
+Weekly required-fields report
+	1.	Who reads the results, and what do they do when an item fails a check?
+	2.	Which filters and required fields does it use, and where is the saved filter defined?
+	3.	Does a field holding only spaces or "N/A" count as empty?
+	4.	Are allowed values case-sensitive?
+	5.	Are any fields required only when another field has a certain value?
+	6.	Do you count issues or individual failures? (One issue missing three fields: 1 or 3?)
+Biweekly structure report
+7. What is its scope for US, and what counts as the required field for CAB approval?
+8. Who gets the notice for each flagged item: assignee, reporter or initiative owner? Many items are unassigned.
+9. How do you decide today which lead gets which finding, and where does that list live?
+10. What should happen to a finding with no known lead?
+11. Is the fix deadline one week or two? The page says one, the email says two.
+12. How does the page find the first linked child item, and what does it show when there is none?
+13. Which teams count as program-reporting teams, and where is that list?
+Timing
+14. When are the next weekly run and the next two structure sends?
+15. Roughly how long does each report take you today?
+16. Which recent run can I compare my output against?
+17. Who should be able to view the automated pages?
+Thanks,
+Daniel

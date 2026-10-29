@@ -1148,3 +1148,17 @@ Two new open items are in the tracker. One is which Jira field holds the parent 
 Leftover code. The comment-based send code in run_record.py and the Send hook in run.py are still unused by slice 2.
 
 The decision log, tracker and daily log are updated. There is no remote yet, so nothing is pushed.
+
+=====================
+Great progress. Slice 2 is code-complete on synthetic data. Three things to do now:
+
+1. **Ask Eric for keyring now.** It's the one blocker for real runs, since tokens can't be stored without it:
+> Eric, one more package approval: `keyring` (pip --user). It stores the Jira/Confluence tokens and the SMTP password in Windows Credential Manager, the same way Anders's team does. OK to install?
+
+2. **Tell Claude Code that real runs are approved:**
+> Eric approved read-only real runs, 2026-10-29. No sends and no Jira or Confluence writes yet. Once keyring is approved: (a) read Stephanie's US page and confirm all queries are found; (b) find the parent-link field from one real issue's fields and set [structure.links]; (c) do a full slice 2 dry run. Add display names to the local dry-run file, which is git-ignored, so I can compare it with Stephanie's list.
+
+3. **Hold off on the leftover code.** Clean it up after the first real runs.
+
+Decision log: `2026-10-29 | Slice 2 code complete on synthetic data (448 tests); real runs wait on keyring approval | Daniel`
+

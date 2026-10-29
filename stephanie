@@ -1106,3 +1106,11 @@ Daniel
 
 ============
 Eric, Stephanie's walk-through is done. One conflict needs your call: AUTO-188 says notify team leads from a team map, but today she emails every assignee and reporter on the report, and there's no lead list. For the gate, can I match what she does today, one email with the page link to assignees and reporters? Also, OK to load the real rules and start real runs, and can you confirm the clock start date?
+
+===============
+	1.	Rerun the full suite and confirm it passes.
+	2.	Build the rest of slice 2 test-first on synthetic data:
+a. Run the page's queries through the Jira client (read-only).
+b. Send the one email through a fake SMTP server: port 587, STARTTLS required (fail if not offered), password from keyring. Recipients in To for now. That's a setting until Stephanie confirms To or Bcc.
+c. Wire the report into run.py with --dry-run, which writes the findings, recipient list and exception list to the run folder without sending.
+	3.	Commit when green.

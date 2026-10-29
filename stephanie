@@ -1162,3 +1162,10 @@ Great progress. Slice 2 is code-complete on synthetic data. Three things to do n
 
 Decision log: `2026-10-29 | Slice 2 code complete on synthetic data (448 tests); real runs wait on keyring approval | Daniel`
 
+================#
+Yes, Claude Code is right. I overstated it. You can start the read-only steps now with environment variables. Two rules:
+
+1. **Set the tokens for the current PowerShell window only**, with `$env:JIRA_TOKEN = "..."`. Don't use `setx` or system settings, which save them permanently. Close the window when you're done.
+2. **Switch to keyring** as soon as Eric approves.
+
+And yes, tell it the Eric message was sent once you've sent it.

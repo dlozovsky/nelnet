@@ -83,5 +83,23 @@ What is the lead time for the two Help Desk requests, and who submits them? Eric
 Request 1 is the most important, because it decides whether the biweekly notifier can go live from the laptop soon. You can start the Help Desk requests before the SMTP sender exists. Once the answers come in, I can build the sender against a local fake SMTP server with the network blocked.
 
 I haven’t updated today’s daily-log entry with this response.
+
+======================
+Good record. Two corrections for Claude Code, plus a message for Eric.
+
+**Corrections:**
+1. **Store secrets in Credential Manager, not environment variables.** Anders's team uses Windows Credential Manager, and Python's `keyring` reads it. That covers both the PAT and the SMTP password, and it closes the "where does the laptop keep its PAT" question. Tell Claude Code to read from `keyring`, with environment variables only as a fallback for tests.
+2. **On question 1:** sending as Odd Squad from your own account almost certainly still needs the MB group and delegated send. Send-as is a permission on the mailbox, whatever account sends. So assume the Help Desk requests are needed and get them moving.
+
+**For the Teams chat:**
+> Thanks Eric, and please thank Anders. That settles tokens and email. Three small follow-ups:
+> 1. Does your send-as request cover adding my account to the Odd Squad MB group and turning on delegated send, or should I file those Help Desk requests myself?
+> 2. Roughly how long do those usually take?
+> 3. Which SMTP port and TLS setting should I use?
+
+The fake-SMTP sender can wait until after Stephanie's call, as planned. Have Claude Code add this to today's daily log too.
+
+Decision log: `2026-10-29 | Laptop secrets (PAT, SMTP password) in Windows Credential Manager via keyring; env vars for tests only | Anders via Eric`
+
  
  

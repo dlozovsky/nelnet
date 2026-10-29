@@ -43,4 +43,21 @@ Thanks Eric, Anders's notes cover hosting and secrets. To save him a meeting, co
 	4.	Later on, could our scripts run on your VDIs, and how do you schedule runs and spot failures?
 
 Question 1 matters most, because the biweekly notifier can't be in use until email works.
+
+----------------------------------------------------------------
+
+In US, the SMTP server is authsmtp01.us.nelnet.biz. In NULSC, the SMTP server is SMTP.office365.com. In both cases, you can use basic authentication (username + password) or token authentication. We use username + password currently, as it works on both local machines (laptop under your local credentials) and automation servers (using a service account).
+For basic authentication, you need an Active Directory service account. It shouldn't need to have an M365 license.
+The service account needs to be added to the MB/MBO/MBX group(s) for whichever mailboxes you want it to send as.
+Additionally, your mailbox needs to have "delegated send" enabled, which is a mailbox-level configuration within M365.
+Both of these access items are Help Desk requests.
+Service account access to the MB groups is an AMO request.
+The mailbox configuration might be AMO or might be MAPPS. Don't hold me to the name of the setting - it's been a while - but they should know what you're talking about.
+If you want to go the more modern route, you'll need to set up a Microsoft Graph application.
+This removes the need for a service account.
+The Graph App will need permissions to send from whichever mailbox(es) you want. I don't know the details of the setup here, but AMO/MAPPS would.
+Once this is set up, you'd authenticate with a token and then be able to use the same SMTP server to send emails - as you would with username+password authentication.
+ 
+We use Personal Access Tokens for both Jira and Confluence. For local development on laptops, each user has their own PAT scoped to their accounts' access. For our automation servers, we have a service account with its own PAT and scoped access. This does incur a cost - the service account uses a seat on both Jira and Confluence - which isn't ideal but is acceptable. I know of some teams who use individual-user PATs for prod automation, and that works just fine even if I wouldn't officially recommend it.
+ 
  

@@ -101,5 +101,13 @@ The fake-SMTP sender can wait until after Stephanie's call, as planned. Have Cla
 
 Decision log: `2026-10-29 | Laptop secrets (PAT, SMTP password) in Windows Credential Manager via keyring; env vars for tests only | Anders via Eric`
 
+==+===============
+Thanks Anders, this is really helpful. It settles tokens and email for us.
+On compute and scheduling, understood, and no ask from us yet. For now we'll run from my laptop. Our use cases are light: two AUTO-188 reports that read Jira, publish a Confluence page, and email team leads. One runs weekly and one every two weeks, each for a few minutes. A monthly report comes later. Once the first two are live, I'd welcome 30 minutes to talk through options, including whether we should have our own VDI.
+Three quick follow-ups on email when you have a minute:
+	1.	Which SMTP port and TLS setting do you use?
+	2.	To send as the Odd Squad mailbox from my own account on the laptop, I assume I still need the MB group membership and delegated send. Is that right?
+	3.	Roughly how long do those Help Desk requests usually take?
+
  
  

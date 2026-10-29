@@ -109,5 +109,37 @@ Three quick follow-ups on email when you have a minute:
 	2.	To send as the Odd Squad mailbox from my own account on the laptop, I assume I still need the MB group membership and delegated send. Is that right?
 	3.	Roughly how long do those Help Desk requests usually take?
 
- 
+ =========================================================
+Here are the two requests. Fill in the bracketed parts. I didn’t invent the mailbox address, group names or your user name.
+
+Request 1: mailbox access (AMO)
+
+Subject: Add my account to the mailbox group for [Odd Squad mailbox name]
+
+Please add my account, [your user name], to the MB group (MB, MBO or MBX, whichever applies) for the mailbox [mailbox address], so I can open it in Outlook and send from it.
+
+Business reason: I’m building an approved automation under AUTO-188 that emails team leads from this mailbox. Eric Ritchie is the sponsor. Dave Newsom owns the reports.
+
+I will use my own account from my Nelnet laptop. No service account is needed for this request.
+
+Please confirm when it’s done, and tell me the group name so I can note it.
+
+Request 2: delegated send (AMO or MAPPS)
+
+Subject: Turn on delegated send for [Odd Squad mailbox name]
+
+Please enable “delegated send” (send as) on the mailbox [mailbox address] for my account, [your user name]. The setting is at the mailbox level in M365.
+
+Business reason: the same AUTO-188 automation sends email from this mailbox over authenticated SMTP on port 587. I need send-as, not only read access.
+
+I’m not sure whether this goes to AMO or MAPPS. If it should go to the other team, please route it. I’d like to test with one email from my laptop as soon as it is on.
+
+Notes
+
+Send Request 1 first. It takes about a week, and delegated send depends on it.
+Put Eric on both if the ticket system allows, since he is already submitting send-as. Ask him first whether his request covers these, so Help Desk doesn’t get two copies.
+If you file them under AUTO-188, add the ticket number. I left it out because I don’t know which ticket the Help Desk expects.
+The requests carry no mailbox contents or ticket data, and no SMTP host names. They have your name and the mailbox address, which is fine to include.
+
+After you file them, tell me the dates. I’ll record them in the daily log and decision log, and note the earliest day a first real send is possible.
  

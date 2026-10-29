@@ -14,3 +14,21 @@ Then the question list, kept short so the meeting stays short:
 > 7. **Handoff:** is there a standard runbook or doc format your team uses, so the maintenance docs match?
 
 Question 1 is the one blocking you today, so if the meeting is a few days out, ask Eric whether you can message Anders that one directly.
+
+
+------------------------------------------
+Here is some information from Anders that I collected before you came on.   It answer the email question and somewhat the secrets.    
+ 
+Hi Anders,   I am starting to have my team work on some automations to remove manual work using python, connecting to jira, confluence, gitlab etc.   I was hoping you could help with a few questions, but feel free to send me to someone else:
+Where do you run your automations when they are used for production across multiple people (ie servers and deployment)? 
+Do you have a service/api already setup to send emails (and create draft emails)?
+how do you store secretes for the automations?  
+ From Anders:
+Hey! I'd be happy to help. Initial notes below. Happy to discuss further too.
+We have compute that we "own" and administrate that runs our automation scripting. Strictly speaking, these are persistent VDIs rather than true production servers.
+You can send emails directly via SMTP if you have a service account with permissions to send from your inbox(es). There's some permission setup required, but the implementation is straightforward in both US and NULSC.
+You'd have most of the same enterprise options for storing secrets in Python that you have in other stacks. Our compute is 100% Windows Server, so we're able to use Windows Credential Manager to store encrypted secrets server-side under our service account. It's a bit of a naive solution, but it works for our purposes. I expect that most cloud secret storage (e.g., Vault) has some version of a Python module out there.
+ 
+ 
+I can setup some time with Anders.   Can you read the above and if you have the answer you need or if it sparks more questions let me know.  When I get that confirmation I will get the meeting setup. 
+ 

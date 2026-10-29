@@ -118,3 +118,970 @@ I can also turn this into a one-page notes template with a blank for each questi
 
 Thanks,
 Daniel
+
+=====================
+
+Stephanie's walk-through for the biweekly structure report is done. Treat this list as settled. Use the transcript and screenshots for detail only, and flag anything that conflicts.
+	1.	One email per run, to all assignees and reporters with a finding, duplicates removed. The body has links only, to the US page. No email when there are no findings.
+	2.	The Confluence page already updates itself from Jira. Don't publish this report unless Dave asks. Run the page's own queries to find the recipients.
+	3.	Read the queries from the page or saved filters at run time. Don't hardcode them. US scope comes from the instance.
+	4.	Checks from the page instructions: epics need a milestone parent (label p/o_not_applicable excludes them); in-progress initiatives need start <= today, end >= today and not blank; milestones need an initiative parent. Put the label and date rules in settings.
+	5.	Two-week fix deadline. No CAB check.
+	6.	Inactive or invalid recipients go on an exception list sent to Odd Squad. Don't guess.
+	7.	Acceptance: a dry run against Stephanie's next round that compares findings and recipients, with nothing sent.
+	8.	Write tests first. Update docs/03, docs/08 and today's daily log. Synthetic data only until Eric OKs real runs.
+Then list what changes in the code, and anything still open.
+
+
+Cluely: You just get maybe notified if something.
+
+Cluely: Was flagged or. Well, is it?
+
+Cluely: That's a Daniel's building for us. Yeah. So, I mean, is it important for you to.
+
+Cluely: Automate that, or should we just focus on the bi-weekly one? Which one takes most of your time? I guess that's the question.
+
+Cluely: Okay.
+
+Cluely: Okay.
+
+Cluely: Okay.
+
+Cluely: So maybe. I know that I asked her a lot of questions, but you were left piece of the equation, right? I gather. I gather information from a lot of different sources. And before I actually start implementing real data hookups, I just wanted to double check with you to answer those questions so I don't go too much of attention. I mean, my goal is to do it, I think, was by 20th, but based on how things are progressing, I'm hoping I can get things in place by this week. To some extent. And so you're. You're actually, your question is the most crucial ones for me, because that will answer a lot of the things that I have. So maybe could you walk me through what.
+
+Cluely: You do from running the. Setting the email, especially any steps that require your judgment? I guess that could be a good conversation piece.
+
+Cluely: I'm pretty.
+
+Cluely: Happy with that, but let me bring that up.
+
+Cluely: Making sure my screen.
+
+Cluely: And I understand that you're just in us environment right now, correct? Right now. Yeah, we're just hitting us because apparently the federal portion of it will require me to go through an extra security layer.
+
+Cluely: Background check. So we're just. But I'm keeping that on the back of my head, so to speak. So when I'm architecting this solution, I'll keep the hooks and the ferrule piece. So in case once I get approval to go ahead and proceed, I hopefully can implement it very quickly. That's what I'm hoping.
+
+Cluely: So for the.
+
+Cluely: Bio weekly reports, all I really do is come out here. It's kind of already set up so everything is always fresh. The data is always fresh.
+
+Cluely: When you look at it.
+
+Cluely: But what we want to do is send an email to everyone.
+
+Cluely: Who has.
+
+Cluely: Pumping on this report, basically, because they would have something to fix.
+
+Cluely: And we would send an email to the assignee and the reporter.
+
+Cluely: Okay.
+
+Cluely: So there's.
+
+Cluely: Light. Okay. Sorry. I noticed that the email goes to everybody at once, even the one. So the use. Is that how you do it? You send it to everybody in the batch or you send the virtual tickets to individual people on the list.
+
+Cluely: No.
+
+Cluely: I.
+
+Cluely: I take this information when I've been doing is putting it in.
+
+Cluely: AI to get the email addresses. Okay.
+
+Cluely: And then.
+
+Cluely: Just kind of.
+
+Cluely: Copy paste those. So we send this one big email with links to us and nulls.
+
+Cluely: To be assignees and reporters.
+
+Cluely: Okay.
+
+Cluely: Okay. So. So what you're showing me on the screen right now, this is the reported self.
+
+Cluely: Yes.
+
+Cluely: Okay.
+
+Cluely: Okay. And that goes in an email. I think I have actually an example of that email.
+
+Cluely: Okay.
+
+Cluely: That there are four different.
+
+Cluely: Sections. Okay.
+
+Cluely: There's, like, initiative.
+
+Cluely: Milestone epic and story. So each one has.
+
+Cluely: Some data.
+
+Cluely: So do you sell. Send all those sections in one email or you send them to depending on who the consumer of the information is.
+
+Cluely: I.
+
+Cluely: Think one big email.
+
+Cluely: Oh, so it includes.
+
+Cluely: Okay. Includes every epic Milestones, all that information in one email.
+
+Cluely: Right. That's what you're saying. Yes. Okay.
+
+Cluely: Yeah. Okay.
+
+Cluely: This.
+
+Cluely: Reporter.
+
+Cluely: And assignee.
+
+Cluely: On all.
+
+Cluely: Of these.
+
+Cluely: Report.
+
+Cluely: Er.
+
+Cluely: So.
+
+Cluely: Oh.
+
+Cluely: Oh.
+
+Cluely: Just.
+
+Cluely: Screaming or.
+
+Cluely: Has it.
+
+Cluely: I.
+
+Cluely: Wasn't sure if there was.
+
+Cluely: Like, well, if there was.
+
+Cluely: If there's an assignee that we don't bother the reporter, we only use the reporter.
+
+Cluely: If there's no signing. But you're saying it's just everybody all the time, all day.
+
+Cluely: Yep.
+
+Cluely: Okay.
+
+Cluely: Do you see that? Let me ask you this question. The first. Do you see the need to send it to only the people that are consuming a particular section of the report, a particular ticket? Or is that not necessary?
+
+Cluely: Kind of like thinking outside a box.
+
+Cluely: That would become a future need.
+
+Cluely: I.
+
+Cluely: Mean, I guess if you.
+
+Cluely: Wanted to get fancy.
+
+Cluely: You really.
+
+Cluely: Indicate to people like, hey.
+
+Cluely: You have.
+
+Cluely: An item on.
+
+Cluely: The.
+
+Cluely: Ethics.
+
+Cluely: Okay.
+
+Cluely: Just.
+
+Cluely: Depending.
+
+Cluely: On what you said.
+
+Cluely: I'll point it out.
+
+Cluely: You have to, like. Yeah, you have to come in and open up all, see where you're at.
+
+Cluely: But you're right. If you knew the section you were in, you can just come in and just look at that. Not to do the whole thing.
+
+Cluely: Okay.
+
+Cluely: So you. You. I remember the email. So you'd redirect the user to click on a particular link. It will take them to this particular page.
+
+Cluely: And then the user will then open up the section that corresponds and looks at.
+
+Cluely: Or just. Okay, I got.
+
+Cluely: Okay, so the email has just links, right? The email itself, it just has links. Okay, got it. Got it. Okay.
+
+Cluely: Okay. That makes sense.
+
+Cluely: And then.
+
+Cluely: To find out, like, what's wrong with you, read the instructions, like, okay, what. What might be wrong, you know, to kind of figure it out, what's missing. Okay.
+
+Cluely: Okay. That. That makes sense.
+
+Cluely: That makes sense. And this you. And this you get from this information comes from where?
+
+Cluely: When you took from Jira. So you're going from Jira, you're populating Confluence.
+
+Cluely: With this data.
+
+Cluely: So you're querying Jira. Okay.
+
+Cluely: You want to see the chira? Yeah. Yeah.
+
+Cluely: So just hit edit, right?
+
+Cluely: Yeah.
+
+Cluely: Perfect. Perfect.
+
+Cluely: To find.
+
+Cluely: Out the perfect. Perfect. Yeah. That makes it easier. So I can just mimic your queries without changing too much. Okay.
+
+Cluely: Good.
+
+Cluely: And this runs.
+
+Cluely: I don't have the date. This runs for the two weeks past.
+
+Cluely: Basic. So if you do that bi-weekly you collect data for the previous two weeks.
+
+Cluely: Into.
+
+Cluely: Whatever data is fresh, whatever data is out here. So kind of a snapshot of the time.
+
+Cluely: So you get everything from the big. From whatever is still available that hasn't been closed or addressed. You still. You still pick it up. You don't go snippet. Okay, got it. Correct.
+
+Cluely: Okay. And I think I have added other looks like again if I added rights to this, but perfect.
+
+Cluely: That helps a lot.
+
+Cluely: Did you write this yourself all the. All this stuff?
+
+Cluely: That's pretty good originally said it off. Oh, Eric showed up. Okay.
+
+Cluely: Okay, good.
+
+Cluely: That's pretty good.
+
+Cluely: That was back when I didn't know how to do that.
+
+Cluely: Okay.
+
+Cluely: I can't remember all of the questions.
+
+Cluely: So I'll keep the existing queries and send one email with the report link to both the sign neon reporters for the US findings removing duplicate addresses. What do you do if the item is unassigned or someone's email address isn't available?
+
+Cluely: Very good question.
+
+Cluely: It's very.
+
+Cluely: Rare.
+
+Cluely: But, I mean, it.
+
+Cluely: Has happened.
+
+Cluely: I guess.
+
+Cluely: We.
+
+Cluely: Would just go into the ticket and, like, see what we can find.
+
+Cluely: Like, you created or something. Yeah.
+
+Cluely: I mean.
+
+Cluely: Yeah.
+
+Cluely: You're saying.
+
+Cluely: It's rare to have unassigned. Oh, you can't have it on a signed reporter because that's a required deal.
+
+Cluely: Right. But if that person left.
+
+Cluely: Kind of.
+
+Cluely: Right there, email invalid because they're inactive.
+
+Cluely: Yeah, really. I guess I would go here and look like, okay, you know, what team was this? Or try to piece it together to figure out who to send it to.
+
+Cluely: It's very rare.
+
+Cluely: But it has happened.
+
+Cluely: Okay, so if that's. If it does happen, is there a procedure that you follow?
+
+Cluely: Or.
+
+Cluely: See? It's kind of a manual.
+
+Cluely: Thing.
+
+Cluely: For us just to look through the ticket and see what we can piece together.
+
+Cluely: Maybe, Daniel, maybe that just becomes an exception report that comes to the odd Squad.
+
+Cluely: And then we have research it manually.
+
+Cluely: So.
+
+Cluely: What I'm thinking of, should we. Should the automation flag unresolved recipients.
+
+Cluely: For your review rather than guests?
+
+Cluely: I mean, who should receive that exception list?
+
+Cluely: Yeah.
+
+Cluely: I would say so.
+
+Cluely: Okay.
+
+Cluely: Okay. That's good. You know, I'll put that in requirements.
+
+Cluely: Sorry, I'm going through my notes, making sure that I have.
+
+Cluely: Oh, okay. And just to capture that, who should receive the exception list?
+
+Cluely: Also, I noticed that the page says one week.
+
+Cluely: To make Corrections, but the email says.
+
+Cluely: Two.
+
+Cluely: I mean, it's always two weeks we give them. So it did go out into Confluence and updated it to be two weeks.
+
+Cluely: Just so they match.
+
+Cluely: Okay.
+
+Cluely: Okay. So. So I got two weeks for Corrections.
+
+Cluely: When are the next. When. When are the next two bi-weekly emails scheduled to go out?
+
+Cluely: And do you send one of. Sorry, go ahead. Sorry.
+
+Cluely: Sometime next week.
+
+Cluely: Next week.
+
+Cluely: And do you send one if there is. If there are no findings, do you still send one?
+
+Cluely: Even if there's no findings.
+
+Cluely: They never had no final. Okay.
+
+Cluely: But if there were no findings. Yeah.
+
+Cluely: We wouldn't send anything.
+
+Cluely: So now I'm thinking off top of my hand, just give you a side question. Will that make sense?
+
+Cluely: To also set up like a teams group.
+
+Cluely: And send report to teams?
+
+Cluely: Does that make sense at all? I was. I know some graduation I work with. They love teams more than 11 years. So that's. So that's why I bring it up if it makes sense for your organization to do the same thing.
+
+Cluely: I'm.
+
+Cluely: Old school.
+
+Cluely: And I like emails.
+
+Cluely: But I can. Okay, that's fine.
+
+Cluely: Okay, got it.
+
+Cluely: January.
+
+Cluely: What do you think?
+
+Cluely: In a team's Channel?
+
+Cluely: Where, like, the.
+
+Cluely: People who need to do something? Yeah, yeah, yeah. I was.
+
+Cluely: Yeah, I was thinking perhaps that.
+
+Cluely: You know, because I noticed that. I mean, at least when I've been corresponding with Eric, he likes teams a lot. He responds faster. So I don't know. I mean, if you just get, like, a lot of emails is a passive for the email to get missed. And if that's the case, then maybe we can implement a another pipeline into teams.
+
+Cluely: For them to get notification perhaps in teams. I don't know. I'm just kind of thinking outside the outside the box, not knowing how you guys fully do things every day.
+
+Cluely: Yeah.
+
+Cluely: I mean, I just don't think.
+
+Cluely: There's.
+
+Cluely: A team.
+
+Cluely: S Channel out there that.
+
+Cluely: Would have.
+
+Cluely: This.
+
+Cluely: Whole.
+
+Cluely: Group.
+
+Cluely: These are people all over the place. Oh, I see.
+
+Cluely: They're changing all the time.
+
+Cluely: Yeah. Okay.
+
+Cluely: Okay.
+
+Cluely: Great idea.
+
+Cluely: But I think MVP.
+
+Cluely: Let's just do the.
+
+Cluely: Film. Sure, sure.
+
+Cluely: But.
+
+Cluely: It's something to keep in mind. A great idea.
+
+Cluely: So one more question I have. Could you show me how the report limits results to U.S. items?
+
+Cluely: And which field it uses to check? I think it called cab approval.
+
+Cluely: Right?
+
+Cluely: Is.
+
+Cluely: There.
+
+Cluely: Cab approval? I guess I'm not aware of that.
+
+Cluely: Is it in your query that you limit? Sorry, go ahead.
+
+Cluely: Any instructions is kind of.
+
+Cluely: Like.
+
+Cluely: What it, you know, what.
+
+Cluely: It's requiring.
+
+Cluely: Like, okay, the Target data set in the future.
+
+Cluely: Target date has an end date. Those are kind of things that it looks for. Okay.
+
+Cluely: Okay.
+
+Cluely: Maybe that.
+
+Cluely: Cab approved.
+
+Cluely: That's definitely a.
+
+Cluely: Field, but I. Maybe that's a different report or something. Yeah, I don't think it's this one, right? I don't think. Yeah, I don't.
+
+Cluely: I'm not aware.
+
+Cluely: Of anything. Yeah, it could be something I picked up from some other report.
+
+Cluely: I mean, I was going so fast through all this data. I might have picked it up.
+
+Cluely: So another question I guess I have. Could you show me the query that selects us items?
+
+Cluely: And for the date check, should I use existing queries exactly as they are?
+
+Cluely: Or do you need them to be somehow modified?
+
+Cluely: No, I.
+
+Cluely: Believe it.
+
+Cluely: Dates as they are.
+
+Cluely: I guess, because it's like a start date, I think, when this.
+
+Cluely: Started. I think that's how it's set up.
+
+Cluely: But everything.
+
+Cluely: Basically everything in us.
+
+Cluely: Would get picked up.
+
+Cluely: Okay.
+
+Cluely: Got it, got it, got it.
+
+Cluely: So the query actually itself takes up the query itself takes care of which ones are just us. It filters them out.
+
+Cluely: Correct. Okay, good.
+
+Cluely: Okay.
+
+Cluely: That's good to know. So I can just use that same structure.
+
+Cluely: Clears.
+
+Cluely: Can't cross instances.
+
+Cluely: Anyway.
+
+Cluely: So you could. We couldn't write a query to say, give me all the US and the nulls and spit it out into one.
+
+Cluely: You got to run the query in the instance. So you're restricting it by default.
+
+Cluely: Where you're running the query.
+
+Cluely: Okay, good.
+
+Cluely: And do you manually do anything? Like, do you manually say anything that you manually remove or adjust before sending the email? Or does everything on the report stay included?
+
+Cluely: I guess everything is as. Oh, good.
+
+Cluely: Perfect. That makes it.
+
+Cluely: Very manual profit. That makes it so much easier. That's good.
+
+Cluely: Okay, so.
+
+Cluely: And.
+
+Cluely: So what I'll probably need to do is compare the recipient list and findings against yours for the same round before I enable anything, obviously, before sending.
+
+Cluely: That's probably the best way to make sure that everything is working correctly.
+
+Cluely: So I'll generate the US findings and recipient list without sending anything. Then we can review any differences together. Okay. Yeah, I think, you know, I think I got. I don't. Did. I think we have most of the questions answered.
+
+Cluely: Really in the record time. I thought it was going to take a bit longer, but I think we have things answered. Is there anything else that you want to add? I guess that show it. Let me ask you this question. If you were to do this.
+
+Cluely: Is there. Is there things that you would like to improve on the report? We can start looking at maybe implementing in the future. Do you have some sort of like a wish list?
+
+Cluely: That you've experienced that you wanted to implement but just didn't have time to do that?
+
+Cluely: Not.
+
+Cluely: Really.
+
+Cluely: Okay.
+
+Cluely: So everything that you. That's going on right now is exactly how you would like to see it moving forward.
+
+Cluely: What are. Okay.
+
+Cluely: Okay.
+
+Cluely: Well, I don't know. I mean, it's. It looks pretty straightforward. I mean, I guess I'll find out when I start mending to see if there is any. If there is any gotchas, right? Feel free to reach out. That's what I was going to ask you. Can I ping you up from time to time? I don't know. How. How do you like teams or emails? I don't know which you prefer. Okay.
+
+Cluely: So.
+
+Cluely: Daniel just.
+
+Cluely: Won.
+
+Cluely: Like.
+
+Cluely: When you're thinking about this.
+
+Cluely: Are you thinking of taking her queries?
+
+Cluely: And then.
+
+Cluely: Putting them.
+
+Cluely: Static, like in your solution? Like, I'm just thinking, what if we ever changed it? Is it dynamic or. Yeah, that's what I'm going to start looking at, how the queries are implemented, and I'll decide what is the best way of implementing it. I mean, I mean, essentially what I want to do, I mean, not in this phase, but I need to keep things a little more compact. Otherwise I never release anything. But I want to. And I was talking this a little bit with Eric, and I don't want people. It might be a good idea, not for people not to touch the code itself so that code will be like a black box, creating a UI of some sort, whether where I hosted. I don't know yet. We'll figure it out. And then anybody that does anything that needs to change queries or needs to change notifications, I need to change, I don't know, schedule time. They can go to the UI, click, make a few clicks, and the code itself will adjust depending on what selection they choose. So that's what I'm kind of thinking as, as a future projections of this to make things so it makes it very easy for you to maintain it just in case you get rid of me tomorrow or whatever. So I want to make sure that you guys are taking care of old cases. That's my long-term plan also because we might be using agents, perhaps. I don't know if we're going to be using agents here.
+
+Cluely: Because I don't see there's a really need for this here yet unless you think of an agent, Stephanie, something that will have its own decision making process to make its own analysis of what needs to be sent, how, what information. That might be an Overkill for this, as I'm seeing right now. I might be wrong after I start implementing. But as if, as we start bringing in AI into this particular flows, I was thinking of making it like a second brain so it doesn't forget and that keeps improving.
+
+Cluely: So those kind of things that I'm seeing as a future, I'm just kind of think when I was thinking about this and I was looking at your documentations, that might be beneficial so the data gets, because AI, as you know, is not 100. Right. It does hallucinate. It comes up with things that shouldn't be coming up with, and this will keep things very stringent. So it just adheres to your company standards and the way your company works and functions without it making up things in the fly.
+
+Cluely: That's kind of how the future will look like. I just want to take it one step at a time. This is my second day. So I'm trying to get it down by this weekend.
+
+Cluely: And then next week I can probably do some manual rounds and check with you to see how it looks before we start going really fancy.
+
+Cluely: If that makes sense.
+
+Cluely: Like a good plan. Okay, good.
+
+Cluely: I'm glad.
+
+Cluely: Perfect. So, Stephanie, thank you so much for your time. I really, really appreciate it. And this helped me a lot.
+
+Cluely: And I'll take all that information and we'll start working on it immediately.
+
+Cluely: I'll reach out to you. Yeah, I'll reach out to you if I have any questions. Since you're the SME here, I really appreciate it. Thank you so much.
+
+Cluely: Yeah.
+
+Cluely: Bye-bye.
+
+
+Cluely: Can you hear me?
+
+Cluely: Do you hear what I'm saying?
+
+Cluely: Like
+
+Cluely: Thank you. Thank you so
+
+Cluely: So much it's oh yes. I
+
+Cluely: Let's do some quick checks, making sure that you can hear me. Can you hear what I said?
+
+Cluely: Yeah.
+
+Cluely: Okay, perfect, thank you.
+
+Cluely: The meeting will start in a few minutes.
+
+Cluely: Okay, Daniel.
+
+Cluely: Oh hi. Hey, what's up? Hi, how are you guys doing? Hi, good. Let me turn my camera on just for one sec.
+
+Cluely: Sorry about that.
+
+Cluely: Okay, perfect mine on, even though I'm eating.
+
+Cluely: With my camera on and lunchtime and uh
+
+Cluely: Central time? I'm in Pacific, so it's eleven o'clock here.
+
+Cluely: I'm on to we got like every brand zone you can imagine. Oh, that's awesome. That's awesome. So before we start, Daniel I'll just saw introduce you to Steph. Um so she's um a business analyst on her team. Okay. She knows a lot of stuff. about stuff I don't know about. Some great resource to have, especially for this.
+
+Cluely: And Steph, this is Daniel, so he's the
+
+Cluely: uh automation engineer that Eric just brought in. Or the second day, now I can't remember.
+
+Cluely: I think the started twenty seventh, so it's second day. Yeah.
+
+Cluely: Already rocking along and doing anti-grades. So get uh a handle of everything that's going on in your in your ecosystem. Uh so uh as I'm going through the process, Eric identified some things he wants to starts with one of it. Uh familiar with it is auto.
+
+Cluely: one eighty eight.
+
+Cluely: Uh it's on the automation of the bi weekly reports or what they call bi weekly reports and uh I have meetings not here, weekly reports that you do I think manually and an email goes out to Everybody else uh once a week or is it once a month I'm I'm kind of
+
+Cluely: Ordering.
+
+Cluely: Yeah, we take a look at it.
+
+Cluely: Every two weeks. Okay.
+
+Cluely: So what Danny was just saying is auto one eighty eight. That what's in that ticket is the one Eric said, let's start doing that. That's the the most valuable in his eyes, edits That bi weekly email thing that you send and a couple of others I think are part of it. So we're starting to
+
+Cluely: build an understanding of what you do there. Yeah. So I'm just looking at the email you were sent um bi weekly and also
+
+Cluely: The weekly requirements field report, I I don't know if that's worth setting up an AI because honestly all I do is um there's two different filters I run. I just click a button and if there's anything that any findings, it's probably our like Squad's fault but they don't have like a validation in there for the team.
+
+Cluely: It's extremely rare that something comes up.
+
+Cluely: So in reality
+
+Cluely: It's probably okay though. That means automating the search for it. It's just then it's something we would never have to look for again. And if it doesn't appear once a year or whatever, it'll show up.
+
+Cluely: So then would we just get maybe notified if something was flagged or well is it that's what Daniel's building for us. Yeah, so I mean is it important for you to
+
+Cluely: uh automate that or should we just focus on the bi weekly one? Which one takes most of your time, I guess. That's the question.
+
+Cluely: Okay.
+
+Cluely: Okay.
+
+Cluely: So maybe uh I know that I I asked you a lot of questions but you a last piece of the equation, right? I gather I gathered information from a lot of different sources and before I actually start implementing real data hookups I just wanted to double check with you to uh answer those questions so I don't
+
+Cluely: go too much of a tangent. I mean my goal is to do it uh I think w was by the twentieth, but based on how things are progressing, I I'm hoping I can get things in place by this week, uh, to some extent. And so your Your actually your question is the most crucial ones for me, because that will answer a lot of the things
+
+Cluely: that uh I have. So uh maybe uh could you walk me through what
+
+Cluely: you do from running the sending the email especially any steps that require your judgment, I guess that could be a good uh conversation piece.
+
+Cluely: Let me bring that up.
+
+Cluely: Yeah.
+
+Cluely: And I understand that you're adjusting US in right now. Right now, yeah, we're just hitting US because apparently the federal portion of it will require me to go through a an extra security layer, uh background check. So we're just but I'm keeping that on the back of my head, so to speak, so when I'm architecting this solution, uh
+
+Cluely: uh keep the hooks and the uh
+
+Cluely: uh federal pace. So in c once I get approval to go ahead and proceed, I sh hopefully can implement it fairly quickly. That's what I'm hoping. Okay.
+
+Cluely: Already said everything is always fresh. The data's always fresh when you look at it. Um but what we want to do is send an email to everyone who has something on this report basically. They would have something to fix. And we would send an email to the assignee and the reporter.
+
+Cluely: Okay. So there's light okay. Sorry, I noticed that the email goes to everybody at once. Even the one so do you is that how you do it? You send it to everybody in the badge or you send the digital tickets to individual people on the list.
+
+Cluely: take this information what I've been doing is putting it in AI to get the email addresses and then just kind of copy paste those. So we send this one big email with links to US and nulls um to the assignees and reporters. Okay.
+
+Cluely: Okay. So so what you're showing me on the screen right now, this is the report itself.
+
+Cluely: Yeah. Okay.
+
+Cluely: Okay. And that goes in an email. I think I have actually an example of that email. Okay. Uh that uh four different functions. Okay.
+
+Cluely: Okay.
+
+Cluely: Damn.
+
+Cluely: So do you send all those sections in one e-mail or do you send them to depending on who the consumer of the information is?
+
+Cluely: Um I found one big email.
+
+Cluely: Okay, includes every appect, milestones, all information and one email, right? That's what you say? Yeah. Okay, good.
+
+Cluely: Oh.
+
+Cluely: Oh, just screen or has it. Okay.
+
+Cluely: Ciao.
+
+Cluely: I wasn't sure if there was like well if there was if there's an assignee then we don't bother the reporter. We only use the reporter if there's no assignee. But you're saying it's just everybody all the time all day. Yep. Okay. Do you see the let me ask you this question, Lastir, do you see the need? to uh send it to only the people that are consuming a particular section of
+
+Cluely: the report a particular tacket uh ticket or is that not necessary? Kind of like thinking outside the box. That'll become a future need.
+
+Cluely: Yeah.
+
+Cluely: Indic indicate to people like, hey, you have a the epic portion.
+
+Cluely: Because the part of life they call everything look. You have to like you have to come in, open a ball, and see where you're at.
+
+Cluely: But you're right, if you knew the section you were in, you can just come in and just look at that and not just think through the whole thing. Okay.
+
+Cluely: So you you uh I I remember that email. Uh so you d redirect the user to click on a particular link, it will take him to this particular page, and then the user will then open up the section that corresponds and and looks at or does Okay, I got it. Okay, so the email has just links, right? The email itself just has links
+
+Cluely: Links. Okay. Got it, got it. Okay. Okay. Okay.
+
+Cluely: That makes sense.
+
+Cluely: Find out if what's wrong with the inspiration like okay what what might be wrong if you figure it out's mistake. Okay.
+
+Cluely: Okay, that that makes sense.
+
+Cluely: Makes sense. And this you and this you get from this information comes from where? When you from JIRA. From JIRA. So you're going from JIRA, you're populating confluence with this data. So you're querying JIRA. Okay.
+
+Cluely: Yeah, yeah, if you want to see that can I pop in there.
+
+Cluely: So just hit edit, right?
+
+Cluely: Yeah yeah. Perfect.
+
+Cluely: Perfect, perfect. Yeah that makes it easy. So I can just uh mimic your queries without changing too much. Okay, good. And this runs uh
+
+Cluely: I don't have the date. This runs for the two weeks past, basic. So if you do that bi weekly you collect data for the previous two weeks into data is whatever the I see. So you get everything from the big from whatever is still available that hasn't been closed or addressed.
+
+Cluely: you st you still pick it up. You don't go snip snip it. Okay, got it, got it. Okay. And I think I have added I'll double check again if I had added rights to this. But perfect. That helps a lot. Did you write this yourself, all the all this stuff? That's pretty good. Oh, Eric set it up, okay.
+
+Cluely: Okay.
+
+Cluely: Um
+
+Cluely: Now I can't remember all of the questions.
+
+Cluely: So just uh I'll keep the existing queries and send one email with the report link to both the signee and reporters for the US findings, removing duplicate addresses. What do you do if the item is Unassigned or someone's email address isn't available.
+
+Cluely: Um
+
+Cluely: It's very rare, but I mean it has happened.
+
+Cluely: I got
+
+Cluely: We would just go into the ticket and like see what we can find.
+
+Cluely: Um
+
+Cluely: Like you're created or something? Yeah, I mean
+
+Cluely: Yeah.
+
+Cluely: But you're saying it's rare to have unassigned oh well you can't have an unassigned reporter'cause that's a required deal.
+
+Cluely: Right, but it's that for some left.
+
+Cluely: Oh that's their email invalid because they're interactive.
+
+Cluely: Yeah, really I guess I would go here and look okay, you know, what team was next to try to be
+
+Cluely: gathered and think about to send it to.
+
+Cluely: It's very rare, but it has happened.
+
+Cluely: Okay, so a and so if does if it does happen, is there a procedure that you follow or
+
+Cluely: Kind of a I would think kind of a manual thing for us just to look through the ticket and see what we can piece together.
+
+Cluely: But maybe Daniel, maybe that just becomes an exception report that comes to the odds quad and then and we have to research it manually. So what I'm I'm thinking is should we uh should the automation flag unresolved recipients? for your review rather than guess. I mean who should we see that exceptionalist?
+
+Cluely: Okay.
+
+Cluely: Okay, that's good. I'll put that in requirements.
+
+Cluely: Noah's making sure that I have
+
+Cluely: Oh okay, and just to capture that, uh who should receive the exception list? Also I noticed that the page says one week to make corrections, but the email says two.
+
+Cluely: And it is always two weeks to give them, but it did go up into complexity taking it to being two weeks.
+
+Cluely: Playing it so.
+
+Cluely: Okay.
+
+Cluely: Okay, so so got it two weeks for corrections
+
+Cluely: Uh w when are the next when when are the next two bi weekly emails scheduled to go out?
+
+Cluely: And do you send one if sorry, go ahead.
+
+Cluely: Sorry.
+
+Cluely: Next week.
+
+Cluely: And do you send one if there is uh if there are no findings? Do you still send one? Even if there's no findings?
+
+Cluely: And they were happy.
+
+Cluely: So I'm now I'm thinking the top on top of my head just give you a side question.
+
+Cluely: But will it make sense?
+
+Cluely: Uh to s also set up like a teams group
+
+Cluely: uh and uh uh send report to teams. Does that make sense at all? I don't s I know some organizations I I I work with, they love teams more than loving us. That's so that's why I bring it up if it makes sense for your organization to do the same thing. I'm old school and I like females, but I can't. Okay, that's fine.
+
+Cluely: Okay, I got it.
+
+Cluely: Anyway.
+
+Cluely: But Daniel, were you were you thinking a team's channel where like the people who need to do something? Yeah, yeah, yeah. I was reading it.
+
+Cluely: Yeah, I was thinking perhaps that.
+
+Cluely: You know, because I noticed that I mean, at least when I've been uh c uh corresponding with Eric, he likes teams a lot. He responds faster. So I don't know, I mean if you just get like a lot of emails, is it possible for the email to get missed? And uh uh if that's the case then uh maybe we can
+
+Cluely: implement a nother pipeline into Teams for them to get a notification perhaps in teams. I don't know. I'm just kind of thinking outside the outside the box, not knowing how you guys fully do things every day.
+
+Cluely: Yeah. I just don't think there's any panel out there that would have this the whole group.'Cause these are people all over the group. Yeah. I see I see. Okay.
+
+Cluely: Okay.
+
+Cluely: idea, but I think MVP, let's just do shell, like then uh but great that's something to keep in mind. It's a great idea. So one more question I have, could you show me how the report limits uh results to US items? and which field it uses to check thing called KEP approval.
+
+Cluely: Yeah.
+
+Cluely: Is there a
+
+Cluely: Um
+
+Cluely: If it does just have approval, I guess I'm not aware of that. Um
+
+Cluely: Yeah.
+
+Cluely: Is it in your query that you limit? Sorry, go ahead.
+
+Cluely: And the instructions is kind of like w what it you know, what it's requiring, like okay, the target date is set in the future, um, target date has an end date. Those are kind of things that it looks for and put error on.
+
+Cluely: Okay.
+
+Cluely: Okay.
+
+Cluely: Or when I say error, um add to this report.
+
+Cluely: Okay.
+
+Cluely: And it maybe that can approved. But that's definitely a field, but I maybe that's a different report or something you're saying. Maybe it's I don't think it's this one. I don't think yeah. Yeah, it could be something that picked up from some other report. I mean I I was going so fast through all this data. Might have picked it up.
+
+Cluely: Me the query that selects US items, and for the date check, should I use existing queries exactly as they are, or do you need them to be somehow modified?
+
+Cluely: No, I I think the dates of things again. Um
+
+Cluely: But everything
+
+Cluely: Basically everything in
+
+Cluely: We'd get picked in.
+
+Cluely: Okay.
+
+Cluely: Yeah.
+
+Cluely: Okay. That's good enough. So I can just use that same structure.
+
+Cluely: Yeah, the queries stamp cross instances anyway. So you could we couldn't write a query to say, give me all the US and the nulls and spit it out into one. You gotta run the query in the instance. So you're restricting it by default where you're running the query.
+
+Cluely: Okay, good. And do you manually do anything? Like uh do you manually um is there anything that you manually remove or adjust before sending the email? Or does everything on the report stay included? Oh good.
+
+Cluely: Perfect. That makes it
+
+Cluely: That makes it much easier. That's good.
+
+Cluely: So and
+
+Cluely: So what I'll probably need to do is compare the recipient list and findings against yours for the same round before I enable anything or literally before sending.
+
+Cluely: That's
+
+Cluely: That's probably be the best way to make sure that everything is working correctly.
+
+Cluely: So I'll generate the US findings, the and recipient list without sending anything, then we can review any differences together. Okay, yeah. I think you know, I think I got did I um did I think we have most of the questions answered. The real rec in the record time. I I thought it was gonna take about
+
+Cluely: longer but I think we have things answered. Is there anything else that you wanna add, I guess, that you would let me ask you this question. If you were to do this, uh is there is there things that you would like to improve in the report, that we can start looking at maybe implementing in the future.
+
+Cluely: Do you have some sort of like a wish list uh that you've experienced
+
+Cluely: That you wanted to implement but just didn't have time to do that? Not really. Okay.
+
+Cluely: So everything that you that's going on right now is exactly how you would like to see it moving forward. Okay.
+
+Cluely: Well I don't know, I mean it's it looks pretty straightforward. I mean uh I I guess I'll find out when I start implementing to see if there is any yeah if there is any gotchas, right.
+
+Cluely: Can I that's what I was gonna ask you, can I ping you from time to time? I don't know how how do you like your teams or emails? I don't know which you
+
+Cluely: Yeah. So Daniel, just one like when you're thinking about this, are you thinking of taking her queries and then putting them static like in your solution? Like I'm just thinking, what if we ever changed it? Is it dynamic? Yeah, th that's what I'm gonna start looking at, how the queries are implemented, and I'll decide what is the best way of
+
+Cluely: implementing it demand I mean essentially what I wanna do, I mean not in this phase, but I need to keep things a little more compact, otherwise I'll never release anything. But I wanna and I was talking this a little bit with Eric and I don't want people it might be a good idea not For people not to touch the code сав содат коліду билек блак бокс.
+
+Cluely: uh creating a UI of some sort. Whether where hosted, I don't know yet, we'll figure it out.
+
+Cluely: And then anybody that does anything that needs to change queries or needs to change notifications or need to change uh I don't know schedule time, they can go through the UI, click make a few clicks and the code itself will adjust depending on uh what selection they choose. So that's what I'm kind of thinking as as a future
+
+Cluely: projections of this to make things so it makes it very easier for you to maintain it just in case you get rid of me tomorrow. Whatever it could be. So I wanna make sure that you guys are taking care of all cases. Uh because we might be using agents perhaps. I don't know if we're gonna be using agents here.
+
+Cluely: Because I don't see there's a real need for this here yet.
+
+Cluely: Unless you think of
+
+Cluely: An agent uh Stephanie is something that the that people have it spawn.
+
+Cluely: decision making process to make its own analysis of what needs to be sent, how, what information. That might be an overkill for this. As I'm seeing right now, I might I might be wrong after I start implementing. But as if as we start bringing in AI into this particular flows. I was thinking of making the
+
+Cluely: like a a second brain so it doesn't forget and it keeps improving. So those kind of things that I'm seeing as a future. Uh I'm just kind of just th think when I was thinking about this and I was looking at your documentations that might be beneficial. special. So the data get because AI, as you know, is not a hundred percent.
+
+Cluely: Right, does hallucinate?
+
+Cluely: It comes up with things it shouldn't be coming up with.
+
+Cluely: And this will keep things uh very
+
+Cluely: Uh
+
+Cluely: Stringent.
+
+Cluely: So it just adheres to your company standards and the way your company works and functions without it making up in the flyer. That's kind of how the future will look like. But we I just wanna take it one step at a time. This is my second day. So I'm trying to get it down by this weekend. Uh and then next week I can probably do some manual run.
+
+Cluely: and check with you to see how it looks before we start going through the same shit.
+
+Cluely: If that makes sense. Okay, good. I'm glad. Perfect. So Stephanie, thank you so much for your time. I really, really appreciate it. And this helped me a lot. And uh I'll Take all that information and we'll start working on it immediately.
+
+Cluely: I'll be I'll reach out to you. Yeah, I'll reach out to you if I have any questions. Since you're the SME here. I really appreciate it. Thank you so much.
+
+Cluely: Oh bye.

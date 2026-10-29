@@ -31,4 +31,16 @@ You'd have most of the same enterprise options for storing secrets in Python tha
  
  
 I can setup some time with Anders.   Can you read the above and if you have the answer you need or if it sparks more questions let me know.  When I get that confirmation I will get the meeting setup. 
+
+
+=============###==========
+Good call. Here's a version for the Teams chat that Eric can forward as-is:
+
+Thanks Eric, Anders's notes cover hosting and secrets. To save him a meeting, could you pass these along? Short answers are fine.
+	1.	How do we request an SMTP service account, who approves it, and roughly how long does it take? Can it send as the Odd Squad mailbox?
+	2.	What SMTP host and port should we use, and what sign-in method? Can a laptop reach it, or only the VDIs?
+	3.	Do your scripts use personal or service account tokens for Jira and Confluence?
+	4.	Later on, could our scripts run on your VDIs, and how do you schedule runs and spot failures?
+
+Question 1 matters most, because the biweekly notifier can't be in use until email works.
  

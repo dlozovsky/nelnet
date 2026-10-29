@@ -1189,3 +1189,14 @@ $env:JIRA_TOKEN = [System.Net.NetworkCredential]::new('', (Read-Host 'Jira token
 Repeat the second line with `CONFLUENCE_TOKEN` and the other prompt text. Don't paste a token into this chat or into a file.
 
 After that, run `--check-page` first. Share only redacted output with me, as before. If you want, I can add the per-window rule and the history caution to CLAUDE.md so they carry into the maintenance guide. I'd do that as its own small commit.
+
+=================================================
+Agreed. I left CLAUDE.md alone and logged your decision: environment variables are a stopgap, and the maintenance guide will describe the keyring setup the team will actually use.
+
+On the hidden prompt, the token never appears on screen and never lands in the history file. History records the command line you typed, not what you enter at the prompt. A few things remain true while the window is open:
+
+- **Visible inside the window.** Any command or program started from that window inherits the token, and `Get-ChildItem Env:` would show it. Don't run anything else from that window.
+- **Gone on close.** Closing the window removes the token. Close it when you're done, as you planned.
+- **One prompt per token.** `JIRA_TOKEN` and `CONFLUENCE_TOKEN` each need their own prompt line. The Confluence token is only needed for `--check-page`, and the Jira token for `--show-issue`.
+
+When you run the steps, start with `--check-page` and share only redacted output. For example, tell me which section names matched or didn't, with no query text or issue keys.

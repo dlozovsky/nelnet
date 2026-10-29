@@ -59,5 +59,29 @@ The Graph App will need permissions to send from whichever mailbox(es) you want.
 Once this is set up, you'd authenticate with a token and then be able to use the same SMTP server to send emails - as you would with username+password authentication.
  
 We use Personal Access Tokens for both Jira and Confluence. For local development on laptops, each user has their own PAT scoped to their accounts' access. For our automation servers, we have a service account with its own PAT and scoped access. This does incur a cost - the service account uses a seat on both Jira and Confluence - which isn't ideal but is acceptable. I know of some teams who use individual-user PATs for prod automation, and that works just fine even if I wouldn't officially recommend it.
+
+---------------------------------------------------------------------------------
+I recorded Anders’s response in docs/03-decision-log.md and docs/08-open-questions.md. No code changed.
+
+What this settles
+
+Tokens (Auto 1, Dave 3): both systems use Personal Access Tokens. On a laptop, you use your own PAT scoped to your own access. The team’s servers use a service account PAT that takes a seat on each system. This matches how the app already reads JIRA_TOKEN and CONFLUENCE_TOKEN as Bearer tokens, so the gate runs on your PAT and a service account can wait. Still open: where a laptop keeps its PAT. The build assumes environment variables.
+Email (Auto 2):
+Sender: the sender will use smtplib with username and password, and the password will come from an environment variable.
+Access it needs: the sending account must be in the mailbox group and delegated send must be on for the mailbox. Both are Help Desk requests, to AMO and AMO or MAPPS.
+Graph app: this is the alternative, and it needs no service account.
+Dave 5 and Auto 4: the sending method is known but not the address. Auto 4 is marked partly answered.
+
+Left out of the docs on purpose. I didn’t write the SMTP host names into the docs, the repo or any comment. They go only in your local settings.toml, and the NULSC one stays unused until N1 passes.
+
+Still open, and worth asking Eric to pass on
+
+Can the gate send from your laptop under your own account, with send-as on the Odd Squad mailbox, instead of a service account? Anders says basic auth works on a laptop under local credentials, but it isn’t clear whether that avoids the Help Desk request.
+What are the port and TLS mode? He didn’t say, and I won’t guess in the code.
+What is the lead time for the two Help Desk requests, and who submits them? Eric is already submitting send-as, so this ties to Dave 5.
+
+Request 1 is the most important, because it decides whether the biweekly notifier can go live from the laptop soon. You can start the Help Desk requests before the SMTP sender exists. Once the answers come in, I can build the sender against a local fake SMTP server with the network blocked.
+
+I haven’t updated today’s daily-log entry with this response.
  
  

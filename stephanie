@@ -54,5 +54,67 @@ Timing and pages
 14. Which recent run can I compare my output against?
 15. Where do the pages live today (space and parent page), and who should be able to view the automated ones?
 
+---------------------------------------------------------
+would you agree with this The call is 11:05 to 11:30, so 25 minutes. I'd put the questions that block the build first, since you may not reach all 16.
+
+**Ask first (these hold build steps)**
+- **Q8 and Q9:** who gets the notice, how a lead is chosen, and what happens to a finding with no lead. These block the notifier, and where the lead list lives matters most.
+- **Q10:** whether the deadline is one week or two. The page says one and the email says two.
+- **Q2 and Q6:** the filter and required fields, and whether a ticket missing three fields counts as 1 or 3. This decides what the weekly count must match.
+- **Q7 and Q11:** the structure report's US scope, the CAB approval field, and how the page finds the first child item and what it shows when there is none.
+- **Q15:** a recent run you can compare against. Without one, slice 2 has no pass/fail check.
+
+**If time remains:** Q12 (which teams report), Q16 (where the pages live and who views them), Q13 (next send dates), then Q3, Q4 and Q5. For those, a yes or no and an example is enough. Q14 is the lowest priority.
+
+**What to capture:** short answers only, per the tracker rule. Write down counts, field names, rules, and yes or no. Don't write ticket text or names. For a question she answers with an example, ask whether it's the rule or an exception.
+
+Two questions would help even though they aren't on your list:
+- Does she do anything by hand that isn't written down, such as removing a ticket before sending?
+- Which part of the weekly or biweekly process has she needed to redo or fix?
+
+When the call ends, paste or summarize what she said. I'll record it in the decision log and tracker, mark each question answered, closed or still open, and tell you which held build steps it unlocks. Anything that differs from what I built, such as how "N/A" counts or case-sensitivity, I'd change with a test first.
+
+Here's a script for the 25 minutes. Times are a guide, and the order puts the questions that block the build first.
+
+**Opening (1 minute)**
+"Thanks for making the time, Stephanie, and Dave, thanks for setting it up. I'm building automation for the weekly required-fields report and the biweekly structure report. I want to copy what you do today before I connect it to real data. I sent 16 questions ahead, so I'd like to use the time on your answers. I'll take notes on rules and counts only, no ticket text or names."
+
+**1. Who gets the notice (6 minutes)**
+- "For each flagged item in the biweekly report, who gets the notice today: the assignee, the reporter, or the initiative owner? I'm asking because many items are unassigned."
+- "How do you decide which lead gets which finding, and where does that list live?"
+- "What happens to a finding when you don't know the lead?"
+- "Is the fix deadline one week or two? The page says one and the email says two."
+
+**2. How the report decides (6 minutes)**
+- "If one ticket is missing three required fields, do you count 1 problem or 3?"
+- "How does the page find the first linked child item, and what does it show when there is none?"
+- "What is the US scope of the structure report, and which field is the CAB approval check?"
+- "Does a field with only spaces, or a value like 'N/A', count as empty? Are allowed values case-sensitive? Is any field required only when another field has a certain value?"
+
+**3. Comparison and scope (5 minutes)**
+- "Which recent run can I compare my output against? I'd like the same filter, same day."
+- "Which teams count as program-reporting teams, and where is that list?"
+- "Which filter and required fields does the weekly report use, and where is the saved filter defined?"
+
+**4. Timing and pages (4 minutes)**
+- "When are the next weekly run and the next two structure sends?"
+- "Where do the pages live today, and who should be able to view the automated ones?"
+- "Roughly how long does each report take you now?"
+
+**5. Open-ended (2 minutes)**
+- "Is there anything you do by hand that isn't written down, like removing a ticket before you send?"
+- "What part of this process has gone wrong before?"
+
+**Close (1 minute)**
+"That's what I needed. I'll write up what I heard and send it back so you can correct anything I got wrong. Is it okay if I come back with a couple of follow-up questions by email once I run my output against your comparison run?"
+
+**Tips for the call**
+- If she answers a question with an example, ask: "Is that the rule, or an exception?"
+- If time runs short, cut section 4, then the scope and filter questions in section 3. Don't cut section 1 or the comparison run.
+- Repeat each answer back in one sentence before moving on, so your notes match what she meant.
+
+I can also turn this into a one-page notes template with a blank for each question, ready to fill in during the call.
+
+
 Thanks,
 Daniel

@@ -1169,3 +1169,23 @@ Yes, Claude Code is right. I overstated it. You can start the read-only steps no
 2. **Switch to keyring** as soon as Eric approves.
 
 And yes, tell it the Eric message was sent once you've sent it.
+================================================
+I recorded those two rules in the decision log and the daily log. No code changed, and I left CLAUDE.md alone.
+
+I added one caution to the log entry that the rules don't cover. PowerShell saves typed commands in a history file on disk. If you type `$env:JIRA_TOKEN = "the-real-token"`, the token ends up in that file in plain text, even though the variable disappears when the window closes. Two ways to avoid it:
+
+1. Turn off history saving for the window before you type anything:
+
+```bash
+Set-PSReadLineOption -HistorySaveStyle SaveNothing
+```
+
+2. Or read the token without typing it as a literal. This prompts with hidden input, and works in Windows PowerShell 5.1 and PowerShell 7:
+
+```bash
+$env:JIRA_TOKEN = [System.Net.NetworkCredential]::new('', (Read-Host 'Jira token' -AsSecureString)).Password
+```
+
+Repeat the second line with `CONFLUENCE_TOKEN` and the other prompt text. Don't paste a token into this chat or into a file.
+
+After that, run `--check-page` first. Share only redacted output with me, as before. If you want, I can add the per-window rule and the history caution to CLAUDE.md so they carry into the maintenance guide. I'd do that as its own small commit.

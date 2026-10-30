@@ -55,5 +55,101 @@ Hours spent in my first 4 days on the project: 32 (8 a day), before the gate clo
 - Delegated send takes about 2 weeks, so the first real send is no earlier than about Nov 12.
 - Nothing has run against real Jira, Confluence, or SMTP. The query reader and field shapes are verified only against fakes.
 - Eric has not said whether a US-only first release counts. Nearly everything touches NULSC.
+
+***********************************************************************************
+Much better, and it’s ready to commit once two small fixes are in:
+
+Drop “Which address does the email send from?” from Ask Dave. Anders already answered it: the Odd Squad mailbox. Section 6 says so too.
+Delegated send: if you’ve already filed that request, change “not filed” in sections 6 and 8 to “Filed; target about Nov 12”. If you haven’t, file it soon, because it’s the longest wait for the gate.
+
+Then commit and send it to Dave.
+
+Say yes. Stephanie only said the end date can’t be blank, so row 82 should say the same.
+
+Its other changes are right too. “Automation team” is a good choice for the answerer, and Oct 29 is the correct date.
+
+One thing to check: the requirements file under docs/requirements/ should be committed, not git-ignored like the logs. Ask it: “Is docs/requirements/slice2-biweekly.md committed? If not, commit it.”
+
+What do you think as a draft
+
+Status: Week 1
+
+Dates: 2026-10-26 to 2026-10-30 (draft written 2026-10-29) · Gate week: Onboarding. Eric has not emailed the clock start date yet
+
+Gate progress
+Automation	Stage	In use by	Maintenance doc
+1. Weekly required-fields check (AUTO-188 slice 1)	Building. Code complete on synthetic data. No real read yet	Nobody yet	Not started
+2. Biweekly structure report email (AUTO-188 slice 2)	Building. Code complete on synthetic data. Requirements drafted and committed. Real read-only steps are next	Nobody yet	Not started
+
+503 tests pass with the network blocked. Nothing is pushed, because GitLab push access is not granted yet.
+
+Hours spent in my first 4 days on the project: 32 (8 a day), before the gate clock starts. This covers laptop setup, both slices on synthetic data, the walk-through with the report owner, and documentation. The ticket estimates about 64 hours for the two slices. That figure is a floor, assumes Java, and excludes waiting on access. Real runs, deployment, and the maintenance guide are still ahead.
+
+Done this week
+Set up the laptop: Python 3.13, pytest, and keyring installed, the repo created, and the credential store ready for the tokens and the SMTP password.
+Slice 1 is code complete: it reads a saved filter, applies the rules, and publishes team counts to Confluence. It has a dry run and safe retries. Not yet run on real data.
+Slice 2 is code complete: it reads the page's queries, applies the rules, and sends one email and an exception list. It has a dry run and a local sent record. Not yet run on real data.
+Test suite grew from 263 to 503 tests, all passing with the network blocked.
+Added three read-only discovery steps for the first real read: --check-page, --show-issue, and display names in the local dry-run file.
+Moved the tokens and the SMTP password into the Windows credential store with keyring.
+Held the walk-through with the report owner on the structure report. It changed the design to one email to every assignee and reporter, with no team lead list.
+Drafted the slice 2 requirements document and corrected the decision log and open questions to match.
+Filed the Help Desk request for mailbox access (RITM1089333). Filed the delegated send request, target about Nov 12.
+Next week
+Run the read-only steps on real data: --check-page on the US page, then --show-issue to find the parent link field.
+Do a full slice 2 dry run and compare findings and recipients with the report owner's next round. Send nothing.
+Add the mailbox name to RITM1089333 as a comment.
+Test write access to the Confluence Data Center page.
+Get the weekly check inputs from the report owner: filter, team field, and label.
+Start the maintenance guide on Confluence Data Center.
+Blockers and asks
+Blocker	Who can unblock	Needed by
+Clock start date email	Eric	[TBD]
+GitLab push permission	Eric	[TBD]
+Mailbox access request RITM1089333 is pending manager approval and needs the mailbox name in a comment	Manager, Help Desk	2026-11-05
+Delegated send on the mailbox (filed, about 2 weeks)	Help Desk	About 2026-11-12
+Weekly check inputs: filter, team field, label, who reads the results	Report owner	Before the first real weekly run
+Slice 2 answers: is a finding what the page query returns, the story rule, the label spelling, To or Bcc, what happens when the start date is blank	Report owner	Before the dry run next week
+US-only acceptance, evidence of use, the double-send limit, and whether Nov 20 stands	Eric	[TBD]
+Which tools are approved for call notes (the walk-through used a meeting-assistant app)	Dave	[TBD]
+Write access to the Confluence Data Center page (untested)	Dave, Daniel	[TBD]
+Decisions made
+Eric: the pair is two AUTO-188 slices. Read-only runs are approved. No sends and no writes to Jira or Confluence until he says otherwise. keyring and pytest are approved.
+Eric: the structure report matches what the report owner does today. One email to assignees and reporters, no lead list.
+Report owner: two-week fix deadline, no CAB check, the page is not published by us, and acceptance is a dry run against her next round.
+Daniel: slice 2 writes nothing to Jira and keeps a local sent record in the run folder. This differs from CLAUDE.md, so Eric needs to hear of it.
+Automation team: Jira and Confluence use personal tokens. Email is SMTP on port 587 with STARTTLS. The email sends from the Odd Squad mailbox.
+Risks to the gate
+Delegated send takes about 2 weeks, so the first real send is no earlier than about Nov 12.
+Nothing has run against real Jira, Confluence, or SMTP. The query reader and field shapes are verified only against fakes.
+Eric has not said whether a US-only first release counts. Nearly everything touches NULSC.
+Slice 1 has no real inputs yet. The weekly filter and fields are unanswered.
+Thanksgiving week likely falls in gate week four, against the Nov 20 target.
+
+It’s a strong draft. Eric can see where things stand at a glance. I’d change five things before sending:
+
+Cut the hours paragraph down to one line, for example “32 hours this week, all before the clock start.” The part about the 64-hour estimate being a floor and assuming Java reads like an argument with the ticket, and he hasn’t asked about it.
+Add the in-use question for slice 1. The weekly check rarely finds anything. Ask Eric whether it still counts as “in use” if most weeks have no findings, and what evidence he wants. It’s the biggest open risk to the gate, and it’s missing.
+Make the sent-record item a direct ask. Change “Eric needs to hear of it” to “Slice 2 keeps a small local sent record (issue keys, count, time; no names). OK with you?”
+Check the keyring line. Only say tokens are in the credential store if you’ve actually run keyring set. Otherwise write “keyring approved; tokens go in next.”
+Fix the Thanksgiving risk. Nov 20 comes before Thanksgiving, so the risk is that week four has a short week, not that the target misses it. Something like: “Thanksgiving (Nov 26) is in week four, so treat Nov 20 as the real finish.”
+
+One more check: is the report owner also the source of slice 1’s inputs? If someone else owns the weekly check, name that role instead.
+
+I don’t know
+
+That’s fine, it just goes in as a question. In the blockers table, change “Report owner” for the weekly check inputs to “Dave: who owns the weekly check and its inputs?” It’s a how-things-work question, so Dave is the right person to ask.
+
+Most likely Stephanie since she is sme
+
+Then keep “Report owner” in the draft, and confirm it in your next note to Stephanie: “Are you also the owner of the weekly required-fields check, and can you send me its filter, team field and label?” If she says no, she’ll tell you who is.
+
+Should we include the slice2 draft document
+
+Yes, attach it. Dave gets it in the same email, and Eric sees that docs have started. Add one line under “Done this week”: “Slice 2 requirements v0.2 attached. Dave, could you review it? Eric, your questions are in section 10.” Once Dave signs off, it moves to Confluence.
+
+Also you were keeping a lot of todo in the custom dashboard should we include that as well
+
+No, keep the tracker for yourself. Your draft already covers almost everything on it, and the tracker hasn’t been updated since Oct 28. The only item missing from your draft is the pending Confluence Cloud sandbox access, and that’s for testing only, so leave it out. Want me to bring the tracker up to date with today’s changes?
 - Slice 1 has no real inputs yet. The weekly filter and fields are unanswered.
 - Thanksgiving week likely falls in gate week four, against the Nov 20 target.

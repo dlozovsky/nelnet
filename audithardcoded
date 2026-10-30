@@ -33,3 +33,6 @@ Display labels on the published page: Unassigned and All teams at check.py:11 an
 Example settings: instance = "us" at settings.example.toml:4 and target = "dc" at :11. Both are settings, not code. The internal link name parent is at :48 and :66.
 
 What this means for you. Nothing needs fixing before the first real run. The values most likely to be wrong are the parent link field’s value shape, the jira macro name, and the key-based user lookup, and the first real --show-issue and --check-page runs will show whether they hold. Say if you want any of these moved into settings, though I’d leave group 1 as is, because those are Jira’s own field names.
+
+============###==============
+Make the keyring entry names include the instance from settings (e.g. jira-token-us, jira-token-nulsc), and the env var fallback too. Add a test that a NULSC settings file reads its own token. Test-first, then commit.

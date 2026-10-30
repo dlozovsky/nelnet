@@ -153,3 +153,84 @@ Also you were keeping a lot of todo in the custom dashboard should we include th
 No, keep the tracker for yourself. Your draft already covers almost everything on it, and the tracker hasn’t been updated since Oct 28. The only item missing from your draft is the pending Confluence Cloud sandbox access, and that’s for testing only, so leave it out. Want me to bring the tracker up to date with today’s changes?
 - Slice 1 has no real inputs yet. The weekly filter and fields are unanswered.
 - Thanksgiving week likely falls in gate week four, against the Nov 20 target.
+
+================================
+Here it is, ready to paste. Check the test count before you send.
+
+Subject: AUTO-188 Week 1 status (Oct 26 to 30)
+
+Hi Eric and Dave,
+
+Here is my Week 1 status for AUTO-188.
+
+Reporting period: October 26 to 30, 2026
+Gate status: Onboarding. Awaiting the four-week clock start date.
+Delivery target: November 20, pending your confirmation.
+
+Gate progress
+
+Automation	Status	In use	Maintenance guide
+Slice 1: Weekly required-fields check	Built and tested locally on synthetic data; real-data run pending	Not yet	Not started
+Slice 2: Biweekly structure report notifier	Built and tested locally on synthetic data; requirements v0.2 drafted	Not yet	Not started
+
+503 tests pass locally with network access blocked. The GitLab access ticket is open but not complete, so the code is on my laptop only and has not been pushed or run in CI.
+
+Completed this week
+
+	•	Set up Python 3.13, a local repository, pytest, and keyring (all approved).
+	•	Built both slices against synthetic data, with dry-run mode and failure handling.
+	•	Added read-only Jira commands to check the existing page queries and field mappings.
+	•	Walked through the structure report with Stephanie and changed Slice 2 to match her assignee and reporter email process.
+	•	Drafted the Slice 2 requirements and updated the decision log and open questions.
+	•	Opened both Help Desk tickets: mailbox access (RITM1089333) and delegated send. Target is about November 12.
+
+Neither slice has run against live Jira, Confluence, or SMTP yet. No emails have been sent and nothing has been written.
+
+Attached: Slice 2 Requirements Draft (v0.2). Dave, could you review the workflow and point out any gaps? Stephanie is confirming the detailed report rules, and Eric's decisions are listed below.
+
+Planned for next week
+
+	•	Create the Jira and Confluence tokens, store them in keyring, and run the read-only checks on the structure report queries.
+	•	Run a Slice 2 dry run and compare its findings and recipients with Stephanie's next round. No emails will be sent.
+	•	Confirm Slice 1's filter, required fields, team mapping, exclusions, and owner.
+	•	Add the Odd Squad mailbox name to RITM1089333 and follow up on both tickets.
+	•	Follow up on the GitLab ticket, then push the repository and check the pipeline.
+	•	Start the maintenance guides.
+
+Blockers and dependencies
+
+Item	Owner	Needed by
+Gate clock start date	Eric	When available
+GitLab access (ticket open)	Eric / IT	November 2
+Slice 1 filter, fields, exclusions, owner	Stephanie / Dave	November 2
+Slice 2 open questions (To or Bcc, label, story rule)	Stephanie	November 2
+Mailbox access, RITM1089333	Help Desk	November 5
+Delegated send	Help Desk	About November 12
+Confluence write approval	Eric / Dave	Before first write test
+
+Decisions this week
+
+	•	Gate = two AUTO-188 slices, run from my laptop, with the team using the output (Eric).
+	•	Read-only real runs approved; no writes or sends until approved (Eric).
+	•	Biweekly email goes to assignees and reporters, with a two-week correction window and no CAB check (Stephanie).
+	•	Tokens in Windows Credential Manager via keyring; SMTP on port 587 with STARTTLS (automation team).
+
+Questions for Eric
+
+	1.	If Slice 1 runs and finds no violations, does the team's use of the clean report count as "in use"?
+	2.	Slice 2 keeps a small local sent record (issue keys, recipient count, send time; no names or addresses) instead of Jira comments. OK with you?
+	3.	If NULSC isn't cleared by November 20, does a validated US-only release of both slices meet the gate?
+	4.	What evidence of team use do you want for acceptance?
+	5.	Does November 20 still stand as the target?
+
+Risks to November 20
+
+	•	GitLab access is still pending.
+	•	Delegated send may not arrive until about November 12, so the first real send can't happen before then.
+	•	Neither slice has run on real data yet.
+	•	Slice 1's inputs are not confirmed yet.
+
+Thanks,
+Daniel
+
+	•	Set up the Nelnet laptop: Python 3.13, Git, Claude Code, a local repository, pytest, and keyring (all approved).

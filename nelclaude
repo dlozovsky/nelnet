@@ -279,3 +279,6 @@ How the page finds the first linked child (Expert 9), which teams report (Expert
 The sender (Auto 2, Dave 5).
 
 The notifier is not wired into run.py, and there is no structure report id yet. All real values in settings.example.toml are still TBD.
+
+====##======
+Add a test-recipient setting: when it's set, every send (main email and exception list) goes only to that address, and the real recipients are written to the run folder instead. Refuse to send if the setting is set to anything other than my address. Test-first, then commit.

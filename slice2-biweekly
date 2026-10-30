@@ -168,3 +168,72 @@ Say yes. Stephanie only said the end date can't be blank, so row 82 should say t
 Its other changes are right too. "Automation team" is a good choice for the answerer, and Oct 29 is the correct date.
 
 One thing to check: the requirements file under docs/requirements/ should be committed, not git-ignored like the logs. Ask it: "Is docs/requirements/slice2-biweekly.md committed? If not, commit it."
+
+====================================================================================
+
+Requirements: Biweekly Structure Report Notifier
+Version: 0.3 · Date: 2026-10-30 · Owner: Daniel · Business owner: Report owner, Program Office · Approver: Eric
+1. Problem
+Every two weeks the report owner sends one email by hand to every assignee and reporter on the structure report. The work is manual. The report owner researches odd cases by hand.
+2. Current process
+Step	Who	Tool	Time per cycle
+The page updates itself from Jira queries that Eric set up	Automatic	Confluence, Jira	None
+Send one email with the US and NULSC page links	Report owner	Email	[TBD: How many hours does one send take?]
+Research an unassigned or inactive person (rare)	Report owner	Jira ticket	[TBD: How long does one case take?]
+Total today: [TBD: hours per month]
+3. Users
+The assignees and reporters get the email every two weeks. Eric's team uses the output. Daniel runs it by hand from a Nelnet laptop. Daniel maintains it first, then Eric's team including Dave.
+4. Success metric
+A dry run gives the same findings and recipients as the report owner's next round. [TBD: What number shows it works, and how many hours does it save?]
+5. Scope
+In (v1):
+Read the queries from the US page at run time.
+Apply the page rules. An epic needs a milestone as its parent, and the exclusion label takes it off the report.
+An in-progress initiative must start today or earlier and end today or later. The end date cannot be blank. [TBD: What happens when the start date is blank?]
+A milestone needs an initiative as its parent. The fix deadline is two weeks.
+Send one email per run date to every assignee and reporter with a finding. Remove duplicates. The body has the page link only.
+Put a recipient that cannot be resolved on an exception list. Send the list to the Odd Squad mailbox.
+Out (v1):
+Publishing the page, unless Dave asks.
+A CAB approval rule, a team lead list, and one message per lead.
+Teams delivery, hosting, a runner, and an unattended service account.
+NULSC, until step N1 passes and Eric or the security owner authorizes it in writing.
+6. Inputs and outputs
+Input	Source	Access status
+Page queries	US Confluence Data Center page	Approved (read-only)
+Issues, assignees, reporters	US Jira, through the page queries	Approved (read-only)
+Parent link field	Jira	Pending first real read
+Sender address	Odd Squad mailbox	Mailbox access filed (RITM1089333), pending approval. Delegated send filed; target about Nov 12
+Output: one email over SMTP, one exception list email, and a local sent record. Read-only runs only, until Eric says otherwise.
+7. Where AI is used
+Step	What the model does	Human review point
+None	The slice makes no model call	The report owner compares the dry run with her round before the first send
+8. Risks
+Risk	Impact	Mitigation
+The process stops after a send and before the record	A recipient can get two emails	The maintenance guide shows how to reconcile. [TBD: Does Eric approve this limit?]
+The page query and our rules give different findings	The comparison run shows a difference	[TBD: Is a finding what the page query returns, or what our rules decide?]
+Delegated send takes about 2 weeks	The first real send is late	Delegated send filed; target about Nov 12
+9. Acceptance criteria
+[ ] A dry run matches the report owner's next round and sends nothing.
+[ ] A run date gets one email with no duplicate recipients and the page link only.
+[ ] A run with no findings sends no email.
+[ ] An unresolved recipient goes on the exception list. The list is not guessed.
+[ ] A failed send writes no record. A retry for a recorded run date sends nothing.
+[ ] Slice 2 writes nothing to Jira.
+[ ] Eric's team uses the output. [TBD: What evidence of use does Eric want?]
+10. Open questions
+Ask the report owner
+[TBD: Is a finding what the page query returns, or what our rules decide?] Recommendation, not a rule yet: the page query, so the dry run compares fairly with the report owner's round.
+[TBD: What is the check for a story? The email has four sections and the rules cover three.]
+[TBD: Is the exclusion label p/o_not_applicable or p/c_not_applicable?]
+[TBD: Does the email use To or Bcc?]
+[TBD: How many hours does one send take?]
+Ask Eric
+[TBD: Does a US-only first release meet the acceptance bar?]
+[TBD: What evidence of use does Eric want?]
+[TBD: Does Eric approve the limit that a recipient can get two emails if the process stops after a send?]
+[TBD: Is a small local sent record (run date, issue keys, recipient count, send time; no names or addresses) OK instead of Jira comments? This differs from CLAUDE.md.]
+[TBD: Does November 20 still stand?]
+Daniel, from the first real read
+[TBD: Which Jira field holds the parent link?]
+[TBD: What is the not-available value for the first linked child?]

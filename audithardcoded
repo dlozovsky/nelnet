@@ -1,0 +1,35 @@
+Audit result: there are no hardcoded Jira custom field ids, field names for your fields, hosts, URLs, project keys, filter ids, page ids or label names in adherence/. I searched for customfield, URLs and host names, and read every module that talks to Jira or Confluence. The real values all come from settings, and settings.example.toml holds only TBD placeholders for them. I changed nothing. I covered adherence/ and the example settings only. Tests and docs are out of scope.
+
+What is hardcoded falls into three groups.
+
+1. Standard Jira field names and response keys. These are the same in every Jira, so they aren’t instance specific.
+
+File and line	Value	Use
+jira_source.py:19	assignee, reporter, creator	The blocklist of person fields the weekly check refuses to load
+jira_source.py:163	"assignee,reporter"	The fields requested for recipients
+jira_source.py:276	("assignee", "reporter")	Reading recipient ids
+jira_source.py:64, 309, 357, 363	labels	The label field the exclude label is checked against
+jira_source.py:62, 167, 258, 361, 372, structure_run.py:219	key	The issue key in responses and link values
+jira_source.py:392	value, name	How select fields arrive
+jira_source.py:179, 181, 187	active, emailAddress, displayName	The user lookup
+jira_source.py:243	displayName, emailAddress, accountId	Spotting a person field in --show-issue
+
+2. Data Center specific, and the places a Cloud move would change. Both are contained in jira_source.py and confluence.py, as planned.
+
+Jira REST v2 paths: jira_source.py:164, 194, 216, 328, 341, 349.
+User identified by key: jira_source.py:194 (the key parameter) and 278 (key or name). Cloud uses accountId. This is the biggest item for the Q1 2027 move.
+Bearer token header: jira_source.py:128 and confluence.py:152. Cloud uses Basic auth.
+Confluence REST paths and format: /rest/api/content at confluence.py:103, 114, 123, 130 and 143. spaceKey is at :102, and storage format and body.storage at :104, :130 and :120.
+Jira macro on the page: the macro name jira and the jqlQuery parameter at confluence.py:193 and :197. They are hardcoded and untested against a real page, so they are the first thing --check-page will confirm.
+Saved filter syntax: filter = at jira_source.py:377.
+Publish targets: dc and cloud at settings.py:14.
+
+3. Environment values and defaults.
+
+Settings defaults: record_dir runs at settings.py:79 and :218. SMTP port 587 at :89 and :233. recipients to at :90 and :236.
+Environment variable names: JIRA_TOKEN and CONFLUENCE_TOKEN at run.py:44 and :45.
+Credential store entries: gate-automation, jira-token and confluence-token at secret_store.py:14 to :16.
+Display labels on the published page: Unassigned and All teams at check.py:11 and :12.
+Example settings: instance = "us" at settings.example.toml:4 and target = "dc" at :11. Both are settings, not code. The internal link name parent is at :48 and :66.
+
+What this means for you. Nothing needs fixing before the first real run. The values most likely to be wrong are the parent link field’s value shape, the jira macro name, and the key-based user lookup, and the first real --show-issue and --check-page runs will show whether they hold. Say if you want any of these moved into settings, though I’d leave group 1 as is, because those are Jira’s own field names.

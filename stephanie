@@ -1200,3 +1200,16 @@ On the hidden prompt, the token never appears on screen and never lands in the h
 - **One prompt per token.** `JIRA_TOKEN` and `CONFLUENCE_TOKEN` each need their own prompt line. The Confluence token is only needed for `--check-page`, and the Jira token for `--show-issue`.
 
 When you run the steps, start with `--check-page` and share only redacted output. For example, tell me which section names matched or didn't, with no query text or issue keys.
+
+=========###=####=====
+Subject: AUTO-188 biweekly report: a few follow-ups
+Hi Stephanie,
+Thanks again for the walk-through and your answers. A few follow-ups came up while I wrote the requirements:
+	1.	The page has four sections, but I have rules for three. What is the check for stories?
+	2.	Is the exclusion label p/o_not_applicable or p/c_not_applicable?
+	3.	Should recipients go in To or Bcc?
+	4.	About how long does one send take you, including research?
+	5.	Are you also the owner of the weekly required-fields check? If so, could you send me its filter, team field and label?
+Thanks,
+Daniel
+

@@ -99,4 +99,17 @@ US-only first release: if NULSC is not cleared in time, does a US-only release c
 NULSC handling: can you or the security owner confirm in writing what NULSC information may be handled on my laptop, in Confluence, and in email? Until I have that, no NULSC data touches any of them and NULSC stays out of the build.   yep, I can help here, let's talk about it so I make sure we are talking the same language. 
 If any of these is better answered by someone else, point me to them and I will ask directly.
 
+=======================================================
+Questions for Eric
+
+If Slice 1 runs and finds no violations, does the team's use of the clean report count as "in use"?  Yes. 
+Slice 2 keeps a small local sent record (issue keys, recipient count, send time; no names or addresses) instead of Jira comments. OK with you?  No, we need this work attached to a jira ticket.    I want to be able to do tracability without having to worry about 1 person being out of the office.   
+If NULSC isn't cleared by November 20, does a validated US-only release of both slices meet the gate?  We need to run this against NULSC, I anticipate you will need to work with another person to do the run.  I am worried that there will be bugs due to a new instance.   If it's coded to not hardcode field ids, the source shouldn't matter.  If this proves to be a big ancore for you we can revisit.
+What evidence of team use do you want for acceptance?  We should do runs against the live data using the old and new.  We should also have one example of each case on a report (ie has business criteria but no AC, Has AC and no Business criteria etc)
+Does November 20 still stand as the target?  Yes.
+
+Note: I am checking on gitlab access again. 
+We need to do code reviews.   Actually we need to follow our methodology.  Dave can you walk him thorugh NAM and help to get the required artifacts going? 
+I would say the clock starts ticking when you have gitlab access.  This is mainly because that is where the SAST tool scans and that could cause major rework. 
+
 

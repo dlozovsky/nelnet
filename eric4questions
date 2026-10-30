@@ -117,4 +117,13 @@ I would say the clock starts ticking when you have gitlab access.  This is mainl
 
 Thanks Eric, all clear. Two follow-ups: (1) For the run record, should it be one comment per run on AUTO-188, or something else? And that means Jira writes for the record are OK? (2) Who should I pair with for the NULSC run?
 
+---------------------------
+Thanks Eric, all clear.
+
+Two follow-ups:
+
+(1) For the run record, should it be one comment per run on AUTO-188, or something else? And that means Jira writes for the record are OK? Yes, but if there are errors in the process it should also write those to the ticket. 
+
+(2) Who should I pair with for the NULSC run? Stephanie for this one. 
+
 

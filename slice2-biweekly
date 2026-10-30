@@ -237,3 +237,14 @@ Ask Eric
 Daniel, from the first real read
 [TBD: Which Jira field holds the parent link?]
 [TBD: What is the not-available value for the first linked child?]
+
+
+========================
+The file lives on your laptop, so have Claude Code make the change there. That way the committed copy and the attachment stay the same. Paste this:
+
+> In docs/requirements/slice2-biweekly.md (v0.3), make two edits and nothing else:
+> 1. In section 5 "Out (v1)", change "until step N1 passes" to "until NULSC validation passes".
+> 2. In section 10 "Ask Eric", remove the sentence "This differs from CLAUDE.md." from the sent-record question.
+> Commit only that file with "docs: slice 2 requirements v0.3 wording fixes".
+
+Then attach that file to the email.

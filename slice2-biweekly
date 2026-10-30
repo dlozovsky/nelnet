@@ -159,3 +159,12 @@ Ask Dave
 Daniel, from the first real read
 [TBD: Which Jira field holds the parent link?]
 [TBD: What is the not-available value for the first linked child?]
+
+
+
+==================#=======#
+Say yes. Stephanie only said the end date can't be blank, so row 82 should say the same.
+
+Its other changes are right too. "Automation team" is a good choice for the answerer, and Oct 29 is the correct date.
+
+One thing to check: the requirements file under docs/requirements/ should be committed, not git-ignored like the logs. Ask it: "Is docs/requirements/slice2-biweekly.md committed? If not, commit it."

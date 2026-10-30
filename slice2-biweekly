@@ -74,3 +74,21 @@ A dry run gives the same findings and recipients as the report owner's next roun
 - [TBD: What is the not-available value for the first linked child?]
 - [TBD: Does November 20 still stand?]
 
+
+========#==========
+It's a good draft and close to ready. Have Claude Code fix these before Dave sees it:
+
+1. **The date rule is overstated.** Stephanie's rule is that the end date can't be blank. Nobody said that about the start date. Change "Neither date can be blank" to "The end date can't be blank."
+2. **The delegated send request is described two different ways.** Section 6 lists RITM1089333 as requested, but the risk table says the request isn't filed yet. If you've filed both requests, change that line to "Filed; target about Nov 12."
+3. **Access status is out of date.** Eric approved read-only runs and keyring today, so change "Requested" to "Approved (read-only)".
+4. **The parent link field isn't blocked.** `--show-issue` will tell you which field it is, so mark it "Pending first real read."
+5. **Business owner:** put Stephanie as the report owner and Eric as the approver, unless you'd rather keep names out of it.
+
+The open questions are good. Group them by who answers, so you can send each person one message:
+- **Stephanie:** the story check, the label spelling, To or Bcc, and her hours per send (that gives you the success number).
+- **Eric:** US-only acceptance, what evidence of use he wants, and the double-send limit.
+- **You, from the first real read:** the parent link field and the not-available value.
+
+The question of "page query or our rules" matters most. My recommendation is that a finding is whatever the page query returns, because that matches Stephanie's round and makes the dry-run comparison fair. Confirm that with her.
+
+

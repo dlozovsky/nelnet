@@ -113,3 +113,8 @@ We need to do code reviews.   Actually we need to follow our methodology.  Dave 
 I would say the clock starts ticking when you have gitlab access.  This is mainly because that is where the SAST tool scans and that could cause major rework. 
 
 
+===================#
+
+Thanks Eric, all clear. Two follow-ups: (1) For the run record, should it be one comment per run on AUTO-188, or something else? And that means Jira writes for the record are OK? (2) Who should I pair with for the NULSC run?
+
+

@@ -1,0 +1,59 @@
+# Weekly Status: Week 1
+
+**Dates:** 2026-10-26 to 2026-10-30 (draft written 2026-10-29) · **Gate week:** Onboarding. Eric has not emailed the clock start date yet
+
+## Gate progress
+| Automation | Stage | In use by | Maintenance doc |
+|---|---|---|---|
+| 1. Weekly required-fields check (AUTO-188 slice 1) | Building. Code complete on synthetic data. No real read yet | Nobody yet | Not started |
+| 2. Biweekly structure report email (AUTO-188 slice 2) | Building. Code complete on synthetic data. Requirements drafted and committed. Real read-only steps are next | Nobody yet | Not started |
+
+503 tests pass with the network blocked. Nothing is pushed, because GitLab push access is not granted yet.
+
+Hours spent in my first 4 days on the project: 32 (8 a day), before the gate clock starts. This covers laptop setup, both slices on synthetic data, the walk-through with the report owner, and documentation. The ticket estimates about 64 hours for the two slices. That figure is a floor, assumes Java, and excludes waiting on access. Real runs, deployment, and the maintenance guide are still ahead.
+
+## Done this week
+- Set up the laptop: Python 3.13, `pytest`, and `keyring` installed, the repo created, and the credential store ready for the tokens and the SMTP password.
+- Slice 1 is code complete: it reads a saved filter, applies the rules, and publishes team counts to Confluence. It has a dry run and safe retries. Not yet run on real data.
+- Slice 2 is code complete: it reads the page's queries, applies the rules, and sends one email and an exception list. It has a dry run and a local sent record. Not yet run on real data.
+- Test suite grew from 263 to 503 tests, all passing with the network blocked.
+- Added three read-only discovery steps for the first real read: `--check-page`, `--show-issue`, and display names in the local dry-run file.
+- Moved the tokens and the SMTP password into the Windows credential store with `keyring`.
+- Held the walk-through with the report owner on the structure report. It changed the design to one email to every assignee and reporter, with no team lead list.
+- Drafted the slice 2 requirements document and corrected the decision log and open questions to match.
+- Filed the Help Desk request for mailbox access (RITM1089333). Filed the delegated send request, target about Nov 12.
+
+## Next week
+- Run the read-only steps on real data: `--check-page` on the US page, then `--show-issue` to find the parent link field.
+- Do a full slice 2 dry run and compare findings and recipients with the report owner's next round. Send nothing.
+- Add the mailbox name to RITM1089333 as a comment.
+- Test write access to the Confluence Data Center page.
+- Get the weekly check inputs from the report owner: filter, team field, and label.
+- Start the maintenance guide on Confluence Data Center.
+
+## Blockers and asks
+| Blocker | Who can unblock | Needed by |
+|---|---|---|
+| Clock start date email | Eric | [TBD] |
+| GitLab push permission | Eric | [TBD] |
+| Mailbox access request RITM1089333 is pending manager approval and needs the mailbox name in a comment | Manager, Help Desk | 2026-11-05 |
+| Delegated send on the mailbox (filed, about 2 weeks) | Help Desk | About 2026-11-12 |
+| Weekly check inputs: filter, team field, label, who reads the results | Report owner | Before the first real weekly run |
+| Slice 2 answers: is a finding what the page query returns, the story rule, the label spelling, To or Bcc, what happens when the start date is blank | Report owner | Before the dry run next week |
+| US-only acceptance, evidence of use, the double-send limit, and whether Nov 20 stands | Eric | [TBD] |
+| Which tools are approved for call notes (the walk-through used a meeting-assistant app) | Dave | [TBD] |
+| Write access to the Confluence Data Center page (untested) | Dave, Daniel | [TBD] |
+
+## Decisions made
+- Eric: the pair is two AUTO-188 slices. Read-only runs are approved. No sends and no writes to Jira or Confluence until he says otherwise. `keyring` and `pytest` are approved.
+- Eric: the structure report matches what the report owner does today. One email to assignees and reporters, no lead list.
+- Report owner: two-week fix deadline, no CAB check, the page is not published by us, and acceptance is a dry run against her next round.
+- Daniel: slice 2 writes nothing to Jira and keeps a local sent record in the run folder. This differs from CLAUDE.md, so Eric needs to hear of it.
+- Automation team: Jira and Confluence use personal tokens. Email is SMTP on port 587 with STARTTLS. The email sends from the Odd Squad mailbox.
+
+## Risks to the gate
+- Delegated send takes about 2 weeks, so the first real send is no earlier than about Nov 12.
+- Nothing has run against real Jira, Confluence, or SMTP. The query reader and field shapes are verified only against fakes.
+- Eric has not said whether a US-only first release counts. Nearly everything touches NULSC.
+- Slice 1 has no real inputs yet. The weekly filter and fields are unanswered.
+- Thanksgiving week likely falls in gate week four, against the Nov 20 target.

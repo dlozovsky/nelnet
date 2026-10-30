@@ -1212,4 +1212,44 @@ Thanks again for the walk-through and your answers. A few follow-ups came up whi
 	5.	Are you also the owner of the weekly required-fields check? If so, could you send me its filter, team field and label?
 Thanks,
 Daniel
+==========================
+Your draft is good: short, specific, and each question is easy to answer. I made four changes.
+
+What I changed
+
+Added the finding question. It is the first ask for the report owner in section 10 of the requirements and in the status blockers, and your draft left it out.
+Added the blank start date question. The requirements and the status both list it, and your draft left it out.
+Added a question about when her next send is, since the dry run compares against that round.
+Added a date ask, so she knows the answers feed the dry run. I used Nov 2 because the status email lists that date for her answers.
+
+I also folded “unassigned or inactive people” into the hours question, since the requirements track that research as a separate time cost. For the weekly check, I added “who reads the results”, which is on the blocker list.
+
+Revised draft
+
+Subject: AUTO-188 biweekly report: questions before my dry run
+
+Hi Stephanie,
+
+Thanks again for the walk-through and your answers. A few questions came up while I wrote the requirements. Short answers are fine. I want to run a dry run against your next round, so I would like these by Monday, Nov 2 if you can.
+
+Biweekly structure report
+
+Does a finding mean whatever the page query returns, or what the rules decide? I suggest the page query, so my dry run matches your round.
+The page has four sections, and I have rules for three (epics, initiatives, milestones). What is the check for stories?
+Is the exclusion label p/o_not_applicable or p/c_not_applicable?
+What should happen when an initiative’s start date is blank? I know the end date cannot be blank.
+Should recipients go in To or Bcc?
+About how long does one send take you, including research on unassigned or inactive people?
+When is your next send? I will compare my dry run with that round.
+
+Weekly required-fields check
+8. Are you also the owner of this check? If so, could you send me its filter, team field, and label, and tell me who reads the results?
+
+Thanks,
+Daniel
+
+Two things to check before you send
+
+Section 10 wording: the requirements say “The email has four sections”, but the email carries only the page link. Your draft says “the page has four sections”, which looks right. I can fix the requirements and re-export the Word copy if you confirm.
+Nov 2: it is a Monday, and you set the date. Change it if you want her to have more time.
 

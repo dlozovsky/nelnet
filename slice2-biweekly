@@ -316,3 +316,18 @@ Ask Eric
 Daniel, from the first real read
 [TBD: Which Jira field holds the parent link?]
 [TBD: What is the not-available value for the first linked child?]
+
+=============##============
+I agree with its bottom line: send it today and let the dry run settle the rest. Most of the review is valid, but it doesn't all need doing before you hit send. Here's what I'd take:
+
+**Fix now (one short Claude Code prompt):**
+1. **Section 5:** "Send one email per run date to the deduplicated list of assignees and reporters with a finding." That removes the "one email or many" ambiguity.
+2. **Section 9 retry line:** "A confirmed send writes a record, and a retry skips a recorded run date. If a send's outcome is uncertain, check before retrying." This matches the risk you already listed.
+3. **Add one acceptance line:** "Another team member can run it from the maintenance guide." That's a third of the gate, and it's missing.
+
+**Skip for now:**
+- **B (source of truth):** it's already your first question for Stephanie in section 10.
+- **D (exception details):** ask Stephanie these in the same message, but don't write rules before she answers.
+- **The 10-row acceptance table and the retention procedure:** they belong in the maintenance guide after the first real run. Doing them now is polishing.
+
+Also use its attachment wording in the email. It's a little better than what you have.

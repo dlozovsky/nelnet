@@ -126,4 +126,9 @@ Two follow-ups:
 
 (2) Who should I pair with for the NULSC run? Stephanie for this one. 
 
-
+===============
+Eric, three quick confirmations on the AUTO-188 run record:
+	1.	Slice 2 writes one comment per message sent (the email and the exception list), so a retry never sends twice. OK?
+	2.	Error comments name the failed step and error type but leave out the raw error text, which can contain addresses or tokens. OK?
+	3.	Slice 1 writes a short status comment at start, at publish, and at the end (up to 3 per run), which lets a failed run resume safely. OK, or do you want one?
+Also, slice 1 publishes a Confluence page. OK to write to a test page under Dave's Automation Output first?

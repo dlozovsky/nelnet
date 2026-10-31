@@ -282,3 +282,6 @@ The notifier is not wired into run.py, and there is no structure report id yet. 
 
 ====##======
 Add a test-recipient setting: when it's set, every send (main email and exception list) goes only to that address, and the real recipients are written to the run folder instead. Refuse to send if the setting is set to anything other than my address. Test-first, then commit.
+=================
+Eric decided (2026-10-30): the run record moves from the local file to one Jira comment per run on a tracking ticket (AUTO-188; make the key a setting). The comment holds run date, slice, instance, issue keys, recipient count, send time and outcome; no names or addresses. If any step fails, the run also writes the error to that ticket. Jira writes are approved for this comment only. Before a send, check the ticket for an existing comment for the run date and skip if one exists. If the comment write itself fails after a send, stop and print a clear message to reconcile by hand. Reuse the comment-based record code where it fits. Test-first, then commit. Update the decision log.
+

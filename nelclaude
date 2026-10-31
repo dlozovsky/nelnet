@@ -287,3 +287,77 @@ Eric decided (2026-10-30): the run record moves from the local file to one Jira 
 ====#######=#####
 Draft docs/requirements/slice1-weekly.md v0.1, using the same structure as slice2-biweekly.md v0.3. Base it on what the code does now. Include Eric's decisions from 2026-10-30: a clean report with no violations counts as in use; the run record and any errors go in one comment per run on AUTO-188; NULSC is in scope, paired with Stephanie; acceptance is parallel runs on live data, old vs new, plus one example of each case on the report (for example, business criteria but no AC, or AC but no business criteria). Mark every unknown as [TBD: question, who answers], including the report owner, the filter, the team field, the label, the full list of cases, and the hours per run. Add "Another team member can run it from the maintenance guide" to acceptance. Don't change code. Commit only that file.
 
+=================================================================
+I’ve reviewed the slice 2 code and tests and settled on the plan: a Jira comment record on AUTO-188 with a configurable key, plus a rule to stop and print the comment by hand if the write fails. I’ll write the tests first, then implement, after the baseline run and a few more file reads.
+
+The notifier and sent-record tests are done, and I’m updating the structure run tests now. Settings and recipient tests come next, then the code.
+
+Status: tests are written and failing as expected. I’ve now written the delivery comment helpers and the Jira sent record, and I’m moving on to the notifier, settings, structure run, and wiring.
+
+I need to read CLAUDE.md first, since the harness only has it as injected context. Reading it, then re-applying the edits.
+
+The BOM was already in that test file before my change, so I’m leaving it. Now updating the decision log.
+
+Slice 2 now records each send as a comment on AUTO-188, and the change is committed as eb1d28e. The full suite passes: 573 tests, network blocked, up from 533 before. I wrote the tests first and watched them fail before writing the code. Nothing ran against real Jira.
+
+What changed
+
+Ticket setting: [structure] record_ticket = "AUTO-188". A dry run works without it. A real run refuses to start if it is missing, or if the comment store is missing.
+The comment: [gate-delivery] with report, instance, run date, kind, issue keys, recipient count, sent time, and outcome. It has no names, addresses, or recipient ids.
+Skip check: before each send, the run reads the ticket and skips a kind that already has a comment for the run date. If the ticket cannot be read, nothing is sent.
+Errors: a failed step writes a FAILED comment with the step and the error class, for example step=send_email detail=ConnectionError.
+Unrecorded send: the run stops, skips the exception list, exits as failed, and prints the exact comment to paste by hand. A test confirms that after you paste it, the next run sends only what is left.
+No Jira writes outside real runs: dry runs and test sends write nothing to Jira. The Jira search client stays read-only, and a test checks it. The record goes through a separate comment store.
+Reuse: I reused the comment line format and parser in run_record.py, and the error comment reuses RunRecord.failed. The local sent record file is gone. The dry-run file stays.
+Other files: CLAUDE.md and settings.example.toml are updated in the same commit.
+
+Two places where I read Eric’s decision differently. Please confirm with him.
+
+Two comments per run date, not one: a run can send an email and an exception list. One comment per run date would skip the exception list after a failed exception send or after an unrecorded email. Writing one comment after both sends would send the email twice if the process stopped in between. A retry sends only the kind that has no comment.
+Error text: Eric said “writes the error”. I write the step and the error class only, because Jira and SMTP error text can carry an address or a token. The console still prints the message.
+
+Not done
+
+Real Jira checks: the comment write and read, and comment permission on AUTO-188 for your token, are unverified. The decision log marks this as a hold. Your first check is a dry run, then the approved test send, and neither writes a comment.
+Requirements and guide: requirements v0.3 still describes the local record. The maintenance guide is not started.
+Decision log: I added six rows to the local 03-decision-log.md: Eric’s decision, the build, the two interpretations, the hold, and my earlier error-comment proposal. I did not commit it, because docs/ is git-ignored.
+Slice 2 now records each send as a comment on AUTO-188 (a setting), writes error comments, and stops with a paste-by-hand message if a comment write fails. Committed as eb1d28e with 573 tests passing, network blocked. Nothing ran against real Jira. Requirements v0.4 and the guide are not updated.
+Draft requirements v0.4 for the ticket record now?
+Draft v0.4
+
+Draft v0.4
+
+I wrote v0.4 in slice2-biweekly.md. It is not committed, and it matches what the code now does. I wrote the new text in the same plain style as v0.3, with short sentences and no “should”, “may”, or “check”. A scan found only “including”, which was already in v0.3.
+
+What changed from v0.3
+
+Record: the local sent record is gone. The scope and the acceptance criteria now say one comment on AUTO-188 for each message sent. Errors go to the same ticket as the step and error class only. Slice 2 writes only those comments to Jira.
+Unrecorded send: if a comment cannot be written after a send, the run stops and prints the comment to add by hand. A crash between the send and the comment is called out as a limit Eric must accept.
+NULSC: it moves from Out to In, to be run with the report owner. Field ids stay in settings. It still waits for written authorization for NULSC data.
+Acceptance: a run on live data matches the old process, and each case shows once on a report. The “evidence of use” question is gone, since Eric answered it. I dropped the old “how many hours does it save” metric. Time saved is not a metric until the hours per send are known.
+New risks: NULSC as a new instance, the GitLab clock and SAST scan, and the token’s comment permission on AUTO-188.
+Open questions: regrouped under the report owner, Eric, Dave, and you. Answered ones are removed.
+
+Other things I fixed or kept
+
+Four sections: I fixed the wording to “The page has four sections”. The email carries only the link.
+Mailbox row: it now says RITM1089333 is approved and in fulfillment, needed by Nov 5.
+Delegated send: I kept “filed”, as you told me. The Oct 30 request list in the decision log did not show it, so confirm it before this goes to Dave.
+Interpretations for Eric: two comments for each run date (email and exceptions), and an error comment with no error text. Both are in “Ask Eric”.
+
+The Word copy is still v0.3. If you want it for the next status email, I can rebuild it from this file after you commit.
+
+I wrote slice 1 requirements v0.1 and committed it as 6c90c75. It uses the same ten sections as slice 2 v0.4 and holds 44 [TBD: question, who answers] markers. The commit has only slice1-weekly.md, and I changed no code.
+
+The scope and acceptance sections describe what the code does now and carry Eric’s decisions from Oct 30. It uses the style words I used for v0.4, and a grep for -ing words, “should”, “may” and “would” found only nouns. Your acceptance line about another team member running it from the maintenance guide is in. I added a second one for changing a rule and rerunning.
+
+The code and the requirements disagree in four places, and the draft says so in section 8:
+
+One comment per run: the code writes a comment for each state (STARTED, PUBLISHED, then COMPLETED or FAILED) on the --ticket key. That is up to three comments per run. The --resume and --rerun rules read those states, so one comment per run needs a code change. I put it to Eric as a TBD.
+Two filters: the report owner said the weekly run is a click on two filters, and the code reads one filter_id.
+Confluence write: the page publish is the core of slice 1, but Eric has approved only read-only runs and the record comments. The page write needs his OK, ideally first to a test parent page.
+NULSC settings: settings hold one [source]. A NULSC run today needs its own settings file with --settings. A second source entry would be code work.
+Names: I wrote “the report owner”, not Stephanie’s name, to match v0.4 and the rule of no names beyond Eric and Dave in the docs.
+Business owner: the header leaves it as a TBD, because it is still open whether the report owner owns the weekly check.
+Slice 2 questions: I left out the first-linked-child and not-available questions, because they belong to the structure page.
+

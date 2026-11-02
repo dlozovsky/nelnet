@@ -273,3 +273,27 @@ You have three to send today. Weekly status isn't due until Friday.
 
 **3. Eric + Dave (AUTO-188 Teams chat), progress one-liner**
 > Update: slice 2 ran end to end on real data today, read-only. 104 findings, 42 recipients, 2 exceptions, nothing sent. Stephanie's answers are in, and I'm comparing against her round Wed 11/4. Test send to myself is next. Slice 1 needs one decision from Eric (message above).
+
+--------------------------------
+
+Let me ask it this way  One yes or no question about the weekly check, the first of the two gate items.
+
+
+
+What happens today: Stephanie runs two saved Jira searches every week. Each one lists issues that are missing required information. One looks for a missing Acceptance Criteria or Business Description. The other looks for a missing Client Impact on finished issues. They almost always come back empty. When one does list something, she sends it to the Odd Squad to look into.
+
+
+
+The problem: our plan said the automated version would show a count for each team. Stephanie’s searches have no team information in them. A per-team report would not match anything she does today.
+
+
+
+What I propose: the automation runs her same two searches and puts the results on a Confluence page. For each search it shows how many issues came back and which ones. There is no breakdown by team and no email. The Odd Squad reads the page. I’m confirming that part with Stephanie.
+
+
+
+How we would know it works: on the same day, the numbers on the page match the numbers Stephanie gets when she runs the searches by hand. A week with nothing to report still counts as in use, as you said on Oct 30.
+
+
+
+My question: is it OK to measure this item that way instead of “count per team”? A yes or no is enough. I won’t start the change until I hear from you. It is small: read two searches instead of one.

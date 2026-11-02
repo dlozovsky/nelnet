@@ -639,3 +639,28 @@ Claude Code is right about "ready." Wednesday is a comparison, not a send. Next 
 
 Decision log: `2026-11-02 | Daniel | Exception list goes to a plain team mailbox address in local settings, not a Jira user lookup.`
 
+-------------------------------------------------
+The new tests fail for the right reason, since the setting doesn’t exist yet. Now the code.
+
+I agree with the advice. I built exception_address test-first and committed it as 852a64e, with 591 tests passing.
+
+What changed:
+
+Setting: [structure] exception_address is optional. When it is set, the exception list goes to that address with no Jira lookup. When it is not set, the old lookup by exception_recipient_id still works.
+Validation: the value must be one email address. A bad value is refused, and the error does not show it.
+Test send: it still goes only to your test address. The team address is not used then.
+Records: a test checks that the team address never appears in the console output, any ticket comment, or any file in runs/.
+Rule: CLAUDE.md now says: “No personal recipient addresses in settings; the team exception mailbox (structure.exception_address, optional) is allowed in local settings only.” It also says the address is never written to a comment, a page or the run folder.
+Notes: the decision log has your line, with a note that Eric gets an FYI in the Week 2 status and does not need to approve it. The requirements v0.6 and the outstanding list are updated, and the Jira-user question for Dave is closed.
+
+Before a real send, you need to set the address:
+
+Test send: you don’t need it.
+Real send: add exception_address = "<the Odd Squad mailbox address>" under [structure] in your local settings.toml. I left it unset because I don’t know the address. A real send without it would again look for a Jira user called TBD-exceptions and get no exception list.
+
+Your next steps, in the order you gave:
+
+Test send to yourself: set the SMTP values and test_recipient, with your own address as from_address, and store the password. The steps are in my earlier message.
+Double dry run: the four commands from my earlier message. It runs the dry run twice in separate processes and compares the two files.
+Two questions for Stephanie: which day she runs the weekly check, and whether “slice 1 sends nothing, the Odd Squad reads the page” is OK.
+

@@ -393,3 +393,26 @@ That's less code, and it's the fastest way to match her round this week. Your qu
 
 Decision log line: `2026-11-02 | Daniel | Slice 2 findings = page section query results as returned. Rule re-evaluation off; no new rule code.`
 
+---------------------------------------------
+Slice 2 now treats every issue the page’s section queries return as a finding. I made no code change. The decision log has your line, and I added one row for the caveat below.
+
+How I did it without code: there is no switch for it. A section must have at least one rule, and a section with no rules gives no findings. Each of the four sections in your local settings.toml now has one rule, page. It is a value_in_list on summary against a sentinel value that no summary equals. That makes the rule fail for every issue the query returned. A comment in the file explains it.
+
+Other changes in your settings:
+
+Stories: it has its own section now. Without one, story findings would be dropped.
+Initiative rules: the date rules from earlier are gone, replaced by the same pass-through rule.
+[structure.links]: it is no longer read by any rule, so --show-issue no longer blocks the dry run. Run it later if you want to know the Parent Link shape.
+
+I tested the settings on invented issues. Two issues in each of the four sections gave 8 findings. A third issue carrying the exclusion label was left out. That one removal is the exclude-label step, which runs before any rule. The page queries already exclude that label, so it only matters for a hand-made list.
+
+There is a cleaner option, not built: a small page_result rule type, about five lines plus a test. A maintainer will find that easier than a sentinel value. The guide would say “replace the rule in a section” to bring real rules back.
+
+Your next step is the slice 2 dry run. Run it from the repo folder. It reads the page’s queries, runs them read-only, and writes the findings, recipient ids with display names, and the exception list to the run folder. It sends nothing:
+
+py -3.13 -m adherence.run --report biweekly_structure --dry-run
+
+Before running it, expect some failures, because the dry run has not run for real yet. The settings still have TBD in the email subject and text, the SMTP section and the exception recipient. The dry run ignores SMTP, but it may still stop on a setting I haven’t seen. If so, paste the one-line error. The run file holds names, so delete it after the comparison, and don’t paste its contents. Counts per section and the exception count are fine to share.
+
+Requirements v0.5 still describe our own rules. I’ll update them once the report owner answers. The question to her is now: is the page the full rule set, or does she check anything by hand?
+

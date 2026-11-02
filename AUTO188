@@ -416,3 +416,17 @@ Build Odd Squad email with test guard
 
 Update settings, docs, run suite, commit
 
+============================
+This is solid work. The default of emailing only when there are findings matches what I suggested, and it's a one-word change if Stephanie says every week.
+
+**Decision log:** 2026-11-02. Slice 1 is built to the approved scope (f518bd9 requirements, af6b422 code, 622 tests). The email default is "findings only" until Stephanie confirms.
+
+One thing to check with Nelnet Claude: **does the page target the test Confluence page under Automation Output?** Eric approved writing to a test page first. Make sure the local settings point there and not at a real page.
+
+Order from here:
+1. Slice 2 test send to yourself.
+2. Slice 2 double dry run.
+3. Look up the two filter IDs and do a slice 1 dry run.
+4. Wednesday: the slice 2 comparison against Stephanie's counts.
+5. Thursday: the slice 1 comparison against her manual run.
+

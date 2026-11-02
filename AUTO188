@@ -297,3 +297,11 @@ How we would know it works: on the same day, the numbers on the page match the n
 
 
 My question: is it OK to measure this item that way instead of “count per team”? A yes or no is enough. I won’t start the change until I hear from you. It is small: read two searches instead of one.
+
+===========================
+Eric, one yes or no question about the weekly check (the first of the two gate items).
+Question: Can we measure it by "the page matches Stephanie's numbers" instead of "count per team"?
+Why: Stephanie runs two saved Jira searches every week. One finds issues missing Acceptance Criteria or Business Description. The other finds finished issues missing Client Impact. They almost always come back empty, and when they don't, she sends the results to the Odd Squad. Her searches have no team information, so a per-team count wouldn't match anything she does today.
+What I'd build: the automation runs her same two searches and posts the results to a Confluence page. For each search, the page shows how many issues came back and which ones. There's no team breakdown and no email, and the Odd Squad reads the page. I'm confirming that last part with Stephanie.
+How we'd know it works: on the same day, the page's numbers match what Stephanie gets by hand. A week with nothing to report still counts as in use, as you said on Oct 30.
+A yes or no is enough. I won't change anything until you answer.

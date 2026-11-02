@@ -588,3 +588,14 @@ This drops the “count per team” criterion for the gate. Is that OK? The code
 
 Still open on my side: the day she runs it, because the filters look back 7 days, and the two saved filter ids, which you’ll look up by name in Jira.
 
+===##==========###=
+Solid work. Three things:
+
+1. **Before the test send, confirm the guard.** Running without `--dry-run` is the first real send, so ask Claude Code: "Confirm a send with test_recipient set goes ONLY to test_recipient, both messages, and show me the test that proves it." Run it only after it says yes.
+2. **Odd Squad mailbox lookup:** don't wait on Dave for this. Ask Claude Code to let the exception recipient be a plain email address in settings, with no Jira lookup. It's a small change, and it removes a dependency that would fail on the first real send.
+3. **Eric message:** send Claude Code's version. It's clearer than mine. "Slice 1 sends nothing, Odd Squad reads the page" is a good scope cut, so confirm that line with Stephanie when you ask her which day she runs the check.
+
+Then do the double dry run. If it says "identical," slice 2 is ready for Wednesday.
+
+Decision log: `2026-11-02 | Daniel | Slice 2 uses page_result rule (finding = page query row); sentinel removed. 371f237, 578 tests.`
+

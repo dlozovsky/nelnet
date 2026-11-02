@@ -349,3 +349,7 @@ Two quick ones for the weekly required-fields check:
  
 
 For Wednesday's biweekly send, could you tell me your section counts and how many people you emailed?   I'll run my dry run that morning and compare. I will send you the results on Wednesday morning.
+
+===========
+
+Eric, an update to my question, now that Stephanie has answered. She runs the weekly check on Thursdays, groups the results by project (not team), and wants the Confluence page plus an email to the Odd Squad. So I'd build exactly that, and measure it by the page matching her numbers on the same Thursday. OK to use "count per project" instead of "count per team" for the gate?

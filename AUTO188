@@ -353,3 +353,14 @@ For Wednesday's biweekly send, could you tell me your section counts and how man
 ===========
 
 Eric, an update to my question, now that Stephanie has answered. She runs the weekly check on Thursdays, groups the results by project (not team), and wants the Confluence page plus an email to the Odd Squad. So I'd build exactly that, and measure it by the page matching her numbers on the same Thursday. OK to use "count per project" instead of "count per team" for the gate?
+=================
+Slice 1's scope is settled.
+
+**Decision log:** 2026-11-02. Eric approved slice 1 to match what Stephanie does today. It runs on Thursdays, uses her two saved searches as they come back, groups results by project, and publishes a Confluence page plus one email to the Odd Squad. It's accepted when the page matches her manual numbers on the same Thursday. The per-team version is deferred to a later slice.
+
+Tell Nelnet Claude this, in words:
+1. Update the slice 1 requirements to this approved scope and commit them.
+2. Then build it: read both searches, group by project, write to the **test** Confluence page first, and send the Odd Squad email through the same test_recipient guard as slice 2.
+3. Don't send anything real yet.
+
+Slice 2 still comes first today: the test send to yourself, then the double dry run.

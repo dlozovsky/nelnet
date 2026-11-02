@@ -632,3 +632,10 @@ Point 1 is verified and proved by a new end-to-end test, committed as a separate
 
 Add the plain-address exception recipient setting?
 
+===================================
+Yes, add it. The rule exists to keep people's addresses out of files, and a team mailbox in a git-ignored local file doesn't break that. Tell Claude Code: "Yes, add exception_address, and amend the rule to say 'no personal recipient addresses in settings; the team exception mailbox is allowed in local settings only.'" Mention it to Eric in your weekly status as an FYI. It doesn't need his approval first.
+
+Claude Code is right about "ready." Wednesday is a comparison, not a send. Next for you: the test send to yourself (with your own address as from_address), then the double dry run, then Stephanie's two questions (which day she runs the weekly check, and is "Odd Squad reads the page" OK).
+
+Decision log: `2026-11-02 | Daniel | Exception list goes to a plain team mailbox address in local settings, not a Jira user lookup.`
+

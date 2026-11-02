@@ -373,3 +373,46 @@ Email timing: does the Odd Squad email go every week, or only when there are fin
 Readers: who in the Odd Squad reads the results?
 Weekly run time: how long does the weekly run take?
 Wednesday numbers: her section counts and how many people she emailed, which she said she’ll send Wednesday morning.
+--------------------------------------------------------Scope is committed (f518bd9). I’m now writing the failing tests for the weekly filters, the project grouping, the page and the email, before any code.
+
+Created 2 files, ran 3 commands, edited a file
+Most of the new tests pass and the 580 earlier ones are intact. Seven of the new tests still fail, so I’m reading each failure.
+
+Ran 6 commands, created weekly_settings_docs.py (1 failed)
+The example file fails to load because both placeholder filters are named TBD, which the new duplicate check rejects. I’m giving them distinct placeholder names.
+
+Ran 2 commands
+Slice 1 is built as Eric approved and committed as af6b422, with 622 tests passing and the network blocked. The requirements and CLAUDE.md were updated first (f518bd9). I changed no real settings and sent nothing. No real calls were made. The only slice 2 work left for you today is the test send and the double dry run.
+
+What it does
+
+Read: it reads each saved filter listed in [[filters]] as it comes back, and no rule re-checks the result.
+Group: it groups the issue keys by project, taken from the key prefix such as PM or PS. Each issue counts once.
+Unreadable filter: if a filter can’t be read, or comes back short, it shows as unavailable and is named. It is never shown as zero, and the other filter still runs.
+Page: the page has one block per filter, with a table of project, count and issue keys. A filter with nothing shows “No issues. 0 found.” Nothing else on the page names a person.
+Comments: the comments on AUTO-188 carry counts only: filters, findings and unavailable.
+Email: there is one email to the Odd Squad, with your intro and then the page link, and it goes only through smtp.test_recipient.
+With test_recipient set, the email goes only to that address and is not recorded, so the real one still goes later.
+A test address that isn’t your own is refused before anything is read.
+With no Odd Squad address set and no test address, nothing is sent, and the run says so.
+A real email is recorded as recipient=odd-squad, so a rerun doesn’t send it twice.
+Dry run: a dry run publishes and sends nothing, and says what the email would do.
+Local settings: settings.toml has both filters by name, with filter_id = "TBD". There is no Odd Squad address, and your test_recipient is still set. A dry run now stops with “the filter ‘Acceptance Criteria and Business Description’ ... is not set” until you put in the two ids.
+
+One default I chose: weekly_email.when = "findings", which sends only when a filter returned issues. A clean week then sends no email, only the page. Stephanie hasn’t said every week or only with findings. It’s one word to change, and I logged it as a default for her to confirm.
+
+Next for you
+
+Look up the two saved filter ids by name in Jira and put them in [[filters]] in settings.toml.
+Run py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188 --dry-run and compare the counts per project with Stephanie’s on Thursday, Nov 5.
+Keep slice 2 first today: the test send to yourself, then the double dry run.
+Record approved slice 1 scope, update requirements
+
+Write failing tests for filters, page, email
+
+Build filters read, project grouping, page
+
+Build Odd Squad email with test guard
+
+Update settings, docs, run suite, commit
+

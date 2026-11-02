@@ -383,3 +383,13 @@ Still open before the slice 2 dry run:
 2. **TBD guard:** the Milestone rule `m1` and Epics rule `e1` have no placeholders, but the guard against `TBD` in a rule is not built. Say the word and I'll write the test first.
 3. **Stories:** there is still no rule for stories.
 
+==============================
+Stop extending the rules. If the page query decides what a finding is, slice 2 doesn't need its own rules at all: the page sections already return the failing issues, including stories, the missing-child cases, and the date cases. Writing new code to recheck "has children" would rebuild logic the page already has, and the rules can only ever remove findings, which Stephanie said not to do.
+
+Tell Claude Code:
+> Findings for slice 2 are the issues each page section's query returns, as is. Turn off rule re-evaluation for slice 2 (keep the code, just disable it in settings) so no finding is ever removed. No new child-check code, no story rule, no TBD guard for now. Then run `--show-issue` on an epic with a milestone parent, then the slice 2 dry run.
+
+That's less code, and it's the fastest way to match her round this week. Your question for Stephanie gets simpler too: "Is the page the full rule set, or do you check anything by hand?"
+
+Decision log line: `2026-11-02 | Daniel | Slice 2 findings = page section query results as returned. Rule re-evaluation off; no new rule code.`
+

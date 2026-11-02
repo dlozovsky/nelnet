@@ -416,3 +416,28 @@ Before running it, expect some failures, because the dry run has not run for rea
 
 Requirements v0.5 still describe our own rules. I’ll update them once the report owner answers. The question to her is now: is the page the full rule set, or does she check anything by hand?
 
+-----------------------------------------------
+took 2 minutes C:\Users\dlozovsky\Documents\Gate Automation>py -3.13 -m adherence.run --report biweekly_structure --dry-run
+Dry run: 104 findings, 42 recipients, 2 on the exception list. Nothing was sent. Wrote biweekly_structure-2026-11-02-dry-run.json.
+
+C:\Users\dlozovsky\Documents\Gate Automation>
+
+Read sent_record.py, ran a command
+The dry run worked end to end on real data, and it ran with the real Confluence and Jira tokens. It read the page’s four queries, ran them, looked up the recipients, and sent nothing. I logged the counts only, in the decision log and the outstanding list. I did not open the dry-run file, because it holds names.
+
+What the numbers say: 104 findings across the four sections, 42 people who would get the email, and 2 findings on the exception list. About 2 minutes is fine for a run you start by hand. Most of that is probably looking up each recipient.
+
+First check: does it match the page? Our findings are the page queries’ results, so the count per section should equal the number of rows in each section on the page today. If a section differs, the cause is something between the page query and our run, such as a paging or exclusion difference, and that is what we most need to find. This command prints only counts per section and the exception reasons, with no keys or names:
+
+py -3.13 -c "import json,collections; d=json.load(open('runs/biweekly_structure-2026-11-02-dry-run.json',encoding='utf-8')); print(collections.Counter(f['section'] for f in d['findings'])); print(len(d['recipients']),'recipients'); print(collections.Counter(e['reason'] for e in d['exceptions']))"
+Paste that output here. It also shows what the 2 exceptions are about, such as no assignee or no deliverable address. Compare the section counts with the page and tell me if any differ.
+
+Then, in order:
+
+Compare with the report owner’s next round. She can tell you whether the 42 recipients and the exceptions look right.
+Delete the dry-run file when you are done, since it holds display names.
+The counts for today are only valid for today. The page updates itself, so rerun on the day you compare.
+Old files: runs/ also holds biweekly_structure-2026-10-30-email.json and -exceptions.json. Those come from the retired local sent-record design. The code ignores them now, so you can delete them. I haven’t opened them.
+
+Next is the question for the report owner: is the page the full rule set, or does she check anything by hand?
+

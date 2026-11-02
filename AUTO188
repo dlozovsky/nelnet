@@ -257,3 +257,19 @@ Learn more about pinned comments
  Collapse comment: Lozovsky, Daniel (Insight Global) added a comment - 10/27/2026 11:51 AM
 
 Lozovsky, Daniel (Insight Global) added a comment - 9 minutes ago
+
+
+===================
+You have three to send today. Weekly status isn't due until Friday.
+
+**1. Stephanie (Teams or email)**
+> Hi Stephanie, thanks for the answers, they settled slice 2. Two quick ones for the weekly required-fields check:
+> 1. Which day of the week do you run it? Your filters look back 7 days, so I need to compare on the same day.
+> 2. My plan is that slice 1 publishes a Confluence page and sends no email, and Odd Squad reads the page. Does that replace you forwarding findings, or should it still send something?
+>
+> For Wednesday's biweekly send, could you tell me your section counts and how many people you emailed? I'll run my dry run that morning and compare.
+
+**2. Eric (AUTO-188 Teams chat):** send Claude Code's slice 1 message as it is.
+
+**3. Eric + Dave (AUTO-188 Teams chat), progress one-liner**
+> Update: slice 2 ran end to end on real data today, read-only. 104 findings, 42 recipients, 2 exceptions, nothing sent. Stephanie's answers are in, and I'm comparing against her round Wed 11/4. Test send to myself is next. Slice 1 needs one decision from Eric (message above).

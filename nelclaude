@@ -488,3 +488,25 @@ Stephanie's answers are logged and both requirements are committed (034f71a, sli
 
 Draft the slice 1 question for Eric?
 
+=======================
+The numbers are consistent: 41 stories, 31 initiatives, 20 epics and 12 milestones add up to 104, which matches the total from the run. I logged them in the decision log, counts only.
+
+What you need to do next: open the page and count the rows in each of the four sections. They should read 31 initiatives, 12 milestones, 20 epics and 41 stories. If the page is within a row or two of that, our reading matches the page. The page updates itself, so small differences from timing are possible. A bigger gap in one section would mean something is dropping or adding issues between the page query and our run. Tell me which section and by how much.
+
+What the 2 exceptions are:
+
+no recipient: one finding had neither an assignee nor a reporter we could read. A deactivated or deleted account is the usual cause.
+no recipient has a deliverable address: one finding had recipients, but none had an email address on file. That fits an inactive account or a service account.
+Where they go: both lines go to the exception recipient, the Odd Squad mailbox, so the report owner can research them. That matches her “unassigned or inactive person” case from the walk-through.
+
+Ask the report owner:
+
+Is the page the full rule set, or does she check anything by hand?
+Do 42 recipients and 2 exceptions look right for a round? How many people usually get her email?
+Next send date, so you can compare on the same day.
+
+Delete runs/biweekly_structure-2026-11-02-dry-run.json once you’ve finished the page comparison. It holds display names, and a rerun on the same date overwrites it anyway.
+
+Not done and still waiting: the real send. That needs Eric’s OK, the mailbox access (needed by Nov 5) and the delegated send (about Nov 12). A test send to yourself is approved, and it needs test_recipient and the SMTP settings filled in. I can walk you through that when you want it.
+
+

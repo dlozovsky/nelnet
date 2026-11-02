@@ -1253,3 +1253,20 @@ Two things to check before you send
 Section 10 wording: the requirements say “The email has four sections”, but the email carries only the page link. Your draft says “the page has four sections”, which looks right. I can fix the requirements and re-export the Word copy if you confirm.
 Nov 2: it is a Monday, and you set the date. Change it if you want her to have more time.
 
+-----------------------------------------------------
+Is the exclusion label p/o_not_applicable or p/c_not_applicable?
+What should happen when an initiative’s start date is blank? I know the end date cannot be blank. It should show up on this report.
+Should recipients go in To or Bcc?
+About how long does one send take you, including research on unassigned or inactive people? Around 30 minutes
+When is your next send? I will compare my dry run with that round. 11/4/2026
+
+8. Are you also the owner of this check? If so, could you send me its filter, team field, and label, and tell me who reads the results? Yes, the filters I use are below. This report is basically used to verify validations for required  fields are working properly in the workflow in Jira. Results would be sent to the Odd Squad to research if there are findings. It is very rare to get findings on these.
+
+Does a finding mean whatever the page query returns, or what the rules decide? I suggest the page query, so my dry run matches your round. Page query.  
+
+Is the exclusion label p/o_not_applicable or p/c_not_applicable?
+What should happen when an initiative’s start date is blank? I know the end date cannot be blank. It should show up on this report.
+Should recipients go in To or Bcc?
+About how long does one send take you, including research on unassigned or inactive people? Around 30 minutes
+When is your next send? I will compare my dry run with that round. 11/4/2026
+

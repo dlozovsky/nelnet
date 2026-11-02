@@ -305,3 +305,20 @@ Why: Stephanie runs two saved Jira searches every week. One finds issues missing
 What I'd build: the automation runs her same two searches and posts the results to a Confluence page. For each search, the page shows how many issues came back and which ones. There's no team breakdown and no email, and the Odd Squad reads the page. I'm confirming that last part with Stephanie.
 How we'd know it works: on the same day, the page's numbers match what Stephanie gets by hand. A week with nothing to report still counts as in use, as you said on Oct 30.
 A yes or no is enough. I won't change anything until you answer.
+
+--------------------------------------------
+Ask both, in this order: Stephanie first, then Eric. They answer different questions.
+
+**What Stephanie can answer:** what she actually needs. Does anyone count or group her results by team? Does a page replace her forwarding findings to the Odd Squad? Which day does she run it? She owns the check, so she is the right person for all of these. Two of them are already with her.
+
+**What only Eric can answer:** whether the gate can be measured differently from the plan. "Count per team" is a gate criterion, not Stephanie's, and she can't waive it. CLAUDE.md says unanswered decisions escalate to Eric. If you only ask her, you'd have her answer but no approval to change the measure.
+
+**Why Stephanie first is a good idea:** your question to Eric gets easier. Today it is "can I drop a criterion?" If she says nobody uses a per-team count, it becomes "Stephanie confirms nobody uses it, so I'd drop it. OK?" That is a quick yes, and it may be why he found the first version hard to follow.
+
+She already has two open questions from you, so add this as a short follow-up, not a new message with its own heading:
+
+> One more on the weekly check: when you run the two searches, do you or anyone else count or group the results by team? Or is it just the list of issues that matters?
+
+Then go back to Eric with her answer. If she says the list is all that matters, your message to Eric can be two sentences: "Stephanie says nobody counts the weekly results by team, only the list of issues matters. OK to measure the check by 'the page matches her list' instead of 'count per team'?"
+
+If she doesn't answer before Eric does, you can still send Eric the longer version. Just don't wait on her for the rest of the slice 2 work. That is already running.

@@ -463,3 +463,28 @@ Delete runs/biweekly_structure-2026-11-02-dry-run.json once you’ve finished th
 
 Not done and still waiting: the real send. That needs Eric’s OK, the mailbox access (needed by Nov 5) and the delegated send (about Nov 12). A test send to yourself is approved, and it needs test_recipient and the SMTP settings filled in. I can walk you through that when you want it.
 
+-----------------------------------------------------
+Her answers are recorded in the tracker, decision log, outstanding list and both requirements, which are committed as 034f71a. Slice 2 is now v0.6 and slice 1 is v0.3. Nothing was built or run.
+
+Slice 2 is settled:
+
+Findings: she confirmed the page query, so the pass-through setup we built matches her answer.
+Stories: the check is the Stories query she pasted. Our Stories section already covers it.
+Blank start date: it shows on the report, which the page query already does.
+Time and date: about 30 minutes per send, roughly 1 hour a month. Her next send is Wednesday, Nov 4. Run the dry run that day and compare it with her round.
+Still open from her: To or Bcc, and a direct answer on the label. She did not answer either. The page queries use p/o_not_applicable, so I treated it as that and left a small TBD to confirm.
+
+Slice 1 doesn’t fit the code. She owns the weekly check, and it uses two saved filters that return only the failing issues. The code reads one filter, counts checked issues, re-applies rules and groups by team. Her filters don’t have any of that. Doing the same for slice 1 as slice 2 means the findings are what each filter returns, as returned. That would need two code changes: reading more than one filter, and a page without checked counts. Eric’s criterion says “count per team equals a manual run”, and nobody has named a team field, so he needs to read that criterion before I build anything.
+
+Other things I noticed:
+
+Filter window: the filters look back 7 days from the run. A comparison only works on the same day she runs it, so I need to know which day that is.
+Filter ids: she gave query text, not saved filter ids. Find the two saved filters by name in Jira to get the ids.
+Test cases: the three cases are Acceptance Criteria empty, Business Description empty, and Client Impact empty on a Done issue. Eric’s two examples map to the first two. I asked her to confirm there are no more.
+
+The box asks whether to draft the question to Eric about slice 1.
+
+Stephanie's answers are logged and both requirements are committed (034f71a, slice 1 v0.3 and slice 2 v0.6). Slice 2 is settled: the page query decides, and the Nov 4 send is the comparison date. Slice 1 needs Eric's decision on a redesign before any code is touched.
+
+Draft the slice 1 question for Eric?
+

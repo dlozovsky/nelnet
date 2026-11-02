@@ -361,3 +361,25 @@ Names: I wrote “the report owner”, not Stephanie’s name, to match v0.4 and
 Business owner: the header leaves it as a TBD, because it is still open whether the report owner owns the weekly check.
 Slice 2 questions: I left out the first-linked-child and not-available questions, because they belong to the structure page.
 
+----------------------------------------------------------------------------
+The Initiative rules in your local `settings.toml` now match the page query. I dropped the in-progress condition and replaced the old rule with three:
+
+| Rule | Field | Flags |
+|---|---|---|
+| `i1` | Target start (`customfield_21842`) | a blank start date |
+| `i2` | Target end (`customfield_21843`) | a blank end date |
+| `i3` | Target end | an end date in the past, where a blank passes because `i2` already catches it |
+
+I checked them on invented issues with no network. A blank start flags `i1` only, and a blank end flags `i2` only. A past end flags `i3` only, and an end of today flags nothing. A future start flags nothing, which is the intended change. All 573 tests still pass. The decision is logged as mine, for the report owner to confirm. The requirements v0.5 still say "start today or earlier", so I left them alone until she answers. This changed only your local settings, so nothing was committed.
+
+Two differences from the page remain in the other sections:
+- **Milestones:** the page flags milestones that have no epic children. Our rule `m1` looks for an initiative parent. The two checks look in opposite directions, and the rule code has no way to ask "has children".
+- **Initiatives:** the page also flags initiatives with no milestone child. Our rules cannot test that either.
+
+That is the same finding-source question for the report owner. If the page decides, the missing child checks need new code.
+
+Still open before the slice 2 dry run:
+1. **`--show-issue`:** run it on an epic with a milestone parent. That confirms whether Parent Link nests its key.
+2. **TBD guard:** the Milestone rule `m1` and Epics rule `e1` have no placeholders, but the guard against `TBD` in a rule is not built. Say the word and I'll write the test first.
+3. **Stories:** there is still no rule for stories.
+

@@ -599,3 +599,36 @@ Then do the double dry run. If it says "identical," slice 2 is ready for Wednesd
 
 Decision log: `2026-11-02 | Daniel | Slice 2 uses page_result rule (finding = page query row); sentinel removed. 371f237, 578 tests.`
 
+------------------------------------------------------------
+The new end-to-end test fails on its last assertion. I’m reading the detail now to see whether it is a real leak or a test mistake.
+
+Showed the failure detail and the synthetic addresses
+The test failed because it was too broad, not because anything leaked: the synthetic address is also the sender’s own From header. I’m narrowing the check to the two real recipients.
+
+Ran 2 commands
+I mostly agree with the review. I did point 1, and I’m waiting for your yes on point 2. Point 3 needs nothing from me.
+
+1. Confirm the guard: agreed. Done, and it holds.
+
+Before this, the tests proved the redirect at two levels: the send step and the whole run. Both messages, the email and the exception list, go to the test address only. What no test covered was the real SMTP sender with the redirect together. I added tests/test_test_send_envelope.py, committed as 9a0afbf. It runs a full test send through the real sender against a fake server, in both to and bcc mode. It checks that exactly two messages go out and that each envelope has only the test address. It also checks that neither real recipient’s address appears in any header or body. All 580 tests pass.
+
+One detail to know: in bcc mode the To: header shows the sending mailbox, not a recipient. That is harmless.
+
+I did not run the test send for you. When you do, remember that sending as the Odd Squad mailbox may be refused until the mailbox access lands. Use your own address as from_address for now.
+
+2. Plain exception address: right idea, but your call because it changes a written rule.
+
+Today the exception list’s address comes from a Jira user lookup. A shared mailbox may not be a Jira user, so a real send could have no exception list. A plain address removes that dependency, and it is a small change. It also fits what you already have: from_address in your local settings is already the Odd Squad mailbox address.
+
+I’d do it as an optional exception_address setting in [structure]. If set, it replaces the Jira lookup. The tests would keep refusing an address in the old exception_recipient_id, and keep checking that no address reaches a comment, a page, or a file.
+
+CLAUDE.md and the settings comments say recipient addresses never live in settings. A team mailbox in a local, git-ignored file fits the reason for that rule, but the sentence needs a short amendment. That is your decision, and I’d mention it to Eric, so I haven’t started. The box above asks for your go-ahead.
+
+3. Eric message: agreed. Stephanie hasn’t confirmed “slice 1 sends nothing, the Odd Squad reads the page” yet. Ask her that in the same message as which day she runs the check.
+
+On “identical means ready for Wednesday”: identical output only shows the run is stable. Wednesday is a comparison, not a send. The real send still needs Eric’s OK, the mailbox access (Nov 5) and the delegated send (about Nov 12). So “ready” means ready to compare. That means rerunning the dry run that morning, checking each section’s count against the page, and checking the 42-odd recipients against her list.
+
+Point 1 is verified and proved by a new end-to-end test, committed as a separate change (580 tests pass). I agree with points 2 and 3, with one caution on point 2. I have not changed the exception recipient yet.
+
+Add the plain-address exception recipient setting?
+

@@ -529,3 +529,62 @@ Paste this into Claude Code:
 
 After it finishes, send me one line here with the commit and anything it pushes back on.
 
+
+-----------------------------------------------------
+The five new tests fail for the right reason: the page_result rule type doesn’t exist yet. I’m adding it now, with a small fix to one test that used the wrong label constant.
+
+Local settings are done: page_result rules, Bcc, and draft email wording all load cleanly. Next I’m updating the example settings and CLAUDE.md, then syncing the notes and committing.
+
+The sync, page_result and the email wording are done and committed as 371f237, with 578 tests passing. The test send, the double dry run and the message to Eric are drafted for you below. Nothing was run against real systems.
+
+Sync: the label (p/o_not_applicable) and Bcc are closed in the decision log, outstanding list and slice 2 requirements. recipients = "bcc" is set in your local settings.toml and in the example. The ~30 minutes and the Nov 4 comparison were already recorded.
+
+Task 1, page_result: it is a new rule type that fails for every issue and needs no field. The 5 new tests came first, and they failed until the rule existed. All four sections in your settings use it now, in place of the sentinel, and the example settings and CLAUDE.md say so.
+
+Task 2, test send to yourself
+
+I drafted the email wording in your local settings.toml, for Stephanie and Eric to approve. The body is your short intro followed by the page link. The subject is “Action needed: issues on the Bi-Weekly Structure Adherence Report”. The exception list has its own subject and intro.
+
+To send, fill these in [smtp] in settings.toml:
+
+host, from the automation team’s answer
+username, your clock id or address
+from_address
+test_recipient, which must be you: the same as username, or your clock id at the from_address domain
+
+secret_service is already set to gate-automation-smtp. Store the password with:
+
+py -3.13 -m keyring set gate-automation-smtp YOUR-USERNAME
+
+Sending as the Odd Squad mailbox needs the mailbox access (Nov 5) and the delegated send (about Nov 12). Until then, set from_address to your own address. That still tests the login, STARTTLS and the formatting. Then run with no --dry-run:
+
+py -3.13 -m adherence.run --report biweekly_structure
+
+You’ll get two messages, the email and the exception list. It writes nothing to Jira and no record, and it writes the real recipients to a -test-send.json file in runs/. Delete that file afterwards.
+
+One more finding: the exception list’s address is looked up through Jira’s user lookup, like any recipient. If the Odd Squad mailbox is not a Jira user, a real send gets no exception list. The test send is not affected. I added it to the outstanding list and the slice 2 requirements for Dave or the Jira administrator.
+
+Task 3, double dry run: run each command in turn. Two separate runs are the real test.
+
+py -3.13 -m adherence.run --report biweekly_structure --dry-run
+py -3.13 -c "import glob,shutil; f=sorted(glob.glob('runs/*-dry-run.json'))[-1]; shutil.copy(f,'runs/first.tmp')"
+py -3.13 -m adherence.run --report biweekly_structure --dry-run
+py -3.13 -c "import glob,filecmp; f=sorted(glob.glob('runs/*-dry-run.json'))[-1]; print('identical' if filecmp.cmp(f,'runs/first.tmp',shallow=False) else 'DIFFERENT')"
+
+Recipients are sorted in the code, so I expect identical. If it says DIFFERENT, someone may have edited an issue in between, so tell me the counts from each run. Delete runs/first.tmp afterwards, since it has names.
+
+Slice 1 message for Eric (for Teams):
+
+Eric, a slice 1 question. Stephanie owns the weekly check. She gave me her two saved filters: Acceptance Criteria and Business Description, and Client Impact on Done issues. Both return only the failing issues, and findings are very rare. They have no team field. My build reads one filter, counts checked issues and groups by team, so it doesn’t fit.
+
+My proposal for the gate:
+
+Findings are what each of her two filters returns, as returned, the same as slice 2.
+The page shows one block for each filter, with its name, the count and the issue keys. No team grouping before the gate.
+Slice 1 sends nothing. The Odd Squad reads the page. I’ll confirm with Stephanie that this replaces her forwarding findings.
+Accept when each filter’s count matches her manual run on the same day. A clean week still counts as in use, as you said on Oct 30.
+
+This drops the “count per team” criterion for the gate. Is that OK? The code change is small: read two filters, and show a page without checked counts. I won’t touch the code until you say yes.
+
+Still open on my side: the day she runs it, because the filters look back 7 days, and the two saved filter ids, which you’ll look up by name in Jira.
+

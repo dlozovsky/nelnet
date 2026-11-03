@@ -753,3 +753,33 @@ Then go back to the filter ids and the slice 1 dry run.
 
 Decision log: `2026-11-02 | Daniel | Token keyring entries set per settings file (per instance); NULSC auth guard deferred pending Eric.`
 
+====================================================
+Tests are written and fail for the right reason: the new functions don’t exist yet. Now the implementation in secret_store.py and run.py.
+
+The token change is built and committed as 6086068. I wrote the tests first and watched them fail, and all 635 tests now pass.
+
+How it works now:
+
+US (the default): it tries jira-token-us and confluence-token-us first, then falls back to your current jira-token and confluence-token. Your existing setup works as is, and you don’t need to re-store anything. The JIRA_TOKEN and CONFLUENCE_TOKEN environment variables still work as before.
+NULSC, or any other instance: it uses only jira-token-nulsc and confluence-token-nulsc. The environment variables for it are JIRA_TOKEN_NULSC and CONFLUENCE_TOKEN_NULSC.
+If a NULSC run finds no NULSC token, it stops and names the missing variable. It never uses a US token in its place.
+
+One difference from your note. You asked for the current names to stay as a fallback. I kept that for US only. A fallback for NULSC would send the US token to the NULSC server, which is the bug this change fixes. There is a test that a NULSC run never gets a US token from the store or the environment.
+
+Also done:
+
+CLAUDE.md: the token section is updated.
+Decision log: a new row, using your wording.
+NULSC guard: skipped, as you said.
+
+Nothing NULSC was stored or run. settings - Copy.toml is still untracked in the repo folder, so keep it out of any push.
+
+Next:
+
+Look up the two saved filter ids in Jira by name.
+Put them in [[filters]] in settings.toml.
+Run the slice 1 dry run:
+py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188 --dry-run
+
+Paste the console output when it finishes, and I’ll help check it.
+

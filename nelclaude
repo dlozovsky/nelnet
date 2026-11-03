@@ -782,4 +782,60 @@ Run the slice 1 dry run:
 py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188 --dry-run
 
 Paste the console output when it finishes, and I’ll help check it.
+-------------------------------------------------------------------------------
+Here is a draft for Eric. It’s short, so edit it freely.
 
+Hi Eric, end of day update.
+
+Done today
+
+Slice 1: both saved filters are set up and the dry run works. It read both filters and returned 0 issues each, which matches Jira today. Thursday I’ll compare the counts per project with Stephanie’s manual run.
+Slice 2: two dry runs back to back gave identical results, so the run is stable. Wednesday I’ll compare with her counts.
+Tokens are now stored per Jira instance, so a US token can never go to NULSC. NULSC itself is still not set up.
+
+Blocked
+
+Test email to myself: the login works, but the mail server refuses to send as the mailbox (no permission to send as the sender). That waits on the delegated send ticket, RITM1089773. I’ve added the result to the ticket and I’m not retrying.
+
+Need from you
+
+Which GitLab project holds the gate repo? My access is in the flyway group, which looks like a different product. I asked Brian Elder too.
+The GitLab clock started Nov 2, so four weeks ends Nov 30. Does the Nov 20 date still hold?
+Is NULSC part of the gate, or later? For now I’m only keeping room for it in the code.
+
+Nothing has been sent, posted or written to Jira or Confluence yet.
+
+If Eric already answered any of the three, delete that line before you send.
+
+Are we in better shape now could we possibly get all the code done and working by end of week and only wait for actual send
+
+Yes, we’re in better shape than this morning. But “code done and working, only waiting on the send” is true for slice 1 and only partly true for slice 2.
+
+What changed today
+
+Slice 1 now reads both real filters with your token. The dry run works.
+Slice 2 gave identical results on two dry runs.
+Tokens are now stored per instance.
+The send is blocked only by a permission, not by the code or your login.
+
+Slice 1 can be fully proven this week, except the email. Two writes have never run against real systems: the status comments on AUTO-188 and the first page under Automation Output. Eric approved both, so you can do a real run now. I’d do it Tuesday or Wednesday, not Thursday. If a permission or page-link problem shows up, you want it before you compare on Thursday. Thursday you rerun with --rerun and compare. Nothing is emailed until the Odd Squad address is set.
+
+Slice 2 can’t be proven end to end without a send. The record comment is written only after a message goes out, so the send and the record are tested together. Both the send and the record are covered by tests, but those use fake data. A real send could still expose a bug. That means a real run before the permission arrives is risky, so I wouldn’t do one. The ticket is estimated at about Nov 12, which is probably after this week. It still fits inside Nov 20 and Nov 30.
+
+What blocks “finished” that isn’t code
+
+The maintenance guide isn’t started. It’s required, and it’s the biggest piece left.
+GitLab: nothing is pushed, there’s no scan, and there’s no code review. You’re waiting on Eric and Brian.
+Stephanie hasn’t answered whether the email goes every week or only with findings, or who reads it. Nothing can be sent until the Odd Squad address is set.
+Acceptance evidence: one example of each case, which needs seeded issues, so Jira writes Eric hasn’t approved.
+The Wednesday and Thursday comparisons with her counts.
+Your weekly status and daily log.
+
+A realistic plan
+
+Tuesday: slice 1 real run, and start the guide.
+Wednesday: slice 2 dry run and comparison.
+Thursday: slice 1 comparison.
+Friday: finish the guide and the status, and push if GitLab is answered.
+
+Say the word and I can start the maintenance guide draft tomorrow, since it needs no real calls.

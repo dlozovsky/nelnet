@@ -393,3 +393,23 @@ The tests block the real network. All tests must pass before you release a chang
 This guide covers the US Jira instance. NULSC is not set up for real use. The tool does not start for NULSC until the written approval and its date are in the settings file (12.4).
 
 The author maintains the tools first. After that, the team that owns the report maintains them. [TBD: names]
+
+
+============================
+Pass them to Nelnet Claude. Two of the fixes need it to read the code first (how to stop each email, and the record format), and the real file is on your laptop. Paste this:
+
+> Please update docs/maintenance-guide-draft.md to 0.2 with these changes. Check the code wherever a change describes behavior, and tell me if the code doesn't match.
+> 1. Add a one-page "Routine run" section at the top: the weekly check on Thursdays, the structure report every second Wednesday. Steps only: dry run, compare, real run, check the page and comments. Mark the time as [TBD].
+> 2. Section 14: add the primary maintainer, the backup, the report owner, and support contacts for tokens, Jira, Confluence and SMTP, all as [TBD: ask Eric].
+> 3. Section 14: replace "NULSC is not set up for real use" with a planned section, "[TBD: NULSC real use, after the Eric laptop test]". NULSC is in the gate.
+> 4. Section 11: check the code and write the real way to stop each email, the weekly one, the main structure one and the exception list. Removing exception_address stops only the exception list.
+> 5. Section 1: "The weekly check keeps no Jira data on disk. Structure dry runs and test sends write files with display names. Delete them after use."
+> 6. Section 12: add "Filling in the approval lines records a decision. It does not grant permission."
+> 7. Section 10: for a Bcc send, one person getting it doesn't prove everyone did. Change it to "If unsure, ask the report owner before you add the record. Do not retry."
+> 8. Make sections 4 and 7.3 agree on the SMTP username. State what the section 4 [TBD] is asking.
+> 9. Check that a test parses the exact example record lines in section 10. If none does, write one first.
+> 10. Small: split reviewer note 4 into two items, say that pytest is for maintainers only, and in 12.2 mark how to ask IT for Python as [TBD: ask Anders].
+> 11. Optional code change, test first: print "TEST MODE: sending only to you" before a test send connects.
+> Don't commit the docs. Commit only the code and test changes.
+
+When it's done, tell me in words what it found for 4 and 9.

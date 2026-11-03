@@ -839,3 +839,14 @@ Thursday: slice 1 comparison.
 Friday: finish the guide and the status, and push if GitLab is answered.
 
 Say the word and I can start the maintenance guide draft tomorrow, since it needs no real calls.
+
+===============
+Yes, you're in better shape, and Nelnet Claude's assessment and plan are right. Say yes to the maintenance guide tomorrow. It's the biggest gap left.
+
+**Don't send that draft as it is.** You already asked Eric the GitLab, Nov 20 and NULSC questions tonight, and asking again a few hours later repeats today's pattern. If you want to send anything, make it two lines: "Slice 1 dry run works on both real filters. Next is a real run to the test page, then Thursday's comparison." Everything else can wait for Friday's status.
+
+Two adjustments to the plan:
+- **Tuesday's real slice 1 run:** confirm first that the page target is the test page.
+- **Acceptance evidence (seeded issues):** that's a new Jira write Eric hasn't approved. Put it as one question in Friday's status, not tonight.
+
+Decision log: `2026-11-02 | Daniel | Slice 1 dry run works on both real filters (0/0). Next: real run to test page, then Thursday's comparison.`

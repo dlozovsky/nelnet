@@ -488,4 +488,7 @@ Next up: tomorrow's slice 2 dry run, then compare counts with Stephanie.
 For the gate docs ( requirements and maintenance guide), may I create a "Gate Automation docs" page under Automation Output, or would you rather they live somewhere else in that space?
  
 that space/page works great. go ahead and put everything there.
+
+----------------------------------------------
+The guide asks for a dry run first because a real run writes three comments on AUTO-188 and a Confluence page, and it will send an email once the address is set. A dry run shows the counts first, with nothing written. The program does not force it. For a routine weekly run with no changes and no email, I can make it optional and keep it required after any change and before any real send. The structure report keeps it either way. Which do you prefer?
  

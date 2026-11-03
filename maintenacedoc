@@ -1,0 +1,395 @@
+# Gate Automation maintenance guide
+
+Draft 0.1, 2026-11-02. For review. This is a local copy. After review, publish it on Confluence Data Center.
+
+## Notes for the reviewer (remove before publishing)
+
+These items are not proved against real systems yet. Each one has a [TBD] mark in the text.
+
+1. The weekly check ran once for real on 2026-11-03. The page and the comments worked, and both filters returned zero. A run with findings did not happen on real data yet.
+2. The page link format `/pages/viewpage.action?pageId=` worked on this Confluence on 2026-11-03.
+3. The structure report did not send a message. The mail server refused to send as the mailbox (error 550 5.7.60). The delegated send request is open.
+4. The Odd Squad mailbox address is not set. The report owner did not say if the weekly email goes every week or only with findings.
+5. The GitLab project that holds the code is not known.
+6. The shared credential store for the team is not decided. This guide uses the Windows credential store on each laptop.
+7. NULSC is not set up for real use. Section 12 describes a read-only test. Everything else in this guide covers the US instance.
+8. The names of the people who maintain the tool are not in this draft.
+9. Section 12 is not tested on a second computer. The NULSC filters and servers are not known to the author.
+
+## 1. What the tools do
+
+Two tools run from one program. A person starts each tool by hand on a Nelnet laptop. Nothing runs by itself.
+
+The weekly check reads saved Jira filters. The US instance has two. It groups the issues by project. It makes a Confluence page. It can send one email to the Odd Squad mailbox with the page link.
+
+The structure report reads the Jira queries on the structure page in Confluence. It finds the assignee and the reporter of each issue that the queries return. It sends one email to those people with the page link. It sends a list of issues with no reachable person to a team mailbox.
+
+The tools make no model call. They do not keep Jira data on disk. The structure report writes two local files for a dry run and a test send. Section 7 describes them.
+
+## 2. What you need
+
+- Python 3.13 on the laptop.
+- A Jira personal access token and a Confluence personal access token for your own account.
+- Permission to view the saved filters and the structure page.
+- Permission to add comments on the tracking ticket.
+- Permission to create pages under the parent page in Confluence.
+- For the structure report: permission to send as the mailbox, and the SMTP password. [TBD: the send as permission is not granted yet]
+
+## 3. Install the program (one time)
+
+1. Get the code from GitLab. [TBD: project address]
+2. Open a terminal in the repository folder. Run every command in this guide from that folder.
+3. Install the two Python packages:
+
+```
+py -3.13 -m pip install keyring pytest --user
+```
+
+## 4. Store the credentials (one time)
+
+The tool needs three secrets. They are the Jira token, the Confluence token, and the SMTP password. The tool reads them from the Windows credential store. Never put a secret in the settings file, in a comment, or in a message.
+
+1. Create a personal access token in your Jira profile. Create a second one in your Confluence profile.
+2. Store the Jira token. The command asks for the token and does not show it:
+
+```
+py -3.13 -m keyring set gate-automation jira-token-us
+```
+
+3. Store the Confluence token:
+
+```
+py -3.13 -m keyring set gate-automation confluence-token-us
+```
+
+4. Store the SMTP password. Use the `secret_service` and `username` values from the `[smtp]` section of your settings file:
+
+```
+py -3.13 -m keyring set <secret_service> <username>
+```
+
+The entry must match both values exactly. The server refused the clock id alone as the username. It accepted the full mailbox address. [TBD: ask the automation team]
+
+A token expires on a set date. When a token expires, run the same `keyring set` command again with a new token. Write the expiry date where the team can see it. [TBD: where]
+
+If no entry exists, the tool uses the older names `jira-token` and `confluence-token`. After that it uses the environment variables `JIRA_TOKEN` and `CONFLUENCE_TOKEN`. This fallback is for the US instance only.
+
+## 5. Set up the settings file (one time)
+
+1. Copy `settings.example.toml` to `settings.toml`.
+2. Replace each `TBD` value that the tool needs. The tool does not start while a needed value is `TBD` or empty.
+3. Do not commit `settings.toml`. It holds server names.
+
+| Section | Key | What to put there |
+|---|---|---|
+| `[source]` | `instance` | `us` |
+| `[source]` | `base_url` | The Jira address |
+| `[publish]` | `target` | `dc` (Data Center) |
+| `[publish]` | `parent_page_id` | The id of the parent page. The tool makes its pages under this page |
+| `[publish]` | `base_url` | The Confluence address |
+| `[[filters]]` | `name` | The title shown on the page |
+| `[[filters]]` | `filter_id` | The number after `filter=` in the address of the saved filter |
+| `[weekly_email]` | `when` | `findings` sends only when a filter returns issues. `always` sends every run |
+| `[weekly_email]` | `subject`, `intro` | The email wording. The page link follows the intro |
+| `[weekly_email]` | `address` | The Odd Squad mailbox. Optional. With no address the tool sends nothing. [TBD] |
+| `[structure]` | `page_id`, `page_url` | The structure page, and the link in the email |
+| `[structure]` | `record_ticket` | The ticket that holds the record of each message |
+| `[structure]` | `exception_address` | The team mailbox for the exception list. Optional. Never put a personal address here |
+| `[smtp]` | `host`, `port`, `username`, `from_address`, `secret_service` | The mail server settings |
+| `[smtp]` | `recipients` | `bcc` or `to` |
+
+To find the number of a saved filter, open Jira. Click Filters, then View all filters, then Search. Open the filter. The number follows `filter=` in the address.
+
+## 6. Run the weekly check
+
+### 6.1 Dry run
+
+Do a dry run before every real run.
+
+```
+py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188 --dry-run
+```
+
+The dry run prints the page text. It posts nothing, writes no file, and sends no email. A filter that returns no issues shows "No issues. 0 found." This is a valid result.
+
+### 6.2 Real run
+
+Use the same command without `--dry-run`. The run does these steps in order:
+
+1. It writes a STARTED comment on the ticket.
+2. It reads each saved filter.
+3. It creates the Confluence page, or it updates the page that has the same title. The title has the report name, the instance, and the week.
+4. It writes a PUBLISHED comment.
+5. It sends the email if an address is set and `when` allows it. With `when` set to `findings`, at least one filter must return issues.
+6. It writes one COMPLETED comment. The first line of the comment has the result counts.
+
+The run prints "Run completed." when it ends well. A week with no issues makes the page and sends no email when `when` is `findings`.
+
+### 6.3 Run again, or continue
+
+| Situation | Add this to the command |
+|---|---|
+| The last run is COMPLETED and you want another run | `--rerun` |
+| The last run is FAILED, or it stopped before it ended | `--resume` |
+| You want a different week | `--period 2026-W46` (use the week you need) |
+
+Do not use `--rerun` and `--resume` together. The default week is the ISO week of the run date. With `--resume`, the default is the most recent run that did not end.
+
+### 6.4 What the comments mean
+
+The run writes these lines as comments on the ticket. They hold no names, addresses, or tokens. A run writes three comments. A run that sends the email also writes one `[gate-sent]` comment.
+
+| Line starts with | Meaning |
+|---|---|
+| `[gate-run] ... state=STARTED` | The run began |
+| `[gate-run] ... state=PUBLISHED` | The page is made or updated |
+| `[gate-run] ... state=COMPLETED` | The run ended well |
+| `[gate-run] ... state=FAILED step=...` | A step failed. The step name tells which one |
+| `[gate-result] ...` | Counts only. The number of filters, findings, and filters that were unavailable. It is the first line of the COMPLETED comment |
+| `[gate-sent] ... recipient=odd-squad` | The weekly email went out |
+
+## 7. Run the structure report
+
+### 7.1 Read-only checks (before the first run)
+
+These commands change nothing.
+
+```
+py -3.13 -m adherence.run --report biweekly_structure --check-page
+```
+
+The command lists the Jira queries on the structure page. It tells you if each section in the settings file is found. A section name must be the same as the heading on the page.
+
+```
+py -3.13 -m adherence.run --report biweekly_structure --show-issue KEY
+```
+
+The command shows which field on one issue holds the parent link. It shows field ids and names. It shows no values.
+
+### 7.2 Dry run
+
+```
+py -3.13 -m adherence.run --report biweekly_structure --dry-run
+```
+
+The dry run reads the page queries and runs them. It sends nothing and writes nothing to Jira. It writes one file to the run folder (`runs/` by default). The file lists the findings, the people who get the email if the run sends it, and the exception list.
+
+CAUTION: The dry-run file holds the display names of real people. Delete the file after you use it. Git ignores the folder, but the file stays on the laptop.
+
+Compare the counts with the report owner's counts before any real send.
+
+### 7.3 Test send
+
+A test send sends every message only to you. Use it to test the mail server before a real send.
+
+1. In `[smtp]`, set `test_recipient` to your own address. It must be the same as `username`. If `username` is only your clock id, use that id at the domain of `from_address`.
+2. Run the command without `--dry-run`:
+
+```
+py -3.13 -m adherence.run --report biweekly_structure
+```
+
+3. Make sure that the messages arrive in your mailbox.
+4. Delete the `test-send` file in the run folder. It holds the names of the real recipients.
+5. Remove `test_recipient` from the settings file before a real run.
+
+A test send writes no comment and nothing else to Jira. The real send for that date is not blocked. The tool refuses an address that is not your own, and it stops before it reads or sends anything.
+
+### 7.4 Real send
+
+Run the command in 7.3 with no `test_recipient` set. The run does these steps:
+
+1. It reads the page queries and runs them.
+2. It reads the tracking ticket. It skips a message that already has a comment for today's date.
+3. It sends one email to everyone with a finding. The page link is the only content. The addresses are in Bcc.
+4. It sends the exception list to the team mailbox.
+5. It writes one `[gate-delivery]` comment for each message sent.
+
+If a send fails, the run writes a FAILED comment with the step and the error class. It does not write the error text. Run the command again to retry. A retry for a date that is already recorded sends nothing.
+
+## 8. Change a setting
+
+After each change, do a dry run. Then do the real run.
+
+| What to change | What to do |
+|---|---|
+| The email wording | Edit `subject` and `intro` in `[weekly_email]` or `[structure]` |
+| When the weekly email goes | Set `when` to `findings` or `always` |
+| A weekly filter | Put the new number in `filter_id`. Run the filter in Jira. Make sure that the count matches the dry run |
+| The structure queries | Edit the query on the Confluence structure page. The settings file does not hold the queries |
+| A structure section | Set `name` in `[[structure.sections]]` to the exact heading on the page. Run `--check-page` |
+| Add a structure section | Copy one `[[structure.sections]]` block. Set the name. Keep the `page_result` rule |
+| Which issues are findings | Change the filter or the page query. No rule in the tool removes or adds a finding |
+
+## 9. Common failures
+
+| What the tool prints | Cause | What to do |
+|---|---|---|
+| `Cannot start: ... is not set` | A needed value is `TBD` or empty | Set the value in `settings.toml` |
+| `Cannot start: no token found` | The token is not in the credential store | Run the `keyring set` command in section 4 |
+| `Not run: this run is COMPLETED. Use --rerun` | The week is done | Add `--rerun` if you want another run |
+| `Not run: the last run is FAILED. Use --resume` | The last run did not end | Add `--resume` |
+| `Run failed at step '...'` | A step failed. The steps are record, read, publish, and notify | Fix the cause. Run again with `--resume` |
+| `Could not read the run record on <ticket>` | The tool cannot read the ticket. It wrote nothing | Make sure that you can open the ticket and that the token is valid. Run the command again |
+| `Run failed at step 'publish'` | Confluence refused the page. The usual cause is no permission to create pages under the parent page | Ask the space owner for permission. Run again with `--resume` |
+| `Source unavailable: ...` | The tool cannot read a filter. The page shows "unavailable" | Make sure that the token is valid and the filter exists and is shared. Run again with `--resume` |
+| `The FAILED state could not be written to the ticket` | The comment on the ticket failed | Read the ticket. Find the last `[gate-run]` line for the week. Then run with `--resume` |
+| A page with this title exists but is not under the parent page | Another page has the same title | Move or rename the other page. Nothing was changed |
+| `Section '...': NOT found` | The section name does not match a heading on the page | Run `--check-page`. Correct the name |
+| `The run stopped before anything was sent` | The tool cannot read Jira or Confluence, or a search returned only some of its issues | Run again. If it repeats, make sure that the tokens are valid |
+| `The email was not sent (SMTPAuthenticationError 535)` | The mail server refused the login | Use the full mailbox address as `username`. Make sure that the stored password is correct |
+| `The email was not sent (SMTPDataError 550 5.7.60)` | The mail server does not let this account send as the mailbox | Ask the mail administrators for send as permission. Do not retry until they answer |
+| `smtp.test_recipient must be your own address` | The test address is not yours | Correct `test_recipient` |
+| `No Odd Squad address is set, so no email was sent.` | The weekly email has no address | This is normal until the address is set |
+| `No email: nobody with a finding could be reached.` | No recipient has an address that can be used | Read the exception list that the run sent |
+| `The email was already sent for <date>` | The ticket has a record for the date | Do nothing |
+
+## 10. Find out if a send went out
+
+An uncertain send is a message that the mail server accepted, but the ticket has no record of it. A retry can send the message twice.
+
+CAUTION: Do not run again until the record is on the ticket. A second run can send the same email twice.
+
+### Weekly check
+
+1. Open the ticket. Search the comments for `[gate-sent]` with the week of the run.
+2. If the line exists, the email went out. Do nothing.
+3. If the line does not exist, ask the Odd Squad if the email arrived.
+4. If the email arrived, add this comment to the ticket by hand. Use the real week:
+
+```
+[gate-sent] report=weekly_required_fields instance=us period=2026-W45 recipient=odd-squad
+```
+
+5. Run the command with `--resume`. The run sends nothing and ends.
+6. If the email did not arrive, run the command with `--resume`. The run sends it.
+
+### Structure report
+
+1. Open the tracking ticket. Search the comments for `[gate-delivery]` with today's date as the period.
+2. A line with `kind=email` means that the email went out. A line with `kind=exceptions` means that the exception list went out.
+3. If the run printed "Add this comment to ... by hand", copy that comment exactly. Add it to the ticket. Then run again. The second run sends nothing for that message.
+4. If the run printed no line, ask the report owner if the email arrived before you run again.
+
+A record line looks like this. The keys are examples:
+
+```
+[gate-delivery] report=biweekly_structure instance=us period=2026-11-04 kind=email keys=ABC-1,ABC-2 recipients=43 sent_at=2026-11-04T15:00:00Z outcome=sent
+```
+
+## 11. Turn it off
+
+The tools have no schedule and no server. To stop them, stop running them.
+
+1. To stop only the email, remove `address` from `[weekly_email]`. Remove `exception_address` from `[structure]`.
+2. To remove the secrets from the laptop, run these commands. Run one for each entry you stored:
+
+```
+py -3.13 -m keyring del gate-automation jira-token-us
+py -3.13 -m keyring del gate-automation confluence-token-us
+```
+
+3. Revoke the personal access tokens in your Jira and Confluence profiles.
+4. Archive the repository. [TBD]
+
+The pages stay in Confluence and the comments stay on the ticket. Delete them by hand if you do not want them.
+
+## 12. Set up on another computer (read-only test)
+
+Use this section when a second person runs the weekly check on their own computer. The first use is a read-only test of the NULSC instance. The test posts nothing, sends nothing, and writes nothing to disk.
+
+CAUTION: For this test, always add `--dry-run`. A run without `--dry-run` writes comments and a page. Do not set an email address. Do not fill in the `[smtp]` section.
+
+### 12.1 Before you start
+
+1. Get written approval from the owner for the run on this computer. The tool does not start for NULSC until you record the approval in the settings file (12.4).
+2. Get a Jira personal access token and a Confluence personal access token for your own account on the instance you test.
+3. Get these values from the maintainer: the Jira address, the Confluence address, and the saved filter numbers for the instance. Do not copy them into a message or a document.
+4. Get the code address. [TBD: GitLab project address]
+
+### 12.2 Install
+
+1. Make sure that Python 3.13 is installed:
+
+```
+py -3.13 --version
+```
+
+If the command fails, ask IT to install Python 3.13. [TBD: how to ask]
+
+2. Get the code from GitLab. Clone the project, or download it as an archive and unpack it. Open a terminal in the folder that holds `adherence`.
+3. Install the package that stores the token. The test needs only this package:
+
+```
+py -3.13 -m pip install keyring --user
+```
+
+### 12.3 Store the tokens
+
+Each instance has its own entries. For NULSC, use the names that end in `-nulsc`. Each command asks for the token and does not show it. Never send a token to anyone.
+
+```
+py -3.13 -m keyring set gate-automation jira-token-nulsc
+```
+
+The dry run reads only Jira. Store the Confluence token only if you also test the page. Use the same command with `confluence-token-nulsc`.
+
+A run for one instance never reads the token of another instance.
+
+### 12.4 Set up the settings file
+
+1. Copy `settings.example.toml` to `settings.toml`. Git ignores `settings.toml`.
+2. In `[source]`, set `instance` to `nulsc`. Set `base_url` to the Jira address.
+3. Leave the `[publish]` values as they are. A dry run does not use them.
+4. In `[source]`, remove the `#` from the two authorization lines. Set `authorized_by` to the name of the person who approved the run. Set `authorized_on` to the date of the approval, as `YYYY-MM-DD`. The tool refuses every instance except `us` until both lines have a value. It never prints them.
+5. Add one `[[filters]]` block for each filter that the maintainer gives you. The NULSC instance has one more filter than the US instance. In each block, set `name` and `filter_id`.
+6. Leave `[weekly_email]` without an `address`. The `[smtp]` and `[structure]` sections can keep their `TBD` values. A dry run does not use them.
+
+### 12.5 Run the test
+
+```
+py -3.13 -m adherence.run --report weekly_required_fields --ticket ABC-1 --dry-run
+```
+
+A dry run does not read the ticket. Use any key in the correct format. The run prints one block for each filter. Each block lists the issue keys by project and a count. "No issues. 0 found." is a valid result.
+
+The issue keys stay on your screen. Send back only the count for each filter and the date of the run.
+
+### 12.6 If the run fails
+
+| What the tool prints | What to do |
+|---|---|
+| `Cannot start: ... is not set` | A value in `settings.toml` is `TBD` or empty. Set it |
+| `Cannot start: the instance '...' needs written authorization` | The approval is not in the settings file. Set the two lines in 12.4 |
+| `Cannot start: no token found` | Store the token again (12.3). Make sure that `instance` is `nulsc` |
+| `Source unavailable: ...` | The tool cannot read a filter. Make sure that the token is valid, the filter number is correct, and the computer can reach the server |
+
+Section 9 lists more failures. Tell the maintainer where you got stuck. Each place that is unclear is a fix to this guide.
+
+### 12.7 When you finish
+
+1. Delete `settings.toml`.
+2. Remove the tokens from the credential store. Run one command for each entry you stored:
+
+```
+py -3.13 -m keyring del gate-automation jira-token-nulsc
+py -3.13 -m keyring del gate-automation confluence-token-nulsc
+```
+
+The dry run leaves no other data on the computer.
+
+## 13. Test the code
+
+Run the tests before and after each change:
+
+```
+py -3.13 -m pytest
+```
+
+The tests block the real network. All tests must pass before you release a change. Change this guide in the same change as the code.
+
+## 14. Scope and owners
+
+This guide covers the US Jira instance. NULSC is not set up for real use. The tool does not start for NULSC until the written approval and its date are in the settings file (12.4).
+
+The author maintains the tools first. After that, the team that owns the report maintains them. [TBD: names]

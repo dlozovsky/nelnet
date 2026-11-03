@@ -964,3 +964,84 @@ I committed the five files as 7419d9b, “Write the weekly result line in the CO
 The commit has the code change, the tests, and the matching line in CLAUDE.md. It holds nothing from settings.toml, runs/ or docs/. Nothing is pushed, because there is still no remote.
 
 Thursday’s --rerun will now write three comments, not four.
+
+---------------------------------------------------------------------------------
+what is next for us to do
+
+Here is what’s next, in order.
+
+Today (Tuesday)
+
+Send Eric two short messages, separate. First, the keyring explanation. Second, the slice 1 update (the first real run worked). Pass him the three NULSC filter numbers in a direct message to him only.
+Thank Stephanie for the filter numbers. Hold the open question (does the weekly email go every week, or only with findings?) for a later message.
+Daily log. Give me your hours for Monday and today. I’ll write the entries for both days. The Week 2 weekly status is also not started. It can wait until Friday.
+
+Tomorrow morning (Wednesday)
+4. Run the structure dry run first thing, then compare its section counts with Stephanie’s counts from her send. Send her only the counts and the number of people. Don’t send the file, because it holds names. Delete the file from runs/ afterward.
+5. If you haven’t heard from Dave on GitLab by the end of the morning, send him the one-line message with the specifics.
+
+Thursday
+6. Run the weekly check again with --rerun, and compare the counts per project with Stephanie’s manual run. Both are probably zero again. A run with real findings is still unproved. If it is zero again, put the seeded-issues question to Eric on Friday.
+
+Friday
+7. Week 2 status, and escalate anything unanswered to Eric. This includes the seeded-issues question and the Odd Squad mailbox address.
+
+What I can do now, with no real calls
+
+Walk through the maintenance guide draft with you, so you can review it before it goes on Confluence. It’s the biggest remaining piece.
+Write the daily log entries once I have your hours.
+
+What is stuck and not in your hands: the delegated send request for the test email, and the GitLab project. Neither blocks anything on this list, except Eric’s NULSC test, which waits on the code.
+
+Which one first: your hours for the daily log, or the guide review?
+
+Do we need to run a few more tests for slice 2 and slice 1
+
+Yes, two more tests are worth doing. Both are read-only, and the first matters most.
+
+1. Slice 1 on a filter that returns issues (about 10 minutes)
+
+Why. Both of Stephanie’s filters return zero today. The grouping by project and the counts are proved only on invented data. A dry run on a filter with real results tests the acceptance rule: the count per project must equal what Jira shows.
+How.
+Find any saved filter in Jira that returns a few dozen issues. Use one of your own, or any shared one.
+Copy settings.toml to a file outside the repo folder, for example in Documents. Name it something like settings-test.toml. Don’t leave a copy in the repo. The last stray copy was untracked and not ignored.
+In the copy, change the filter_id of one [[filters]] block to that filter.
+Run a dry run with the copy:
+py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188 --dry-run --settings "C:\Users\dlozovsky\Documents\settings-test.toml"
+In Jira, open the same filter. Compare the total, and the count in each project, with the dry run output.
+Always keep --dry-run in this command. Without it, the run writes comments and a page.
+Send me only counts, such as “total 37, matched, project counts matched.” No issue keys.
+Bonus. Try one filter with more than 100 issues. It tests that the tool reads every page of results. The dry run total must equal Jira’s total.
+
+2. Slice 2: the Wednesday comparison
+
+The dry run is stable, but nobody has compared it with Stephanie’s real round yet. That happens tomorrow morning.
+Look at the two exception items by eye. Do they make sense to her, as issues with no reachable person?
+
+What I would not add
+
+A deliberate failure to test --resume. The tests cover it, and each real run adds comments to AUTO-188.
+A fake mail server. Our tests already cover the send code. The real blocker is a permission, and no fake can test that.
+
+What stays unproved until the permission arrives: the test send, the real send, and the record comment after a send. Nothing we run today changes that.
+
+If you want, run test 1 now. It tests the one thing Thursday’s comparison may not.
+
+should I ask stephanie what she gets when she runs slice 1
+
+Yes, ask her. Don’t send it as its own message today. You will already write to her tomorrow morning with your slice 2 counts, so add a second paragraph to that message. That way she gets one message, not two, and she knows ahead of time what to send on Thursday.
+
+Two things matter for this ask:
+
+Time of day. Her filters look back 7 days from the moment she runs them. A run at a different hour can give a different count. Ask what time she usually runs it, and run yours around then.
+What to send back. The total for each filter, and the count per project, like what the page shows. Counts only, with no issue keys or names.
+
+Here is a draft for tomorrow’s message, to follow the slice 2 numbers:
+
+Thursday’s weekly check: when you run the two weekly filters, could you send me the total for each filter and the count per project? I’ll run mine at about the same time and compare. About what time do you usually run it?
+
+Also, when did a weekly run last have findings? If you remember one, I’d like to test against a week like that.
+
+The second question is useful. Both filters return zero now, and she says findings are rare. A past week with findings shows you what a real finding looks like. It also tells you whether a seeded test issue is needed at all.
+
+If you would rather not wait, you can also send her the first paragraph today. It’s harmless. I’d still combine them, because she is busy with Wednesday’s send.

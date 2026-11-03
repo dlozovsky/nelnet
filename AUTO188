@@ -430,3 +430,41 @@ Order from here:
 4. Wednesday: the slice 2 comparison against Stephanie's counts.
 5. Thursday: the slice 1 comparison against her manual run.
 
+==================================================
+May I create a few test issues in Jira, to have one example of each case?
+ 
+Yes, we have a test project that you can add as many tickets as you'd like. The project key is OSTO
+ 
+ 
+ 
+I will escalate the email address tickets next week if it hasn't been completed yet.   at this point, I can't justify the escalation.
+ 
+
+are you asking where to send messages that something went wrong?   if so [oddsquadhelp@nelnet.net](mailto:oddsquadhelp@nelnet.net)
+do the real send
+I can be the person to review your code for now.   I do need to figure this out for the long term.   
+use the project Dave shared above
+Michael Popelka or Phil Baker would be the next.  I would start with Phil.
+Created log_eric_answers.py, ran a command
+Eric’s answers are good news. I recorded them in your local outstanding list, the guide’s reviewer notes, and the decision log.
+
+What he said, as I read it
+
+Where “something went wrong” messages go: the Odd Squad help mailbox. That is the exception list address. He didn’t say where the weekly email goes. Don’t assume it’s the same. Ask him in one line: “Does the weekly email go to the same mailbox?”
+First real send: approved. You don’t need to ask again once the permission arrives.
+Code review: Eric reviews it for now, and he has to find a long-term answer. He did not answer the scan question, so that is still open.
+Test issues: yes, in the OSTO test project, as many as you want.
+During the appraisal: go to Phil Baker first, then Michael Popelka.
+The send permission. Eric will escalate next week if it is still open. He can’t justify escalating now. That matches your Nov 12 plan.
+
+What the OSTO project lets you do. You can create test issues by hand in Jira for one example of each case. A word of caution: Stephanie’s filters list other projects, not OSTO. So for slice 1, use a copy of a filter’s query with the project set to OSTO. For slice 2, the real structure page doesn’t include OSTO. A test structure page would be a new Confluence write. Ask Eric before you make one.
+
+Two edits are waiting on you
+
+Local settings: I haven’t touched settings.toml. The box asks about setting structure.exception_address. The address goes only there, never in a tracked file or my docs. You’d confirm the exact address, then I’d edit.
+CLAUDE.md: it still says no sends except the test send. Eric’s approval of the first real send belongs there, with the date. Say so, and I’ll add one line. I won’t change the approvals file without your word.
+Next: ask Eric the one-line question about the weekly address, then continue with tomorrow’s comparison.
+
+Eric's Nov 3 answers are in the local outstanding list, guide notes, and decision log. The real send is approved once the permission arrives, and OSTO is the test project. I did not touch settings.toml or CLAUDE.md.
+
+Set the exception mailbox in your local settings?

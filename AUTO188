@@ -468,3 +468,19 @@ Next: ask Eric the one-line question about the weekly address, then continue wit
 Eric's Nov 3 answers are in the local outstanding list, guide notes, and decision log. The real send is approved once the permission arrives, and OSTO is the test project. I did not touch settings.toml or CLAUDE.md.
 
 Set the exception mailbox in your local settings?
+##=================#
+Yes to both.
+
+1. **Exception mailbox:** set exception_address to the help mailbox in your local settings.toml only. Don't put it in settings.example.toml or commit it.
+2. **CLAUDE.md:** yes, have Nelnet Claude add one dated line: "2026-11-03: Eric approved the first real send once the send-as permission (RITM1089773) lands." Keep the test_recipient rule for test runs.
+
+One short check for Eric, since "error messages" and the exception list aren't quite the same thing:
+
+> Thanks Eric. To confirm: the help mailbox will get the slice 2 exception list (issues with no reachable assignee or reporter) and any run-failure alerts. The weekly required-fields email still goes to the Odd Squad list, correct?
+
+For test issues in OSTO, create 3 seeded issues, one per case (missing field, wrong structure, no reachable person). Test slice 1 against a copied filter limited to OSTO, not Stephanie's filters. If you want a test structure page, ask Eric first.
+
+Decision log:
+`2026-11-03 | Eric | Real send approved once permission lands; test issues in OSTO; Eric reviews code for now; Phil Baker then Michael Popelka as backups during appraisal week; exception list goes to the Odd Squad help mailbox.`
+
+Next up: tomorrow's slice 2 dry run, then compare counts with Stephanie.

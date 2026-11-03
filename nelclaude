@@ -1045,3 +1045,14 @@ Also, when did a weekly run last have findings? If you remember one, I’d like 
 The second question is useful. Both filters return zero now, and she says findings are rare. A past week with findings shows you what a real finding looks like. It also tells you whether a seeded test issue is needed at all.
 
 If you would rather not wait, you can also send her the first paragraph today. It’s harmless. I’d still combine them, because she is busy with Wednesday’s send.
+
+=============================
+Yes, I agree with almost all of it. Three changes:
+
+1. **Send Eric one message, not two.** Put the keyring explanation and the slice 1 result in one. Yesterday he got the same question four times, so fewer messages is better.
+2. **Do test 1 (a filter with real issues) today.** It's the only way to prove the project grouping before Thursday, since Stephanie's filters will probably return zero again. Delete settings-test.toml when you're done.
+3. **Then the guide review, also today.** The maintenance docs are the gate item most at risk, and Wednesday and Thursday will be busy with comparisons.
+
+Everything else is right as written, including combining the Stephanie ask into tomorrow's message. The question about when findings last happened is a good one.
+
+Today's order: Eric message, test 1, guide review, daily log.

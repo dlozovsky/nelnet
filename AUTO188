@@ -484,3 +484,8 @@ Decision log:
 `2026-11-03 | Eric | Real send approved once permission lands; test issues in OSTO; Eric reviews code for now; Phil Baker then Michael Popelka as backups during appraisal week; exception list goes to the Odd Squad help mailbox.`
 
 Next up: tomorrow's slice 2 dry run, then compare counts with Stephanie.
+----------
+For the gate docs ( requirements and maintenance guide), may I create a "Gate Automation docs" page under Automation Output, or would you rather they live somewhere else in that space?
+ 
+that space/page works great. go ahead and put everything there.
+ 

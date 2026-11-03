@@ -744,3 +744,12 @@ Almost nothing, and only one real change. I checked the code for this.
 
 **My suggestion:** build the token change now. It is the one hook that is wrong today, it takes little effort, and nothing real depends on it. Tell me yes, and I'll write the tests first.
 
+=======================
+Yes, tell it to build the token change. A US token going to the NULSC server is a real bug, and the fix is small. One detail: my notes say you already settled on per-instance keyring names (`jira-token-us` / `jira-token-nulsc`). So have it use those names, keeping the current names working as a fallback so your US setup doesn't break.
+
+Skip the authorization safety catch for now. It doesn't move the gate, and whether you need it depends on Eric's NULSC answer. Raise it with him only if he says NULSC is in the gate.
+
+Then go back to the filter ids and the slice 1 dry run.
+
+Decision log: `2026-11-02 | Daniel | Token keyring entries set per settings file (per instance); NULSC auth guard deferred pending Eric.`
+

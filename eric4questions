@@ -175,3 +175,42 @@ Two limits.
 
 Don’t share the NULSC server names or filter numbers with me. The settings file on Eric’s computer holds them.
 The run depends on the GitLab answer, because Eric needs a place to get the code. If that stalls, a zip file is a poor fallback, so push that question.
+
+==========#######======
+Nelnet Claude's reply is good. Send it, but add one line first, because it's the question that matters most for the gate:
+
+> Is the NULSC run a gate condition, or a step after the gate? If it's in the gate, the gate depends on your computer and the CFO approval, so I'd like that on record.
+
+If the answer is "in the gate" and nobody settles it, Nov 20 depends on things you can't control. If it's "after", NULSC stops being a risk.
+
+On its two offers:
+- **Safety check: yes, build it now.** It's small, and a second computer is exactly where a wrong run happens.
+- **Step list: don't write a separate one.** Put it in the maintenance guide as a "run on another computer" section. Eric following it becomes the first real test that someone else can use the doc, and that counts toward the gate.
+
+Keep pushing the GitLab project question. Eric's run can't happen until he has somewhere to get the code from.
+
+Decision log: `2026-11-03 | Daniel | Eric wants NULSC ASAP; to run read-only on Eric's PC with his tokens, counts only back. NULSC auth guard built now. Asked if NULSC is a gate condition.`
+
+Yes, it should work. The code already handles this: Eric uses his own NULSC settings file with `--settings`, and his own tokens under `jira-token-nulsc` / `confluence-token-nulsc` in his keyring. His laptop needs four things:
+
+1. **Python 3.13 and the packages**, which may need the same install approval you got for pytest and keyring.
+2. **The code**, so the GitLab project question still blocks this.
+3. **His NULSC tokens** in his own keyring. You never see them.
+4. **A NULSC settings file** with the server address, field ids and filter ids. Field ids can differ between instances, so check them on his machine before you trust the counts.
+
+The one thing I can't confirm is whether his laptop can reach the NULSC servers. He has access, so it probably can, but run a read-only connection check first to be sure.
+
+Keep the first run a dry run with counts only on his screen.
+
+Yes, but make it the "Set up on another computer" section of the maintenance guide, not a separate document. The gate needs that guide anyway, so this is gate work, not extra.
+
+Have Nelnet Claude write it from the real repo. It should cover:
+1. Install Python 3.13 and the requirements.
+2. Get the code from GitLab.
+3. Store the tokens in the keyring under the per-instance names.
+4. Copy the example settings file and fill in the instance values (placeholders only in the doc).
+5. Run the read-only connection check.
+6. Run a dry run and check the counts.
+7. What to do when something fails.
+
+Then Eric following it on his laptop is your test. Every place he gets stuck is something to fix in the doc.

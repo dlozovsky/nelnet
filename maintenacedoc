@@ -424,3 +424,20 @@ Not yet. First find out where the exception list goes when `exception_address` i
 - **If it goes to a personal address, or anywhere Stephanie or Eric didn't agree to:** that's a bug. Fix it, test first, so that an empty address means no exception email. That's the behavior the guide already describes.
 
 Either way, no new setting. Nobody has asked to turn the exception list off, and the gate needs it to work, not to be switchable.
+
+========================================================
+In the code, with `exception_address` empty, the exception list goes to no fixed address. The tool looks up the Jira user whose key equals `exception_recipient_id`. If that user is active and has an email address, the list goes there. If not, nothing is sent.
+
+- **Your settings today.** The id is `TBD-exceptions`. No Jira user has that key, so the lookup finds nothing. The run does not send. It writes a FAILED comment and exits with an error. It never goes to your address or the sending mailbox.
+- **The risk.** If someone sets that id to a real person's Jira key, the list goes to that person's work address. Stephanie and Eric agreed to a team mailbox, not a person. It takes a deliberate setting, and the example file does not do it, but it shouldn't be possible.
+- **A second problem.** The run sends the main email first and then fails on the exception list. The result is a half-sent run and a FAILED comment after people already got the email.
+
+I would call it a trap, not a bug that bites today. It is a leftover from when the list was meant to go to a Jira user.
+
+**What I recommend.** Remove the Jira lookup for the exception list. On a real run, if there are exceptions and no `exception_address`, stop before anything is sent. The message would say that the exception list has nowhere to go. Nothing would go to a person, and no run would be half-sent. A dry run and a test send would not change. There is no new setting.
+
+This differs a little from your note. You said an empty address should mean "no exception email." If it sent the main email and silently skipped the list, findings with no reachable person would go unseen. Stopping is louder and safer. In both versions the list never goes to a personal address.
+
+Section 11 would then say: with no `exception_address`, a real run does not start when there are exceptions. The only way to stop everything is to stop running the report.
+
+Tell me which one you want, and I'll write the test first. The change is small: about ten lines and three tests. If you choose "no exception email," I'll do that instead.

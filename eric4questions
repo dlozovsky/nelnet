@@ -149,4 +149,29 @@ yes the confluence page is ok
 
 -----------------------------------------------------------------------
 I would like the nulsc run to be done as soon as possible.   Your access will be several weeks out though.   I am going to make the case with the CFO today to start the process.    We will need to be able to run the automation on a different computer to test the nulsc access.  I can be that guinea pig if you would like.
- 
+
+That helps. Your NULSC access is weeks away, but a run on Eric’s computer could prove the NULSC path much sooner. Before you say yes, three things need a written answer from Eric. Our rules say no NULSC data goes on a laptop, a page, or an email until he or the security owner authorizes it in writing. His message says he wants the run, but it doesn’t say that the run is authorized.
+
+Here is a reply you can send:
+
+Yes, please be the test. I will keep it small and read-only.
+
+What the run does: a dry run of the weekly check against NULSC. It prints counts and issue keys on the screen. It posts nothing, sends nothing, writes no files, and changes nothing in Jira or Confluence.
+
+What I need from you, in writing:
+
+OK for that run on your computer, with NULSC data on your screen only. I would get back counts only, no names.
+Your NULSC personal access tokens for Jira and Confluence, stored in your own credential store. I never see them.
+The NULSC saved filter numbers to use. Who has them?
+
+What I need to do first: get the code to your computer. It is not on GitLab yet, because I am waiting on which project holds it. I will send you a short step list.
+
+What I can do now. Say yes to any of these.
+
+Write a one-page step list for a second computer. It covers install, token storage, and the NULSC settings, with no real server names. The maintenance guide mostly covers this already.
+Build the safety check we deferred. A run against NULSC would refuse to start unless the settings file records who authorized it and when. You told me to raise it if Eric says NULSC is in the gate, and he has. It is a small change, and it stops a wrong run on a second computer. Eric’s reply would be that authorization.
+
+Two limits.
+
+Don’t share the NULSC server names or filter numbers with me. The settings file on Eric’s computer holds them.
+The run depends on the GitLab answer, because Eric needs a place to get the code. If that stalls, a zip file is a poor fallback, so push that question.

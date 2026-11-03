@@ -278,3 +278,33 @@ Dave, I think the team has dealt with the access before for gitlab, can you take
 yes it's ok for this to run on my laptop.   I don't know anything about "Keyring"  can you give me more information on this?   3. yes there would be filters, we would get that from Stephanie.    
  
 Yes the NULSC still is part of the gate, but that should only be a configuration change.  I will revisit this if we find there are delays around that.  
+
+-------------------------------------------------
+Eric’s reply helps. I recorded it in your local outstanding list and decision log.
+
+What it means
+
+GitLab: Eric handed it to Dave. You still don’t know which project holds the code, so wait for Dave.
+NULSC run on his laptop: he says it’s OK. This is the written approval for the read-only dry run on his laptop only. It doesn’t cover your laptop, Confluence, or email. When he runs it, the two approval lines go in his settings file.
+NULSC in the gate: he says it is still in the gate and should only be a configuration change. He didn’t say “Nov 20” in so many words. His answer keeps the date, so don’t ask again. Don’t pass over one risk: the access that takes weeks is yours, not his.
+Filters: they exist, and Stephanie has them.
+Keyring: he doesn’t know it, so he asked. He approved it on Oct 29, but he may not remember the name.
+
+Reply to Eric about keyring
+
+Keyring is a small Python add-on you approved on Oct 29. It stores a password or token in the Windows Credential Manager, the same place Windows keeps saved passwords. Without it, a token would sit in a file or be typed each time.
+
+You run one command and paste your token at a prompt that doesn’t show it. It is saved under your Windows login. I never see it, and it is never in the code, the settings file, or a message. One more command removes it.
+
+Your laptop needs Python 3.13 and two small installs. I’ll send a short step list. Does your laptop already have Python 3.13?
+
+Message to Stephanie
+
+Hi Stephanie, Eric says you have the NULSC versions of your two saved filters, “Acceptance Criteria and Business Description” and “Client Impact Field Not Populated”. Could you send me their numbers? The number is after filter= in the address when you open the filter. Numbers only, please, no issue lists.
+
+Keep the NULSC filter numbers out of this chat and out of your docs. They go only in Eric’s settings file.
+
+Two things from the earlier list still wait on you:
+
+The slice 1 real run (command above).
+Today’s daily log and weekly status, which need your hours.

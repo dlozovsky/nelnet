@@ -246,3 +246,28 @@ Ask Eric or Stephanie for these. Don't guess.
 - Don't repeat the GitLab question to Eric as a new ask. One line in the same reply is enough: his run needs it.
 
 Want me to start the safety check, or the real run first?
+
+============#===================
+Here's a reply for Teams:
+
+> Thanks Eric, yes please, let's use your laptop for the first NULSC test. I'll keep it to a read-only dry run of the weekly check. It posts nothing, sends nothing and writes nothing to disk. The issue keys stay on your screen, and you'd send me counts only.
+>
+> To set it up I need:
+> 1. Your OK in writing for that run on your laptop. This reply is enough.
+> 2. Your own NULSC Jira and Confluence tokens, stored in your keyring. I never see them.
+> 3. Do Stephanie's two saved filters exist on NULSC, and who has the filter numbers?
+> 4. Which GitLab project should hold the code? Your run needs it, so you have somewhere to get the code from.
+>
+> I'll write the setup steps as part of the maintenance guide, so your run also tests the guide.
+>
+> One more: you said Oct 30 that NULSC is in the gate. With the CFO approval and your laptop now on the path, does Nov 20 still cover the NULSC run, or does the run count after the gate?
+
+I left out the structure report page question. The first run is the weekly check only, so ask it later.
+
+Eric already answered the GitLab question: the team's code lives in the nelnetinc group on gitlab.com. So drop point 4 from the reply and thank him for the link instead. Change it to:
+
+> 4. Thanks for the GitLab link. I'll push the code there, so you can get it from there for your run.
+
+Before you push, delete `settings - Copy.toml` and ask Nelnet Claude to check that no settings file or runs/ output is tracked. Also, it's gitlab.com and not an internal server, so ask Eric whether the repo should be private, and in which subgroup.
+
+Please delete this photo too, and tell me in words from now on.

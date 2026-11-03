@@ -850,3 +850,15 @@ Two adjustments to the plan:
 - **Acceptance evidence (seeded issues):** that's a new Jira write Eric hasn't approved. Put it as one question in Friday's status, not tonight.
 
 Decision log: `2026-11-02 | Daniel | Slice 1 dry run works on both real filters (0/0). Next: real run to test page, then Thursday's comparison.`
+
+
+===================
+
+Yes, commit it. 651 tests pass and your US settings still load, so it's done. Before you commit, have Nelnet Claude check two things:
+
+1. **Only code, tests and docs are staged.** No settings.toml, no `settings - Copy.toml` (delete that file now), and nothing from runs/.
+2. **Make sure the example settings file shows the approval fields with placeholders only.** It should never hold a real approval.
+
+Then go straight to the slice 1 real run to the test page.
+
+Decision log: `2026-11-03 | Daniel | NULSC guard built: non-US instance refused unless settings record written approval and date (651 tests).`

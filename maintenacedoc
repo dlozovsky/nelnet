@@ -489,3 +489,12 @@ Eight files are changed and nothing is committed. They’re CLAUDE.md, settings.
 The exception list no longer looks up a Jira user. A real run with exceptions and no exception_address now stops before any send, not even the main email. 660 tests pass with the network blocked. Eight files changed, and nothing is committed yet.
 
 Commit the exception list change?
+=======================================
+The eight changed files are the code, the tests, CLAUDE.md and the example settings, with nothing from settings.toml, runs/ or docs/. I will stage them by name and commit.
+
+Staged the eight files, commit, and reran the tests
+I committed the eight files as 2976873, “Stop a real run before any send when the exception list has no address.” The working tree is clean, and all 660 tests pass.
+
+The commit holds the code, the tests, and the matching lines in CLAUDE.md and settings.example.toml. It holds nothing from settings.toml, runs/, or docs/. Nothing is pushed, because there is still no remote.
+
+The first real structure send still needs a team mailbox for exception_address. That question goes to Stephanie or Eric in Friday’s status.

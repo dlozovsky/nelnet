@@ -214,3 +214,35 @@ Have Nelnet Claude write it from the real repo. It should cover:
 7. What to do when something fails.
 
 Then Eric following it on his laptop is your test. Every place he gets stuck is something to fix in the doc.
+
+-------------------------------------------------------------------------------------------------
+I agree with most of it. Four points are wrong or missing.
+
+**1. The "gate condition" question.** It is the right question, but our records show Eric already answered it. The Oct 30 answers say "NULSC is in the gate" and "Nov 20 stands." If you ask it cold, it looks like you forgot. What changed is that the run now depends on CFO approval and on his computer. Ask it this way:
+
+> You said Oct 30 that NULSC is in the gate. With the CFO approval and your computer now on the path, does Nov 20 still cover the NULSC run, or does the run count after the gate?
+
+**2. The `--settings` and token setup is correct, but the field ids point is wrong for slice 1.** The weekly check reads saved filters and groups by project key. It never reads a field id. What differs on NULSC is the filter numbers, the server addresses, and the Confluence page. Two open questions are bigger:
+- Do the same saved filters exist on NULSC?
+- Which page does the structure report read there?
+
+Ask Eric or Stephanie for these. Don't guess.
+
+**3. There is no read-only connection check command.** `--check-page` reads only the structure page. The weekly dry run is itself the connection test, because it reads and posts nothing.
+
+**4. Make the first NULSC run the weekly dry run, not the structure dry run.** The weekly dry run writes nothing to disk. The structure dry run writes a file with real display names to the run folder. On a second computer with NULSC data, that is a bad first test. It prints issue keys on screen, so only counts go back to you.
+
+**On the two build items:**
+- **Safety check:** build it. Eric's written reply is the authorization it records.
+- **Guide section:** put it in the guide, not a separate list. It mostly reuses sections 3 to 5, with the GitLab address still [TBD]. Eric following it is a real test of the guide.
+
+**Order today (Tuesday):**
+1. The slice 1 real run to the test page. It checks what the guide describes, and the Wednesday and Thursday comparisons depend on it.
+2. The safety check.
+3. The guide section.
+
+**Two cautions on the logging:**
+- Don't log "guard built" or "asked" until both happen.
+- Don't repeat the GitLab question to Eric as a new ask. One line in the same reply is enough: his run needs it.
+
+Want me to start the safety check, or the real run first?

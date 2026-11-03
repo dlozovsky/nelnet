@@ -413,3 +413,7 @@ Pass them to Nelnet Claude. Two of the fixes need it to read the code first (how
 > Don't commit the docs. Commit only the code and test changes.
 
 When it's done, tell me in words what it found for 4 and 9.
+===================================
+The guide is at 0.2 in the local file, and the TEST MODE change is committed as fcca7dc, code and tests only. 658 tests pass. One of your points did not match the code: removing `exception_address` does not stop the exception list.
+
+Add a switch to turn off the exception list?

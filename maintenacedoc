@@ -498,3 +498,19 @@ I committed the eight files as 2976873, “Stop a real run before any send when 
 The commit holds the code, the tests, and the matching lines in CLAUDE.md and settings.example.toml. It holds nothing from settings.toml, runs/, or docs/. Nothing is pushed, because there is still no remote.
 
 The first real structure send still needs a team mailbox for exception_address. That question goes to Stephanie or Eric in Friday’s status.
+
+========================
+The structure looks right: one parent page, three child pages, and the run output page as a sibling. Please delete this photo from your phone and from this chat. Next time, describe the page in words.
+
+Fixes to make:
+
+1. **Move the three links above Open items.** A reader should see the docs first and the gaps second.
+2. **Item 6 is known now.** Eric said to use the project Dave shared. Change it to "waiting on Dave for access."
+3. **Item 9 can be partly filled.** Eric is the code reviewer for now, and Phil Baker then Michael Popelka are the backups. The owner after the gate is still open, so ask about it on Friday.
+4. **Items 4 and 11 read like they contradict each other.** If item 4 means the sending mailbox (the one RITM1089773 is about), name it that way. Then the reader won't think the help mailbox is still unknown.
+5. **Item 5 is for Stephanie.** Add it to tomorrow's message: does the weekly email go every week, or only when there are findings?
+
+Also check the full width of the page for anything cut off in your view. I couldn't see the right edge, and no server names or filter numbers should be on it.
+
+Decision log:
+`2026-11-03 | Daniel | Docs page reviewed; open items 6 and 9 updated from Eric's answers; item 5 goes to Stephanie.`

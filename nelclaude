@@ -664,3 +664,68 @@ Test send to yourself: set the SMTP values and test_recipient, with your own add
 Double dry run: the four commands from my earlier message. It runs the dry run twice in separate processes and compares the two files.
 Two questions for Stephanie: which day she runs the weekly check, and whether “slice 1 sends nothing, the Odd Squad reads the page” is OK.
 
+============================
+
+The decision log, the outstanding list, and docs/links.md are updated. They are local and git-ignored, so there is nothing to commit. They contain no names, addresses, or passwords.
+
+Decision log: six new rows:
+GitLab access done, with the open question of which project holds the repo.
+The state of the two Help Desk tickets.
+The three test-send runs and the 550 5.7.60 result.
+The reply-code change (f381f2b, 628 tests).
+The double dry run result, identical at 120 / 43 / 2.
+Why a sendmail-style workaround was not used, with the Graph app as the fallback if RITM1089773 stalls past about Nov 12.
+Outstanding list:
+GitLab is marked done. The clock is shown as started Nov 2, so four weeks ends Nov 30, with the Nov 20 question for Eric.
+The test send is shown as waiting on RITM1089773, with a note not to retry.
+The double dry run is recorded as done.
+The Help Desk and Eric tables are updated.
+I added to-dos: move or delete settings - Copy.toml before any push, find out which project holds the repo, and the unknown purpose of RITM1090085.
+Links: a GitLab section with the clean group address.
+
+You still need to do these:
+
+Look up the two saved filter ids in Jira and set them in [[filters]].
+Do a slice 1 dry run.
+Wednesday: run the slice 2 dry run that morning and compare it with Stephanie’s counts.
+Thursday: compare slice 1 with her manual run.
+
+I haven’t written the Week 2 weekly status or today’s daily log entry. Tell me your hours for today and I’ll write the log entry.
+
+should I write another update message to eric or wait
+
+Send a short one. You haven’t updated him since the first draft, and three things have changed since his delegated-send reply. He is your sponsor, and a short note avoids him finding it out piecemeal. You already asked him which GitLab project to use, so don’t repeat that question.
+
+Draft:
+
+Update for today:
+
+GitLab: I’m in. I can see nelnetinc/nds/flyway, but it looks like a different product, so I haven’t created anything. I asked you and Brian which project should hold the gate code.
+Email test: my SMTP login now works. The server refuses the message with “550 5.7.60”, which means no permission to send as the sender. That matches your read on delegated send. RITM1089773 is still open, and I added the error to it. I’m not retrying until it moves.
+Slice 2 dry run: I ran it twice back to back and the results were identical, 120 findings, 43 recipients, and 2 exceptions. It is stable, so Wednesday’s comparison with Stephanie’s counts will reflect the data.
+One question: the clock started at GitLab access today, so four weeks is Nov 30. Does Nov 20 still hold?
+
+Next: slice 1 filter ids and a dry run, then comparisons with Stephanie on Wed and Thu.
+
+Two notes:
+
+The 550 5.7.60 reading is my interpretation of the Microsoft code. The draft says it that way, not as a confirmed cause.
+If you’d rather not raise the Nov 20 question yet, delete that bullet. It also fits the Week 2 status.
+
+I do not think Eric is counting on NULSC it will come later but I just need to have hooks
+
+Hooks are mostly there already, and nothing new needs building for them.
+
+Instance is a setting. source.instance names the system, and run records carry it.
+Field ids and filter ids stay in settings. A search of adherence/ found no customfield_ ids in code.
+A separate settings file per instance. --settings PATH points a run at a NULSC file, so nothing is shared with the US one.
+No NULSC data or server names anywhere in the repo, the docs, or this chat, which is the rule until written authorization.
+
+One conflict in the records. Your decision log and the outstanding list say Eric answered on Oct 30 that NULSC is in the gate, and he chose the report owner to run it with you. You may know something more recent. If the plan really is “later”, get that from Eric in a line, and I’d note it in the Week 2 status. Then the gate scope, the plan, and the NULSC rows in the outstanding list all agree. Don’t change them on my reading of your note.
+
+Suggested wording for Eric, if you want it:
+
+NULSC: I’m treating it as a later step. The code has the hooks (instance and field ids in settings, a separate settings file per instance), and nothing NULSC-related is built or stored until the written authorization exists. Is that right for the gate, or do you still expect a NULSC run before it closes?
+
+I’d put that in the same message as the status, as a one-line question. I haven’t changed any docs for it.
+

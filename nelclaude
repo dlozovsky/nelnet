@@ -899,3 +899,68 @@ Check what is staged and the example file
 Stage the seven files and commit
 
 Verify the commit
+
+===========================================================
+All four comments are there, and they carry only ids and counts. No names, addresses, or tokens appear in them. The [gate-result] line reads filters=2 findings=0 unavailable=0, which matches the page. The first real run is verified.
+
+One thing to flag, since you said “3”: your paste shows four comments, not three. They are STARTED, PUBLISHED, the [gate-result] line, and COMPLETED. Eric’s rule on Nov 2 was “up to three per run.” The code writes the result line as its own comment, just before COMPLETED. So every run is one comment over the limit he approved.
+
+I’ll log the run now, and then ask you about the fix.
+
+The first real run of the weekly check is verified. I logged it in your local outstanding list and decision log. In the guide’s reviewer notes, I marked the comment write, the page write, and the link format as proved.
+
+What the run proved
+
+The page is published under Automation Output, with both filters at zero and no personal names in its text.
+The link works when you paste it in a browser.
+AUTO-188 has comments from the run, and they hold only ids and counts.
+
+What it did not prove
+
+A run with findings on real data.
+The email.
+
+The comment count. The run writes four comments, one more than Eric’s “up to three.” The result line is a separate comment just before COMPLETED. The fix is small: write the result line and the COMPLETED line in one comment. The code that reads the record already works line by line, so it should keep working. The change touches a few tests that expect separate comments. The pick in the box is yours: fix it now, or ask Eric first.
+
+If you choose to fix it, do it before Thursday. Thursday’s --rerun will otherwise add four more comments, and the old ones stay on the ticket.
+
+The first real slice 1 run is verified: the page, the link, and four comments on AUTO-188 with no names or addresses. I logged it locally and marked the proved guide items. The run writes four comments, one more than Eric's three, and nothing is changed for that yet.
+Fix it to three comments per run?
+Yes, fix it
+
+Yes, fix it
+
+The new tests fail as expected, and one of them revealed that the test run sends an email, which adds a fifth comment. I’m making the count skip that sent record and cover only the status comments.
+
+The code change took effect. The test edit was refused, because my earlier script had changed that file since I last read it. I’m rereading it and applying the edit again.
+
+All 653 tests pass, one more than before. Now the docs.
+
+The weekly run now writes three status comments, as Eric approved. All 653 tests pass with the network blocked, up from 652. The change is not committed.
+
+What changed
+
+The result line is now the first line of the COMPLETED comment. It was a separate comment before. The change is one edit in adherence/run_record.py.
+I wrote the tests first and watched them fail. A new test checks that a finished run has three comments, and that the last one has the result line above COMPLETED.
+The code that reads the record works line by line, so it reads the new comment as before. That includes --rerun and --resume.
+I updated CLAUDE.md, the guide draft, the outstanding list, and the decision log.
+
+One thing for the count. When a run sends the Odd Squad email, it also writes one [gate-sent] comment. That comment is the record that stops a second send, so that run has four comments. A week with no email has exactly three. This record was part of the design before today. I noted it in CLAUDE.md and the guide. If Eric wants a hard limit of three even with an email, tell me, and we’ll talk about it. For now it stays.
+
+The four comments from this morning’s run stay on AUTO-188. You can’t easily delete them. Thursday’s --rerun adds three more, after you commit this change. Run Thursday’s rerun with the committed code.
+
+The pick in the box asks whether to commit. If you say commit, I’ll stage only the four files that changed in code and tests, plus CLAUDE.md, and nothing from settings.toml, runs/, or docs/.
+
+The weekly run now writes three status comments, with the result counts as the first line of the COMPLETED comment. 653 tests pass with the network blocked. Four files changed and CLAUDE.md was updated, and nothing is committed yet.
+Commit the comment change?
+Commit changes
+
+Commit the working tree changes with a sensible message.
+
+The five changed files are the code, the tests and CLAUDE.md. No settings file, run output or docs are among them, so I will stage them by name and commit.
+
+I committed the five files as 7419d9b, “Write the weekly result line in the COMPLETED comment.” The working tree is clean, and the 653 tests still pass.
+
+The commit has the code change, the tests, and the matching line in CLAUDE.md. It holds nothing from settings.toml, runs/ or docs/. Nothing is pushed, because there is still no remote.
+
+Thursday’s --rerun will now write three comments, not four.

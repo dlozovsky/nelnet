@@ -417,3 +417,10 @@ When it's done, tell me in words what it found for 4 and 9.
 The guide is at 0.2 in the local file, and the TEST MODE change is committed as fcca7dc, code and tests only. 658 tests pass. One of your points did not match the code: removing `exception_address` does not stop the exception list.
 
 Add a switch to turn off the exception list?
+==============
+Not yet. First find out where the exception list goes when `exception_address` is empty. Ask Nelnet Claude for the answer in words:
+
+- **If it goes to the from_address or to you:** no switch. Document that in section 11, and note that "stop running the report" stops everything.
+- **If it goes to a personal address, or anywhere Stephanie or Eric didn't agree to:** that's a bug. Fix it, test first, so that an empty address means no exception email. That's the behavior the guide already describes.
+
+Either way, no new setting. Nobody has asked to turn the exception list off, and the gate needs it to work, not to be switchable.

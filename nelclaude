@@ -729,3 +729,18 @@ NULSC: I’m treating it as a later step. The code has the hooks (instance and f
 
 I’d put that in the same message as the status, as a one-line question. I haven’t changed any docs for it.
 
+==================================================
+Almost nothing, and only one real change. I checked the code for this.
+
+**What already works by configuration.** A NULSC run would use its own settings file, started with `--settings PATH`. That file holds the NULSC Jira address, its field ids, its filter ids, its page target, and its SMTP host. The instance name appears in the run records and in the page title, so a NULSC page can't overwrite a US one.
+
+**The one code gap: tokens.** The tokens are looked up under fixed names, `jira-token` and `confluence-token`, whatever the settings file says (`secret_store.py`, `TOKEN_ENTRIES`). With a NULSC settings file, the run would send your US token to the NULSC server. That fails, and it also sends a US credential to the wrong system, which is the kind of mistake the authorization rules exist to prevent.
+
+**The change:** let each settings file name its own token entries, with the current names as the defaults. A US file stays exactly as it is, and a NULSC file would say something like `nulsc-jira-token`. It is small, test first. I would add tests that a US run never asks for a NULSC entry, and the other way round.
+
+**Two other things to know, neither is code:**
+- **Authorization:** the rule is no NULSC data on the laptop until Eric or the security owner authorizes it in writing. That stays a process rule. If you want a safety catch in the code, a refusal to run any instance other than `us` unless the settings file records an authorization note is possible. It is a design choice, so ask Eric before I add it.
+- **Mail:** the NULSC mail server differs, but it is only a setting. The SMTP password lives under its own `secret_service` name, so nothing collides.
+
+**My suggestion:** build the token change now. It is the one hook that is wrong today, it takes little effort, and nothing real depends on it. Tell me yes, and I'll write the tests first.
+

@@ -271,3 +271,10 @@ Eric already answered the GitLab question: the team's code lives in the nelnetin
 Before you push, delete `settings - Copy.toml` and ask Nelnet Claude to check that no settings file or runs/ output is tracked. Also, it's gitlab.com and not an internal server, so ask Eric whether the repo should be private, and in which subgroup.
 
 Please delete this photo too, and tell me in words from now on.
+
+-------------------------------------------------------
+Dave, I think the team has dealt with the access before for gitlab, can you take that and get him the access he needs?
+ 
+yes it's ok for this to run on my laptop.   I don't know anything about "Keyring"  can you give me more information on this?   3. yes there would be filters, we would get that from Stephanie.    
+ 
+Yes the NULSC still is part of the gate, but that should only be a configuration change.  I will revisit this if we find there are delays around that.  

@@ -441,3 +441,11 @@ This differs a little from your note. You said an empty address should mean "no 
 Section 11 would then say: with no `exception_address`, a real run does not start when there are exceptions. The only way to stop everything is to stop running the report.
 
 Tell me which one you want, and I'll write the test first. The change is small: about ten lines and three tests. If you choose "no exception email," I'll do that instead.
+=================
+Its recommendation is better than mine. Go with it: remove the Jira lookup, and on a real run with exceptions and no `exception_address`, stop before anything is sent. It also fixes the half-sent run, which is the worse problem.
+
+One thing to make sure the tests cover: the check happens before the main email. A run with exceptions and no address sends nothing at all.
+
+This also means slice 2 can't do a real send until there's a team mailbox for `exception_address`, since the last dry run had 2 exceptions. Ask Stephanie or Eric which mailbox in Friday's status, or sooner if RITM1089773 lands first.
+
+Decision log: `2026-11-03 | Daniel | Exception list: removed Jira-user lookup; real run with exceptions and no exception_address stops before any send.`

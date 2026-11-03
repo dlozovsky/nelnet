@@ -1,0 +1,52 @@
+# Code map
+
+One page for review and handoff. Line counts are as of 2026-11-03 and cover every line in the file.
+Slice 1 is the weekly required-fields report. Slice 2 is the biweekly structure report and its email.
+
+## App: `adherence/` (15 files, 3,227 lines)
+
+| File | Lines | Slice | What it does |
+|---|---:|---|---|
+| `run.py` | 478 | both | Entry point and command line. Runs slice 1 (record state, read the filters, publish the page, send the one email, record the end). Builds the real clients from the settings and tokens for both slices. |
+| `settings.py` | 442 | both | Loads and checks `settings.toml`. Holds every setting type: source, saved filters, weekly email, structure page and sections, SMTP. Refuses any instance except `us` without a written authorization. |
+| `jira_source.py` | 415 | both | The only module that knows Jira (Data Center REST v2). Searches by filter or query, reads and writes comments, looks up assignee and reporter ids and deliverable addresses, inspects one issue. Has fakes for tests. |
+| `notifier.py` | 291 | 2 | Plans one email to everyone with a finding and one exception list, sends each once, and handles the test send that goes only to the maintainer. |
+| `structure_run.py` | 284 | 2 | The structure run: read the page's queries, run them read-only, plan, then dry run, test send or real send with a record comment. Also `--check-page` and `--show-issue`. |
+| `confluence.py` | 272 | both | The only module that knows Confluence (Data Center). Publishes a page, reads a page, finds the Jira queries under each heading, builds the page link. |
+| `run_record.py` | 241 | both | Run states and send records as `[gate-...]` comment lines on a ticket. Limited characters, so a comment cannot carry a name, address or token. Reads the latest state back. |
+| `sent_record.py` | 169 | 2 | The record of a send: one comment per message on the tracking ticket. Also writes the local dry-run and test-send files. |
+| `check.py` | 134 | both | Applies rules and counts per team. Reads each saved filter and groups the results by project (slice 1). Applies a section's rules to the page's issues (slice 2). |
+| `secret_store.py` | 123 | both | Reads secrets from the Windows credential store through `keyring`. One token entry per instance, with an environment variable fallback for US. |
+| `models.py` | 110 | both | Data shapes: issue, filter result, team result, finding, run result. No person fields. |
+| `render.py` | 109 | 1 | Builds the Confluence page body from an allowlist of fields. Team-level figures and issue keys only. |
+| `rules.py` | 98 | both | Rule types as small functions, including `page_result`, which marks every issue a page query returned as a finding. |
+| `smtp_sender.py` | 60 | both | Sends one email over SMTP. STARTTLS is required, and the password comes from the credential store. |
+| `__init__.py` | 1 | | Package name. |
+
+## Tests: `tests/` (37 files, 5,606 lines, 663 tests, network blocked)
+
+| Group | Files | Lines |
+|---|---:|---:|
+| Slice 1: filters, check, page render, run record, unavailable source | 5 | 846 |
+| Slice 2: structure run, page queries, rules, notifier, recipients, sent record, test send, dry run | 17 | 2,830 |
+| Shared: entry point, settings, Jira and Confluence clients, rules, secrets, SMTP, repo rules | 11 | 1,695 |
+| Helpers: `conftest.py` (blocks the network, empties the credential store), `synth.py` (invented data), `http_fakes.py` | 4 | 235 |
+
+## Where to change what
+
+| To change | Edit |
+|---|---|
+| A rule, the saved filters, the page sections, the email wording, the recipients setting | `settings.toml` (see `settings.example.toml`). No code. |
+| Jira calls, fields, user lookup (the Cloud move) | `jira_source.py` only |
+| Confluence calls or how queries are found on the page | `confluence.py` only |
+| Where a token or password comes from | `secret_store.py` |
+
+## How a run flows
+
+1. `run.py` reads the settings and tokens and builds the clients.
+2. The source (`jira_source.py`, and `confluence.py` for the page queries) returns issues.
+3. `check.py` and `rules.py` turn them into results or findings.
+4. Slice 1: `render.py` builds the page, `confluence.py` publishes it, `run_record.py` writes the run state. Slice 2: `notifier.py` plans the email and `sent_record.py` records each send.
+5. `smtp_sender.py` sends. A dry run stops before this step, and a test send goes only to the maintainer.
+
+To refresh the line counts, run `py -3.13 -m pytest --collect-only -q` for the test total and count lines with a file manager or `Measure-Object -Line`.

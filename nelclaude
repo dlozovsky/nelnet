@@ -1056,3 +1056,81 @@ Yes, I agree with almost all of it. Three changes:
 Everything else is right as written, including combining the Stephanie ask into tomorrow's message. The question about when findings last happened is a good one.
 
 Today's order: Eric message, test 1, guide review, daily log.
+
+-----------------------------------------------------
+The test passed. Slice 1’s grouping and counts are proved on real data.
+
+What matched
+
+Total: the printout said 46, and Jira said 46. The window didn’t move, so this is exact.
+Biggest project: 29 on the printout and 29 in Jira.
+Second project: Jitterbug - US had 5 on both sides.
+Earlier run: it read 125 issues across more than two pages. That shows the paging works.
+Zero filter: it shows its usual “No issues” beside the big one.
+
+The earlier 125 against 124 was window drift, not a bug. The third check (3) is optional. I’d skip it.
+
+I logged the result in your local outstanding list and decision log. It states that I used a test filter of your own, not Stephanie’s, and that her two filters are compared on Thursday.
+
+Clean up now
+
+Delete C:\Users\dlozovsky\Documents\settings-test.toml.
+Go to Manage Filters, click My, and delete TEST daniel grouping. Also click the star off so it doesn’t stay in your favourites.
+
+Next on the list
+
+The small fix to the dry-run email note. It’s your choice in the box.
+Send your messages to Dave and Eric.
+Tomorrow morning, run the structure dry run and compare with Stephanie’s counts.
+Thursday, run --rerun and compare her two filters.
+The slice 1 grouping test passed on real data: total 46 matched Jira, and the two projects checked matched. I logged it in the local outstanding list and decision log. Cleanup of the test filter and settings copy is yours.
+Fix the dry-run email note now?
+Yes, fix it
+
+Yes, fix it
+
+Two of the three tests fail as expected. The third passes already. Now the change:
+
+The weekly dry run now says what a real run would do about the email. The tests were written first, and all 663 pass with the network blocked.
+
+The three cases, which match what a real run does
+
+No Odd Squad address: “no Odd Squad address is set, so a real run would send no email.” This was the bug. Before, it said an email would be sent.
+smtp.test_recipient set: “a real run would send one test email to you only.” A test recipient wins over the team address, the same as in a real run.
+An address and no test recipient: “one email to the Odd Squad would be sent with the page link.” This is unchanged.
+
+The no-findings message stays as it was, and no case prints an address. The change is in adherence/run.py, with three new tests in tests/test_weekly_filters.py. I logged it in your local decision log and closed the open item.
+
+Two files are changed and nothing is committed yet. If you pick commit, I’ll stage only those two files. Nothing from settings.toml, runs/, or docs/ goes in.
+
+Before you stop for the day:
+
+Delete settings-test.toml and the saved test filter TEST daniel grouping.
+Send your reply to Dave with the three asks, and the one message to Eric.
+Tomorrow morning, run the structure dry run and compare it with Stephanie’s counts.
+
+then need to change the message to eric
+
+Yes. The line “Everything else is built and tested” overstates it. Here is the message with that corrected:
+
+Eric, I know the appraisal takes you and Dave next week, so I’d like to settle what I can before then.
+
+Roadblock: the send permission. Dave says the Help Desk and the access management team run on their own time and are swamped. My mailbox group request is done, and I tested a send to myself after it. The mail server still refuses with “not permitted to send as this sender.” So the missing piece is Send As on the mailbox. My request for it (RITM1089773) has been open since the end of October, with no update. Until it lands, neither slice can send an email, not even a test send to myself. If you want to try pushing it, that’s the ticket. If it hasn’t landed by about Nov 12, I’ll need your decision on a fallback.
+
+Where testing stands. Slice 1 has run for real: the page and the status comments worked, and the grouping matched Jira on real issues. Slice 2 has run twice as a dry run with the same results. The two comparisons with Stephanie’s own runs come tomorrow (slice 2) and Thursday (slice 1). The email, the first real send, and the NULSC test are the parts still waiting.
+
+Then five short items:
+
+Which team mailbox is the exception list address, and which is the Odd Squad address? A real send needs both.
+Once the permission arrives, may I remove the test setting and do the first real send, or do you want to approve that again?
+Who reviews the code for the gate? Dave’s team has no engineers. Does the security scan run by policy, or does the project need a CI job?
+May I create a few test issues in Jira, to have one example of each case?
+While you and Dave are in the appraisal, who should I go to for decisions?
+
+What changed
+
+The “built and tested” line is gone. The new paragraph says what has run for real, what is still to be compared, and what is waiting.
+The send permission paragraph no longer says “I also commented on the ticket that is moving.” Post that comment first, then add the sentence back if you like.
+The rest is as before.
+
+If a message to a sponsor reads as complete when comparisons are still pending, it can cost you later. Saying where testing stands keeps the claim true.

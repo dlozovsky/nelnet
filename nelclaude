@@ -862,3 +862,40 @@ Yes, commit it. 651 tests pass and your US settings still load, so it's done. Be
 Then go straight to the slice 1 real run to the test page.
 
 Decision log: `2026-11-03 | Daniel | NULSC guard built: non-US instance refused unless settings record written approval and date (651 tests).`
+
+---------------------------------------------
+Both pre-commit checks pass: nothing is staged, only the seven code, test and doc files are changed, and the example file’s approval lines are commented out with placeholders. I’m staging those seven files by name and committing next.
+
+The safety check is committed as 2fc5e3e. The commit has seven files, all code, tests, and CLAUDE.md. Nothing from settings.toml, runs/, or docs/ is in it. settings - Copy.toml is already gone. The example file has the two approval lines commented out, with placeholder text only. Nothing is pushed, because there is still no remote. I logged this in your decision log, with more detail than the one-line row in the note.
+
+Slice 1 real run. I can’t run it from here, because real calls are yours to run locally. These are the steps:
+
+Make sure that the page target is the test page. I checked settings.toml: parent_page_id is 649471817, the Automation Output page. Before you run, open that page and make sure that you see the title “Automation Output”.
+Run this command, with no --dry-run:
+py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188
+
+What it does.
+
+It writes a STARTED comment on AUTO-188.
+It reads both filters.
+It creates one page under Automation Output.
+It writes PUBLISHED and COMPLETED comments.
+It sends no email, because no Odd Squad address is set.
+
+What to expect. Both filters will probably show zero again. The run should print “Published page” with a number and then “Run completed.”
+
+After it runs
+
+Open AUTO-188 and read the new comments.
+Open the new page and make sure it shows both filters.
+Make sure there are no names or addresses on the page or in the comments.
+
+This is the first time the comment write and the page write run for real. If either fails, the output will say “Run failed at step” followed by the step name. Paste that line and I’ll help. Don’t run it twice: a second run needs --rerun after COMPLETED, or --resume after a failure.
+
+Send me the output and the page title only. Don’t paste tokens.
+
+Check what is staged and the example file
+
+Stage the seven files and commit
+
+Verify the commit

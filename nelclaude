@@ -1136,3 +1136,32 @@ The rest is as before.
 If a message to a sponsor reads as complete when comparisons are still pending, it can cost you later. Saying where testing stands keeps the claim true.
 ====================
 In words only, no changes: when a real run fails partway, what does a maintainer see today on screen and in Jira? Is there anything they would need for the failure table in the guide that they can't see?
+==========================
+Here is what a maintainer sees today, from run.py, run_record.py and the error raises in the other modules. I didn’t open smtp_sender.py for this.
+
+On screen
+
+A failure prints Run failed at step 'X': detail, then the run exits with a failed code.
+If the error is one of this package’s own (SourceUnavailable for Jira, PublishError for Confluence), the detail is its plain message. Examples are “could not reach Jira”, an HTTP-status message, “the parent page id is still the TBD placeholder”, and “a page with this title exists in the space but is not under the parent page”.
+Any other error shows only its class name, with no text. The code does this on purpose, so a name or address can’t leak.
+If a search completes but a filter couldn’t be read, the page is still published. The screen says Source unavailable: and names the missing input, and the run is left open for --resume.
+If the run can’t read the ticket at the start, it says “Nothing was written.”
+Refusals say what to do, for example “the last run is FAILED. Use --resume”.
+If the FAILED comment itself can’t be written, the screen says to check the ticket before resuming.
+
+In Jira on AUTO-188
+
+You see STARTED, possibly PUBLISHED, then FAILED. FAILED carries step= and detail=. The detail is the same text as on screen, with addresses and long token-like strings blanked and a length cap.
+A resumed run shows resume=yes on its STARTED comment.
+A [gate-sent] comment exists for each email that was recorded.
+A failed run writes no result line, so there is no count to compare.
+
+What a failure table can’t get from this today
+
+Which side of the email a notify failure was on. The step stays notify for building the notice, delivering the mail, and writing the [gate-sent] comment. If the mail went out and the comment write then failed, nothing in Jira says so. This is the uncertain-send case, and the guide has to tell the maintainer to check the mailbox’s sent items before --resume. That check can’t be done from the ticket.
+Which record it was. The step is record for the STARTED comment, the PUBLISHED comment and the COMPLETED comment. After PUBLISHED, the page exists but the state doesn’t say so. The maintainer has to look for the PUBLISHED comment above the FAILED one.
+The real cause of anything that isn’t a Jira or Confluence error. An SMTP refusal such as the 550 5.7.60 Send As problem would likely show only as its class name. I haven’t checked whether smtp_sender.py wraps it, so confirm that before writing the SMTP rows. The table can map a class name to a cause, but not to a server code.
+Which filter or section failed. The Source unavailable: message names a missing input, but a bare “could not reach Jira” or an HTTP status doesn’t say which of the two filters was being read.
+What was published. The screen prints the page id on success, but the FAILED comment doesn’t carry it. After a publish failure, the maintainer can’t tell from the ticket whether the page was created or updated.
+
+Items 1 and 3 matter most for the table. Item 2 can be covered by wording alone. Items 4 and 5 would need a code change, and that is your decision. All of these are what the table says today, not new findings. I have not changed anything.

@@ -120,3 +120,13 @@ It names no people and no issue keys, only counts and descriptions.
 I put in “I have not opened the NULSC report” on purpose, so she knows why it hasn’t been compared. Delete the line if you would rather not mention it.
 
 You send it, since I don’t send messages for you. If she answers, give me her reply and I’ll update the Open items and the guide.
+================
+Checking is fine, as long as nothing changes. Ask Nelnet Claude to read the settings and report back in words, with no edits:
+
+1. **Page URL:** is it the US page from today's 120/120 run? It should be, since the dry run read it.
+2. **from_address:** the Odd Squad sending mailbox that RITM1089773 covers.
+3. **exception_address:** the Odd Squad help mailbox, in local settings only.
+4. **test_recipient:** you.
+5. **Delivery:** Bcc, which is how Stephanie sends it.
+
+If all five are right, you're done. If one is wrong, fix only that one, then run one more dry run and check that it still shows 120 findings, 43 recipients and 2 exceptions.

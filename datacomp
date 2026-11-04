@@ -130,3 +130,9 @@ Checking is fine, as long as nothing changes. Ask Nelnet Claude to read the sett
 5. **Delivery:** Bcc, which is how Stephanie sends it.
 
 If all five are right, you're done. If one is wrong, fix only that one, then run one more dry run and check that it still shows 120 findings, 43 recipients and 2 exceptions.
+================
+Half right. The tool reads the queries from the page on every run, so a change to a query needs no settings change. A move does: if the page moves or gets a new page id, update the page URL in settings.
+
+Ask Nelnet Claude whether the settings also store the section names. If they do, renaming a section is a settings change too. Then put this line in the guide:
+
+> If the structure page moves, or [a section is renamed], update settings.toml. Query edits on the page need no change. After any of these, do a dry run and compare it with the report owner.

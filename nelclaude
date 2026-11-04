@@ -1134,3 +1134,5 @@ The send permission paragraph no longer says “I also commented on the ticket t
 The rest is as before.
 
 If a message to a sponsor reads as complete when comparisons are still pending, it can cost you later. Saying where testing stands keeps the claim true.
+====================
+In words only, no changes: when a real run fails partway, what does a maintainer see today on screen and in Jira? Is there anything they would need for the failure table in the guide that they can't see?

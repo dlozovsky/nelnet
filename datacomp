@@ -13,3 +13,19 @@ Your JSON "findings" successfully reproduces all 120 Jira keys shown in the four
 There are zero missing keys and zero extra keys.
 
 So the issue-extraction portion of your process looks correct across all four sections. The next separate validation would be the JSON's recipients and exceptions, since those determine whether the right people actually receive notifications.
+
+
+All four sections now match key for key: 120 of 120, with none missing and none extra. That settles the issue-reading part of the structure report for the US instance on 2026-11-04. It is one day's result, so it shows the page queries are read and run correctly, not that the page stays unchanged.
+
+**Still open: the people side**
+- Her distinct people count (from the Assignee and Reporter columns), compared with our 43. Hers should be 43 or more.
+- The reasons for the 2 exceptions, from the `reason` field in your file. Send me only the wording.
+
+That is the same next step the comparison itself pointed to. It is the check that matters most before a real send, because it decides who gets the email.
+
+**Housekeeping**
+1. Delete the file from `runs/`, and the pasted dataset and comparison workbook.
+2. Reply to Stephanie that the sections match key for key. You can drop "so far".
+3. Say "log it" and I'll add the result to today's daily log. I'd also put one line in Friday's status: the structure dry run matches her US report key for key, and the recipient check is next.
+
+I haven't changed anything this turn.

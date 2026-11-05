@@ -1165,3 +1165,123 @@ Which filter or section failed. The Source unavailable: message names a missing 
 What was published. The screen prints the page id on success, but the FAILED comment doesn’t carry it. After a publish failure, the maintainer can’t tell from the ticket whether the page was created or updated.
 
 Items 1 and 3 matter most for the table. Item 2 can be covered by wording alone. Items 4 and 5 would need a code change, and that is your decision. All of these are what the table says today, not new findings. I have not changed anything.
+
+-------------------------------------------------------------------------------
+The test send still fails. It’s the same 550 5.7.60 on both messages, and this is the morning retest I’d planned, so Send As is still not working. I logged it in the daily log.
+
+Do now
+
+del runs\*.json
+
+That removes the test-send file, which holds real display names.
+
+Send As (RITM1089773)
+
+Did the technician answer the three questions I drafted yesterday (which account, whether it applies to the SMTP relay, when it was changed)? If not, add a second comment now: “Retested the morning of 2026-11-05, still error 550 5.7.60. Waiting on your answer to the three questions above.”
+If there is still no answer by end of today, tell Eric. The report owner’s real send can’t happen without this, and Eric can push the ticket where you can’t. Put it in Friday’s status as a blocker, with the date the request opened.
+
+Still needed from you
+
+The GitLab ticket number. Send it to me and I’ll put it in Open item 6 and the log. Then send it to Dave and edit Open item 6 on Confluence.
+
+Next on my list
+
+The recipients default change to "bcc". Say “go” and I’ll start with the suite run.
+The weekly --rerun on the real filters, which is yours to run. I’ll give you the command when you’re ready.
+
+The other one has no answer and this is what I have for this one Home (→ nelnet.servicenowservices.com)
+
+My Request - RITM1089333 (→ nelnet.servicenowservices.com)
+
+My Request - RITM1089333
+Add my account to the mailbox group for OddSquadHelp@nelnet.net
+RITM1089333
+Assigned
+Created 7d ago7 days ago
+Last updated a day agoa day ago
+Hide details (→ nelnet.servicenowservices.com)
+Requested for
+Daniel Lozovsky
+Opened by
+Daniel Lozovsky
+Item
+General Service Request
+Stage
+Customer Approval
+
+Additional Details (→ nelnet.servicenowservices.com)
+Activity & Comments (→ nelnet.servicenowservices.com)
+Attachments (→ nelnet.servicenowservices.com)
+Tasks (→ nelnet.servicenowservices.com)
+Cancel Request (→ nelnet.servicenowservices.com)
+
+Additional comments
+
+Ken Hicks a day agoa day ago Additional comments
+Added to mailbox access groups:
+MBO_OddSquadHelp
+MB_OddSquadHelp
+Comments added from SCTASK1782395
+Daniel Lozovsky 2d ago2 days ago Additional comments
+Thank you for adding me to the mailbox group. I also need Send As on the mailbox, so I can send from my own laptop account. I tested after the group add, and the mail server still refuses with a “not permitted to send as this sender” error (550 5.7.60). Could you route this to the team that handles Send As, or tell me which ticket tracks it? My request for it is RITM1089773.
+Spencer Bukosky 3d ago3 days ago Additional comments
+
+added user to MBO_OddSquadHelp
+
+Comments added from SCTASK1782395
+
+Daniel Lozovsky 7d ago7 days ago Additional comments
+Please enable delegated send (send as) on the mailbox OddSquadHelp, OddSquadHelp@nelnet.net, for my account, 129902@nelnet.net. The setting is at the mailbox level in M365.
+
+Business reason: I am building an approved automation under AUTO-188 that sends one email per run to the people who have findings on the biweekly structure report. Eric Ritchie is the sponsor. The automation sends from this mailbox over authenticated SMTP, from my own laptop account. I need send-as, not only read access.
+
+The mailbox access request is already filed as RITM1089333. If this belongs with the team that handles delegated send (AMO or MAPPS), please route it there. Please confirm when it is done.
+* Daniel Lozovsky 7d ago7 days ago
+RITM1089333 Created
+
+What this ticket shows:
+
+Done: Ken Hicks added you to MBO_OddSquadHelp and MB_OddSquadHelp a day ago, and Spencer Bukosky added the first group three days ago. Those are mailbox groups. They give mailbox access, not Send As.
+Unanswered: your comment from two days ago asked them to route Send As or name the ticket. Ken’s reply only lists the group adds, so nobody has answered the question.
+Stage: Customer Approval means the group part is complete and waits for you to accept it.
+
+What I’d do
+
+Don’t accept RITM1089333 yet. What it asked for is done, but your routing question is still open there. Accept it after Ken or someone answers.
+Ask Ken directly on Teams, because he is the one who wrote that Send As was enabled:
+
+Hi Ken, thank you for the group adds on RITM1089333. On RITM1089773 you wrote that Send As was enabled on the OddSquadHelp mailbox. I retested this morning and the mail server still refuses with error 550 5.7.60. Could you tell me which account got the permission, whether it applies to sending through the SMTP relay and not only in Outlook, and when the change was made? I will retest after your answer.
+
+Add the same three questions to RITM1089773. That ticket has no answer yet, and it’s the one that tracks Send As. Use yesterday’s comment, plus “Retested the morning of 2026-11-05, still error 550 5.7.60”.
+
+I’d keep two threads, because tickets move faster when a named person gets a direct message. If neither answers by end of today, tell Eric. It blocks the first real send, and it’s a blocker for Friday’s status.
+
+If the portal shows an auto-close date for tickets at Customer Approval, tell me. I’d accept RITM1089333 before that date, so it doesn’t close itself with your question unanswered.
+
+Your GitLab ticket number is still missing. Send it when you have it.
+
+I should ask her to send out week 11/9 right
+
+Yes, ask her. The tool’s send is blocked by Send As, and the week of 11/9 is only days away. If the tool isn’t ready, the email would be skipped for the cycle. So her manual send should continue until the tool takes over.
+
+Her words, “it can be sent out the week of 11/9”, most likely refer to the tool, but they could also mean her own send. The reply below makes both clear.
+
+Hi Stephanie,
+
+Thank you, that helps. The tool’s first send is the week of November 9, then every other week. The tool cannot send yet, because the mail server does not allow it to send as the Odd Squad mailbox. That request is open. If it is not fixed by the week of November 9, please send the report yourself that week, as you do today. I will tell you before the tool takes over, so that nobody receives two emails.
+
+Which day of the week and what time should the tool send?
+
+Thank you,
+Daniel
+
+Why I worded it this way:
+
+It keeps her manual send as the default until you say otherwise. That prevents a missed cycle.
+It promises a handover notice, which also prevents a double send. The tool sends once per run date, but it doesn’t know about her manual send.
+It asks for the day and time, which are the only TBDs left on the Routine run line.
+Eric and Dave are on the thread, so they see the dependency on Send As.
+
+Before you send, check one thing: the tool’s first send also needs a successful test send and Eric’s approval. Don’t promise the week of 11/9 for the tool itself. This message promises only that she should send manually if it isn’t ready.
+
+I’d add the manual fallback to the daily log and the Friday status as well. Tell me if you want me to add it now.

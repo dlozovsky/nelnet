@@ -1443,3 +1443,23 @@ None of that is fixable until the GitLab access arrives.
 AUTO-56 is Eric’s decision, so I haven’t touched it.
 
 Say “send” after you read the section 14 draft, and I’ll put it in a form ready to paste. Or edit the table first. Nothing is sent or committed. I’m still waiting for your requirements page previews.
+
+==========================================================
+Done. Both points are in the docs.
+
+- **Python:** the TBD "who in IT installs Python" is gone from 12.2 in both guide copies. The line now reads: "Eric's laptop already has Python 3.13 (Eric, 2026-11-05). On another computer, if the command fails, ask IT to install Python 3.13." The second sentence is general advice for any other computer. If you want it gone too, say so.
+- **Second-computer test:** Open item 10 now says that test is the NULSC run itself, so it closes when GitLab access opens and the run is authorized in writing. I added the authorization because the settings file refuses NULSC without it, so GitLab access alone won't open the run.
+
+I raised the guide to **Draft 0.5** in both copies, because the text changed after you uploaded 0.4. The daily log has the entry.
+
+**What to republish now**
+1. The guide body from `docs/maintenance-guide-for-confluence.md`.
+2. Item 10 on the parent page, from `docs/open-items-for-parent-page.md`. Here is the full item:
+
+```text
+10. Section 12 is not tested on a second computer. That test is the NULSC run itself, so it closes when GitLab access opens and the run is authorized in writing. The report owner said on 2026-11-04 that NULSC has one more filter than the US instance. The NULSC filter numbers and servers are not in this guide.
+```
+
+Page status line: if it says "Draft 0.2" for the guide, change it to "Draft 0.5".
+
+Open items with the guide that remain by design: the GitLab address, the weekly time, the structure day, and the section 14 owners. The last one waits on Eric's answer to the proposal in `docs/proposal-section14-owners.md`. I'm still waiting for your requirements page previews.

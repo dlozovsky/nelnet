@@ -1403,3 +1403,13 @@ If you paste that block, send me the preview, as you did last time, and I’ll c
 Three TBDs remain by design: the GitLab address (section 1.1 and 12.4), the weekly time and the structure day, and the section 14 owners. The dry-run wording also waits for Eric.
 
 Tomorrow’s code change, the recipients default, will change two sentences in section 5 and 7.4. That is one more upload.
+
+==================
+ALARM: AUTO-56 isn't one of the two gate automations, so it doesn't move the gate. I don't know what it is, so tell me in one sanitized line.
+
+My recommendation is not yet, unless Eric says so. If you have idle time, these touch the gate first:
+1. **Graph fallback prep:** write the one-paragraph ask for an app registration, and hold it in case Send As is still stuck on Nov 12. That's the biggest risk to Nov 20.
+2. **Section 14 owners and backup:** draft a proposal for Eric so he only has to say yes.
+3. **Eric-laptop NULSC setup steps:** make sure section 12 is ready, so the run happens the day GitLab opens.
+
+If those are done and Eric wants AUTO-56 started, timebox it and drop it the moment a gate blocker clears.

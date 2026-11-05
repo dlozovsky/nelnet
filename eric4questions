@@ -308,3 +308,22 @@ Two things from the earlier list still wait on you:
 
 The slice 1 real run (command above).
 Today’s daily log and weekly status, which need your hours.
+-------------------
+I think I found something.  The Odd Squad location: the group nelnetinc/nds/it-delivery/po-process-tools-metrics. It has its own Azure groups. I get “page not found” now, so I am not a member yet. Could Michael add me to az_appl_hg_GitLab_process_tools_metrics_developer? Does a project already exist in that group for Odd Squad tools, or should someone create one for the gate automation?
+ 
+ 
+Michael wouldn't be able to add you to an AD group. that would have to be the access management folks through a help desk ticket. i just sent Eric a message asking what he submitted for you in his original request.
+ 
+i believe once you get permissions in the developer role that you will be able to create a project for your automation work. unless Eric has already created one which i'm guessing probably not.
+ 
+Eric wasn't quite sure so he is asking me to follow up with someone else. I'll let you know as soon as they reply back to me. we'll get you permissions at some point!
+ 
+here is the info I got from the guy we reach out to a bunch for this sort of thing.
+ 
+ 
+so you are correct in the group to ask to be added to. Michael confirmed that we all should be added as the Developer role. it will take a help desk ticket to get added to that group if you wanted to send one off. and Michael did confirm for me that if you are in the developer role you will be able to create your own project within it.
+ 
+Newsom, David
+here is the info I got from the guy we reach out to a bunch for this sort of thing.   📷   so you are correct in the group to ask to be added to. Michael confirmed that we all should be added as the…
+Thank you Dave let me create a ticket.  
+ 

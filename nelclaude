@@ -1461,5 +1461,24 @@ I raised the guide to **Draft 0.5** in both copies, because the text changed aft
 ```
 
 Page status line: if it says "Draft 0.2" for the guide, change it to "Draft 0.5".
+Slice 1 reads any number of saved filters from the settings, so no fix is needed before the NULSC run. I'm logging the result and the new test now.
 
+It reads any number of filters. Nothing in the code assumes two, so there is no fix to make before the NULSC run.
+
+How I checked:
+- **Settings:** `adherence/settings.py` reads every `[[filters]]` block into a list. The only checks are that each has a name and a filter id, and that no name repeats.
+- **Run, page and record:** the run loops over that list. The page shows one block per filter, in the order you list them. The `[gate-result]` comment counts them (`filters=N`), and the run header says "N saved filters".
+- **Where the two comes from:** only the US-specific text in the guide and the requirements, which says "the US instance has two". That is a fact about US, not a limit in the code.
+
+**New test:** the existing tests only used two filters, so I added one with three, the NULSC case. It checks that all three are searched in order, that the page shows them in that order, that an empty third filter shows "No issues. 0 found.", and that the result line says `filters=3` and `unavailable=0`. It passed with no code change. The whole suite is 665 passed, up from 664.
+
+For the NULSC run, the settings file needs one more `[[filters]]` block, as 12.4 says. The guide needs no change for this.
+
+Nothing is committed. The code changes so far are `adherence/notifier.py` and `adherence/run.py` (the reply code on a failed send), and the tests in `tests/test_run.py` and `tests/test_weekly_filters.py`.
+
+I'm still waiting for the requirements page previews, Stephanie's counts, the mail administrators and the GitLab add.
 Open items with the guide that remain by design: the GitLab address, the weekly time, the structure day, and the section 14 owners. The last one waits on Eric's answer to the proposal in `docs/proposal-section14-owners.md`. I'm still waiting for your requirements page previews.
+
+
+============================================================
+

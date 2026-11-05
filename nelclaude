@@ -1413,3 +1413,33 @@ My recommendation is not yet, unless Eric says so. If you have idle time, these 
 3. **Eric-laptop NULSC setup steps:** make sure section 12 is ready, so the run happens the day GitLab opens.
 
 If those are done and Eric wants AUTO-56 started, timebox it and drop it the moment a gate blocker clears.
+=============================================
+I started on items 2 and 3. I held item 1, because it likely wouldn’t work.
+
+Item 1: Graph fallback. Hold it. Two reasons:
+
+It doesn’t get around Send As. Sending from a shared mailbox through Microsoft Graph needs the same permission on the mailbox, either for the signed-in user or for an app. An app that sends without anyone signed in is an unattended service identity, and CLAUDE.md rules that out for the gate. A user sign-in version would need a library such as msal, which is a new dependency, so Eric would have to approve it.
+We don’t know where the block is. Your own-address test failed with 550 5.7.60 too. That points at the relay or the account, not only at the mailbox. If the relay is the problem, Graph could help. If the mailbox permission is, it would not.
+
+Write the ask once the mail administrators say which of the two it is. I can draft it in a few minutes then, with the permission type chosen to fit. Whether to send it, and to whom, is Eric’s call.
+
+Item 2: owners for section 14. Drafted. The file is docs/proposal-section14-owners.md, a message to Eric with a table he can approve. I filled in only what I could source:
+
+Primary maintainer: you, until the handoff.
+Backup maintainer and Confluence support: Dave, marked “confirm”.
+Report owner: Stephanie.
+Tokens, Jira and SMTP support: left as TBDs. I don’t know those contacts, so I didn’t invent them.
+
+It also asks Eric two questions: who takes over the primary role, and whether the reviewer role moves.
+
+Item 3: section 12 readiness. Checked, with no change. I compared the section against the code. The authorization lines in settings.example.toml are commented out, as 12.4 says. The refusal message matches 12.6. A dry run needs --ticket but doesn’t read it, so any key works, as 12.5 says. What is not ready:
+
+the GitLab address;
+who installs Python;
+the second-computer run, which no one has done.
+
+None of that is fixable until the GitLab access arrives.
+
+AUTO-56 is Eric’s decision, so I haven’t touched it.
+
+Say “send” after you read the section 14 draft, and I’ll put it in a form ready to paste. Or edit the table first. Nothing is sent or committed. I’m still waiting for your requirements page previews.

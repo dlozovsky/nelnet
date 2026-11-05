@@ -249,4 +249,146 @@ Also updated: AUTO-59, AUTO-61, AUTO-62 (descriptions); AUTO-58, AUTO-289 (comme
 
 
 Pin
+===========================================
+[PARENT] Unified documentation agent (sanitized, condensed)
 
+Type: Idea. Status: Backlog. Priority: Medium. Epic: Technical Writing.
+
+Placeholders used: Writer A and Writer B (two writers who own existing tools), Team V (US instance, first team), Teams G and M (federal instance), External API site (hosted in GitHub Enterprise), [US GitLab host], [new GitLab host], [source-ticket] keys, [date].
+
+Goal
+
+One orchestrating agent, built from separable subagents, covering the documentation lifecycle for GitLab-hosted docs: discover work that needs a doc update, identify the affected docs, draft the update, track it in Jira, and commit the draft to a branch for review. It consolidates tools that already work for two people.
+
+Operating model
+Propose. On a schedule, the agent scans the configured source Jira projects, decides which tickets need documentation work, and creates a tracking ticket in the team's tracking project. The ticket links the source tickets and names the manual(s), with the reason and a confidence level.
+Human gate 1. A person reviews. Moving the ticket to an approval status (for example "Approved for Draft") is the trigger. Disagreement goes to a rejected status with a reason.
+Draft. The agent reads the source tickets (and later the committed code), finds where the change belongs, creates a ticket-named branch in GitLab, commits the changes, moves the ticket to a review status, and links the branch.
+Human gate 2. A person approves or rejects the draft. The agent never merges or publishes.
+Train. Rejections and corrections are recorded with a reason. A person approves changes to guidance. Learning is reviewed rules, not model training.
+
+The agent does not route SME feedback (a writer task).
+
+Logging: all logging is comments on the tracking tickets. No log files, no local state on disk. Prior proposals are rebuilt from tracking tickets and their links. If Jira is unreachable, the run stops and reports failure through the scheduler.
+
+GitLab only for Phases 0 to 7. Confluence is never written, and is read-only as source material for new manuals (Phase 8). The External API site is its own phase (Phase 9).
+
+New manuals (Phase 8) are started by a person. Writers create the GitLab project from their template, add configuration, and create a new-manual ticket listing inputs. The agent never creates repos or edits configuration. Until then it only reports unmatched tickets.
+
+Configuration is per team and per manual, each naming its Jira and GitLab instance (US or federal), project, and layout. Adding a team, manual, or source project is a configuration change. Code host is configured separately from the doc store.
+
+Estimate (judgment, not measured)
+
+Engineer hours, range / midpoint. Odd Squad figure is 2.5 times the engineer figure.
+
+Phase	Scope	Engineer hrs	Mid	Odd Squad hrs
+0	Baselines, access, spike	16-28	22	55
+1	Skeleton, config, propose stage	20-36	28	70
+2	Discovery and identification	24-40	32	80
+3	GitLab draft stage	24-40	32	80
+4	Trainability	16-28	22	55
+5	Hosting, parallel run, cutover	24-44	34	85
+6	Team V configuration	20-36	28	70
+7	Code-aware	20-36	28	70
+8	New manuals	24-40	32	80
+9	External API site	20-32	26	65
+Total		208-360	284	710
+
+Assumptions: existing tools are Claude skills (instructions, not code), so most hours go to assembly, per-team config, branch handling, tests with no real API calls, and validation. Hours exclude writers' and reviewers' time and calendar waits for access. Phase 5 depends on an undecided hosting choice. The GitLab helper is read-only today and gains branch and commit support in Phase 3. Phase 0 re-checks the estimates.
+
+What already exists (checked against Jira; skill files not read)
+Writer A's weekly doc-candidate sweep for Team G (two weekly tickets). Lists candidates with manual locations, low-confidence flags with a developer question, and excluded tickets with reasons. A Stage 2 skill is Blocked.
+Writer A's Q&A assistant (Copilot-based, covered by another idea): pilot Done, availability Done.
+Writer B's sprint-doc pipeline (Claude skills run by hand: Jira to Confluence draft to SME review, plus a skill mirroring Confluence edits into a MkDocs repo). Only its discovery logic and MkDocs side are in scope.
+A Teams submission-form agent was in test. An earlier Copilot Jira-story-to-manual use case is documented.
+GitLab doc repos were backed up to [new GitLab host] ([date], Done). Whether the old host is retired is not recorded.
+Team V is furthest along, keeps docs in GitLab, and is first. The External API site is in GitHub Enterprise.
+
+Missing from both tools: shared architecture, central hosting, scheduling, logging in Jira, and learning from reviewer feedback.
+
+Decisions
+One unified system, not two. Build the skeleton for both pipelines at once. Old tools stay live until the Phase 5 parallel run shows parity.
+Subagents: discovery, identification, drafting, tracking, repo. Each independently testable.
+Branch-per-ticket for repo output. Team V first. Phase 3 is the first release.
+Status-triggered drafting. Statuses are created by a Jira administrator.
+Trainable through reviewed rules, not model training (Phase 4).
+Per-manual instance (US or federal) is configuration.
+Personal access tokens to start, service identity before unattended scheduling.
+Code-aware (Phase 7): the agent reads code and never writes to a code repo. Code host is per repo.
+New manuals are person-controlled. No threshold, no detection.
+Parity with existing skills means overlap within a tolerance agreed in Phase 0, not exact match.
+All logging goes to tracking tickets.
+Phases
+
+0: collect skill files, reconcile baselines, confirm GitLab host and access, identification spike, agree parity tolerance (gate). 1: skeleton, config, Jira tracking and logging, proposal stage, status workflow. 2: discovery in both modes, location identification, unmatched reporting. 3: GitLab/MkDocs draft stage (first release for Team V). 4: trainability. 5: hosting, scheduling, parallel run, cutover. 6: Team V configuration and rubric. 7: code-aware. 8: new manuals. 9: External API site.
+
+Dependencies: 1 needs 0. 2 and 3 run in parallel after 1. 4 needs a working propose or draft stage. 5 needs 2, 3, 4. 6 needs 0 to 4. 7 needs 1, 3, 4. 8 needs 1, 3, 4. 9 needs 1, 3, 4, 6. A failed Phase 0 gate (for example no GitLab access) blocks the first release.
+
+Non-negotiables
+No auto-publish on any content store. A human decides on every draft.
+The Y/N "AI proposes, humans dispose" call stays with a person.
+Every proposal records its reason as a comment. No personal data, secrets, or raw payloads in comments.
+Neither existing tool is retired until the unified system matches its output for one full cycle.
+Never invent a manual location or line citation. Unverifiable locations are reported as unverified.
+Never edit, comment on, or transition a source ticket.
+Never change its own guidance.
+Never route or summarize SME feedback.
+Never write to a code repo. No code copied into Jira or drafts beyond short identifiers.
+Never create a repo or edit configuration.
+Never write to Confluence.
+Never write to a publishing branch or default branch. Never send a production release request.
+Acceptance criteria (initiative level)
+
+Matches and overlaps are within the Phase 0 tolerance.
+
+Discovery and identification overlap with Writer A's sweep for the same window, with a recorded reason for each difference.
+Discovery overlaps with Writer B's scan for the same sprint. GitLab drafts match Writer B's MkDocs output in structure and coverage.
+A source ticket needing docs produces a tracking ticket with linked sources, manual(s), reason, and confidence.
+A ticket moved to the approval status produces a ticket-named branch draft. The ticket moves to review status with summary and branch link. Nothing merges.
+Every proposal has its reason recorded. No log or state file is written.
+If Jira is unreachable, the run stops and reports failure.
+A rejection with a reason plus an approved guidance change alters later behavior and records the rule applied.
+A new team or manual, including one on another instance, is added by configuration only.
+(Phase 7) A source ticket with committed code: the agent reads and cites it, with no write access.
+(Phase 8) An approved new-manual ticket yields first content on a ticket-named branch following the template, with no repo created and nothing written to Confluence.
+(Phase 9) An approved External API item yields a ticket-named branch draft with nothing written to publishing or master branches.
+Savings
+
+About 500-900 hrs/year across the team, high variance and not reconciled. Derived from an earlier GitLab-only estimate (about 400-800 hrs across roughly 4 writers) plus unquantified savings from the two live tools. Phase 0 replaces it with real numbers (Writer B's impact report is a floor).
+
+Risks
+Disrupting two adopted tools. Parallel run and per-tool cutover are mandatory.
+The two discovery patterns differ (sprint and done-ticket scan vs production-implementation sweep). Keep both as configured modes.
+Doc identification on the GitLab side is the hard problem (README, docs folder, wiki, inline).
+GitLab access is not configured for an unattended agent and is on the critical path.
+Hosting is undecided and also blocks other portfolio items.
+Scope creep. Each subagent should ship and prove out on its own.
+Workflow statuses depend on a Jira administrator and may differ by project and instance.
+Reviewers who record no reason give the agent nothing to learn from.
+Code and docs can be on different hosts. Reading code risks copying sensitive content into a draft.
+Existing skills live on individual machines and may depend on local files or settings.
+Tickets considered but not proposed have no tracking ticket to carry their reason (see Q9).
+Phase 8: Confluence input may be stale or contradict Jira. Conflicts must be reported. Large input sets need bounded reading.
+Phase 9: a push to the publishing branch publishes the QA site. Branch rules and scoped credentials must exist before any write path.
+Estimates are judgment and exclude writers' time and access waits.
+Open questions
+Q1 Access to the existing skill files. Owner: Eric; Phase 0.
+Q2 Writer B's impact report and the sweep history, to replace the savings range. Owner: Phase 0.
+Q3 Confirm the target GitLab host and whether the old host is retired. Owner: Eric.
+Q4 Parallel-run length before retiring skills. Owner: Phase 5.
+Q5 Update prompt design, confidence threshold, stale-branch cleanup. Owner: Phase 3.
+Q6 Tracking project per team and exact status names. Owner: Eric with a Jira administrator.
+Q7 Where a rejection reason is recorded (field, comment convention, or transition screen). Owner: Phase 1.
+Q8 Per source project, the code host and how commits link to tickets. Owner: Phase 7.
+Q9 Where decisions and reasons are recorded for tickets considered but not proposed, and how to avoid re-evaluating them every run. Owner: Phase 1 with Eric.
+Q10 Where the manual template lives and how the agent recognizes a new repo has it. Owner: Phase 8 with the writers.
+Q11 What "matches" means for parity. Owner: Phase 0 with the two writers and the team.
+Q12 External API site: access, branch and publish rules, who approves a production release, and whether it follows the first Team V release. Owner: Phase 9.
+Sub-tasks
+
+Ten sub-tasks, one per phase (0 to 9), all Backlog and Unassigned.
+
+Comments (Eric, [date])
+Records Eric's decisions: operating model added, SME-feedback routing removed, Team V first, per-manual instance in configuration, PATs then service identity, Jira administrator creates statuses, estimates unchanged (Eric thinks they look high; Phase 0 re-baselines). New questions Q6 and Q7.
+Design note: a separate annual manual audit is built on this agent. It reuses the manual definition (adds audit settings), the code reader, location verification, confidence tiers, and Jira logging. Its accepted recommendations arrive as tracking tickets already in the approved status. Keep the manual definition extensible and let a tracking ticket link an audit ticket.
+Correction: the audit output is now Jira tickets, not a Word document. Audit child tickets (one per category and manual section) are this agent's tracking tickets, created in the proposed status under an audit parent. A writer approves each to start drafting. Creating them already approved is withdrawn. A tracking ticket must be able to list several items and sit under an audit parent.

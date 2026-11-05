@@ -326,4 +326,26 @@ so you are correct in the group to ask to be added to. Michael confirmed that we
 Newsom, David
 here is the info I got from the guy we reach out to a bunch for this sort of thing.   📷   so you are correct in the group to ask to be added to. Michael confirmed that we all should be added as the…
 Thank you Dave let me create a ticket.  
- 
+ ---------------------------------------------------
+This corrects what I said earlier. I told you Michael could add you to the Azure group, and he can't. The help desk does it through a ticket, which you're already creating. It's GitLab, not GitHub, by the way.
+
+**Text for the help desk ticket**
+
+> **Short description:** Add to Azure group az_appl_hg_GitLab_process_tools_metrics_developer
+>
+> **Description:** Please add Daniel Lozovsky (Insight Global, clock id 129902) to the Azure group az_appl_hg_GitLab_process_tools_metrics_developer. This gives the Developer role in the GitLab group nelnetinc/nds/it-delivery/po-process-tools-metrics, for the Odd Squad gate automation work (AUTO-188).
+>
+> Eric Ritchie asked for the Developer role for the Odd Squad team, and Michael confirmed it. Eric may already have submitted a request. If one exists, please link or merge this one with it.
+
+The last line is there because Dave said Eric is checking what he submitted. If Eric's request is already open, this ticket might duplicate it.
+
+**After you submit**
+1. Send Dave the ticket number. He is following up with Eric.
+2. When the add goes through, sign out of GitLab and back in. Then open `https://gitlab.com/nelnetinc/nds/it-delivery/po-process-tools-metrics` and send me a screenshot of the role badge.
+3. With the Developer role you can create the project inside the group yourself, so we don't need to ask anyone to create it. I'd tell Eric the name you pick before you push anything, because the repo is the team's.
+
+**Docs updated** (nothing committed):
+- Open item 6 in `docs/open-items-for-parent-page.md` and the notes block of the master draft. It now says the help desk adds the account, a Developer can create the project, and the ticket number is a TBD.
+- The daily log has the GitLab update.
+
+**On Confluence**, replace item 6 by hand when you have the ticket number, so you edit it once. Give me the number and I'll fill it in.

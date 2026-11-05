@@ -1285,3 +1285,121 @@ Eric and Dave are on the thread, so they see the dependency on Send As.
 Before you send, check one thing: the tool’s first send also needs a successful test send and Eric’s approval. Don’t promise the week of 11/9 for the tool itself. This message promises only that she should send manually if it isn’t ready.
 
 I’d add the manual fallback to the daily log and the Friday status as well. Tell me if you want me to add it now.
+
+---------------------------------------------------------
+lets do slice 1 run and we will send numbets to stephanie
+
+Today is Thursday, the day Eric set for the comparison. Run it in two steps: a dry run first, then the real run. The guide asks for the dry run first, and it shows the counts before anything is posted.
+
+1. Dry run on the real filters. It posts nothing.
+
+cd "C:\Users\dlozovsky\Documents\Gate Automation"
+py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188 --dry-run
+
+2. Check the counts the same day. Run the two saved filters in Jira yourself and compare the count per project. If they match, go to step 3. If not, don’t run for real. Send me the difference.
+
+3. Real run. The earlier real run on 2026-11-03 finished run 2026-W45, so this one needs --rerun.
+
+py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188 --rerun
+
+What a real run does (all of it approved):
+
+It publishes a page under the Automation Output parent.
+It writes up to three status comments on AUTO-188. The first line of the end comment holds the result counts.
+It sends one email. Your test_recipient is set and when is "always", so the email goes only to you. Nothing real is sent, since the weekly email has no address.
+
+Send me: the counts per project for each filter, the last lines the tool printed, and the page link. Don’t send names or screenshots of the issue list.
+
+For Stephanie. Ask her to run the same two filters today and send her count per project. Then compare them:
+
+Match: send her the tool’s numbers with “they match your run”.
+No match: send her the difference first, with the keys for each side. The criterion is count per project equals a manual run of the same filter the same day.
+
+If both filters return zero again, the numbers still count as a valid match. Zero on both sides is still a valid result. Only an unavailable filter would be a problem.
+
+C:\Users\dlozovsky\Documents\Gate Automation>py -3.13 -m adherence.run --report biweekly_structure
+TEST MODE: sending only to you. Every message goes to the test address only. The real recipients are in biweekly_structure-2026-11-05-test-send.json.
+The email was not sent (SMTPDataError 550 5.7.60). Run again to retry.
+The exception list was not sent (SMTPDataError 550 5.7.60). Run again to retry.
+
+C:\Users\dlozovsky\Documents\Gate Automation>
+
+C:\Users\dlozovsky\Documents\Gate Automation>
+
+C:\Users\dlozovsky\Documents\Gate Automation>
+
+C:\Users\dlozovsky\Documents\Gate Automation>del runs\*.json
+
+C:\Users\dlozovsky\Documents\Gate Automation>py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188 --dry-run
+<h1>weekly_required_fields | us | 2026-W45</h1>
+<ul><li><strong>Report:</strong> weekly_required_fields</li><li><strong>Instance:</strong> us</li><li><strong>Period:</strong> 2026-W45</li><li><strong>Source:</strong> Jira us, 2 saved filters</li><li><strong>Obtained:</strong> 2026-11-05 16:42 UTC</li><li><strong>Definition version:</strong> 996c0e89</li></ul>
+<h2>Acceptance Criteria and Business Description</h2><p>No issues. 0 found.</p>
+<h2>Client Impact Field Not Populated</h2><p>No issues. 0 found.</p>
+Email: smtp.test_recipient is set, so a real run would send one test email to you only. A dry run sends nothing.
+
+C:\Users\dlozovsky\Documents\Gate Automation>
+
+Both filters returned 0 again, and the output says “No issues. 0 found”, not “unavailable”. A completed search with zero issues is a valid zero.
+
+Two things to say about zero:
+
+It counts as a match, but a weak one. Zero against zero meets the criterion, but it doesn’t test the grouping on real data. The OSTO test already did that: 2 and 2 by project, equal to Jira. A real run with findings is still unproven on real data (Open item 1). I wouldn’t write “grouping proven on real data” in the status.
+A real run on a zero week is still useful. when is "always" now, so it tests the clean-week path: a page that says “No issues”, a test email to you, and no new ticket.
+
+Do next
+
+In Jira, run both saved filters and confirm they show zero today. If either shows issues, stop and send me the difference. Don’t do a real run.
+If both show zero, run for real:
+py -3.13 -m adherence.run --report weekly_required_fields --ticket AUTO-188 --rerun
+Check three things: the page says “No issues” for both filters, the AUTO-188 end comment says 0 and 0 on its first line, and your inbox has one test email.
+
+Message to Stephanie
+
+Hi Stephanie,
+
+I ran the weekly required-fields check on both saved filters today (Acceptance Criteria and Business Description, and Client Impact Field Not Populated). The tool found 0 issues for each. Could you run the same two filters in Jira today and tell me the count per project? If your counts are 0 too, that is a match.
+
+Thank you,
+Daniel
+
+Send me the real-run output when you have it (counts, the last lines and the page link). The first part of this paste, the structure test send, shows the same 550 as before, so nothing is new there.
+
+Yes, add it. The page link, from the page id the tool printed and your Confluence base address, is:
+
+https://confluence.nelnet.net/pages/viewpage.action?pageId=649477336
+
+Add this to the email, after the two counts:
+
+The page the tool published is here: https://confluence.nelnet.net/pages/viewpage.action?pageId=649477336. It is a test page under the Automation Output parent, and it says “No issues” for both filters.
+
+Two things to know before you send:
+
+She may not be able to open it. The page sits under Dave’s Automation Output parent, and the page’s view restrictions follow that parent. If it shows “no permission”, tell her it is fine and that her count is what matters. The page is for you and Dave.
+Don’t point her at it as the real report. It’s the first output of a tool that isn’t in use yet. The line above says “test page” for that reason.
+
+The rest of the email stays as it was. Send me her answer when it comes. I’ll update the daily log and the Friday status notes.
+
+The docs are in sync. I checked three things:
+
+The two guide copies match. Apart from the Confluence step formatting and the reviewer notes block, all 296 content lines are the same.
+The Open items match. The master draft’s notes block and docs/open-items-for-parent-page.md have the same 11 items.
+No em dashes in any of the three files.
+
+I raised both guide copies to Draft 0.4, 2026-11-05.
+
+Since your last full upload, these changed in the guide:
+
+The Routine run line: the first structure send is the week of 2026-11-09, and the day and time are still TBD.
+The send section: a failed send now writes the reply code, such as 550 5.7.60, and never the text.
+The failure table has a new row for Run failed at step 'notify': SMTPDataError 550 5.7.60 in the weekly check.
+
+Upload
+
+Maintenance guide page: replace the body with docs/maintenance-guide-for-confluence.md, using the same Markdown Markup route as before.
+Open items on the parent page: replace the whole block with docs/open-items-for-parent-page.md. Items 3, 5 and 6 are the ones that changed since the page you pasted earlier. Item 3 now says that a send from your own address also fails.
+
+If you paste that block, send me the preview, as you did last time, and I’ll check it against the file.
+
+Three TBDs remain by design: the GitLab address (section 1.1 and 12.4), the weekly time and the structure day, and the section 14 owners. The dry-run wording also waits for Eric.
+
+Tomorrow’s code change, the recipients default, will change two sentences in section 5 and 7.4. That is one more upload.

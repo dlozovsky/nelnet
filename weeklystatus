@@ -87,3 +87,17 @@ When you answer, I will fill in section 14 and publish the next version of the g
 - GitLab access has no date. Without it nothing is pushed, and the code scan and the NULSC laptop test wait.
 - NULSC: my profile change is approved (2026-11-04). The NULSC account request (RITM1091818) is assigned as of 2026-11-06. I have not received the EQUIP form yet (as of 2026-11-05), so clearance is pending, and Eric is ordering the new laptop. The timing depends on the Department of Education, and I will tell Eric each step as I hear it. Clearance is not the written authorization the settings file needs. No NULSC data is on this laptop.
 - Thanksgiving (Nov 26) is in gate week four, so treat Nov 20 as the real finish.
+
+=========
+It's solid and honest. The mail ask is right at the top, where it belongs. Fix these before you send:
+
+1. **Question 3 is out of date.** You now lean toward Stephanie's AUTO-188 phases, and "Next week" already says Phase 6, so Q3 contradicts it. Change it to: "After the gate, OK to finish Stephanie's AUTO-188 phases (Phase 6 next) before starting AUTO-56?" Then drop the timebox TBD.
+2. **"The clock starts at GitLab access" is a guess, not a fact.** Eric hasn't said that. Merge the two clock rows in Blockers into one question: "What date do you count as the gate start, and does Nov 20 still hold if GitLab access is late?"
+3. **"Before N1"** is your own label, so Eric won't know what it means. Say "before the first NULSC run."
+4. **Trim it for someone who's about to be out.** Eric needs the mail ask, the clock question, Q3 and the section 14 owners. Mark Q1, Q2, Q4 and Q6 as "can wait until you're back," or he may answer none of them.
+5. Delete the first line, and the test-send runs file, before you send.
+
+One boundary note: this paste has real ticket numbers, GitLab paths and issue keys. Please keep pastes here to a short summary.
+
+Decision log: `2026-11-06 | Daniel | Proposing to Eric: Stephanie's AUTO-188 phases (Phase 6 next) before AUTO-56.`
+

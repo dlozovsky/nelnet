@@ -1,0 +1,219 @@
+Cluely: Weekly status of the blockers.
+
+Cluely: Those are the top things that I need right now.
+
+Cluely: To move forward. The Maya account has been created for the Nulls.
+
+Cluely: C. I can't pro. So I need to know what the next steps are for to get legal.
+
+Cluely: If I need to do a background. I understand this needs to be a background check, so I need to get all. I have my. I have my stuff ready already because data for NASA. So I'll just read dug them up. So whenever they send me something, then they need me to. I'll just quickly fill it out and I'll submit it. But the main thing.
+
+Cluely: Yeah, yeah. Just. Just got a message. I just got Jessica the message that got created. So now I don't know how it works.
+
+Cluely: Sorry.
+
+Cluely: I don't know how it works in terms of cards. I mean, before. NASA had to have special card to go in to be able to use the computer. Probably the same thing here. So it gets verified. So I might. So.
+
+Cluely: It's going to mean travel, too, so. Oh, travel. Okay.
+
+Cluely: You have to go to a nail that office because it hasn't been an FSA machine. Sure, sure, sure.
+
+Cluely: Where am I flying to?
+
+Cluely: You're in Washington? Yeah.
+
+Cluely: So.
+
+Cluely: I guess we either have you fly to.
+
+Cluely: I guess you could. You could have your choice. You could either go to Nebraska, Denver or Madison, Wisconsin. Those are the three places, whatever is probably the most convenient for you. I wouldn't tell you to go for it. But I think you're. You're well outside of driving range for all of those. Yeah. Yeah. I won't be able to drive a bit too much.
+
+Cluely: So I'll just fly in. So, yeah, so that. But the. The two are the two most blocking ones is gitlab. Obviously, the ticket has been formed.
+
+Cluely: Twice. I'm still waiting. The one for the. I don't know what's going on. I keep sending them updates. There's no response from them. I also have that mailbox still an issue. I have two. Two tickets open for that. I found that what the issue is. I send them all the information. They haven't replied back to me at all. So I. I don't know what to do with that. So instead of me.
+
+Cluely: And then today I got a new space for Confluence. They've helped out. Thank God. And I already started moving things there to make it much more organized and professional looking, I guess. And I wanted. And that's what. That's what I wanted to talk to you about is because you're going to be gone for a week.
+
+Cluely: I'm going to be. I don't know how long it's going to take him to do a ticket. I need something to be in place by the 11th. Otherwise, I don't know how I'm going to run it, but that's fine. But in the meantime, what I want to. I started looking for is phase six.
+
+Cluely: In 1088. And that's the one. The reason I like that one is Stephanie's in charge.
+
+Cluely: Or she's the owner, I guess, of it.
+
+Cluely: And I don't have to do a lot of different. A lot of code changes.
+
+Cluely: To. To augment it. So you're not going to piggyback. I already started kind of drafting it. I sent Stephanie a bunch of questions regarding that. Hopefully she can answer to me next week. And I also started looking 56 just in case. I didn't know which direction you want to go. So I started looking for this as well, and I started drafting that as well, just to see which direction you want to. But I thought six phase six might be the best way to do it.
+
+Cluely: Because, you know, it's fine. I mean, because. Because 56, it's huge.
+
+Cluely: It's a monster, like 500 engineering hours.
+
+Cluely: So phase zero will be probably. I have the scope figure out and see how much can be done.
+
+Cluely: And how much hours it's going to take. I mean, to get it done.
+
+Cluely: So. But it's going to be a monster, but phase six looks like it's 12 to 20 hours, most likely I can get it done by next week if Stephanie replies back to me.
+
+Cluely: So.
+
+Cluely: All right.
+
+Cluely: Yeah. So the two things are those tickets.
+
+Cluely: That's. That's the only thing.
+
+Cluely: Once I get them, I can fly. GitLab is even much more is important, too, because I have no place to store my code. And they need to get reviewed, right? Yeah.
+
+Cluely: Right. Can't do anything. Right, right.
+
+Cluely: I agree.
+
+Cluely: That's probably the most important.
+
+Cluely: To me, just. Just to totally levels that with you, right? As long as. As long as we have a automation that can run, that's what I'm looking for. Right. If we don't have the send email set up, that's. That's not a blocker for me. Do I want us to set it set up? Yeah, I still want us to set that up and get that going. But do I. Would I say that you wouldn't meet? You keep asking questions around. Well, is. Is this going to be the gate?
+
+Cluely: As long as you have running code that someone else can run, you investigate. The code is running. I validated. So I did multiple validations. I did 200. I think my weakness test on 6 tests. The current. The only problem the code is pretty big.
+
+Cluely: I might have to refactor it, but it's like 8,000 lines of code. It's going to grow.
+
+Cluely: You know, it's going to grow because you're talking about the main code. Then you have all the additional tests to go through it that runs all together. It just. Just tremendous. So I might have to refactor it and decide how it will grow from there. It'll still be mailing. So they're easily maintained. I'm leaving. I'm not putting a UI yet for it.
+
+Cluely: Unless you tell me this was the best way to do it. In other words, I was thinking of putting it like I did at Microsoft, because even though they're Microsoft, I was surprised that people are not very technical. So I put. I put a quick UI so they can administer, the code base without touch the code. So right now, when I was looking at your specs, I don't know if it needs that right now. I mean, I don't know, but I could actually start looking at a.
+
+Cluely: A quick little. I mean, because I was assuming it's going to be running off of Rails or some other automation. But if it's going to be running from desktop and somebody else can be running it, I might have to put a quick little UI in it to help support. So it'll be easier for people to. I mean, I don't know. I'm just thinking out of sight of my box, right? Something like that that I'm thinking. And what was. I just lost my train of thought.
+
+Cluely: And it's. It's a lot of stuff.
+
+Cluely: So, yeah.
+
+Cluely: So what was I going to say?
+
+Cluely: I'm sorry, Eric. I lost my train. I thought I was. So, yeah, the code used to probably need to be refactored. I have all the Ducks written. They need to be. Another thing is you'll need to review them or somebody needs to review them. I have outlined in the.
+
+Cluely: Weekly status. There is section 14. I don't know if you have answers for them.
+
+Cluely: Now or when you come back is to fill out that Matrix. Well, what is the thing that I sent you? Is to fill out that Matrix of who is responsible for what I can complete it. Like the primary maintainer, backup maintenance report owner.
+
+Cluely: Support for tokens. Now, now, one thing is that right now, this is my tokens. So when somebody's going to be running it of their laptop, obviously they have to create their own post. I'll show you how to do it in, like, two minutes. But I'll.
+
+Cluely: Yeah, it's not an easy. It's not an issue.
+
+Cluely: So those are not issues. Do any. There were two issues is that blockers. And I have. I have no idea what to do with them. I mean, I'm. I don't know if I should ping them. I mean, I'm thinking about. Should I just ping them directly in teams and say, what's up, buddy? Can you help me out? I don't know what's. What's the protocol here? I would try that first. Okay.
+
+Cluely: I mean, I normally give them a day or so, and then. Then I start paying those. I think that's a good idea. Okay, so I'll do that Monday. I will ping them and see what's the hold up, what's holding you off to get things redone. They did something. So for the gitlab, they didn't release. I didn't think they understood how to set it up correctly. So I I traced it and I told them where the issues are. And then. Then they going back. So I. I was right. So now they're setting it up the way we need to set up so I can have access to a particular path. Right. Otherwise I'm getting not found. So I'm not. So once they do that, I think I'll be good to go. But they just. They just need to do that. And I don't know how much time it takes them to do this. I mean, it should be like a two, three minute work. But I don't know how much it takes me to do it, but whatever it is. So, yeah, so those. Those are the two things.
+
+Cluely: So those are. Those are the things that I wanted to talk to you about. I think we're okay.
+
+Cluely: Davis helping me here and there. So when you're gone and Dave is gone, I'll be going to Phyllis. I think you said right, Phil.
+
+Cluely: They know about me. They know I'm coming. They know who I am. Okay. They won't get scared. Okay, good.
+
+Cluely: That's good.
+
+Cluely: Everyone.
+
+Cluely: Knows your ears. Okay, good. Good.
+
+Cluely: The.
+
+Cluely: One. One piece of feedback I'd give for you is you're asking for two months, I would say, for approvals. I don't need to approve what you write to things. Right. Okay.
+
+Cluely: And. And we'll look at that stuff afterwards. I do think I do want to prove, like, the packages that you're using just because I. Yeah, that's what I figured. But other than that, I mean, just do what you need to do. And if we rework it. Sure. I will.
+
+Cluely: Sure. I will just keep everything in the status report. So if anything escalates, I'll let you know, like we're doing now. I think that's just. This seems to be working fast. Actually, it's great because it's. It's really fast communication. I can actually move much faster than I thought I would be doing, which is great. This. This way of doing this wonderful. So my goal is not have you, like, stall, but you can't do anything. Yeah. That tells me. Okay. Yeah, it's good.
+
+Cluely: So the.
+
+Cluely: I didn't try.
+
+Cluely: To.
+
+Cluely: I've been trying to.
+
+Cluely: Wrangle.
+
+Cluely: Where.
+
+Cluely: Do shutter automations run?
+
+Cluely: And.
+
+Cluely: I've come into the.
+
+Cluely: To what I didn't want to hear, which is we really haven't given that any thought.
+
+Cluely: Yet. So I kind of wanted to give you what are the options for where this automation should go on? Because obviously we can run another laptop, but what other. No, you don't want. Yeah. I mean, you don't want to throw it on a laptop. I mean, the git lip probably be the one of the best way of doing it. We can run it on Azure cloud. If you have Azure clouds, we can use functions. We can run AWS cloud. They have a schedule mode. We can run out and a Windows server.
+
+Cluely: Or a Linux. Actually, I prefer more of a link server, but that's fine. If you have Linux, that's fine. We'll just. We can run on a Windows server through the scheduler. I can build a quick scheduler to help schedule it when it runs. So that's not an issue. I just need some place that's not like a laptop.
+
+Cluely: I mean, keeping a laptop is not. It's not a great idea, you know, for obvious reasons. So we. And we. It'll be good to have something that is backed up. Obviously, to a certain extent. And if I don't know how you want, even automatically has redundancy building to. Even a bigger plus. But. But a server is fire. Windows server is fine. We have many options. I mean, what I. I guess I need to better understand. What do you guys have at your disposal? What can I grab quickly?
+
+Cluely: When the server you mentioned before that I could probably give.
+
+Cluely: Yeah.
+
+Cluely: It's quickly.
+
+Cluely: Right?
+
+Cluely: That's that right here. So we run AWS for our server or for most of our. Our work.
+
+Cluely: So that could be an option.
+
+Cluely: But we don't normally allow.
+
+Cluely: AWS things to touch Jira and Confluence, which. So I think that's going to be. That's not a question I wanted to ask you.
+
+Cluely: We need to have an easy pass. I think that might be difficult.
+
+Cluely: And probably more time than it's worth, but it's probably the right answer.
+
+Cluely: Get lab Runners, the team that. That owns it. They said, well, they've done proof of Concepts, and they were. They're able to run Claude and all that stuff in the GitLab Runners. They're hesitant to say that that's the way we should go.
+
+Cluely: They would prefer that we use a server. Okay. So where I'm at the moment is. Is I wanted to go talk to Andrews and say, okay, you're a little hesitant of honest running on your server, which that's totally fine. I get it. It's the production server for you. What would it. What would it look like for us to get our own server? So I guess silly question. I did this before on big company, surprisingly, have a desktop sitting somewhere in the office that I can plug in remote access into it, dump the code there and have it run by itself. It probably will have access to all the things we need access if it's on your network. That could be a very quick, easy, not very kosher solution. But what can you do? So that's. I I did it before, but I used a Linux box for a purpose plus file. We can do a Windows desktop. We can do a Linux box that something sits on the network.
+
+Cluely: You know, and the. And I can remote. I can turn that into it, or I can remote access to it, and then I can just dump the code directly to it. That could be an option. I mean, that. That would be fastest.
+
+Cluely: So. So.
+
+Cluely: Rry.
+
+Cluely: That's awesome. I know that things that I've done have all run through Docker.
+
+Cluely: But I know that's not a good solution. Right. So, yeah.
+
+Cluely: I mean, we can make it work, but everybody's computer. Yeah. I mean, that's. Yeah, I mean, I want to get. Get away as much as possible from personal computer use because who knows?
+
+Cluely: You know what I mean? So cloud would be the best. I mean, that Microsoft, I just did function Azure functions and scheduled.
+
+Cluely: But it all depends on you guys. Yeah. I mean, we'll figure it out. I mean, the most critical things I want to make sure. I haven't sent an email yet, so I don't. I don't even know. I might even have to put. I would. If it. If I don't remember if Outlook gives me a nice link for the hyperlink or it gives me, you know, I don't remember. Unless I run it. I don't know if my. If Outlook will convert it by itself or I have to write a quick conversion little. So anyway, I just need to send. I just need to send one email so I'll know how. How it runs.
+
+Cluely: Right? That's kind of what it is.
+
+Cluely: I know.
+
+Cluely: I.
+
+Cluely: I.
+
+Cluely: At the same time, we.
+
+Cluely: Requested your stuff. I asked for some that saved stuff for a couple mailboxes. I got the notice. They say they were.
+
+Cluely: Updated, so I was going to maybe write a quick little.
+
+Cluely: Script to see. Can I send an email? My guests never are in the exact same thing as you. Yeah, you'll run the same thing because the blocker is something else, right? So you learn the same thing. And I. And I outline the ticket. I mean, if you have a chance to take a look at what the. What I found the blockers are. And if. If they. If. If they read it, they should be able to know how to solve it very quickly.
+
+Cluely: You know, so. Yeah. And it's not the first time they've solved this, so we just. We may have to. At some point, maybe Luca Leander, except for not getting any information because he's. He's been through this before. Sure. So. All right. All right. I just want to. Yeah, it's all good. So. So next week I'm kind of set. I'm going to start moving into the phase six Direction. If I don't hear anything, I'll be pinging them here and there with your blessing. And if there's any issues, I won't be bothering you, obviously. I'll be asking Cell and I'll just going to be sending you just Phillips reports of what's going on so you'll be aware.
+
+Cluely: Might be available.
+
+Cluely: At certain points this next week. But the big thing is I have to make sure that I. If there's something for this whole assessment that we're going through, I have to be focused on that. Sure, sure, sure. I want. I won't bother you at all. I won't even ping you. It's still good.
+
+Cluely: Okay.
+
+Cluely: Just. Just all good. It's all good. That's all good.
+
+Cluely: All right.
+
+Cluely: Thanks, Daniel. Bye. Talk to you soon. Bye-bye.

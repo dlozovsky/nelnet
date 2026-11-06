@@ -1,0 +1,89 @@
+DRAFT, NOT SENT. Written 2026-11-05. Update it on 2026-11-06 with the morning retest, the tickets, Eric's reply, the GitLab check, and Stephanie's time zone. Remove this line before sending.
+
+# Weekly Status: Week 2
+
+**Dates:** 2026-11-02 to 2026-11-06 · **Gate week:** [TBD: Eric has not told me the clock start date]
+
+**Needs action before Wednesday 2026-11-11:** the first structure send is that day at 8 am CST, and the mail server still refuses every send (error 550 5.7.60), retested 2026-11-06. Could you ask the Send As team to look at RITM1089773? If it is not fixed by Tuesday 2026-11-10, the report owner sends the first email by hand.
+
+## Gate progress
+| Automation | Stage | In use by | Maintenance doc |
+|---|---|---|---|
+| 1. Weekly required-fields check (AUTO-188 slice 1) | Ran for real twice on the US filters (2026-11-03 and 2026-11-05). The page publishes to Confluence and the ticket comments work. Both filters returned 0, and the results match the report owner's counts. The email step fails (see Blockers) | Nobody yet | Draft 0.5 on Confluence |
+| 2. Biweekly structure report email (AUTO-188 slice 2) | Dry run on real data matches the report owner's report: 120 of 120 findings, and the Jira keys match in every section. The send fails (see Blockers) | Nobody yet. First send planned for Wednesday 2026-11-11 at 8 am | Draft 0.5 on Confluence |
+
+666 tests pass with the network blocked. Nothing is pushed, because GitLab access is not granted yet.
+
+40 hours this week.
+
+## Done this week
+- Structure report: the dry run on 2026-11-04 found 120 findings (31 initiatives, 12 milestones, 36 epics, 41 stories). The report owner's US report has the same issues in every section, with none missing and none extra. It gave 43 recipients and 2 issues with no reachable person. Both were confirmed in Jira.
+- Weekly check: the first real run wrote its comments on AUTO-188 on 2026-11-03. On 2026-11-05 the real run published the page and then failed at the email step. The page is on Confluence under the Automation Output page, and it has both filters with 0 issues each. Stephanie verified the results against her own counts on 2026-11-05 and they match.
+- The failure line now shows the mail server's reply code (550 5.7.60), never its text. Test added first.
+- The weekly check reads any number of saved filters. A test with three filters passes, so the NULSC instance, which has one more filter than the US instance, needs no code change.
+- Email recipients now default to Bcc, as the report owner confirmed. Test added first.
+- Report owner decisions: the weekly email goes every week. The structure email goes every other week, on Wednesdays at 8 am CST, starting 2026-11-11. The exception list goes to the Odd Squad.
+- Maintenance guide and both requirements documents are on Confluence (guide Draft 0.5, both requirements documents v0.8). The guide has a first full run-through, a failure table, and the Wednesday schedule.
+- Found the GitLab group for the Odd Squad: `nelnetinc/nds/it-delivery/po-process-tools-metrics`. Access comes from an Azure group, through a help desk ticket (RITM1091566).
+- Tested the weekly check on three test issues in the Odd Squad - Testing Only project (OSTO-264, OSTO-265, OSTO-266) with two test filters. The dry run returned the same issues as Jira on both filters (2 and 2, and OSTO-266 is in both). The Client Impact case cannot be tested there, because the field is not in that project.
+- Backed up the code before the last change (git tag and a folder copy).
+- Asked Dave how to organize Confluence for more automations. He suggested a new space for the automation work, with its own page tree. He answered my questions and created the space on 2026-11-06: Odd Squad Automation, key OSA. It uses the standard permissions (anyone can see, add and edit pages, and no one but admins can delete). He, Eric and I are the space admins. My token can create pages there, the same as I can by hand.
+
+## Next week
+- While you are out, I go to Phil Baker first and then Michael Popelka, as you said on 2026-11-03. That covers the mail ticket (RITM1089773) and the GitLab project name.
+- Retest the send as soon as the mail administrators change something (RITM1089773, RITM1089333). Then finish the weekly run with `--resume`, and show Stephanie the test email before the first real send.
+- First structure send, Wednesday 2026-11-11 at 8 am, if the send works. If not, the report owner sends it by hand that week, as she does today.
+- Thanksgiving week: the report owner said to run the weekly check on Wednesday 2026-11-25, and the structure email also goes that day at 8 am CST (her answer 2026-11-06).
+- Run the weekly check again on Thursday 2026-11-12. The counts matched this week with 0 findings, so a week with findings is the next test.
+- Create the GitLab project when access opens (RITM1091566). I will tell Eric the project name before the first push.
+- Fill in section 14 of the guide when you answer the questions below.
+- Phase 6 of AUTO-188 (weekly risk report): notes only. I sent Stephanie my questions on 2026-11-06, and Dave agreed it is the logical next step. I will not build until you agree.
+- Confluence: the top of the page tree is built in the new Odd Squad Automation space (key OSA), with the guide and both requirements documents under AUTO-188. I will mark the old copies as moved. The weekly check moves to the new parent page (Automation Output under AUTO-188) after you have seen this update. For now the weekly page stays under Dave's Automation Output page.
+
+## Blockers and asks
+| Blocker | Who can unblock | Needed by |
+|---|---|---|
+| The mail server refuses every send with error 550 5.7.60: the structure email, the exception list, and the weekly email. It also refused a test from my own account, so the Send As permission on the Odd Squad mailbox may not be the only cause. RITM1089773 (delegated send) has no answer. RITM1089333 (mailbox groups) is waiting on my acceptance. I retested the structure send on 2026-11-06 and got the same error, and neither ticket has changed since 2026-11-05 | Mail administrators. Eric, could you ask the Send As team to look at RITM1089773? If it is not fixed by Tuesday 2026-11-10, the report owner sends the 2026-11-11 email by hand | Wednesday 2026-11-11, 8 am |
+| GitLab access: I need the Developer role in the Odd Squad group. Ticket RITM1091566 is open. No project can be created before it closes | Help desk | [TBD] |
+| Clock start date email | Eric | [TBD] |
+| Written authorization for NULSC data, and where the NULSC run happens | Eric, security owner | Before N1 |
+| Does November 20 still hold if GitLab access comes late? The clock starts at GitLab access | Eric | [TBD] |
+
+## Questions for Eric
+1. Test issues: findings are rare, so I made the three test issues by hand and two test filters, and the weekly check passed on them (see Done this week). The project cannot show the Client Impact case. Are you OK with these three issues staying until the acceptance run is done, and how do we test the Client Impact case? I will delete the issues and the test filters afterward.
+2. Dry run: the guide says to do a dry run before every real run. Should it stay required, or optional? I will change the guide to match.
+3. While I wait for GitLab access and the mail fix, what do you want me to work on: AUTO-56 (the documentation agent) or the next phase of AUTO-188? For AUTO-56 I need a timebox. [TBD: what time do you want me to give it?]
+4. Code scan and the long-term code reviewer: who runs the scan, and does the reviewer stay you after the handoff?
+5. Heads-up, no decision needed: Dave created a new Confluence space for the automation work, Odd Squad Automation (key OSA). You are a space admin, with Dave and me. He says you do not need to approve writes to a space. The guide and both requirements documents are already there, under AUTO-188. Until you have seen this, the weekly page stays under the old Automation Output page, and I will tell you when it moves.
+6. The email sent by the report owner on 2026-11-04 has the US and NULSC links. The tool's email has the US link only. Do we add the NULSC link after N1 and your written authorization?
+
+## Section 14 owners (maintenance guide)
+The guide has seven roles with no name. Two are known. For the others, a name after TBD is a guess for you to confirm or change.
+
+| Role | Who |
+|---|---|
+| Primary maintainer | Daniel, until the handoff. After that, [TBD: a person from your team] |
+| Backup maintainer | [TBD: Dave?] |
+| Report owner | Stephanie Anderson |
+| Support for tokens | [TBD: who issues or resets a Jira and Confluence personal access token?] |
+| Support for Jira | [TBD: the Jira administrators, or a person] |
+| Support for Confluence | [TBD: Dave?] |
+| Support for SMTP | [TBD: the mail administrators who handle RITM1089773] |
+
+Two questions only you can answer:
+1. Who on your team takes over as primary maintainer, and when? If you do not know yet, tell me when you will.
+2. Does the code reviewer stay you, or does that move too?
+
+When you answer, I will fill in section 14 and publish the next version of the guide.
+
+## Decisions made
+- Report owner: the weekly email goes every week. The structure email goes every other week, on Wednesdays at 8 am. The exception list goes to the Odd Squad. Her 2026-11-04 email to me was only a run for me, not a send.
+- Report owner: the exception list and every message use Bcc. A finding is what the page query returns, with no rule of the tool's own.
+- Eric: the weekly page goes under Dave's Automation Output page for now. Up to three status comments for each run on AUTO-188 are approved.
+
+## Risks to the gate
+- The first structure send is Wednesday 2026-11-11. If the mail server still refuses the send that day, the report owner sends by hand, and the tool's first send moves to the next round, 2026-11-25.
+- Nothing has been sent by the tool. The email layout in Outlook, and the link as a clickable link, are untested until the mail server works.
+- GitLab access has no date. Without it nothing is pushed, and the code scan and the NULSC laptop test wait.
+- NULSC: my profile change is approved (2026-11-04). The NULSC account request (RITM1091818) is assigned as of 2026-11-06. I have not received the EQUIP form yet (as of 2026-11-05), so clearance is pending, and Eric is ordering the new laptop. The timing depends on the Department of Education, and I will tell Eric each step as I hear it. Clearance is not the written authorization the settings file needs. No NULSC data is on this laptop.
+- Thanksgiving (Nov 26) is in gate week four, so treat Nov 20 as the real finish.

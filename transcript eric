@@ -259,3 +259,28 @@ I work on Phase 6 notes and requirements next week unless you say otherwise.
 Point 2 is the one that matters. His reply is the written record I need before changing the approval lines in CLAUDE.md. Until he answers, those lines stay as they are.
 Point 5 stands in for question 3 from the status. It lets him answer with one word. If he says yes, you can drop question 3 from the Week 3 status.
 I left out the “Luca” name. Add the name to point 4 only after you know who that is.
+
+Subject: Where the gate automations run after the gate: options for your talk with Andres
+
+Eric,
+
+You said on the call that the team has not decided where the automations run, and that you plan to talk to Andres. Here are the options, best first. I am building nothing for this. The gate stays a person starting each run.
+
+#	Option	For	Against
+1	Windows server on the Nelnet network, with Task Scheduler	The code already runs on Windows as it is. Jira, Confluence and mail are all inside Nelnet. Run history is in Jira comments, so the server holds no state	Needs a server and an owner for it
+2	VDI, if it is persistent (Andres mentioned it)	On the Nelnet network, Windows, and backed up by the platform. Better than a laptop for a person starting each run	A scheduled run needs the session to stay alive. A non-persistent VDI erases the Python install and the stored tokens. Not tested
+3	Linux server on the Nelnet network	Same network benefit, and the team prefers a server	Tokens now come from the Windows credential store, so secrets need a small code change
+4	Spare desktop, with remote access	Fastest to start	No backup. One person depends on it. A stopgap only
+5	GitLab Runners	Already exists	The Runners team is hesitant and prefers a server. The project rule says GitLab runs the tests only
+6	Azure Functions	No server to patch	Reaching Jira Data Center from Azure is unproven. Secrets and the credential store need a rewrite
+7	AWS	The company’s usual platform	AWS is not allowed to touch Jira and Confluence
+
+My recommendation is option 1. If a persistent VDI can run a scheduled task under a service account when nobody is logged in, option 2 is the same thing and I would take it. Whichever you pick, these three things are needed:
+
+A service account for the run. Today the tokens are mine. Jira and Confluence tokens, and permission to send as the Odd Squad mailbox, belong to that account. The mail tickets (RITM1089773 and RITM1089333) should fix the send for that account too, so the mail team solves it once.
+An owner on your team for the server or VDI, and its credentials.
+A failure alert. The Jira status comments show a failed run, but someone has to read them.
+
+The decision I need from you: who owns the host and the service account, and does the rule of “no unattended service identity” change for that account. No reply is needed before you are back, and the gate does not wait on it.
+
+Daniel

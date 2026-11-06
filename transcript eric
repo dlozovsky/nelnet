@@ -217,3 +217,45 @@ Cluely: Just. Just all good. It's all good. That's all good.
 Cluely: All right.
 
 Cluely: Thanks, Daniel. Bye. Talk to you soon. Bye-bye.
+
+================
+I read the pasted call as a transcript of your talk with Eric. I saved my notes in eric-call-2026-11-06.md and added an entry to the daily log. I changed no code, settings, CLAUDE.md or Confluence page. The transcript is rough and has no speaker labels, so each point below is how I read it.
+
+What I took from the call
+
+Gate and email: The gate needs a running automation that someone else can run. Eric wants the email working, but it is not a blocker.
+Monday pings: You ping the mail and GitLab owners on Monday 2026-11-09. Eric agreed.
+Coverage: Phil Baker covers while Eric and Dave are out.
+Review and section 14: Eric will review the code and the documents. He can answer section 14 now or when he is back.
+Where it runs after the gate: Nobody has decided. AWS can’t touch Jira and Confluence, and the GitLab Runners team prefers a server. Eric will ask Andrews about getting a server.
+Mail fix: Eric said the mail tickets are written clearly enough for a fast fix, and that the mail team has solved this before. The transcript doesn’t make clear who the “Luca” he mentioned is, so I recorded no name.
+
+Decisions to confirm in writing before anything changes
+
+Approvals: I read Eric as saying the tool’s Jira comments and Confluence pages no longer need his approval, but new packages still do. The transcript could mean something narrower. CLAUDE.md still limits Jira and Confluence writes, so I left it alone. The notes file has a short draft for you to confirm this with Eric.
+Hosting, scheduler and admin UI: CLAUDE.md puts these outside the gate, so I’m treating them as open items for after it. I built nothing for them.
+Phase 6: Eric didn’t object, but he didn’t answer question 3 either. I’d keep it listed as “no objection on the call, please confirm”.
+
+A mistake in the status you already sent
+
+Line count: The status says “The code is 37 files and about 5,600 lines”. That is the tests only.
+Real numbers: I counted blank lines too. The app is 15 files and 3,235 lines. The tests are 37 files and 5,649 lines. Together that’s about 8,900, so your “about 8,000” on the call was close.
+Fix: Use the split in the Week 3 status and say it replaces the earlier line. CODEMAP.md is two lines off in each count (3,233 and 5,647), so refresh it at the next commit.
+I wrote the call with Eric into `docs/eric-call-2026-11-06.md` and the daily log, and saved a memory note. I found a wrong figure in the status you sent: "5,600 lines" is the tests only. Nothing else changed, and no rules or code were touched.
+Send Eric the written confirmation?
+Yes, tighten it
+
+Yes, tighten it
+
+Here is the tightened version, ready to paste into Teams. I also saved it in eric-call-2026-11-06.md.
+
+Eric, thanks for the call. Here is what I took from it. Please reply “yes” or correct me.
+
+The gate needs a running automation that someone else can run. The email is wanted, but it is not a blocker.
+I do not need your approval for the comments and pages the tool writes in Jira and Confluence. You review them afterward. I still ask you before I add a package. Is that right for both Jira and Confluence?
+Where the tool runs after the gate is yours to settle with Andrews. I build nothing for it.
+I ping the mail and GitLab owners on Monday, and I go to Phil Baker while you are out.
+I work on Phase 6 notes and requirements next week unless you say otherwise.
+Point 2 is the one that matters. His reply is the written record I need before changing the approval lines in CLAUDE.md. Until he answers, those lines stay as they are.
+Point 5 stands in for question 3 from the status. It lets him answer with one word. If he says yes, you can drop question 3 from the Week 3 status.
+I left out the “Luca” name. Add the name to point 4 only after you know who that is.

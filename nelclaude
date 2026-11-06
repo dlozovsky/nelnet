@@ -1481,4 +1481,72 @@ Open items with the guide that remain by design: the GitLab address, the weekly 
 
 
 ============================================================
+Today’s checks are done: the mail retest failed again, the tickets haven’t moved, and GitLab isn’t open. What’s left:
+
+Before the status goes out
+
+Delete runs\biweekly_structure-2026-11-06-test-send.json, if you haven’t.
+Decide whether to nudge Eric on the mail now or leave it to the status.
+Fix the OSTO wording. Either say which filter caught which issue, or change “all three passed” to “the dry run counts matched Jira on both test filters (2 and 2)”.
+Clock start date and AUTO-56 timebox are still TBD in the status. Leave them as questions to Eric, or fill them in if you know them.
+Remove the “DRAFT, NOT SENT” first line, then send to Eric and Dave.
+
+Confluence
+6. Replace Open item 1 with the new “Stephanie verified slice 1” text.
+7. Republish the Slice 1 requirements as v0.7.
+8. Check whether Dave has created the space. If he has, build the top level only.
+
+Messages
+9. Stephanie: the time zone and the Thanksgiving weekly run day (2026-11-25 or 2026-11-27).
+
+End of day
+10. The daily log entry. I’ll write it when you say so.
+
+Optional, none asked for: add the Thanksgiving line to the status risks, and update the Automation Registry, which my notes say to update with each change.
+
+Nothing in the code is outstanding for today.
+
+draft question to stephanie
+
+Here is a short message for Stephanie:
+
+Hi Stephanie, two quick scheduling questions.
+
+For the structure email on Wednesdays at 8 am, which time zone do you mean? I want the first send on 2026-11-11 to go out when you expect it.
+Thursday 2026-11-26 is Thanksgiving, the day of the weekly required-fields check. Do you want to run it on Wednesday the 25th or Friday the 27th that week? I’ll run the tool the same day, so our counts match.
+
+Thanks!
+
+One optional line to add, if you want her to hear it from you before Wednesday:
+
+The mail server still refuses my test sends. If it isn’t fixed by Tuesday, I’ll let you know so you can send the 2026-11-11 email by hand as you do now.
+
+Whether to add that depends on whether you’ve decided to tell her. Once the cutoff is in the status, Eric will know. Do you want it in this message too?
+
+just asked her
+
+Ritchie, Eric and Newsom, David  an update before you’re out. While I wait for GitLab access and the mail fix, I’m preparing notes for the next phases of AUTO-188 and for AUTO-56. It’s reading and notes only. I won’t build anything or change the gate. If you’d rather I work on something else, tell me.
+ 
+Daniel, let me know when you are free to talk this through
+
+Now it’s clear: he is replying to the update you posted in the group chat with Eric and Dave. A call about it usually means he wants to redirect or add something, so bring a short proposal.
+
+Reply with a time, for example:
+
+Free at [time] today. I can talk then.
+
+What to bring
+
+What you want from him. Which to start while you wait: AUTO-56 or the next AUTO-188 phase. If AUTO-56, how much time he’ll give it.
+Your lean. AUTO-56 with a timebox, because the next AUTO-188 phases depend on decisions that aren’t made (hosting, the model-call approval, the viewer platform, Nicolette’s time). This is only my lean.
+The coverage question. Your posted message left it out. Who do you go to next week for the mail block (RITM1089773) and the GitLab project name? The first send is Wednesday 2026-11-11.
+Where the gate stands. The mail is still blocked, GitLab is not open, and both slices match Stephanie’s results.
+The new space. Dave is creating “Odd Squad Automation”. Eric only needs to know it exists.
+
+What I’d avoid
+
+Don’t commit to a build date for anything new until you hear his timebox for AUTO-56. CLAUDE.md says the gate comes first, and the end date depends on GitLab access.
+Don’t bring up all six questions from the status. Keep to the three or four above and say the rest are in the status.
+
+If you tell me what he asks for, I’ll update the status draft before you send it. I haven’t changed any files.
 

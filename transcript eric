@@ -296,3 +296,37 @@ Eric, thanks for the call. Here's what I took from it. A "yes" or a correction i
 	5.	I work on Phase 6 notes and requirements next week unless you say otherwise.
 	6.	Who should be the second person to run it from the guide for acceptance?
 	7.	Is NULSC still part of the gate, given the clearance and the office trip, or can it follow?
+
+================
+Here are both, tightened. Check the spelling of Anders' name before you send.
+
+**1. Teams confirmation (send today)**
+> Eric, thanks for the call. Here's what I took from it. A "yes" or a correction is all I need.
+> 1. Gate: a running automation that someone else can run from the guide. Email is wanted but not a blocker.
+> 2. Approvals: the tool's Jira comments and Confluence pages don't need your approval first. You review them after. New packages still go through you.
+> 3. Hosting: yours to settle with Anders. I'm building nothing for it.
+> 4. Next week: I ping the mail and GitLab owners Monday, and go to Phil while you're out.
+> 5. I work on Phase 6 notes and requirements next week unless you say otherwise.
+> 6. Who should be the second person to run it from the guide for acceptance?
+> 7. Is NULSC still part of the gate, given the clearance and the office trip, or can it follow?
+
+**2. Hosting email (no reply needed until he's back)**
+> Subject: Where the automations run after the gate
+>
+> Eric, here are the options for your talk with Anders, best first. Nothing here blocks the gate, and I'm building nothing for it.
+>
+> 1. **Windows server on the network, with Task Scheduler.** The code runs as it is, and Jira, Confluence and mail are all reachable. Needs a server and an owner.
+> 2. **Persistent VDI.** The same thing, if it can run a scheduled task under a service account with nobody logged in. A non-persistent VDI won't work.
+> 3. **Linux server.** Works, but secrets need a small code change.
+> 4. **Spare desktop owned by you or Dave.** Fastest, but no backup. Stopgap only.
+> 5. **Not recommended:** GitLab Runners (that team prefers a server), Azure Functions or Power Automate (both need a gateway to reach Jira), AWS (not allowed to touch Jira or Confluence).
+>
+> My pick is 1, or 2 if it qualifies. Any of them needs three things:
+> - A service account that owns the Jira and Confluence tokens and the send permission. The open mail tickets should cover that account too.
+> - An owner on your team for the host.
+> - Someone who reads the failure comments in Jira.
+>
+> What I need when you're back: who owns the host and the service account, and whether an unattended service account is allowed.
+>
+> Daniel
+

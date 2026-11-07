@@ -284,3 +284,15 @@ A failure alert. The Jira status comments show a failed run, but someone has to 
 The decision I need from you: who owns the host and the service account, and does the rule of “no unattended service identity” change for that account. No reply is needed before you are back, and the gate does not wait on it.
 
 Daniel
+
+==#==#=================
+Teams confirmation (send today)
+
+Eric, thanks for the call. Here's what I took from it. A "yes" or a correction is all I need.
+	1.	Gate: a running automation that someone else can run from the guide. Email is wanted but not a blocker.
+	2.	Approvals: the tool's Jira comments and Confluence pages don't need your approval first. You review them after. New packages still go through you.
+	3.	Hosting: yours to settle with Anders. I'm building nothing for it.
+	4.	Next week: I ping the mail and GitLab owners Monday, and go to Phil while you're out.
+	5.	I work on Phase 6 notes and requirements next week unless you say otherwise.
+	6.	Who should be the second person to run it from the guide for acceptance?
+	7.	Is NULSC still part of the gate, given the clearance and the office trip, or can it follow?

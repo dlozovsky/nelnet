@@ -667,5 +667,16 @@ I agree with the direction, but four things need fixing before anyone runs these
 6. You paste the owner line.
 
 Do you want me to run steps 1 to 4 with the requirements files kept, or deleted as you wrote?
+
+==========
+Its pushback is right. Keep the files, which is the cheaper option. Tell it:
+
+"Keep the requirements files in the repo, each marked at the top 'Copy. The Confluence page is the master.' Run steps 1 to 4 in your order. Write the CLAUDE.md text for me to paste, and use your owner line as written."
+
+Then do your two parts: paste the CLAUDE.md text, and paste the owner line into section 14 on Confluence. After switching to main, run one dry-run settings load to confirm it ignores link_label.
+
+This finishes the docs cleanup. Next is mail and the NULSC run, not more doc work.
+
+Decision log: `2026-11-09: Requirements kept in repo as marked copies; Confluence is master (pending NAM code-scan answer).`
  
  

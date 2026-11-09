@@ -611,5 +611,17 @@ The labeled-link change is committed on `html-email` as `18c630d`. It isn't merg
 - **Wording:** Paste its subject and intro when it turns up, and I'll match the wording in your local settings.
 - **Deadline:** If it's still missing on Tuesday, the current wording stays for Wednesday.
 - **Log:** The daily log has all of this.
+
+=====================#
+Paste this:
+
+"Confluence (the Odd Squad Automation space) is now the master for the open items, the maintenance guide, and the slice 1 and slice 2 requirements. On main:
+1. Commit the leftover slice1-weekly.md v0.8 edits on their own, so nothing is lost.
+2. Replace the tracked requirements files in docs with a short README that says the docs live in the Odd Squad Automation Confluence space and lists the page titles. No URLs or page ids.
+3. Add the same pointer to the code map and CLAUDE.md, so future edits go to Confluence and not the repo.
+4. Update CLAUDE.md: requirements and guide changes are written as Confluence-ready text for me to paste, not as repo files.
+5. Run the tests, commit, and switch to main for Wednesday. Leave html-email unmerged."
+
+Then add an owner line to the maintenance page on Confluence yourself. Put "TBD: Eric to name" if you don't have a name yet.
  
  

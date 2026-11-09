@@ -623,5 +623,49 @@ Paste this:
 5. Run the tests, commit, and switch to main for Wednesday. Leave html-email unmerged."
 
 Then add an owner line to the maintenance page on Confluence yourself. Put "TBD: Eric to name" if you don't have a name yet.
+
+=============================================
+I agree with the direction, but four things need fixing before anyone runs these steps.
+
+**Why I agree**
+- One master is better than three copies. Right now the requirements exist in the repo, in the ignored `docs` folder and in Confluence, and I've had to keep them in sync by hand.
+- Dave said the whole space moves to Cloud, so a Confluence master moves with it.
+- The README should name page titles only. Page ids will change.
+
+**What needs fixing**
+
+1. **Step 1 doesn't save the slice 2 changes.**
+   - `main` has slice 1 at v0.6 and slice 2 at v0.7. The v0.8 and v0.9 slice 2 edits are only in the `html-email` commit.
+   - Step 1 commits slice 1 v0.8 on `main`, which is fine. Step 2 then deletes both files from `main`.
+   - Merging `html-email` later will then conflict, because that branch modifies a file `main` deleted. The fix is simple: drop the file at merge time. Confluence holds the real text. Just expect it.
+
+2. **I can't edit `CLAUDE.md`.**
+   - The edit I tried earlier was blocked by the session's self-modification rule, so steps 3 and 4 need you.
+   - I can write the exact text for you to paste. It would say requirements and guide changes are Confluence-ready text, not repo files.
+   - I can edit `CODEMAP.md` and the README.
+
+3. **I can't edit Confluence.**
+   - I have no Confluence access, and the project rules say I make no real calls. You paste.
+   - The owner line: I assume you mean section 14 of the guide, where the primary maintainer is "Daniel, until the handoff". For the part after the handoff, here is the text to paste: `Primary maintainer: Daniel, until the handoff. After that: TBD: Eric to name.`
+   - If you meant a different line, tell me which.
+
+4. **Wednesday's tool send would use the old email.**
+   - On `main`, the email has the bare link, not Stephanie's label. A real send needs mail, which is still blocked, so Stephanie sends by hand.
+   - If mail unblocks before Wednesday, test-send from `html-email` first. The test send is also what clears the merge.
+   - Switching to `main` is safe for the dry run. Nothing in the settings loader refuses unknown keys, so the `link_label` line in your `settings.toml` is simply ignored. I haven't run the load on `main`, so I'd check it right after you switch.
+
+**One risk to consider on step 2**
+- **Open question:** The open question about NAM and the required artifacts for the code scan isn't answered. If NAM wants requirements in the repo, deleting them now means putting them back.
+- **Cheaper alternative:** Keep the README pointer and leave the two requirements files in the repo, marked "copy, Confluence is the master". That costs nothing and avoids the conflict.
+
+**Order I'd use**
+1. Commit slice 1 v0.8 on its own.
+2. Write the README pointer and update `CODEMAP.md`.
+3. Run the tests and commit.
+4. Switch to `main`.
+5. You edit `CLAUDE.md`.
+6. You paste the owner line.
+
+Do you want me to run steps 1 to 4 with the requirements files kept, or deleted as you wrote?
  
  

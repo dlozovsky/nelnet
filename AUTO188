@@ -579,5 +579,37 @@ Paste this into Nelnet Claude:
 
 "Commit the html-email branch with the tests and doc updates. Don't merge to main until a test send to my own address shows the labeled link correctly in Outlook. Don't add a label to the weekly email. Nobody asked for one. In my local settings.toml, set link_label to "bi-weekly reports (US)" and page_url to the short page address, and make sure settings.toml stays untracked. Don't upload the Confluence copies yet. When Stephanie's earlier email turns up, I'll paste its subject and intro so you can match the wording. If it isn't here by Tuesday, we keep the current wording for Wednesday."
 
+===================================
+Everything on your list is done. I'm writing the summary now.
+
+The labeled-link change is committed on `html-email` as `18c630d`. It isn't merged and it isn't pushed. `main` stays at `7e707e2`.
+
+**The commit has 8 files**
+- **Code:** `notifier.py`, `settings.py` and `smtp_sender.py`.
+- **Tests:** the three test files, 15 new tests.
+- **Settings and requirements:** `settings.example.toml` and the slice 2 requirements, now v0.9.
+- **Commit message:** It says plain what changed, with no em dashes, and has the co-author line.
+- **Hiccup:** My first commit attempt didn't run, because `git add` returned an error about the ignored `docs` folder. I reran it, and the commit worked.
+
+**What's in git and what isn't**
+- **In git:** Only the two requirements files in `docs` are tracked. The guide and both Confluence copies are in the ignored part of `docs`, so they aren't in the commit.
+- **Not uploaded:** I uploaded none of the Confluence copies.
+- **Left out:** `slice1-weekly.md` still has its v0.8 edits, uncommitted. They aren't part of this change.
+
+**Your local `settings.toml`**
+- **Settings:** `link_label` is `bi-weekly reports (US)`, and `page_url` is the short address `https://confluence.nelnet.net/pages/viewpage.action?pageId=448278822`.
+- **Check:** I loaded the file and it reads cleanly. I printed only those two values.
+- **Untracked:** Git ignores it through `.gitignore` line 11, and `git ls-files` shows nothing for it.
+
+**What's unchanged**
+- **Weekly email:** It has no label, and no code touches it.
+- **Merge condition:** The merge waits until a test send to your own address shows the labeled link correctly in Outlook. That needs working mail.
+
+**Your working folder is on `html-email`.** A run from the repo root, such as Wednesday's dry run, uses the labeled-link code. That's safe for a dry run, since it only reads. If you'd rather run `main` for Wednesday, switch back first with `git switch main`.
+
+**Stephanie's earlier email**
+- **Wording:** Paste its subject and intro when it turns up, and I'll match the wording in your local settings.
+- **Deadline:** If it's still missing on Tuesday, the current wording stays for Wednesday.
+- **Log:** The daily log has all of this.
  
  

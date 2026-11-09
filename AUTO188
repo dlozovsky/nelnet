@@ -494,5 +494,85 @@ The guide asks for a dry run first because a real run writes three comments on A
 
 ------------------------------------------
 your profile change to allow NULSC and US access has been approved.  It will work it's way through the system and you should be asked to fill out an EQUIP form for clearance.   Keep me informed on what you are hearing.  The clearance is the first step to getting the access.   I will also order you a new laptop that will be used once you have that access.   This could take days or it could take weeks, we are at the mercy of the department of education for the clearance process.
+ ============================================================================
+tephanie’s answer triggers the labeled-link change. I’m on a local branch, html-email, writing the tests first.
+
+Ran a command, edited 2 files
+Now the notifier and the example settings.
+
+Edited 2 files, read 2 files, ran 2 commands
+One test string has a escaping slip; I’m fixing it, then rerunning the suite.
+
+Edited test_structure_settings.py, ran 4 commands
+The structure email can now show the page link as “bi-weekly reports (US)”, as Stephanie asked. I built it on a local branch, html-email. I haven’t committed, and main is untouched.
+
+What Stephanie’s answers settled
+
+Link text: She wants “bi-weekly reports (US)”.
+Link target: Her reply contains a long safelinks address. That is Outlook rewriting her link, so don’t copy it. The real target is https://confluence.nelnet.net/pages/viewpage.action?pageId=448278822.
+Page refresh: The page is always current, so there’s nothing to do on it before a send. My Wednesday sequence stands without a refresh step.
+Her own email: She sent her last email to the recipients in a separate message. I haven’t seen it, so the subject and intro wording are not matched yet.
+What I built
+
+New setting: An optional structure.link_label, empty by default.
+With the label set: The email gets an HTML part (the intro, then the link under the label). The plain-text part with the bare link stays beside it, so a client that can’t show HTML still gets the link.
+With it empty: The email is exactly as before, and the sender call is the same. A sender with the old signature still works.
+Checks: The label must be one short line, and page_url must start with http:// or https://. The label and link are escaped in the HTML.
+Unchanged: The exception list and the weekly email stay plain text. Bcc is unchanged.
+Tests
+
+I wrote the tests first and watched them fail.
+There are 15 new tests, and the suite now passes: 681 tests, up from 666, with the network blocked.
+One of my new tests had a string-escaping slip, which I fixed.
+Docs updated in the same change
+
+Requirements: Slice 2 requirements are v0.9, as a master and a Confluence copy.
+Guide: The maintenance guide’s settings table and “what to change” table cover link_label, as a master and a Confluence copy.
+Settings and log: settings.example.toml and the daily log.
+Uploads: None of the Confluence copies are uploaded yet.
+Not done
+
+Local settings: Your local settings.toml is unchanged. To use the label, add link_label = "bi-weekly reports (US)" and set page_url to the short address.
+Outlook check: A test send needs working mail, so how Outlook displays it is unconfirmed.
+Weekly email: It stays plain text. Ask Stephanie whether the weekly email to the Odd Squad needs a label too.
+Wording: Her real email wording is not matched yet. When her separate email arrives, send me the subject and intro.
+Monday’s gate items are still yours. Check Eric’s and Stephanie’s replies, then the mail tickets, and ping Phil Baker if nothing has moved. Warn Stephanie that Wednesday’s send may fall to her. Then ping the GitLab owner.
+
+The structure email can now show the page link as "bi-weekly reports (US)". It's built on the local branch `html-email`, uncommitted, with 15 new tests; the full suite is 681 passing with the network blocked. Not tried with a real Outlook or a real send, and your local `settings.toml` is unchanged.
+
+Commit the html-email branch?
+
+Please see my responses below:
+
+ 
+
+From: Lozovsky, Daniel (Insight Global) <129902@nelnet.net>
+Sent: Saturday, November 7, 2026 12:06 PM
+To: Anderson, Stephanie <Stephanie.Anderson@nelnet.net>
+Cc: Ritchie, Eric <Eric.Ritchie@nelnet.net>; Newsom, David <David.Newsom@nelnet.net>
+Subject: Re: Bi-Weekly Initiative/Milestone/Epic Report
+
+ 
+
+Stephanie, several questions I forgot to ask about the email you send out:
+
+Is a plain link acceptable in the email, or do you need a labeled hyperlink like the one in your 11-04 email? A label would mean a code change on my side.
+Please have the link appear as follows: bi-weekly reports (US)
+
+Is this shorter link to the same page fine? https://confluence.nelnet.net/pages/viewpage.action?pageId=448278822
+Could you send me a copy of the last email you sent to the assignees and reporters? I’d like to match its wording.
+Sent in a separate email.
+
+Before you send, do you do anything on the page first, such as an edit or a refresh, so the totals are current? Or is the page always current when you open it?
+The Confluence page is always current so no need to do anything on this one.
+
+ 
+
+Thanks, 
+
+ 
+
+Daniel 
+
  
  

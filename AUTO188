@@ -574,5 +574,10 @@ Thanks,
 
 Daniel 
 
+=========================
+Paste this into Nelnet Claude:
+
+"Commit the html-email branch with the tests and doc updates. Don't merge to main until a test send to my own address shows the labeled link correctly in Outlook. Don't add a label to the weekly email. Nobody asked for one. In my local settings.toml, set link_label to "bi-weekly reports (US)" and page_url to the short page address, and make sure settings.toml stays untracked. Don't upload the Confluence copies yet. When Stephanie's earlier email turns up, I'll paste its subject and intro so you can match the wording. If it isn't here by Tuesday, we keep the current wording for Wednesday."
+
  
  

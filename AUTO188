@@ -731,3 +731,69 @@ Week 3 status
 Drop: Questions 2, 3, 4 and 6.
 Keep: Question 7, shown as waiting on Eric.
 Add: The Client Impact follow-up to Stephanie.
+
+Here's the summary, from the logs and this chat.
+
+## Yesterday, Monday 2026-11-09
+
+**Phase 6 (AUTO-323)**
+- Stephanie answered the seven questions. The report is monthly, not weekly, and runs from a Jira dashboard Dave set up. I rewrote the requirements as v0.2.
+- She sent the Risk & Opportunities Monthly Audit document, and the requirements became v0.3. The owner is the assignee, else the reporter. Check 1 is a comment that mentions the owner, and check 2 is an email, with no comment on those tickets.
+- I dropped the owner-names exception, because no page lists owners.
+
+**Eric's answers to the Week 2 questions**
+- A dry run is required only when testing, not for production runs.
+- Phase 6 comes before AUTO-56.
+- The code scan runs by itself in GitLab.
+- The NULSC link goes in the email after written authorization.
+- Section 14 is still open.
+
+**The labeled link**
+- Stephanie wants the link shown as "bi-weekly reports (US)", with the short page address.
+- I built the optional `link_label` setting on the branch `html-email`, with 15 new tests, and 681 tests pass. It's committed and not merged.
+- Your local settings have the label and the short address.
+
+**Docs cleanup on `main`**
+- Slice 1 requirements v0.8 are committed.
+- The README and code map point to Confluence.
+- The requirements files are marked as copies.
+- The `CLAUDE.md` paragraph is committed.
+
+**Mail**
+- Both tickets closed. The test send was still refused with 550 5.7.60.
+- You opened the new request RITM1092783 and messaged Phil.
+
+**The tracker:** I rewrote `outstanding.md` as the one list for all ten initiatives.
+
+## Today, Tuesday 2026-11-10, so far
+
+**Mail**
+- **Ken Hicks:** He first showed the Send on Behalf list, then the Send As list, with your login and the group on it.
+- **Test send:** It was refused again.
+- **Diagnosis:** The error class shows login and recipient were accepted. Only the From address is refused. That corrected my earlier idea that SMTP was blocked.
+- **Phil:** He found the trace belongs to the Exchange group, not Ken. You sent him the facts.
+- **Wednesday:** Stephanie sends by hand.
+
+**GitLab:** The group page still shows 404. You commented on RITM1091566 and sent Phil a lower-priority nudge.
+
+**Confluence**
+- The maintenance guide is Draft 0.6, with the routine without a dry run, the corrected 550 rows, and section 14 filled in where known. You re-uploaded it.
+- Open items 3, 6, 8, 9 and 12 are updated, and the page matches the local copy.
+
+**Stephanie's replies**
+- Her five answers on the audit gave Phase 6 requirements v0.4. PM is out and Closed tickets are excluded. The comment and email wording are in.
+- On slices 1 and 2, the link alone is enough, and the Client Impact field is now on the OSTO project.
+- Her forwarded past email didn't reach you. You asked her to resend.
+
+## What's open
+
+| Area | Open |
+|---|---|
+| Mail | The Exchange group's trace, and RITM1092783 |
+| GitLab | RITM1091566 |
+| Stephanie | The resent email (wording match), the 90-day email format, who signs |
+| Dave | The filter ids for Phase 6 |
+| Eric | Section 14, the owner mention and the new write on risk tickets |
+| Your side | The Client Impact test, and the Week 3 status on Friday |
+
+Tonight, Jira and Confluence are down from 7 PM to 1 AM CT. Tomorrow at 8 am CST, Stephanie sends by hand. Nothing else is due tonight.

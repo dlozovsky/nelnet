@@ -679,4 +679,55 @@ This finishes the docs cleanup. Next is mail and the NULSC run, not more doc wor
 
 Decision log: `2026-11-09: Requirements kept in repo as marked copies; Confluence is master (pending NAM code-scan answer).`
  
- 
+ =================================
+here are questions that eric answered from the weekly status Questions for Eric
+Questions 1, 2, 4 and 6 can wait until you are back. Questions 3 and 7 need an answer before you leave, if you can. Question 5 needs no answer.
+
+(Can wait.) Test issues: findings are rare, so I made the three test issues by hand and two test filters, and the weekly check passed on them (see Done this week). The project cannot show the Client Impact case. Are you OK with these three issues staying until the acceptance run is done, and how do we test the Client Impact case? I will delete the issues and the test filters afterward.   Stephanie should be able to add this to your project. 
+(Can wait.) Dry run: the guide says to do a dry run before every real run. Should it stay required, or optional? I will change the guide to match.  It's a requirement when testing, not for production runs.   
+(Before you leave, if you can.) After the gate, is it OK to finish Stephanie's AUTO-188 phases (Phase 6 next) before starting AUTO-56? yes
+(Can wait.) Code scan: who runs the scan?  it will auto run in gitlab
+(No answer needed.) Heads-up: Dave created a new Confluence space for the automation work, Odd Squad Automation (key OSA). You are a space admin, with Dave and me. He says you do not need to approve writes to a space. The guide and both requirements documents are already there, under AUTO-188. Until you have seen this, the weekly page stays under the old Automation Output page, and I will tell you when it moves.
+(Can wait.) The email sent by the report owner on 2026-11-04 has the US and NULSC links. The tool's email has the US link only. Do we add the NULSC link once you have authorized the first NULSC run in writing? yes
+Section 14 of the maintenance guide has seven roles, and the table below shows who I think fills each one. Who on your team takes over as primary maintainer, and when? If you do not know yet, tell me when you will. Please also confirm or change the other names after TBD in the table.   I hadn't thought about this.  Let me circle the wagons here
+Ran 4 commands
+I’ve recorded Eric’s answers; the summary is next. I changed no code or settings, and nothing is on Confluence yet.
+
+What Eric answered
+
+#	Answer	What changes
+1	Stephanie should be able to add the Client Impact field to the testing project	Ask Stephanie. He didn’t say whether the three test issues stay, so I treated that as unanswered
+2	A dry run is required when testing, not for production runs	The guide line changes
+3	Yes, finish Stephanie’s phases (Phase 6 next) before AUTO-56	Recorded. This settles the order
+4	The code scan runs automatically in GitLab	No CI job needed for it
+6	Yes, add the NULSC link, after the first NULSC run is authorized in writing	Later change. It holds one link today, and no NULSC link or server name goes in the repo or docs before then
+7	He hadn’t thought about it and will “circle the wagons”	Still open, no date
+Where I recorded it
+
+Decision log: Six new rows in 03-decision-log.md.
+Daily log: An entry in daily-log.md.
+Local guide copies: The master and the Confluence copy now have the new dry-run line.
+Local open items: Items 8 and 9 are updated, and there’s a new item 12 about Client Impact.
+Phase 6 requirements: The “Answered” list has the order from Eric.
+Paste these into Confluence
+
+Guide, section 6.1. Replace “Do a dry run before every real run.” with:
+Do a dry run when you test a change: a new rule, a new setting, or new code. A routine weekly run does not need one (Eric, 2026-11-09).
+Open items, item 9. Add after the existing sentence:
+Eric is deciding who takes over as primary maintainer (2026-11-09). The security scan runs by itself in GitLab, so it needs no CI job from this project (Eric, 2026-11-09).
+Open items, item 8. Add:
+The NULSC link goes in the email after Eric authorizes the first NULSC run in writing (Eric, 2026-11-09).
+Open items, new item 12.
+The Client Impact case cannot be tested in the Odd Squad - Testing Only project, because the field is not on it. Eric said the report owner should be able to add it (2026-11-09). Ask her. The three test issues and the two test filters are deleted after the acceptance run.
+A question for Stephanie
+
+Stephanie, Eric said you should be able to add the Client Impact field to the Odd Squad - Testing Only project. Can you do that? It lets me test the Client Impact case on real test issues.
+
+One thing to watch
+Section 7.2 of the guide says to compare the counts with Stephanie’s before any real send. Eric’s rule is about production runs. I left that line alone, because the first real send is still an acceptance step. Revisit it after the first send works.
+
+Week 3 status
+
+Drop: Questions 2, 3, 4 and 6.
+Keep: Question 7, shown as waiting on Eric.
+Add: The Client Impact follow-up to Stephanie.

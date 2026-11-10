@@ -797,3 +797,52 @@ Here's the summary, from the logs and this chat.
 | Your side | The Client Impact test, and the Week 3 status on Friday |
 
 Tonight, Jira and Confluence are down from 7 PM to 1 AM CT. Tomorrow at 8 am CST, Stephanie sends by hand. Nothing else is due tonight.
+=======================
+This covers everything since the last summary, from Saturday 2026-11-07 to Tuesday 2026-11-10.
+
+## Saturday 2026-11-07
+- **Eric's call:** I recorded the points in the notes file and the decision log. The gate needs a running automation, and email isn't a blocker. His approvals for the tool's Jira and Confluence writes are no longer needed, but he still approves packages. Hosting is for Eric and Andres. I corrected three points I had credited to Eric that he didn't say.
+- **Messages sent:** The confirmation to Eric, and the hosting options email, with VDI as option 2.
+- **Dry run:** 128 findings, 46 recipients and 2 exceptions, against 120, 43 and 2 on 2026-11-04. You deleted the file.
+- **Code size:** The status said "37 files, 5,600 lines". That was the tests only. The app is 15 files and 3,235 lines, and the tests are 37 files and 5,649.
+- **Email checks:** A long bare link arrives intact. The short link opens the same page.
+
+## Monday 2026-11-09
+- **Labeled link:** Stephanie wants "bi-weekly reports (US)", and the page is always current. I built the optional `link_label` setting on branch `html-email` with 15 new tests. The suite passes with 681 tests. It's committed as `18c630d`, not merged. Your local settings have the label and the short address.
+- **Docs cleanup on `main`:** Slice 1 requirements v0.8 are committed, and the README and code map point to Confluence. The requirements files are marked as copies, and `CLAUDE.md` says Confluence is the master. 666 tests pass.
+- **Eric's Week 2 answers:** Dry run only when testing. Phase 6 before AUTO-56. The scan runs by itself in GitLab. The NULSC link comes after written authorization. Section 14 is still open.
+- **Phase 6:** Stephanie's answers and her audit document produced requirements v0.2 and v0.3, then the design notes. I left the NULSC dashboard address and ticket out of every file.
+- **Tracker:** I rewrote `outstanding.md` as one list of ten initiatives.
+- **Mail:** Both tickets closed, but the test send was still refused with 550 5.7.60. You opened RITM1092783 and messaged Phil. I was unwell, so I flagged what could wait.
+
+## Tuesday 2026-11-10, so far
+- **Mail diagnosis:**
+  - Ken showed the Send on Behalf list, then the Send As list. A second test failed.
+  - The error class showed login and sender were accepted, and only the From address was refused. That corrected my earlier SMTP-blocked idea.
+  - The trace went to the Exchange group, through RITM1093019.
+  - Kirk Beeman guesses Ken set Send As in Entra ID, but the relay checks AD. That fits the facts, and Phil is asking Ken.
+- **GitLab:** The group page still shows 404. You commented on RITM1091566 and nudged Phil.
+- **Confluence:** The guide is Draft 0.6 and re-uploaded. Open items 3, 6, 8, 9 and 12 are updated. Section 6.1 has the new dry-run line.
+- **Stephanie:**
+  - Her five audit answers produced Phase 6 requirements v0.4.
+  - The biweekly email needs only the link.
+  - The Client Impact field was added to the OSTO project.
+  - Her past email to the recipients arrived, and I proposed matching wording, not yet applied.
+- **Eric's Phase 6 answers:** No comments or mentions on risk tickets, so both checks go by email. The status comments go on the monthly audit ticket. The report is monthly. Requirements are v0.5, with the handoff note updated.
+
+## Where things stand
+- **Repo:** `main` is at `365603b`, and `html-email` is unmerged at `18c630d`. Nothing is pushed, because GitLab access is missing.
+- **Confluence:** The guide and open items are current. Phase 6 and slice 2 v0.9 requirements aren't uploaded.
+- **Wednesday:** Stephanie sends by hand at 8 am CST.
+
+## Open, in order
+1. **Mail:** Reply in the Exchange chat with the route facts, and ask what to grant and where. No retest until they say it's in place.
+2. **Stephanie:**
+   - Her answer on the 14-day email format.
+   - Confirmation of the wording and first-person voice, and the Business Confidential label.
+3. **Phase 6:** The two US filter ids, which you read from the dashboard, then the build in a new chat.
+4. **GitLab:** RITM1091566.
+5. **Eric:** Section 14, and the Week 3 status on Friday.
+6. **Your side:** The Client Impact test in OSTO, and applying the email wording once she confirms it.
+
+Tonight, Jira and Confluence are down from 7 PM to 1 AM CT.

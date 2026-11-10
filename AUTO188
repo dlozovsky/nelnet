@@ -868,3 +868,42 @@ The Phase 6 build can wait for the filter ids. Don't let it take time from items
 
 Also, delete that paste. It has ticket numbers and names of staff outside your stakeholders.
 
+==========================================
+# Summary: Tuesday 2026-11-10
+
+I also added an end-of-day entry to `docs/daily-log.md`.
+
+## Mail: found and fixed
+The test send had failed since 2026-11-05 with 550 5.7.60. Today it worked, after three fixes and one wrong turn.
+1. **Send As on the on-premises side.** Ken Hicks set it on the on-premises Exchange for your login. The earlier grant was in Entra ID, which the relay does not check. Steve Kindschuh also set Send As in AD for the group `MBO_OddSquadHelp`.
+2. **The test address was wrong.** The relay accepted the messages and then bounced them with 550 5.1.10 RecipientNotFound. `129902@nelnet.net` exists only in O365. You found the bounces in your Inbox and the headers named the cause.
+3. **The code fix.** I added an optional `[smtp] own_address` setting. Your login stays `129902@nelnet.net`, and the test goes to `Daniel.Lozovsky@nelnet.net`. It has 12 new tests.
+4. **The wrong turn.** Trying the new address as the login failed with 535 5.7.3, and the failed attempts may have locked the account for a while. Reverting the login fixed it, and the final test arrived with both messages.
+
+## Code and repo
+- **Merge:** `html-email` and `own-address` are merged into `main` as `3b28461`. The suite passes with 693 tests. Nothing is pushed, because GitLab access is still missing.
+- **Code map:** updated and committed (`8eb0339`).
+- **Labeled link:** the link "bi-weekly reports (US)" opens the right page.
+
+## Documents
+- **Updated locally:** the guide (v0.6), slice 1 requirements (v0.9), slice 2 requirements (v0.10), open item 3, and the tracker. The decision log and daily log have new entries.
+- **New:** `docs/decision-record.md`, with the settled decisions and the open ones, and a "Refactor later" list in the tracker.
+- **Confluence:** the guide, open items 3, 6, 8, 9 and 12 were updated earlier in the day. The newest versions still need pasting.
+
+## Earlier in the day
+- **Phase 6:** Stephanie's five audit answers produced requirements v0.4. Eric's three rulings produced v0.5: no comments on risk tickets, both checks by email, status comments on the monthly audit ticket, and a monthly cadence.
+- **Mail tickets:** RITM1093019 opened for the trace, and Phil started the chat with Kirk Beeman.
+
+## Decisions and corrections
+- **Phil:** He said informally that the first real send on 2026-11-25 is fine.
+- **My correction:** Eric approved the first real send on 2026-11-03, so no new approval is needed. I had said it was.
+- **Also corrected:** my first guess that SMTP submission was blocked, and my assumption that you were on Central time. You are on Pacific time.
+
+## Still open
+- Tell Stephanie she sends by hand tomorrow at 8 am CST, and send the update email to Eric, Dave and Stephanie.
+- The Confluence pastes (guide, open item 3, both requirements pages).
+- Steve's answer on whether the Jira addresses are on-premises.
+- Thursday's weekly run: remove `test_recipient`, then `--resume` for 2026-W45.
+- Friday's Week 3 status, and the 14-day wording from Stephanie.
+- GitLab: RITM1091566 is due 2026-11-12, and the first real send is planned for 2026-11-25.
+

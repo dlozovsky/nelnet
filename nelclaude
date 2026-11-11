@@ -1727,3 +1727,40 @@ Check your notes before you send email 2. On Nov 2 Eric approved slice 1 as "Con
 If you still want her to confirm, make it a yes or no so it doesn't sit: "For Thursday's weekly check, I'll send the email to the Odd Squad help mailbox, the same one as the exception list, unless you tell me otherwise by Thursday morning." Keep the subject line it suggested.
 
 Emails 3 and 4 look right, and holding 4 until she answers is correct.
+--------------------
+I checked the notes. The advice is mostly right, and it needs one adjustment and one addition.
+
+What the notes say
+
+Decided: Eric approved on 2026-11-02 that slice 1 sends one email to the Odd Squad. So the recipient is the Odd Squad team mailbox, and that part is settled.
+Not confirmed: open item 4 says it isn’t confirmed that the weekly email uses the same help mailbox as the exception list. CLAUDE.md says an unanswered value doesn’t become a default. So I wouldn’t set it silently, and I’d still ask.
+The advice’s yes-or-no wording works. It asks with a default and a deadline, and the risk is low. The email goes to a team mailbox that Eric approved, and it carries only an intro and the page link, with no names.
+One addition. On Thursday the Odd Squad mailbox would get two emails: the week-old W45 one and this week’s. Tell her so. If you’d rather not send the old one, remove that paragraph. We left that choice open.
+
+Here is the new email 2:
+
+Subject: Weekly check: email goes to the Odd Squad help mailbox unless you say otherwise
+
+Stephanie, for Thursday’s weekly check, the tool sends one email with the page link to a team mailbox. Eric approved one email to the Odd Squad, so I will send it to the Odd Squad help mailbox, the same one the exception list uses, unless you tell me otherwise by Thursday morning. A yes is enough.
+
+Heads-up: the run from 2026-11-05 stopped at the email step because the mail was not working. I will finish it on Thursday, so the Odd Squad mailbox will get that week-old email and then this week’s. Each has an intro and the page link only.
+
+Thanks,
+Daniel
+
+I’ll update the file.
+
+Edited emails-for-stephanie-2026-11-11.md
+Email 2 is updated in the file with the new wording above.
+
+If she says nothing by Thursday morning: you set the Odd Squad help mailbox as the weekly address in local settings.toml, remove test_recipient, and run --resume. That treats her silence as a yes, so do it only if you’re comfortable with that. Phil is the person to ask while Eric is out.
+
+Still true
+
+Email 2 is unsent.
+Emails 3 and 4 are unsent, and 4 is held until she answers email 1.
+The three checks are unconfirmed: delete the test-send file, click the link, and look in your Inbox for any “Undeliverable” notice.
+If you remove the W45 heads-up paragraph, tell me whether you also want to skip sending the old email or only skip mentioning it.
+
+Email 2 in docs/emails-for-stephanie-2026-11-11.md now proposes the Odd Squad help mailbox as the default unless she says otherwise by Thursday morning, with a heads-up about the week-old W45 email. Nothing is sent. Emails 2, 3 and 4 are unsent, and the test-send file delete, link click and Inbox check are unconfirmed.
+Do you want the W45 heads-up paragraph in email 2?

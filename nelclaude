@@ -1764,3 +1764,10 @@ If you remove the W45 heads-up paragraph, tell me whether you also want to skip 
 
 Email 2 in docs/emails-for-stephanie-2026-11-11.md now proposes the Odd Squad help mailbox as the default unless she says otherwise by Thursday morning, with a heads-up about the week-old W45 email. Nothing is sent. Emails 2, 3 and 4 are unsent, and the test-send file delete, link click and Inbox check are unconfirmed.
 Do you want the W45 heads-up paragraph in email 2?
+
+===================
+Good email. I'd skip the old W45 email rather than explain it. A week-old report in the team mailbox is just noise, and the page from this Thursday will be current anyway.
+
+So ask Nelnet Claude: "Can W45 be closed without sending the email, with a Jira status comment saying it was skipped because mail wasn't working?" If yes, drop the heads-up paragraph and do that. If it needs a code change, keep the paragraph and send both. A new feature isn't worth it for one stale email.
+
+Then send email 2, and do the three checks it's still waiting on: delete the test-send file, click the link, and check your Inbox for bounces.

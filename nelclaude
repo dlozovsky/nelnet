@@ -1703,3 +1703,20 @@ I put the totals first because that's the one you need for acceptance.
 Your email has both report links. When you send it today, is it one email with both links, and is everyone with a finding in either report in the same Bcc list? Or do you send a separate email for each report? I ask because the tool will need to do the same once the second report is added.
 ====================
 Yes, that's better. It gives her both options and says why you're asking. One small trim: you already know it's one email with both links, so start at the Bcc part: "Your email has both report links. Is everyone with a finding in either report in the same Bcc list, or do you send a separate email for each report? The tool will need to do the same once the second report is added."
+-----
+Email 2 is the weekly address question. It's a separate, short email to Stephanie, and it blocks Thursday's weekly run.
+
+> Stephanie, one more question, for Thursday's weekly check. The tool sends the weekly required-fields email to one team mailbox, with the page link. Which address should it go to? The Odd Squad help mailbox, the same one the exception list uses, or a different one? Until I have the address, the run publishes the page and sends nothing. I would like to run it Thursday.
+>
+> Thanks,
+> Daniel
+
+**Why it matters.** Open item 4 says the weekly email address is not set. Without it, `--resume` for 2026-W45 ends COMPLETED and sends nothing.
+
+**Suggestion.** Add a subject like "Weekly check: which mailbox gets the email?" so it doesn't get lost under email 1.
+
+The other two emails are:
+- **Email 3:** the AUTO-323 note about the 14-day email. It goes as a reply to all on that thread.
+- **Email 4:** the update to Eric, Dave and Stephanie. Hold it until she answers email 1.
+
+All four are in `docs/emails-for-stephanie-2026-11-11.md`.

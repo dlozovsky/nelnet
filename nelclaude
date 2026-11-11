@@ -1607,3 +1607,28 @@ Good plan, and asking her tomorrow side by side is right. Two things to add:
 2. **Add one question to the forward:** "Is the Bcc list everyone with a finding in US or NULSC, in one email?" Her email has both links, and "Bcc to everyone with a finding" was answered before NULSC was in the picture.
 
 The rest holds: nothing tomorrow depends on her answers, and they only matter before Nov 25.
+======
+Both points are good. I added them to the open decisions in `decision-record.md`.
+
+**1. The label**
+I agree with the note, and I would not promise Stephanie the label.
+- **What the tool can do:** It builds a plain message with a subject, a text part and an HTML part. It can put a line of text in the subject or the body, such as "Business Confidential". That is a setting, with no code change.
+- **What it probably cannot do:** The label on your Outlook-composed test (the "(BCI) Business Confidential Information" line) is a sensitivity label that Outlook applies itself. I don't think a plain SMTP send can apply it the same way. I'm not certain, so I'd mark it as unconfirmed.
+- **A header would not be the same thing.** The tool could add a standard sensitivity header in a small code change. Outlook might show it as "Confidential", but it would not be the Nelnet label, and I can't test what the mail system does with it from here.
+- **Who knows:** The mail team can say whether a transport rule or an auto-labeling policy could mark mail from the Odd Squad mailbox. Ask them the same way you asked about Send As. Don't tell Stephanie yes before then.
+- **I can't ask "Nelnet Claude."** I don't have access to it from this session, so the check goes through the mail team.
+
+**2. One email or two, for the two instances**
+That is a real gap. "One email to everyone with a finding" was answered before the NULSC link was in the picture. Her email has both links. The decision log says the tool carries the NULSC link only after Eric authorizes the first NULSC run in writing, so the code today handles one link. Keep the question generic, and don't name any NULSC link or filter number in the message to her.
+
+**The forward, with the four questions**
+
+> Stephanie, this is what the tool's email looks like, from a test to my own mailbox. It is not a send to anyone else. Please compare it with yours:
+> 1. Do the subject and the intro look right, or do you want your own wording?
+> 2. Who should it say it is from?
+> 3. Do you want the Business Confidential label? I need to check with the mail team whether the tool can apply it. It may only be possible as a line of text.
+> 4. Is the Bcc list everyone with a finding in one email, or one email per instance, each with its own link?
+>
+> The second message is the exception list. In a real run it goes to the Odd Squad mailbox, not to the recipients.
+
+Four questions in one message is the most I would send. If she answers only 1 and 2, the wording can go in the settings.

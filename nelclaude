@@ -1553,3 +1553,50 @@ If you tell me what he asks for, I’ll update the status draft before you send 
 ===============
 Summarize this chat in 10 lines: the goal, what we decided, what's left.
 The goal is to paste your answer in a new Claude chat so it takes it from there.
+
+------------------------
+Confirmed by Stephanie
+
+Recipients and Bcc: One email to every assignee and reporter with a finding, in Bcc (2026-11-02).
+The link text: “bi-weekly reports (US)”, with the short page address (2026-11-09).
+The body: The page link only, nothing else for the recipients to act on.
+The exception list: It goes to the Odd Squad (2026-11-04).
+Timing: Every other Wednesday at 8 am CST, starting 2026-11-11.
+The totals: She confirmed the page updates itself, so no step is needed before a send.
+
+Not confirmed
+
+The subject. I proposed one based on her past email. She hasn’t answered.
+The intro. Her 2026-11-10 email to the recipients has a first-person intro and a Business Confidential label. The tool’s text is different: “One or more issues that you are assigned or reported appear on the Bi-Weekly Initiative, Milestone, Epic Structure Adherence Report. Please open the report, find your issues, and fix them within two weeks.” Whether she wants her own wording is the open question.
+The label. Whether the email should carry “Business Confidential”, and who it should say it is from.
+The signature. The tool’s text ends with “Thank you.” and no name.
+
+What she has seen: A screenshot of her own email and the idea of the tool’s email. She has not seen the actual message from the tool. That is why forwarding today’s test email makes sense, and why the reply to her past email is still on your “not confirmed sent” list.
+
+What to ask in the forward (one message, as drafted before)
+
+Does the subject look right?
+Do you want your own intro wording, first person, and the Business Confidential label?
+Who should it say it is from?
+
+When she answers, I’ll apply the wording in your local settings.toml (the subject and intro lines) and, because they’re settings, no code changes. I’ll record it in the decision record and the guide.
+
+Until then, tomorrow she sends her own version by hand, so nothing sent tomorrow depends on this. It only matters before the first real send from the tool on 2026-11-25.
+
+We can ask this tomorrow when we send it because her email has different wording
+
+That works, and it is better. She can compare her own email with the tool’s side by side, and there is no deadline before 2026-11-25.
+
+Tomorrow, in order
+
+Stephanie sends at 8 am CST. If you’re on her recipient list, keep your copy of her email, since it is the real wording to compare with.
+You run the test send after her send, with the date of the day, and count the three totals with the one-liner I gave you.
+Forward the structure email and the exception list to her. Use one message with the three questions: the subject, the intro and the Business Confidential label, and who it says it is from. Tell her the second message goes to the Odd Squad in a real run.
+Delete the test-send file after you have the numbers.
+
+Then, after she answers
+
+I’ll apply her wording in your local settings.toml (the subject and intro lines). It is a settings change only, with no code change and no new test.
+I’ll record it in the decision record and give you the Confluence-ready guide line, if the wording changes where the guide says to edit it.
+
+Nothing sent tomorrow depends on this, so there is no risk in waiting. If she wants her wording and a label that the tool doesn’t support, tell me. I’d rather find that out before 2026-11-25. I’d expect the intro and subject to be plain settings, but the label might need a small change.

@@ -1846,3 +1846,35 @@ Here is what we can do now without waiting on anyone. I'd start with the first t
 **I'd skip Phase 6 (AUTO-323) for now.** Eric put it after the gate, and the answers it needs are with Stephanie. Prepping it moves neither gate automation forward.
 
 Tell me which of 1 to 5 to start. If you say "1 to 3", I'll run the tests and then draft the status and the checklist.
+=======================
+Tests are green: 693 passed. Now I'm writing the checklist and the slice 2 text.
+
+All three are done: the tests, the Thursday checklist and the slice 2 text.
+
+**1. Tests.** All 693 passed in about 7 seconds, with the network blocked. Today's settings change doesn't affect the code.
+
+**3. Thursday checklist:** `docs/thursday-2026-11-12-checklist.md`
+- **Settings edits:**
+  - Set the weekly `address` to the Odd Squad help mailbox.
+  - Keep `when = "always"`.
+  - Comment out `test_recipient`. While it is set, the weekly email goes only to you and writes no `[gate-sent]` record.
+- **Command:** always pass `--period 2026-W46`, with an optional dry run first.
+- **After the run:**
+  - Check the COMPLETED comment, the counts per project against the filters in Jira the same day, the single `[gate-sent]` comment, and the Odd Squad's mailbox.
+  - Check your Inbox for Undeliverable notices.
+- **W45:** W45 doesn't block W46, because each run is gated by its own week. The checklist has the hand-comment text, which is a manual comment outside the tool. It also covers the resume option.
+
+**4. Slice 2 requirements:** `docs/slice2-v0.11-changes-for-confluence.md`
+- **Format:** it is a section-by-section list of what to paste into the Confluence page. The repo copy of v0.10 is untouched, as CLAUDE.md requires.
+- **Content:**
+  - the test send results (146, 51 and 2, with sections equal to the page)
+  - her approved wording, with no label
+  - the exception list going only to the Odd Squad mailbox
+  - Eric's 2026-11-03 approval
+  - the 2026-11-25 first send
+  - two new TBDs: one email or two, and the recipient match
+- **Correction:** v0.10 still says the first real send needs approval. The new text fixes that.
+
+Both files are in the git-ignored `docs/` folder, and nothing is uploaded or committed. I logged both in `docs/daily-log.md`.
+
+The weekly email wording ("Weekly required-fields check: issues to review") has not been shown to Stephanie. She agreed only to the address. The email goes to the Odd Squad mailbox, so the risk is low, but you might mention it to her.

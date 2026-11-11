@@ -1771,3 +1771,44 @@ Good email. I'd skip the old W45 email rather than explain it. A week-old report
 So ask Nelnet Claude: "Can W45 be closed without sending the email, with a Jira status comment saying it was skipped because mail wasn't working?" If yes, drop the heads-up paragraph and do that. If it needs a code change, keep the paragraph and send both. A new feature isn't worth it for one stale email.
 
 Then send email 2, and do the three checks it's still waiting on: delete the test-send file, click the link, and check your Inbox for bounces.
+============================
+Here is what we did today, 2026-11-11, in order.
+
+**Setup**
+- Read CLAUDE.md and the latest daily log, then listed what was left.
+- Recovered the old chat history after your SSO change. The transcripts are still on disk, and I saved a memory note on where they are. I saved a second note that you work on Pacific time.
+
+**Structure test send**
+- You ran the first test send after Stephanie's hand send. It gave 146 findings, 51 recipients and 2 exceptions (PM-10186 and PM-10426).
+- The 146 equals the report page: 31 initiatives, 12 milestones, 53 epics and 50 stories.
+- You deleted that test-send file.
+
+**Emails to Stephanie**
+- **Email 1:** the confirm email, with the two test messages. It asks about the totals, one Bcc email versus one per report, the wording, the sign-off and the label.
+- **Email 2:** the weekly address. It goes to the Odd Squad help mailbox unless she says otherwise.
+- **Email 3:** the AUTO-323 reply-all. The 14-day findings go by email, with four proposals.
+- **Follow-ups:** you sent the totals questions again, then a short note with the new test email attached.
+- **Email 4:** held until she answers the totals.
+
+**Her replies**
+- She approved the wording and the third-person opening, and said the label can be left off.
+- She said "Sounds good" to the weekly address.
+
+**Wording and second test send**
+- I put her subject and body into your local `settings.toml`.
+- You ran a second test send. The email rendered correctly, and the exception list was fine.
+- Section counts from the file matched the page. The link opened the right page, there was no Undeliverable notice, and you deleted the second test-send file.
+
+**Docs**
+- **Decision record:** two decisions added (wording with no label, and the weekly address).
+- **Outstanding tracker:** updated the slice 2 row and the weekly address note.
+- **Maintenance guide:** v0.7 is written locally and not uploaded.
+- **Daily log:** an entry for each step above, plus your 8 hours.
+
+**Still open**
+- **Stephanie:** whether the 51 recipients match her report, and one Bcc email versus one per report.
+- **W45:** leave it FAILED with a hand comment, or resume it and close it.
+- **Thursday:** set the weekly address, remove `test_recipient`, and run the W46 check.
+- **Confluence pastes:** guide v0.7, open items, and the slice 1 and slice 2 requirements. Then send Phil the page link.
+- **Exception list:** the "page:" label and the missing report link, if you want them fixed.
+- **Week 3 status:** due Friday.

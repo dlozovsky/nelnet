@@ -1632,3 +1632,47 @@ That is a real gap. "One email to everyone with a finding" was answered before t
 > The second message is the exception list. In a real run it goes to the Odd Squad mailbox, not to the recipients.
 
 Four questions in one message is the most I would send. If she answers only 1 and 2, the wording can go in the settings.
+
+-----------------
+Understood. I'll take out the claim that the totals match, because that's for Stephanie to confirm. I'll rewrite email 1 as the confirmation email, with how the tool sends mail and your questions.
+
+I removed every "totals match" claim from the emails and from the daily log. Email 1 is now the confirmation email you asked for.
+
+**Email 1: send to Stephanie**
+
+Forward the structure email and the exception list from your mailbox, with this text on top:
+
+> **Subject:** Structure email from the tool: please confirm how it works
+>
+> Stephanie,
+>
+> Below are the two messages the tool produced in a test to my own mailbox. Nobody else received anything. Could you confirm that this is how you want it to work, and tell me what to change?
+>
+> How the tool sends:
+> 1. One email for each run, to every assignee and reporter who has a finding, with duplicates removed.
+> 2. Everyone is in Bcc, so recipients do not see each other. It is sent from the Odd Squad mailbox.
+> 3. The body has a short intro and the report link only, shown as "bi-weekly reports (US)".
+> 4. No email goes out when there are no findings.
+> 5. Issues with nobody to reach, or with nobody who has a deliverable address, go on a separate exception list. That list goes to the Odd Squad mailbox, not to the recipients.
+> 6. A person starts each run, every other Wednesday at 8 am CST.
+>
+> Questions:
+> 1. Is that how your email works today? In particular, is everyone in Bcc, and is it one email to everyone?
+> 2. Your email has two report links. Is the Bcc list everyone with a finding in both reports, in one email, or one email for each report, each with its own link?
+> 3. Do the subject and the intro look right, or do you want your own wording?
+> 4. Who should it say it is from?
+> 5. Do you want the Business Confidential label? I need to check with the mail team whether the tool can apply it. It may only be possible as a line of text.
+> 6. Today the tool found 146 findings, 51 recipients and 2 issues on the exception list (one with nobody on it, one with nobody who has a deliverable address). Do the totals match your report from this morning? If you can, please compare each section.
+>
+> No rush on the wording. Question 6 is the one I need for the check.
+>
+> Thanks,
+> Daniel
+
+**What changed in the other emails**
+- **Email 4** (update to Eric, Dave and Stephanie): the numbers stay. The "totals match" line is now a bracketed note to add only after she confirms. I'd hold email 4 until she answers email 1.
+- **Emails 2 and 3:** unchanged. Email 2 (the weekly address) is still the one that blocks Thursday.
+
+Everything is in `docs/emails-for-stephanie-2026-11-11.md`. The daily log now says the comparison is pending.
+
+The file delete, link click and Inbox check are still unconfirmed. Tell me when you've done them.

@@ -1550,3 +1550,6 @@ Don’t bring up all six questions from the status. Keep to the three or four ab
 
 If you tell me what he asks for, I’ll update the status draft before you send it. I haven’t changed any files.
 
+===============
+Summarize this chat in 10 lines: the goal, what we decided, what's left.
+The goal is to paste your answer in a new Claude chat so it takes it from there.

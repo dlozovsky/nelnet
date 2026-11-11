@@ -1676,3 +1676,26 @@ Forward the structure email and the exception list from your mailbox, with this 
 Everything is in `docs/emails-for-stephanie-2026-11-11.md`. The daily log now says the comparison is pending.
 
 The file delete, link click and Inbox check are still unconfirmed. Tell me when you've done them.
+====####
+Send the Nelnet Claude one, trimmed, because it has the totals check and ours doesn't. Here it is ready to paste:
+
+> **Subject:** Structure email from the tool: please confirm how it works
+>
+> Stephanie,
+>
+> Below are the two messages the tool produced in a test to my own mailbox. Nobody else received anything. It covers the US report only for now. NULSC comes later.
+>
+> In a real run, it sends one Bcc email from the Odd Squad mailbox to everyone with a finding. It sends nothing when there are no findings, and the exception list goes to the Odd Squad, not to recipients.
+>
+> Questions:
+> 1. Today the tool found 146 findings, 51 recipients and 2 exceptions on the US report. Do those match your report from this morning?
+> 2. Your email has both links. Is the Bcc list everyone with a finding in US or NULSC, in one email?
+> 3. Do the subject and intro look right, or do you want your own wording?
+> 4. Who should it say it's from, and do you want the Business Confidential label? The label may only be possible as a line of text.
+>
+> Question 1 is the one I need now. The rest can wait until before Nov 25.
+>
+> Thanks,
+> Daniel
+
+I put the totals first because that's the one you need for acceptance.

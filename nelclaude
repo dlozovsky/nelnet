@@ -1823,4 +1823,26 @@ We're in sync, and I've saved it. Good day: the wording is approved and the tota
 Decision log: `2026-11-11: Structure email uses Stephanie's approved wording with no label; weekly email goes to the Odd Squad help mailbox.`
 
 Please delete this paste. It has two ticket keys.
+===========================
+Here is what we can do now without waiting on anyone. I'd start with the first three.
 
+**Can do right now**
+1. **Run the test suite.** It's local, with the network blocked. Today's `settings.toml` change isn't covered by a test, and the last green run was 693 tests. It takes a minute, and I can run it myself.
+2. **Draft the Week 3 status** (due Friday). It would cover the mail fix and how, `own_address`, both test sends, Stephanie's approvals, the NULSC laptop and PIV card, GitLab, and the corrected line counts (app 3,276, tests 5,823). I'd leave your hours out until you give them.
+3. **Write a Thursday checklist for the W46 run.** It lists the exact `settings.toml` changes (weekly address, `when = always`, remove `test_recipient`) and the W45 decision. It would also suggest a weekly dry run Wednesday evening, so Thursday has no surprises. You'd run the dry run, because I don't make real calls.
+4. **Write the Confluence-ready text for the slice 2 requirements.** Add her approved wording, no label, the exception list going only to the Odd Squad mailbox, and the open one-email-or-two question. The repo copies stay unedited.
+5. **Clean up `docs/outstanding.md`.** I found one stale row today, so others may be stale too.
+
+**Needs your decision**
+- **W45:** hand comment on AUTO-188 or resume. The hand comment is quicker. It only matters because `--resume` without `--period` could pick the wrong week.
+- **Exception list polish:** parked until Stephanie complains, as agreed.
+
+**Waiting on someone else**
+- **Stephanie:** the recipient count and one email versus two.
+- **GitLab:** the push, due tomorrow.
+- **Eric:** gate date, maintainer, hosting.
+- **NULSC:** PIV card and written authorization.
+
+**I'd skip Phase 6 (AUTO-323) for now.** Eric put it after the gate, and the answers it needs are with Stephanie. Prepping it moves neither gate automation forward.
+
+Tell me which of 1 to 5 to start. If you say "1 to 3", I'll run the tests and then draft the status and the checklist.

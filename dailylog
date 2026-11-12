@@ -1,0 +1,454 @@
+# Daily Log
+
+## 2026-10-28
+- Finished: S0 logged, S1 to S11 (cc200f9, 6951a97, 6f810cb, 047b145, 40d862a, b262cc6, c32ebf4, 2be3b21, bf6a7d0, 205530d, 42c6f40), four fixes (57ef147), slice 2 rules (af32819), notifier core (8816642), shared unknown-lead refusal and resume of the latest unfinished run (f2f95b1).
+- Tests: 263 passing, network blocked. Branch renamed to main. No remote, nothing pushed.
+- Blockers: Auto 1 token store (Anders Flashnick's automation team, question 1 for the meeting Eric is setting up); Dave 2 Confluence parent page (Dave gave the page, Daniel tests write access); Expert 6 filter, team field, label (expert); Expert 7 to 12 and Dave 7 notifier answers (expert, Eric settles); Auto 2 and Dave 5 sender (automation team, Dave); GitLab push permission (Eric, escalating); sent-messages limitation approval (Eric).
+- Decisions: S0 approved (Eric, 2026-10-27); pip install pytest approved (Eric); period defaults to the ISO week; unavailable counts are None; BOM accepted; LF line endings; one message per lead; an unknown-lead id that matches a real lead is refused; --resume without --period takes the latest unfinished run. 22 rows are in the decision log.
+- Meetings: Dave set up a call with Stephanie Anderson and Daniel on the biweekly structure report, Thu 2026-10-29 11:05 to 11:30; Daniel emails her the weekly and biweekly questions first. Eric will set up a short meeting with Anders Flashnick; 7 questions sent to Eric (secrets, where code runs, email, packages, GitLab and runners, Jira and Confluence limits, handoff format).
+- GitLab: Eric escalates access. Runners are not needed for the first release, since it runs from the laptop; Daniel checks what the group has once access arrives.
+- Confluence: Cloud sandbox access granted for testing. Dave gave the Data Center page for the reports; write access to it is not yet tested.
+- Hours: 8
+
+## 2026-10-29
+- Finished: structure report pieces built test-first and committed (86c84c3): [structure] settings, page query reader, section checks, email and exception-list planning. Then, committed (87132a6): Jira recipient and address lookup (jira_source.py), team lead map removed, CLAUDE.md updated. Then, committed (e9302c0): slice 2 sent record as a local file in the run folder (run date, issue keys, recipient count, sent time) and no Jira writes; one send to all recipients. Then, committed (03521d4): page queries run read-only through the Jira client, SMTP sender (port 587, STARTTLS required, password from keyring, To by default), and --report biweekly_structure wired into run.py with a dry run that writes findings, recipient ids and exceptions to the run folder. 448 tests passing, network blocked. Eric approved read-only runs (no sends, no Jira or Confluence writes). Then, committed (260d267): --check-page, --show-issue KEY, and display names in the local dry-run file. 495 tests passing. Decision log and tracker hold the automation team's and Stephanie's answers.
+- Answered: Jira and Confluence use Personal Access Tokens (own PAT on a laptop). Email is SMTP with basic auth, which needs the sending account in the mailbox group and delegated send on the mailbox, both Help Desk requests (AMO, or AMO or MAPPS). SMTP port is 587 in both domains with STARTTLS. Sending from my own account needs access to the mailbox itself. Dave 3 answered; Auto 1, Auto 2, Auto 4, Auto 6 and Dave 5 partly answered. Shared compute: no ask for now, the team will discuss use cases, and a 30 minute talk is offered once both reports are live.
+- Meeting: Stephanie call held on the biweekly structure report. Settled: one email per run to every assignee and reporter with a finding, links only, none when clean; the page is not published unless Dave asks; page queries read at run time; unresolved recipients go on an exception list to Odd Squad; two-week deadline; no CAB check; acceptance is a dry run against her next round, next week.- Blockers: Mailbox access filed as RITM1089333 (pending manager approval, needed 2026-11-05; the mailbox name still has to be added as a comment); delegated send not filed yet, about 2 weeks (Daniel, check with Eric first); Jira field for the parent link (report owner, Jira admin); To or Bcc (report owner); Dave 5 sender address (Dave); GitLab push permission (Eric); Confluence write test on Dave's page (Daniel); Eric's reply on loading real rules and starting real runs (asked today; he has answered only the first question); story section, label name and finding source to confirm with Stephanie; Dave 6 on meeting-assistant apps (Dave).
+- Decisions: the gate runs on my own PATs. Eric approved `keyring` (installed, 25.7.0): the tokens and the SMTP password are read from Windows Credential Manager (service gate-automation), with the environment variables as the fallback; 503 tests passing, not yet committed. Assume the Help Desk requests are needed even from my own account. The SMTP sender will use `smtplib`, is not built, and its host names stay in the local settings file only. Slice 2 is code complete on synthetic data; real runs wait on the keyring approval, and the leftover comment-based send code is cleaned up after the first real runs. Read-only steps start with tokens set for the current PowerShell window only, then switch to keyring when Eric approves. After Eric's OK the first real step is a read-only read of Stephanie's page to check the query reader, with no sends. Eric confirmed: match Stephanie's process, one email to assignees and reporters, no lead list.
+- Hours: 8
+
+## 2026-10-30
+- Finished: Eric's five answers recorded in the tracker, decision log, and outstanding list. Slice 2 run record moved from a local file to Jira comments on AUTO-188, test-first (eb1d28e): `record_ticket` setting, a delivery comment per message, an error comment on failure, skip a kind that already has a comment, and stop and print the comment to add by hand when a write fails. Slice 2 requirements v0.4 drafted.
+- Tests: 573 passing, network blocked (533 before).
+- Blockers: GitLab access RITM1087730 starts the clock (Help Desk, Eric is checking); Nov 20 against that clock (Eric); written authorization for NULSC data (Eric); comment permission on AUTO-188 untested (Jira administrator); mailbox RITM1089333 needed Nov 5 (Help Desk); delegated send "filed" to confirm (Daniel).
+- Decisions (Eric): a clean slice 1 report counts as in use; NULSC is in the gate, paired with the report owner; acceptance is live old and new runs plus one example of each case; follow NAM with code reviews (Dave); the record goes on AUTO-188 and errors go there too. Daniel's readings for Eric to confirm: one comment per message kind, and error comments carry the step and error class only.
+- Hours: 8
+
+## 2026-10-31
+- Finished: slice 2 requirements v0.4 committed (41bfe13). Slice 1 requirements v0.1 drafted and committed (6c90c75). Word copies of both built and stored locally. No code change.
+- Tests: 573 passing at the last run (eb1d28e), not rerun today.
+- Gaps the slice 1 draft found: the code writes a comment per state and Eric asked for one per run (Eric); the report owner uses two filters and the code reads one (report owner); the Confluence page write is not approved (Eric); settings hold one source, so NULSC needs its own settings file.
+- Blockers: the Oct 30 list, plus the four gaps above.
+- Next: tokens into the credential store, then `--check-page`, `--show-issue`, then the slice 2 dry run.
+- Hours: 8
+
+## 2026-11-02
+- Finished: first real reads. `--check-page` on the US structure page found all four queries. The first real slice 2 dry run gave 104 findings, 42 recipients, 2 on the exception list, and sent nothing. Built, test-first: `page_result` rule for the slice 2 sections (371f237), test send reaches only the test address (9a0afbf), exception list to a team mailbox address (852a64e), page update refused outside the approved parent (9043ef9), error code only on a refused message (f381f2b), tokens per instance (6086068). Slice 1 built as Eric approved: the saved filters as they come back, grouped by project, one page and one email (af6b422). Answers recorded in both requirements (034f71a, d404c04, f518bd9, 49893c7).
+- Tests: 622 passing, network blocked.
+- Blockers: send as permission on the mailbox (Help Desk); the two real filter ids (found by name in Jira); GitLab access (Eric, Dave); written authorization for NULSC (Eric).
+- Decisions: Eric approved one comment per message sent, error comments with the step and error class only, up to three status comments per slice 1 run, a test page under Automation Output, and slice 1 as the report owner does it today. The report owner answered that a finding is what the page query returns, the label is `p/o_not_applicable`, recipients go in Bcc, and she runs the weekly check on Thursdays. Her next structure send is Nov 4.
+- Hours: 8
+
+## 2026-11-03
+- Finished: NULSC authorization guard (2fc5e3e), result line first in the COMPLETED comment (7419d9b), TEST MODE line and record-line test (fcca7dc), exception list stops before any send when no `exception_address` is set and the Jira lookup is removed (2976873), dry-run email note matches a real run (e5cc725). First real weekly run done on both real filters (0 and 0). Grouping and counts checked on an own test filter (46 equals 46). Maintenance guide v0.2 written. Docs published on Confluence under Automation Output: guide, both requirements pages, open items. The slice 1 requirements fix (two outdated filter lines) is not committed.
+- Tests: 663 passing, network blocked.
+- Blockers: send as permission on the mailbox (RITM1089773, Help Desk, test send still 550 5.7.60); GitLab project access (Dave, asked Michael); weekly email address and how often it goes (report owner, Eric); scan and long-term code reviewer (Eric).
+- Decisions: exception list goes to the Odd Squad help mailbox, local settings only (Eric); first real send approved (Eric); test issues in the OSTO project approved (Eric); Eric reviews the code for now; during the appraisal ask Phil Baker, then Michael Popelka; all gate docs go on one Gate Automation docs page (Eric, Dave).
+- Hours: 8
+
+## 2026-11-04
+- Finished: structure dry run on the US page matched the report owner's report. 120 findings (Initiative 31, Milestone 12, Epic 36, Stories 41), all 120 keys the same in both lists. 43 recipients; her 44 people less one deactivated reporter equals 43. 2 exceptions, both confirmed in Jira (nobody on the issue; only a deactivated reporter). `--check-page` found all four sections. Settings read and checked, nothing changed: page link, send-as mailbox, exception address, test recipient, Bcc. Maintenance guide v0.3 written and posted, Open items 5, 10 and 11 updated. No code change today.
+- Tests: 663 passing at the last run, not rerun today.
+- Blockers: send as permission on the mailbox (RITM1089773, test send still 550 5.7.60); GitLab project access (Dave); how often the weekly required-fields email goes and which weeks the every-other-week email goes (report owner, asked today); whether the dry run stays required before a real run (Eric); scan and long-term code reviewer (Eric); NULSC profile change approved, EQUIP clearance and new laptop pending (Eric).
+- Decisions: the report owner answered that the structure email goes every other week, the exception list goes to the Odd Squad to find the right person, and the page link is the one in `settings.toml`.
+- Next: delete the dry-run file; Thursday weekly `--rerun`, compare with her manual run; Friday status to Eric and Dave.
+- Hours: 8
+
+### 2026-11-04 detail, for the Friday status
+Structure report, US instance
+- The report owner sent the US and NULSC reports. Only the US report was used. The NULSC report was not opened. It waits on access and on written authorization.
+- Dry run: 120 findings, 43 recipients, 2 on the exception list. It sent nothing and wrote nothing to Jira.
+- Sections compared with her report: Initiative 31 and 31, Milestone 12 and 12, Epic 36 and 36, Stories 41 and 41. The Jira keys of all 120 were compared. None are missing and none are extra.
+- People: her report has 44 distinct people in Assignee and Reporter. The run has 43 recipients, and the 44th is a deactivated reporter on one issue.
+- Exceptions: one issue has no assignee and no reporter. The other has no assignee and only a deactivated reporter. Both were confirmed in Jira.
+- `--check-page` found all four queries and all four sections.
+- Settings read in words only, nothing changed. The page id and link match her email. The sending mailbox is the Odd Squad help mailbox. The exception address is the same mailbox. The test recipient is Daniel. Delivery is Bcc.
+- The email design was checked in the code: one email per run, the intro and the page link only, addresses in Bcc, exceptions as a separate message to the team mailbox.
+
+Report owner answers (reply to the email with the comparison)
+- The structure email goes every other week. She did not say which weeks.
+- The exception list goes to the Odd Squad, who find out who each issue should reach.
+- The page link in the settings is the correct one.
+- NULSC has one additional filter compared with US.
+- Asked, no answer yet: which weeks the every-other-week email goes out, and whether the weekly required-fields email goes every week or only with findings.
+
+Maintenance guide and Open items
+- Guide v0.3 added: the queries are read from the page each run; what to change if the page is copied, a section is renamed or the page moves; the every-other-week cadence; a Bcc and page link check before a real send; what to do with the exception list; a failure row for counts that differ from the report owner's; the `recipients` row now says to use bcc. The Routine run line for the structure report no longer names a Wednesday.
+- Open items 5, 10 and 11 changed. The master guide, the Confluence copy and the Open items file match. Daniel posted both Confluence pages.
+- NULSC filter numbers were left out of every file.
+
+Analysis done, nothing changed
+- What a maintainer sees when a real run fails partway: the screen prints the step and a message, and the FAILED comment carries the step and the same text. Gaps for the failure table: the `notify` step covers both the send and the record of it, so a failure there does not say whether the mail went out; the `record` step name is used three times; an error that is not from Jira or Confluence shows only its class name; the filter being read is not named; the page id is not in the FAILED comment.
+- The code default for `recipients` is `to` when the line is missing. The settings file has `bcc`. Changing the default to `bcc` is suggested and not done.
+- A finding with one reachable and one unreachable person goes on the exception list with the reason "some recipients have no deliverable address", and the reachable person still gets the email. None of today's 2 exceptions were that case.
+
+Access
+- Daniel's profile change for NULSC and US access was approved. Next is the EQUIP form for clearance, then a new laptop. Timing depends on the Department of Education. No NULSC work before the clearance and the written authorization.
+
+Earlier in the same stretch, dates to confirm
+- CODEMAP refresh instruction corrected; README links to the Gate Automation docs page.
+- Answer for Eric on why a dry run comes before a real run: the guide says so, the code does not force it, and Eric decides whether it becomes optional.
+- The weekly status goes by email to Eric and Dave. It is not posted on Confluence.
+- Three OSTO test issues planned. They wait on the text of the two real filters.
+
+Waiting on
+- Send as permission (RITM1089773); GitLab access (Dave); the report owner's two answers; Eric on the dry run, the scan and the long-term reviewer; EQUIP clearance and the new laptop.
+
+Send As update, 2026-11-04
+- RITM1089333: the account was added to two mailbox access groups. A test send after both adds still gets SMTPDataError 550 5.7.60 on the email and on the exception list. The groups give mailbox access and do not give Send As. Send As stays with RITM1089773. The test send file in the run folder holds real display names and is to be deleted.
+- RITM1089773: the technician wrote that send as was enabled on the mailbox, about six hours before the test send above. The test send after that change still got 550 5.7.60. The request is at Customer Approval and is not confirmed, because the send does not work yet. Next: test again later, then ask the technician what was granted and to whom.
+
+Report owner answers, second round, 2026-11-04
+- The weekly required-fields email goes every week, so `when` should be `always`. Daniel changes it in local settings. It still has no address (Open item 4).
+- The structure email goes every other week, starting the week of 2026-11-09. Her next manual send was planned for 2026-11-04, which would make the next one the week of 2026-11-16. The first week is not confirmed and is Open item 5. The example week in the question was written by Daniel, so her yes may only repeat it.
+- OSTO test set built: OSTO-264 (Story, In Progress), OSTO-265 (Epic, Done), OSTO-266 (Story, Done). Test filters 49068 shows 264 and 266, 49067 shows 265 and 266. The Client Impact condition cannot be tested in OSTO, because Jira treats that field as not applicable there, so the Done-issues test filter has no Client Impact clause. The weekly dry run on the test filters is next.
+
+GitLab access, 2026-11-04
+- Michael (through a colleague) said the Odd Squad content is under `po-process-tools-metrics` and that Eric asked for the Developer role for everyone on the Odd Squad work.
+- A search of the nelnetinc group found no project or group with that name. A context document in the group names the path as `nds/it-delivery/po-process-tools-metrics` and says it has its own Azure group, not inherited from it-delivery. That path is not confirmed by Michael.
+- The direct address returned page not found. The account is probably not in that Azure group yet. Next: ask Michael to add the account with the Developer role and to name the group that gives it. If the role is not Developer after the add, tell Eric.
+- Found later the same day: a merged change in the context library (!70) lists the location as a group, `nelnetinc/nds/it-delivery/po-process-tools-metrics`, verified through the GitLab API. Its Azure groups are one per role. The Developer group is `az_appl_hg_GitLab_process_tools_metrics_developer`. Next: ask Michael to add the account to that group, and ask whether a project already exists in the group.
+
+Report owner follow-up sent, 2026-11-04
+- Daniel asked the report owner (Eric and Dave on copy) whether her email of 2026-11-04 with the report links was the 2026-11-04 send or a separate note, and which day of the week the structure email goes. If it was the send, the tool's first send is the week of 2026-11-16. Waiting on her answer. Open item 5 and the Routine run line stay as they are until then.
+
+OSTO weekly dry run, 2026-11-04
+- Weekly dry run on the two test filters (49068 and 49067, settings copy `settings-osto.toml`): 2 issues under OSTO for each filter. Filter 49068 returned OSTO-264 and OSTO-266. Filter 49067 returned OSTO-265 and OSTO-266. Both lists equal what Jira shows when the same filters are run by hand. The dry run wrote nothing to Jira or Confluence and sent nothing. Result: the slice 1 count-per-project check passes on test data.
+- Limit: the Client Impact condition cannot be tested in OSTO, because Jira treats that field as not applicable there (filter 49067 has no Client Impact clause).
+- No real run on the test settings. It would end run 2026-W45 with test data. Thursday's `--rerun` on the real filters is the real comparison.
+- Structure test send, about 4 PM Central: still 550 5.7.60 on the email and the exception list. The test-send file in `runs/` was deleted. RITM1089773 stays open and is not confirmed.
+- Clean up after Friday's status: `settings-osto.toml`, `settings-test.toml`, Jira filter "TEST daniel grouping" (49051), and the test filters 49067 and 49068 once Thursday's comparison is done.
+
+Send As retest, 2026-11-04 (evening)
+- Structure test send run again after the weekly dry run: still SMTPDataError 550 5.7.60 on the email and on the exception list. RITM1089773 is not confirmed. Daniel replies on the request asking which account got Send As and on which mailbox, whether it applies to the SMTP relay, and when the change was made. Next retest: tomorrow morning. The test-send file in `runs/` is to be deleted after each try.
+
+Next, 2026-11-05
+- Make `recipients` default to "bcc" in settings.py (test first, then the guide sentence in section 5 and section 7.4; run the whole suite before and after). Daniel agreed on 2026-11-04.
+- Structure test send retest for Send As, then delete `runs\*.json`.
+- Weekly `--rerun` on the real filters and the comparison with the report owner's manual run.
+- Replies pending: report owner (first send week and day), Michael (GitLab developer group).
+
+GitLab access update, 2026-11-05
+- Dave relayed from Michael: the group and the developer Azure group are correct. Michael cannot add the account to an Azure group. The help desk (access management) does it through a ticket. Eric is checking what he submitted in his original request. A Developer can create a project in the group, and none exists yet.
+- Daniel is creating the help desk ticket. Next: add the ticket number to Open item 6 and the daily log, tell Dave the number, and retest the page address after the add (sign out of GitLab and back in first).
+
+Send As retest, 2026-11-05 (morning)
+- Structure test send again: still SMTPDataError 550 5.7.60 on the email and the exception list. RITM1089773 is not confirmed. GitLab help desk ticket opened by Daniel (number to add). The test-send file in `runs/` is to be deleted.
+- GitLab help desk ticket: RITM1091566 (add the account to the Azure group `az_appl_hg_GitLab_process_tools_metrics_developer`). Open item 6 updated. Daniel tells Dave and Eric the number.
+
+Report owner answer, 2026-11-05
+- Her 2026-11-04 email was only a run for Daniel, not a send. The structure email can go out the week of 2026-11-09, then every other week (2026-11-23, 2026-12-07, and so on). She did not give the day of the week or the time. Open item 5, the Routine run line in both guide copies updated. The first real send also waits on Send As (RITM1089773).
+
+Weekly real run on the real filters, 2026-11-05
+- Dry run (16:42 UTC): both filters 0 issues, "No issues. 0 found", not unavailable. Real run with `--rerun`: page 649477336 published, then "Run failed at step 'notify': SMTPDataError". The weekly test email to Daniel is refused by the mail server for the same reason as the structure test send (Send As on the Odd Squad mailbox, RITM1089773). The page is published. The run is FAILED and needs `--resume`.
+- For the guide failure table: the screen shows only the step and the error class, not the 550 code or what the step covers. The error text is not shown, by design.
+- `--resume` with a self-send settings copy (from_address = own account, no Send As needed) also failed at step 'notify': SMTPDataError. The screen did not show the server reply code, so the cause is not known yet (it may not be Send As). Code change made 2026-11-05: the weekly run's failure line and the FAILED comment now carry the numeric reply code and extended status (for example 550 5.7.60), never the text, the same as the structure send. Test added. Suite: 664 passed. Guide failure table and the sentence in the send section updated in both copies. Next: run `--resume` again and read the code.
+- `--resume` again, now with the reply code shown: "Run failed at step 'notify': SMTPDataError 550 5.7.60", with from_address = the account's own address and the test email going only to that address. So the mail server refuses even when the account sends as itself. The mailbox permission (Send As) is not the only cause. The mail administrators need to check whether this account may send through the relay at all. Open item 3 updated. The weekly run stays FAILED on AUTO-188 and the page (649477336, both filters 0) is published. Do not retry until they answer, because each retry adds comments to the ticket.
+
+Requirements pages updated, 2026-11-05
+- Slice 1 requirements v0.6 and slice 2 requirements v0.7 (masters in `docs/requirements/` and the `*-for-confluence.md` copies). Closed with a dated answer: the weekly email goes every week, the token can comment on AUTO-188, the filter ids are set, 120 of 120 findings match the report owner's US report, the exception list goes to the Odd Squad. Slice 2 first send is the week of 2026-11-09, her 2026-11-04 email was only a run for Daniel. Sender status updated (550 5.7.60 on 2026-11-05, also from the account's own address). Two acceptance boxes in slice 2 ticked. Left open: the seeded-issues question to Eric, NULSC authorization, November 20, SAST and NAM, hours per run, and the report owner's count for the weekly comparison. Daniel republishes both pages.
+
+Section 12 update, 2026-11-05
+- Eric's laptop already has Python 3.13, so the TBD "who in IT installs Python" is dropped from 12.2 in both guide copies. The second-computer test is the NULSC run itself, so Open item 10 now says it closes when GitLab access opens and the run is authorized in writing. Guide is Draft 0.5. Daniel re-pastes the guide and edits item 10 on the parent page.
+
+Filter count check, 2026-11-05
+- Slice 1 reads every `[[filters]]` block in the settings, in order, and nothing in the code assumes two. The page, the result line (`filters=N`) and the email come from the list. Added a test with three filters, the NULSC case (one more filter than the US instance). It passed with no code change. Suite: 665 passed.
+
+Commit, 2026-11-05
+- Three commits on main (no remote yet): 638deb1 requirements, README and code map; 93bad6d three-filter test; c52d566 server reply code on a failed weekly email. Suite: 665 passed. Not pushed, because the GitLab group is not available yet.
+
+Wrap-up, 2026-11-05 (afternoon)
+- Structure test send again: still SMTPDataError 550 5.7.60 on the email and the exception list. Nothing written to Jira. Test-send file deleted. Daniel added the retest line to RITM1089773 and RITM1089333, and sent the AUTO-188 update to Eric (Teams message).
+- Open item 1 now names both real weekly runs (2026-11-03 and 2026-11-05) and says the 2026-11-05 run stays FAILED at the email step. Changed in the open-items file and the guide notes block. Daniel pastes it on the parent page.
+- Section 14 proposal for Eric written (`docs/proposal-section14-owners.md`). Guesses are marked TBD. It goes at the end of the Friday status.
+- Waiting on: Ken and the mail administrators (550 5.7.60, RITM1089773), the help desk (RITM1091566), the report owner (weekly counts, structure send day and time), Eric. If neither mail ticket has an answer by end of day, Daniel asks Eric to ask the Send As team to look at RITM1089773.
+- Next, 2026-11-06: change the `recipients` default to "bcc" (test first, update guide sections 5 and 7.4 in both copies), retest the send, then the Friday status once Daniel says "start the status". Weekly `--resume` only after mail works.
+
+Report owner answer, 2026-11-05 (evening)
+- Stephanie: "Let plan on it sending on Wednesdays at 8 am." The structure sends are Wednesday 2026-11-11, 2026-11-25, 2026-12-09. No time zone given. The tool has no schedule, so a person starts each run. Open item 5 and the Routine run line in both guide copies updated. Daniel republishes the guide and edits item 5 on the parent page.
+- Still open: the send permission (550 5.7.60). If it is not fixed by 2026-11-11, Stephanie sends by hand that week, as Daniel told her.
+
+Escalation, 2026-11-05 (evening)
+- No answer on RITM1089773 or RITM1089333 by end of day. Daniel sent Eric the escalation (Teams): ask the Send As team to look at RITM1089773. The first structure send is Wednesday 2026-11-11 at 8 am. If not fixed, Stephanie sends by hand that week.
+- Daniel replied to Stephanie about the time zone. Her answer will update the Routine run line and item 5.
+- Next, 2026-11-06: check both tickets and Eric's reply, retest the structure send in the morning (delete `runs\*.json`), test the GitLab link after signing out and in, change the `recipients` default to "bcc", then the Friday status on "start the status".
+
+Backup and recipients default, 2026-11-05 (afternoon)
+- Backup before the change: git tag `backup-2026-11-05` on 638deb1 (code, clean tree) and a folder copy `Documents\Gate Automation backup 2026-11-05` (code, docs, settings.toml; no `runs/`). Delete the folder copy at clean-up: it holds server names.
+- `smtp.recipients` now defaults to `bcc` in `settings.py` (both places). Test first: the default test failed, then passed. One older test relied on the old default without saying so (`test_smtp_sender.py`), so it now sets `to` itself. Suite: 666 passed. Added a test that `to` still works. Guide sentences in section 5 (table) and 7.4 updated in both copies. `settings.example.toml` comment and CODEMAP test count updated. Not committed.
+- Structure test send again, same 550 5.7.60. File deleted. No more retests today.
+
+Friday status draft, 2026-11-05
+- Started `docs/weekly-status-2026-11-06.md` from the 2026-10-30 file. Draft, not sent. It has the 120 of 120 match, the mail block and the escalation, GitLab (RITM1091566), the Wednesday 8 am deadline, six questions for Eric, the section 14 table, and the clearance and laptop risk. Hours, the clock start date and the AUTO-56 timebox are TBD. Update it on 2026-11-06 after the retest, the tickets, Eric's reply, the GitLab check and Stephanie's time zone.
+
+NULSC and US access, 2026-11-05
+- EQUIP form not received yet. Profile change approved 2026-11-04; Eric is ordering the new laptop. Status draft Risks line says so. Log the date the form arrives, the date it is submitted, and the clearance result, and tell Eric each step.
+
+Weekly counts validated, 2026-11-05
+- The report owner confirmed the slice 1 results match her counts (both filters 0). Slice 1 requirements v0.7 (both files): two count acceptance boxes ticked, the pending TBD closed. Open item 1 updated (open-items file and the guide notes block). Status draft updated: progress table, Done, Next week, and the Blockers row for her counts removed. A week with real findings still has not shown on live data. Daniel republishes slice 1 requirements and edits item 1 on the parent page.
+
+Confluence space, 2026-11-05
+- Dave answered: the Odd Squad has many spaces, and a new space for the automation work is fine. Daniel sent Dave five questions (who creates it and the name, space admins, who can view the weekly page, token permission, and Eric's approval). Status draft updated (Done, Next week, a heads-up for Eric). Next: Dave's answer, then Eric approves writes to the new space, then change `parent_page_id` in settings. Do not move the weekly page. Move the Gate docs after the first send and acceptance.
+
+Work calendar, 2026-11-05
+- The team works Veterans Day (Wednesday 2026-11-11, the first structure send) and the day after Thanksgiving (Friday 2026-11-27). Thanksgiving Thursday 2026-11-26 is the weekly run day: decide with the report owner whether to run on 2026-11-25 or 2026-11-27. Saved as a memory note.
+
+Next question for the report owner, 2026-11-05
+- Thanksgiving: the weekly check day, Thursday 2026-11-26, is the holiday. Ask whether she runs it on 2026-11-25 or 2026-11-27 that week, and that the tool should run the same day so the counts match (her filters look back 7 days from the run). Bundle with her next message. Her time zone answer (Wednesday 8 am) is still pending.
+
+Dave's answers on the new Confluence space, 2026-11-05
+- Dave creates the space and needs a name from Daniel. Daniel becomes a space admin (the Atlassian admins are space admins by default). Spaces are not locked down: anyone with a Confluence license can see it. If Daniel can create a page by hand, his token can too. Eric does not need to approve writes to a space, only to hear that the space exists. Daniel builds the page tree himself once the space exists.
+- Status draft updated (Done, Next week, question 5 is now a heads-up). Next: pick the name, send it to Dave, then change `[publish] parent_page_id`. The current CLAUDE.md approval still names only Automation Output, so the tool stays pointed there until the space exists and Eric has the heads-up. Do not move the weekly page. Move the Gate docs after the first send and acceptance.
+
+Space name chosen, 2026-11-05
+- Daniel chose "Odd Squad Automation" and sends it to Dave. Status draft updated. Waiting for Dave to create the space. Then: build the page tree, set `[publish] parent_page_id`, tell Eric in the status.
+
+Questions sent to the report owner, 2026-11-06
+- Daniel asked her two things: the time zone for the Wednesday 8 am structure email, and the weekly check day in Thanksgiving week (2026-11-25 or 2026-11-27, with the tool run the same day). Waiting for her answer. The mail retest on 2026-11-06 failed again (SMTPDataError 550 5.7.60), and neither ticket changed.
+
+Report owner answers, 2026-11-06
+- Time zone: run the structure email at 8 am CST. Thanksgiving week: run the weekly check on Wednesday 2026-11-25, which is also a structure send day (2026-11-25, 8 am CST). Guide Routine run line (master and Confluence copy), Open item 5 (file and guide notes block) and the status draft updated: time zone row removed from Blockers, Thanksgiving line added to Next week. Daniel re-pastes the guide line and item 5 on Confluence. Her reply did not say which report the 8 am applies to beyond "it", so the weekly check time stays TBD in the guide.
+
+NULSC account request, 2026-11-06
+- The NULSC account request is RITM1091818, status Assigned (2026-11-06). Added to the Risks line in the status draft, number only. It is not the written authorization for NULSC data. The EQUIP form and the new laptop are still pending.
+
+Coverage while Eric and Dave are out, 2026-11-06
+- Eric answered on 2026-11-03: go to Phil Baker first, then Michael Popelka. Daniel will use them next week for the mail block and the GitLab project name. No coverage question needed in the status or the call.
+
+Dave on the Cloud move, 2026-11-06
+- Dave said all spaces and pages move to Cloud as part of the migration, and nothing needs to be done to include the new space. Open point for the guide and the Cloud client: after the move, page ids and links in settings (`parent_page_id`, `page_url`) and in the README and guide are likely to change, so check them on migration day. Not yet in the guide.
+
+Page tree agreed, 2026-11-06
+- Dave likes the branch layout for the new space and having ticket numbers in the page names, because they trace back the purpose of the parent pages. Plan stays: two branches (AUTO-188 Scheduled adherence reports, AUTO-56 Documentation agent), the guide and requirements pages under AUTO-188, Automation Output for generated pages. Titles: branch pages start with the ticket key; report pages use the plain report name plus ": requirements". Open: whether report pages also carry their phase ticket key (needs Eric to confirm slice 1 = AUTO-221 and slice 2 = AUTO-225). Renames wait until the space exists, in one pass.
+
+Confluence space created, 2026-11-06
+- Dave created the space Odd Squad Automation, key OSA. Home page id 649480702. Default permissions: any user can see, add and edit pages, no one but admins can delete. Space admins: Eric, Daniel, Dave. Status draft updated (Done, Next week, question 5). Next: build the top of the tree by hand (AUTO-188 and AUTO-56 branches, Automation Output), then the renames and moves in one pass, then `[publish] parent_page_id` after Eric has seen the heads-up. No parent page for the tool exists in the space yet, so the home page id is not the setting value.
+
+Top of the new space built, 2026-11-06
+- Daniel created three pages in Odd Squad Automation (OSA): AUTO-188 Scheduled adherence reports and AUTO-56 Documentation agent under the home page, and Automation Output under AUTO-188. Automation Output page id: 649480732. Its body says: Pages created by the automation tools. Do not edit or move them by hand.
+- For later: `[publish] parent_page_id = 649480732` in local settings, only after Eric has seen the heads-up in the status. Not changed. The weekly page 649477336 stays under the old Automation Output. Next pass: rename and move the Gate Automation docs page, the guide and the two requirements pages under AUTO-188.
+
+Slice 2 requirements v0.8, 2026-11-06
+- Slice 2 requirements go to v0.8 (master `docs/requirements/slice2-biweekly.md` and the Confluence copy): new "Changes from v0.7" paragraph (every other week, Wednesday 8 am CST, sends 2026-11-11, 2026-11-25, 2026-12-09, mail still failing), a "replaced in v0.7" note on the stale v0.6 line, section 3 schedule, and a "met on 2026-11-04" note in section 4. Status draft line updated (v0.7 for slice 1, v0.8 for slice 2). Daniel re-uploads the page. Slice 1 requirements still v0.7 and not yet confirmed re-uploaded.
+
+Slice 1 requirements v0.8, 2026-11-06
+- Checked the slice 1 requirements against what changed. Updated master `docs/requirements/slice1-weekly.md` and the Confluence copy to v0.8: new "Changes from v0.7" paragraph (Thanksgiving week run on Wednesday 2026-11-25, the new OSA space and its Automation Output parent, OSTO test issues, NULSC has one more filter, mail retest 2026-11-06), the email failure date, the TBD on the real parent page answered, the OSTO test issues noted in the risks and open questions, and the "US only or NULSC" question answered. Status line now says both requirements documents v0.8. Daniel re-uploads both requirements pages. Still TBD (unchanged): hours per run, who reads the results, exclusion label, whether the three cases are all, NAM and code review, SAST, Nov 20.
+
+Phase 6 questions sent to the report owner, 2026-11-06
+- Dave's message of 2026-11-06 backs a US-first scan for the weekly risk report with the instance as a setting (PS, PM and PSC in US Jira, PS and PM also in NULSC). Daniel sent Stephanie seven questions (subject: AUTO-323 weekly risk adherence report: questions before I start): the weekly ticket and who is told (AUTO-323 Q1), status names across projects and instances (Q2), saved filters, the page today and who reads it, how "two weeks" is counted, whether the tests match the monthly audit, and the named person for a risk with no owner. Notes only, in `docs/phase6-prep.md`. Waiting for her answers and for Eric on the build and the owner-names exception. Status draft has no Phase 6 line yet.
+
+Weekly status sent, 2026-11-06
+- Week 2 status sent by email to Eric (To) and Dave (Cc). Master copy: `docs/weekly-status-2026-11-06.md`. It leads with the mail block (first structure send Wednesday 2026-11-11 at 8 am CST, retested 2026-11-06, same 550 5.7.60, fallback is Stephanie sending by hand if not fixed by Tuesday 2026-11-10). Questions for Eric: 3 and 7 before he leaves, 1, 2, 4, 6 can wait, 5 needs no answer. Contacts while Eric is out: Phil Baker, then Michael Popelka.
+- Also today: slice 1 and slice 2 requirements v0.8, guide and requirements moved into the OSA space under AUTO-188, `parent_page_id = 649480732` set in local settings (dry run clean; first real test is Thursday 2026-11-12), Phase 6 notes and seven questions sent to Stephanie, Dave agrees US first for Phase 6.
+- Next: check both mail tickets Monday and message Phil Baker if no change; Stephanie's Phase 6 answers; Eric's call; Thursday 2026-11-12 weekly run (confirm the page lands under the new Automation Output); local docs folder restructure if wanted. Start next week's status from the 2026-11-06 file.
+
+Call with Eric, 2026-11-06
+- Eric talked through the status. Gate = a running automation someone else can run; the email is wanted but is not a blocker. Daniel pings the mail and GitLab owners Monday 2026-11-09. Coverage while Eric is out: Phil Baker (Eric's answer on whether Phil knows is not clear in the transcript). Daniel raised code review and section 14; Eric did not answer either on the call.
+- Eric said he gets asked for too many approvals: as I read the rough transcript, writes by the tool need no approval from him, packages still do. CLAUDE.md is unchanged until he confirms in writing.
+- Where the tool runs after the gate is undecided (AWS cannot touch Jira and Confluence, Runners team prefers a server). Eric plans to ask Andres about a server. Nothing to build.
+- Found a wrong figure in the sent status: "37 files, about 5,600 lines" is the tests only. App 15 files and 3,235 lines, tests 37 files and 5,649 lines. Fix in the Week 3 status.
+- Notes and a draft confirmation message: `docs/eric-call-2026-11-06.md`. Next: Monday mail and GitLab pings, Stephanie's Phase 6 answers, Thursday 2026-11-12 weekly run.
+
+Eric's call points confirmed, 2026-11-06
+- Daniel confirmed that Eric said: no approval needed for the tool's Jira and Confluence writes (he reviews after), packages still need his approval, where the tool runs after the gate is for Eric and Andres, Daniel pings the mail and GitLab owners Monday and goes to Phil Baker, and Phase 6 notes and requirements start next week with Eric's approval. Question 3 in the status is answered; drop it from Week 3.
+- CLAUDE.md is not changed yet (the edit was blocked in the session), so its approval lines still read the old way. Sends, NULSC data and new kinds of write still go to Eric first. Written reply from Eric still pending (message drafted in `docs/eric-call-2026-11-06.md`).
+
+Phase 6 requirements v0.1 drafted, 2026-11-06
+- Eric approved starting Phase 6 notes and requirements on the call. Wrote `docs/requirements/phase6-weekly-risk.md` (master) and `docs/requirements-phase6-for-confluence.md` (Confluence copy), same ten sections as slices 1 and 2. Source: AUTO-323 text, the parent ticket, Dave's instance answer, `phase6-prep.md`. Stephanie's answers are not in yet, so each dependent point is a TBD (31 lines carry a TBD, sorted under report owner, Eric, answered).
+- Draft scope: US first, two checks (not assessed, not updated in 90 days), owner = assignee else reporter, "no owner" listed, one page with owner names (the exception, needs Eric), up to three status comments, no email, no per-team counts or metric records (Phase 7), no NULSC. Nothing approved to build. Not uploaded to Confluence. Suggested page title: Weekly risk adherence report: requirements, under AUTO-188.
+- Next: fold Stephanie's answers in, ask Eric about the names exception and the person-field rule, then upload.
+
+Follow-ups to track, 2026-11-07
+- Drafted, send status not confirmed (update each line when sent, with the date):
+  - [ ] Teams message to Eric confirming the call (five points). Text in `docs/eric-call-2026-11-06.md`. Reply from Eric is the written record for the approval change; CLAUDE.md stays unchanged until then.
+  - [ ] Email to Eric with hosting options, best first, VDI at option 2. Text in `docs/hosting-options-email-draft.md`. Remove the "DRAFT, NOT SENT" line before sending. Check the spelling of Andres.
+  - [ ] Three follow-up questions to Stephanie (owner names on the page, total counts only in v1, deactivated owner). Text in `docs/phase6-prep.md`. Add to her existing thread.
+  - [ ] Eric: Phase 6 rulings a and b (owner names on one page, person fields for this report only). Text in `docs/eric-call-2026-11-06.md`, point 6. Hold until Stephanie answers.
+- Not started:
+  - [ ] Questions to Andres about VDI (persistent, scheduled task with nobody logged in, service account, Python and keyring, NULSC). In the hosting draft file.
+  - [ ] Upload Phase 6 requirements v0.1 to Confluence under AUTO-188 as "Weekly risk adherence report: requirements".
+  - [ ] Week 3 status: replace the "37 files and about 5,600 lines" line (tests only; app 3,235, tests 5,649), drop question 3 (answered), and add the hosting item.
+- Monday 2026-11-09: check RITM1089773 and RITM1089333 and message Phil Baker if nothing changed; ping the GitLab owner (RITM1091566).
+- `docs/outstanding.md` is stale (last updated 2026-11-02). Refresh it with the next status.
+
+Phase 6 design notes, 2026-11-07
+- Read the code map and the slice 1 and structure code paths, and wrote `docs/phase6-design-notes.md`: what is reused (`search_jql`, `run.py` gate and status comments, `confluence.py`, `HttpJiraContacts` lookup), what changes (a new `owners_for` in `jira_source.py` that returns the assignee, else the reporter, a deactivated-owner check, a risk row shape, a separate renderer, the two repo-rule tests), a settings sketch, ten tests to write first, and the build order. No code, settings or tests changed.
+- Found that `recipients_for` is the wrong method to reuse for the owner: `_user_ids` silently drops a non-opaque assignee id, so the reporter would look like the owner.
+- Not read yet: `settings.py`, `test_repo_rules.py`, `test_models.py`. Still waiting on Stephanie (saved filters or rules, status names) and Eric (owner names, person fields).
+
+Decision log updated, 2026-11-07
+- Added six rows dated 2026-11-06 to `docs/03-decision-log.md` from the call with Eric: the gate bar, the approvals change (verbal, written reply pending, CLAUDE.md unchanged), hosting undecided, Monday pings and coverage, Phase 6 start and its limits, and what is still open. The log had no rows after 2026-11-03 before this, so 2026-11-04 to 2026-11-06 decisions (Stephanie's answers, the OSA space and tree, v0.8 documents, `parent_page_id`) are not in it yet.
+
+Structure dry run, 2026-11-07
+- Daniel ran `--report biweekly_structure --dry-run` locally (Saturday, before the 2026-11-11 first send). Result: 128 findings, 46 recipients, 2 on the exception list. Nothing sent. Compared with 2026-11-04 (120 findings, 43 recipients, 2 exceptions): +8 findings, +3 recipients, same 2 exceptions. The console shows totals only, so the split by section is not known. Both tokens and the page read worked. Not compared with the report owner's page today.
+- The run wrote `biweekly_structure-2026-11-07-dry-run.json` in the run folder (names and recipient ids). Delete it after use. Do not share it.
+- Next: dry run again on Wednesday 2026-11-11 before 8 am CST and compare with Stephanie's report that morning.
+
+Email link check, 2026-11-07
+- The shorter link `https://confluence.nelnet.net/pages/viewpage.action?pageId=448278822` opens Stephanie's structure page (US, space AH) and the browser then shows the long URL. `page_url` in local settings is unchanged until she agrees. A test of the encoding showed the 121-character long link arrives intact in a plain-text email (quoted-printable, rejoined by the mail program). Questions drafted for her: bare link or labeled hyperlink, the shorter link, and a copy of the last email she sent to the recipients. Not confirmed sent.
+
+Sent, 2026-11-07 (Saturday)
+- Daniel says everything drafted today is sent: the Teams message to Eric confirming the call, the hosting options email to Eric, and the email to Stephanie with four questions (plain or labeled link, the shorter link, a copy of her last email to the recipients, anything she does on the page before sending). Replies pending on all three. The follow-up checkboxes above are still unticked; treat this entry as the update.
+- Not confirmed sent: the three Phase 6 follow-up questions to Stephanie (owner names, total counts only, deactivated owner), the Phase 6 rulings for Eric (hold until Stephanie answers), the questions to Andres about VDI.
+- Still to do locally: delete `biweekly_structure-2026-11-07-dry-run.json` in the run folder.
+- Monday 2026-11-09: check for replies (Eric, Stephanie), then the mail tickets (RITM1089773, RITM1089333) and ping Phil Baker if nothing moved, warn Stephanie the 11-11 send may fall to her, ping the GitLab owner (RITM1091566), then Phase 6 notes and requirements.
+
+- 2026-11-07: Daniel deleted `biweekly_structure-2026-11-07-dry-run.json` from the run folder.
+
+Stephanie's answers on the email, and the labeled link, 2026-11-09
+- Stephanie answered the four questions. She wants the link to show as the text "bi-weekly reports (US)", and the link target is the short page-id address (the `safelinks` address in her reply is Outlook's rewrite of it, not the address to use). The Confluence page is always current, so she does nothing on it before a send. She sent her last email to the recipients in a separate message; its wording is not yet matched.
+- Built on the local branch `html-email` (not committed, `main` untouched): new optional setting `structure.link_label`, empty by default. With it set, the structure email gets an HTML part (intro, then the link under the label) beside the plain text part with the bare link. With it empty, the email and the sender call are as before, so a sender with the old signature still works. The exception list and the weekly email stay plain text. Tests first: 15 new tests, suite 681 passed with the network blocked (was 666).
+- Docs in the same change: slice 2 requirements v0.9 (master and Confluence copy, not uploaded), the guide settings table and "what to change" table (master and Confluence copy, not uploaded), `settings.example.toml`.
+- Not done: the local `settings.toml` is not changed (to use it, set `link_label = "bi-weekly reports (US)"` and `page_url` to the short address). No test send yet, because mail is still refused. No commit.
+
+Labeled link committed, 2026-11-09
+- Committed on the local branch `html-email` (commit 18c630d, 8 files: the three code files, three test files, `settings.example.toml`, slice 2 requirements v0.9). Not merged to `main`, and not pushed. Merge only after a test send to Daniel's own address shows the labeled link correctly in Outlook. The weekly email gets no label (nobody asked). The guide copies and the Confluence copies are in the ignored `docs` folder, so they are not in git, and none is uploaded.
+- Local `settings.toml` (ignored by git, not tracked): `link_label = "bi-weekly reports (US)"` and `page_url` now the short address `.../pages/viewpage.action?pageId=448278822`. The file loads.
+- Waiting on: Stephanie's earlier email to the recipients (Daniel pastes its subject and intro, then the wording is matched). If it is not here by Tuesday 2026-11-10, the current wording stays for Wednesday.
+- Note: this branch is checked out in the working folder, so a run from the repo root uses the labeled-link code. `main` has the old code. Slice 1 requirements v0.8 changes are still uncommitted.
+
+Docs cleanup on main, 2026-11-09
+- Switched to `main` (working folder is now on `main`; `html-email` stays committed and unmerged at 18c630d). Two commits on `main`: f13721f (slice 1 requirements v0.8, on its own) and 9f2cab9 (README and CODEMAP.md point to Confluence by page title, no URLs or page ids; both requirements files marked "Copy. The Confluence page is the master."). Tests on `main`: 666 passed.
+- Settings load on `main` with the local `settings.toml`: loads, `page_url` is the short address, and `link_label` is ignored (the field does not exist on `main`). A settings load only, no Jira or Confluence call.
+- Slice 2 requirements copy on `main` is v0.7 (Confluence has v0.8, `html-email` has v0.9). When `html-email` merges, expect a small conflict in `slice2-biweekly.md` (the marker line near the top). Keep both the marker and the v0.9 text.
+- CLAUDE.md is not changed (the edit is blocked for me). Daniel pastes the "Docs" paragraph. Daniel also pastes the owner line in section 14 of the guide on Confluence: "Primary maintainer: Daniel, until the handoff. After that: TBD: Eric to name."
+- Next: mail (Monday checks) and the NULSC run. No more doc work.
+
+- 2026-11-09: Daniel pasted the Docs paragraph into CLAUDE.md (Handoff section) and reports the Confluence section 14 owner line updated. CLAUDE.md change is not committed. The docs cleanup is finished; next is mail and the NULSC run.
+
+Eric's answers to the Week 2 status questions, 2026-11-09
+- Q1 Client Impact test: the report owner should be able to add the field to the Odd Squad - Testing Only project (to ask her). Whether the three test issues stay is not answered.
+- Q2 dry run: required when testing, not for production runs. Guide line changed in the local copies (master and Confluence copy). The Confluence guide needs the same edit.
+- Q3: yes, finish Stephanie's AUTO-188 phases (Phase 6 next) before AUTO-56. Q4: the scan runs by itself in GitLab. Q6: yes, add the NULSC link after the first NULSC run is authorized in writing. Q5 needed no answer. Q7: Eric will circle the wagons on the primary maintainer, no date.
+- Recorded in `03-decision-log.md` (six rows), local open items (items 8, 9, new 12) and the Phase 6 requirements "Answered" list. Not on Confluence yet: Daniel pastes the guide line and the open items changes. For the Week 3 status: drop Q2, Q3, Q4 and Q6, keep Q7 as waiting, ask Stephanie about Client Impact.
+
+Phase 6 answers from Stephanie, 2026-11-09
+- She answered the seven questions. Main findings: monthly, not weekly; a Jira dashboard Dave set up (Odd Squad only) holds the two lists; comment on the ticket for missing Impact/Likelihood after 14 days, email for not reviewed in 90 days; PS and PSC in US, PS only in NULSC; no-owner goes to the Odd Squad; "not assessed" is not her term.
+- Rewrote `docs/requirements/phase6-weekly-risk.md` as v0.2 and its Confluence copy (not uploaded). The owner-names exception is dropped. New open items: Dave's filter ids, Eric on the comment write and the cadence, her follow-ups (PM, fields, owner rule, wording, OSC-3008, page or not). Added her two links to `links.md` (local), her answers to `phase6-prep.md`, two rows to the decision log.
+- AUTO-56 stays in its own folder and starts after Phase 6 (Eric). No new chat needed for it now. For the Phase 6 build, a new chat once the filters and Eric's approvals are in.
+
+Audit process document, 2026-11-09
+- Stephanie sent the Risk & Opportunities Monthly Audit process document for Phase 6. Updated `docs/requirements/phase6-weekly-risk.md` to v0.3 and its Confluence copy (not uploaded): check 1 by ticket type, owner = assignee else reporter, comment with an owner mention for check 1, email and never a comment for check 2, second reminder and the SharePoint audit log out of v1. Notes added to `phase6-prep.md` and `phase6-design-notes.md`, two rows in the decision log.
+- The document names a NULSC dashboard address and a NULSC ticket. None of it is in any file. It is already in this chat. Do not put the document, as it is, on Confluence or in email: remove the NULSC link first.
+- Open for Eric: the owner mention (a person id in a comment) and the new write on risk tickets, the run ticket, and the second reminder as a later phase. Open for Dave: the filter ids.
+
+Initiative tracker, 2026-11-09
+- Rewrote the top of `docs/outstanding.md` as the one tracker: ten initiatives with status, next action and what each waits on (slices 1 and 2, mail, GitLab, NULSC, Confluence docs, hosting, Phase 6, AUTO-56, later phases); two tables on how Phase 6 and the gate affect each other (what Phase 6 needs from the gate, and what Phase 6 work must not break); dates through 2026-12-09; the end clean-up list. The old 2026-11-02 list is kept below it as an archive. Update it with each weekly status.
+
+Mail tickets closed, 2026-11-09
+- RITM1089333 and RITM1089773 both show Closed Complete (about 13 hours before the check). Not retested yet. Plan: switch to `html-email`, run the structure test send to Daniel's own address (`test_recipient` set), look at the labeled link in Outlook, delete the test-send file, then decide the merge. Then `--resume` on the 2026-W45 weekly run. Tracker (`outstanding.md`) rows 3 and the Monday and Tuesday dates updated.
+
+Test send after the mail tickets closed, 2026-11-09
+- Daniel switched to `html-email` and ran the structure test send. Both messages (the email and the exception list) were refused with SMTPDataError 550 5.7.60, the same error as before. The run wrote `biweekly_structure-2026-11-09-test-send.json` (delete it, it holds names). The labeled link could not be checked in Outlook.
+- Next: message Phil Baker with the facts (both tickets closed, retest still 550 5.7.60, SMTP on port 587 with STARTTLS, From is the Odd Squad help mailbox, the login is the clock id). Ask what was granted and whether SMTP submission is allowed. Tell Stephanie today that she sends on 2026-11-11 by hand. Switch the working folder back to `main`. `html-email` stays unmerged.
+
+Mail follow-up sent, 2026-11-09
+- Daniel submitted a new request for the send permission (number to come; it could not be created as a reopen). Daniel sent Phil Baker a Teams message with the facts and the ask: what was granted (Send As or Send on Behalf), whether SMTP is allowed for the account, and that the first send is Wednesday 2026-11-11 at 8 am CST with a hand-send fallback if not fixed by Tuesday 2026-11-10. Add the new ticket number here and in the tracker when it appears, and send it to Phil.
+- Still to do today: tell Stephanie she sends on 2026-11-11 by hand (offer the pack: email text, exception issue keys, Wednesday dry run comparison); delete `biweekly_structure-2026-11-09-test-send.json` in the run folder; `git switch main`.
+
+- 2026-11-09: Daniel deleted the test-send file from the run folder and switched the working folder back to main. Still to do today: tell Stephanie she sends the 2026-11-11 email by hand.
+
+New mail request, 2026-11-10
+- RITM1092783 exists (Access Management Operations, Assigned). Form needed-by date is 2026-11-17, not the real 2026-11-11 8 am CST. Contact method shows Chat in the header and Email in the work notes. Next: a comment on the ticket with the real date, the number to Phil Baker, and the hand-send confirmed with Stephanie for 2026-11-11. The tool does not send on 2026-11-11 unless the mail team fixes it first.
+
+Ken Hicks reply, 2026-11-10
+- Ken Hicks (mail team) asked on Teams whether RITM1092783 is for Daniel and which account the tool uses (US or USDS). His screenshot shows Send on Behalf for Daniel and the MBO_OddSquadHelp group, not Send As. Next: reply to Ken with the account the tool logs in with, ask him to confirm the Send As list and whether SMTP submission is allowed for that account, then retest once. Wednesday's send stays with Stephanie unless a test send works today. Fallback idea, unverified: if only Send on Behalf is allowed, set a Sender header in the message. Not built.
+
+GitLab check, 2026-11-10
+- The Odd Squad group path (`nelnetinc/nds/it-delivery/po-process-tools-metrics`) still shows 404 Page not found in the browser while signed in. A private group shows 404 when the account is not a member, so access is not in place yet (RITM1091566, Developer role through an Azure group). Next: check the ticket, sign out and back in through SSO if it was granted, look at the parent group `it-delivery` to see whether the Odd Squad group is listed, and ask Phil Baker who owns group access. No Monday ping on record. Nothing is blocked this week by GitLab. Tell Eric the project name before creating one.
+
+Send As confirmed, 2026-11-10
+- Ken Hicks showed the Send As list for the mailbox: Daniel's login name and the group MBO_OddSquadHelp. Next: one test send to Daniel's own address from `html-email` (labeled link check), then delete the test-send file. If it works: show Stephanie the test email, decide with her whether the tool sends on 2026-11-11 (needs `test_recipient` removed and `exception_address` set, dry run first, Eric already approved the first real send on 2026-11-03) or whether she still sends by hand and the tool takes the 2026-11-25 round. If it fails again: wait about an hour and retest once, then tell Ken the exact error. Do not accept the ticket's customer approval until the test works.
+
+Test send after Send As confirmed, 2026-11-10
+- Both messages refused again with SMTPDataError 550 5.7.60 (the same error). The run wrote `biweekly_structure-2026-11-10-test-send.json` (delete it). Not retested yet: wait about an hour, then one retest. In the meantime: Outlook test sending From the mailbox, a note to Ken with the exact error and time, asking for a message trace and a check of authenticated SMTP for the account. The report owner sends the 2026-11-11 email by hand. Tell her tonight.
+
+- 2026-11-10: Correction. The 550 5.7.60 comes as SMTPDataError, so the login, the sender and the recipient were accepted, and the From header is what is refused. The earlier suspicion that SMTP submission is blocked was wrong. Tell Ken that. Diagnostics to do: compare username, from_address and the mailbox primary address; the Outlook From test; a retest after about an hour; optionally a one-off script that prints the server reply text with addresses masked.
+
+Open items on Confluence, 2026-11-10
+- Daniel pasted open items 8, 9 and 12 (and the guide dry-run line is the other paste, not confirmed). Review found items 3 and 6 stale: the delegated send request is closed and RITM1092783 is open, the refusal is at the data step, Ken Hicks showed the Send As list, and the GitLab group page still shows Page not found. Local copy updated; Daniel pastes items 3 and 6 on Confluence. The page intro says each item has a TBD mark, which is not true, so drop that sentence. Item 5 changes only after the retest decides whether Stephanie sends 2026-11-11 by hand.
+
+- 2026-11-10: Daniel pasted the guide section 6.1 dry-run line on Confluence (checked from the pasted text: correct). Open items 8, 9 and 12 are pasted too. Still to paste: items 3 and 6 (updated), and remove the sentence about TBD marks in the intro.
+
+Guide v0.6 fix, 2026-11-10
+- Wrote `docs/maintenance-guide-v0.6-for-confluence.md` from the Confluence copy for Daniel to re-upload: Draft 0.6; weekly routine without the dry run (Eric, 2026-11-09); hand-send note on the structure line; section 2 send-as note; both 550 5.7.60 rows rewritten (login accepted, refused at the data step); section 14 primary maintainer and report owner filled; the link_label rows left out because html-email is not merged. Still to add after the merge or the fix: link_label, a mail-fixed note. Confluence is the master: after re-upload, the older local copies are stale.
+
+Mail trace goes to the Exchange group, 2026-11-10
+- Phil Baker found that the message trace for the refused attempts belongs to the Exchange group, not Ken Hicks. Phil is finding out who that is. Daniel replied that it helps to know who to talk to. Next: give the Exchange group the facts (From mailbox, login, server, error 550 5.7.60 at the data step, the times of the attempts with timezone, the Send As list Ken showed, RITM1092783). Do not retest before 7 PM CT tonight (Jira and Confluence maintenance 7 PM to 1 AM CT, CHG0105122) or without a reason. The report owner sends the 2026-11-11 email by hand.
+
+- 2026-11-10: Daniel re-uploaded the maintenance guide to Confluence from `maintenance-guide-v0.6-for-confluence.md` (Draft 0.6). Confluence is now the master. The older local guide copies are stale. Open items 3 and 6 and the intro sentence about TBD marks may still need pasting. After the html-email merge: add link_label rows and update the email wording in 7.4.
+
+- 2026-11-10: Updated `open-items-for-parent-page.md` to match the Confluence page plus three edits for Daniel to paste: item 3 (message trace is with the Exchange group, wording), item 9 (section 14 names the primary maintainer and report owner), item 6 (one space). The intro line has no TBD sentence.
+
+- 2026-11-10: Daniel pasted the open items updates (items 3, 6, 9) on Confluence. The page now matches the local copy.
+
+Phase 6 answers, 2026-11-10
+- Stephanie answered the five audit questions. Requirements v0.4 (master and Confluence copy, not uploaded): PM out, Closed excluded, three comment wordings and the 90-day email wording as settings, comment only for the 14-day check, a monthly auto-generated ticket. New design point: the 90-day email names a ticket and a due date, so it is one message for each ticket or owner, not one Bcc message. Still open: Dave filter ids, Eric on the owner mention and the new write, who signs the email, which ticket the run comments on.
+
+Stephanie replies on slices 1 and 2, 2026-11-10
+- The link alone is enough for the biweekly email (no finding count). The Client Impact field is now on the OSTO test project: test that case next (make or edit a Done issue with Client Impact empty, point the second test filter at it, dry run with the OSTO settings, compare with Jira). She forwarded her past email separately: Daniel pastes its subject and intro, and I match the wording in settings. Open item 12 updated in the local copy (Daniel pastes it). Not decided: whether the three test issues stay.
+
+- 2026-11-10: Stephanie said she forwarded her past email to the recipients, but it did not reach Daniel. Daniel asked her to resend. Wording match waits on it. If it is not here by the next send, the current wording stays.
+
+Phase 6 preparation while waiting, 2026-11-10
+- Appended the v0.4 design to `phase6-design-notes.md` (wording by case, per-ticket emails need a per-key record for safe retries, settings sketch, tests) and wrote `phase6-handoff.md` for the build chat. No code, tests or settings. Waiting: Dave filter ids, Eric rulings and build approval, `html-email` merge.
+
+- 2026-11-10: Dave is out with Eric. The Phase 6 filter ids come from the US dashboard by hand (open each gadget filter, the number follows filter= in the address; US only, no NULSC). Eric rulings go in the Week 3 status, or to Phil Baker as Eric coverage, confirmed with Eric on return (decision log notes who decided). Tracker row 8 updated.
+
+- 2026-11-10: Daniel opened RITM1093019, assigned to the Microsoft Application Platform and Productivity Solutions team (Phil recommendation) for the message trace. RITM1092783 stays open with Access Management Operations. Next: make sure RITM1093019 has the facts (From mailbox, login, server, error at the data step, attempt times with timezone) and names RITM1092783. No retest until the trace returns. Report owner sends the 2026-11-11 email by hand.
+
+- 2026-11-10: Daniel sent Eric the three Phase 6 questions as a separate message (owner mention on risk tickets, status comments on the monthly audit ticket, monthly not weekly). Not in Stephanie thread, no Cc. Add a one-line pointer in the Week 3 status ("sent 2026-11-10, waiting") and do not ask a second time. Build waits for his answers.
+
+Stephanie past email to the recipients, 2026-11-10
+- Daniel got her past email (subject "ACTION REQUIRED by 9/23: Bi-Weekly Initiative/Milestone/Epic Structure Adherence Report"). It has a first-person intro from the Program Office, a "Why do I care" list (CMMI findings, USDS reporting), "What do I need from you" with two links (US and NULSC), and "within two weeks of receiving this email". It shows a Business Confidential label. The tool email today has a shorter intro and a deadline, no "why". Proposed new subject and intro (settings only, local `settings.toml`, no NULSC link) are in the chat; not applied until Daniel agrees and Stephanie confirms the wording and the first-person voice.
+
+Eric answered the Phase 6 questions, 2026-11-10
+- Eric: no comments and no owner mention on risk tickets (use email for both checks); status comments on the monthly audit ticket; plan for monthly. Requirements v0.5 (master and Confluence copy, not uploaded), tracker row 8, decision log and design notes updated. CLAUDE.md note for Daniel to paste: Jira writes are also approved for the status, record and error comments on the Phase 6 monthly audit ticket. Next: Stephanie on the 14-day email format (and tell her the first contact becomes email), the filter ids, then the build in a new chat. Handoff note needs the same update.
+
+- 2026-11-10: Phil Baker made a Teams chat with Daniel and Kirk Beeman (Exchange) for RITM1093019. Kirk guess: Send As was added in Entra ID, but the relay uses the Exchange servers and AD. Phil asks Ken. Daniel answers in the chat with the route facts and asks what to grant and where. Stephanie still sends by hand on 2026-11-11. Tracker row 3 to update when a fix is claimed. No retest until told.
+
+- 2026-11-10 (evening): The mail test send now works. Cause chain: no Send As in AD (Ken then Steve fixed it), then test mail to the login name 129902@nelnet.net bounced because that address exists only in O365. Built `[smtp] own_address` on branch own-address (c5d60dc, 693 tests pass). Test to Daniel.Lozovsky@nelnet.net arrived, both messages. Some 535 5.7.3 failures along the way, possibly a lockout. Not done: tell Steve, Phil and Kirk; comment on RITM1092783 and RITM1093019; ask Phil before a real send; merge html-email and own-address after the Outlook link check; Stephanie still sends 2026-11-11 by hand.
+
+- 2026-11-10 (end of day): Merged html-email and own-address into main (3b28461, 693 tests pass), then updated CODEMAP.md (8eb0339). The labeled link opens the right page. Updated slice 1 requirements to v0.9 and slice 2 to v0.10, the guide v0.6 (own_address step, 535 and RecipientNotFound rows, link_label rows back, Inbox check after a real send), and open item 3. Started docs/decision-record.md and a Refactor later section in outstanding.md. Phil said the first real send on 2026-11-25 is fine (informal). Correction: Eric approved the first real send on 2026-11-03, so no new approval is needed. Not done: Confluence pastes, the update email to Eric, Dave and Stephanie, telling Stephanie she sends by hand on 2026-11-11, Steve's answer on Jira addresses.
+
+Structure test send, 2026-11-11
+
+- Daniel ran the structure test send after Stephanie's hand send. Both messages arrived (7:52 AM PT): the email with the label "bi-weekly reports (US)" and the exception list with PM-10186 (no recipient) and PM-10426 (no deliverable address). Totals: 146 findings, 51 recipients, 2 exceptions. Comparison with Stephanie's report is pending: Daniel asks her (question 6 in the confirm email). Nothing written to Jira.
+
+- Still to confirm: the test-send file deleted, the link opens the right page, no Undeliverable notice in the Inbox. Emails for Stephanie are in docs/emails-for-stephanie-2026-11-11.md (totals filled in). Not confirmed sent. Hours: not yet given.
+- 2026-11-11: Daniel sent email 1 to Stephanie (the confirm email with the two test messages attached, five questions: totals, one email or two for both reports, subject and intro, sign-off, label). Waiting for her answer. Not yet sent: email 2 (weekly address, blocks Thursday), email 3 (AUTO-323 note), email 4 (update to Eric, Dave and Stephanie, hold until she answers). Still to confirm: test-send file deleted, link opens the right page, no Undeliverable notice.
+- 2026-11-11: Daniel sent email 2 to Stephanie (weekly check: the email goes to the Odd Squad help mailbox unless she says otherwise by Thursday morning 2026-11-12). Test-send file deleted from runs/ (empty). Report page today: 31, 12, 53, 50 = 146, equal to the tool total. Recipients (51) still wait on Stephanie's count. Open: W45 choice (resume and close, or leave FAILED with a hand comment on AUTO-188), link click, Inbox bounce check, emails 3 and 4 unsent (4 held until she answers email 1).
+- 2026-11-11: Daniel sent email 3 to Stephanie (AUTO-323 thread, reply to all, Eric and Dave in Cc): the 14-day findings go by email, not a Jira comment, with four proposals (subject, body, one email per owner, signature). Waiting for her answer. Emails 1, 2 and 3 are sent. Email 4 (update to Eric, Dave and Stephanie) is held until she answers email 1.
+- 2026-11-11: Stephanie replied twice. (a) To the 2026-11-10 wording draft (not to email 1): the body looks good, the third person works, and the label can be left off. (b) To email 2: "Sounds good", so the weekly email goes to the Odd Squad help mailbox. Her answers to email 1 (totals and recipients, one email or two, sign-off) are still missing, so email 4 stays held. Changed local `settings.toml` (ignored by git): the structure subject and intro now use her wording. Not yet loaded or dry-run. Recorded both decisions in docs/decision-record.md. No label request to the mail team.
+- 2026-11-11: Daniel sent Stephanie a follow-up on the email 1 thread asking the two open questions again: whether the 146 findings and 51 recipients match her report (with the page's section counts 31, 12, 53, 50), and whether everyone is in one Bcc list for both reports or one email per report. Waiting for her answer. Email 4 stays held. Updated docs/outstanding.md (weekly address confirmed, slice 2 row). Hours: not yet given.
+- 2026-11-11: Second structure test send with Stephanie's wording, to Daniel's own address. The email arrived with the subject "ACTION REQUIRED: Bi-Weekly Initiative/Milestone/Epic Structure Adherence Report", her third-person opening, the numbered list on two lines, "Thank you," and the "bi-weekly reports (US)" link after "Report:". No label. Console showed the email and the exception list both sent. Still to do: delete the new test-send file in runs/, click the link, check the Inbox for Undeliverable notices.
+- 2026-11-11: Counts from the second test-send file (no names): Initiative 31, Milestone 12, Epics 53, Stories 50, total 146, recipients 51, exceptions 2. Each section equals the report page's count for today (31, 12, 53, 50). This is our own check against the page. Stephanie has not yet confirmed it matches her report or the 51 recipients.
+- 2026-11-11: Daniel clicked the link in the second test email. It opened the report page (the second paste was that page's content, not advice). No Undeliverable notice in the sending mailbox. Test-send file deleted (Daniel confirmed). All three checks from the test send are done.
+- 2026-11-11: Daniel sent Stephanie a short note on the email 1 thread with the new test email attached (her wording). It replaces the first test messages, which had the old wording. It repeats the numbers (146 findings: 31, 12, 53, 50; 51 recipients; 2 exceptions) and asks again whether they match her report and whether it is one Bcc email for both reports or one per report. Waiting for her answer. Email 4 stays held.
+- 2026-11-11 hours: 8 (given by Daniel).
+- 2026-11-11: NULSC access: Daniel says his NULSC laptop is ready to be shipped, but he still needs a PIV card to use it. Not yet shipped or received. Inform Eric in the Week 3 status. The question to Phil and Stephanie about Stephanie running NULSC waits (Daniel's call). GitLab (RITM1091566) is due 2026-11-12. Who tries the guide setup is open (suggest Dave or the next maintainer for a read-only dry run, ask Eric).
+- 2026-11-11: Stephanie answered the totals email (11:27 AM). "The e-mail looks good. I send one BCC email for both reports." So one Bcc email for both reports is settled. She says the numbers match except Epics: she has 59, the tool has 53 (the page and the second test send also showed 53 when Daniel looked). Initiatives 31, milestones 12 and stories 50 match. She did not mention the 51 recipients. The Epics gap is not explained yet and must be before the 2026-11-25 send. Email 4 stays held. Checks to run: open the page now and read the Epics count, ask whether she sees 59 on the page now or in her morning report, and diff her six extra epic keys against a dry run file.
+- 2026-11-11: Stephanie's inline answers to both emails arrived. Her total is 152 (more Epics, 59 against 53). One email with links to both Confluence pages. Subject and intro look good. Sign-off: "Odd Squad". Label: leave it off. Because the tool is US only until NULSC is authorized, she said she may need to do NULSC by hand for now. Changed local `settings.toml`: the intro now ends "Thank you," then "Odd Squad", then "Report:". Code check: `confluence.py` stops with an error when a heading has more than one Jira query, so a second Epics macro cannot be silently dropped. New open decision: for 2026-11-25, tool sends US only and she sends NULSC separately, or she keeps sending by hand.
+- 2026-11-11: Epics gap, likely timing: Daniel refreshed the report page and now sees 59 epics, the same as Stephanie. The tool read 53 when it ran (two test sends, and the page when he first looked). Not yet confirmed that the tool reads 59 now. A second dry run would show it. The count went from 59 (her morning report) to 53 and back to 59, so it is worth knowing why the page count moves.
+- 2026-11-11: Dry run later in the day: Epics 59, Stories 50, Initiative 31, Milestone 12, 152 findings, 51 recipients, 2 exceptions. The tool now equals Stephanie's total (152) and the page. The Epics gap was timing. Recipients stayed 51. She has not said whether 51 matches her list. Dry-run file deleted (Daniel confirmed).
+- 2026-11-11: Daniel replied to Stephanie: the Epics difference is timing (the page queries refresh when the report runs), the later dry run read 59 epics and 152 findings, equal to her total. Asked if 51 recipients looks right, said "Odd Squad" is added as the sign-off, and said he will run the tool just before she compares on 2026-11-25. Waiting for her answer on the 51. Email 4 stays held until then.
+- 2026-11-11: Daniel's point: Stephanie does not need to validate the numbers. Her counts are the page's, so the check is the tool against the page at the same time. The 51 recipients can be checked the same way, against the distinct people on the page. Recorded in the decision record, the tracker and the slice 2 changes. Email 4 no longer has to wait for her answer on 51.
+- 2026-11-11: Recipients checked against the page (Daniel): 52 distinct people across the assignee and reporter columns, one clearly inactive account removed, 51 countable. Equal to the tool's 51. The issue with no usable person is PM-10186 (an exception). Email 4 can now say the recipients equal the page count. No names recorded.
+- 2026-11-11: Email 4 shortened (reply-all on Stephanie's thread, Eric and Dave in Cc). The NULSC question (tool sends US only and Stephanie sends NULSC separately, or she keeps sending by hand) waits for when Eric is back. Daniel is unsure Eric wants the tool to send on 2026-11-25. The records: Eric approved the first real send on 2026-11-03 (decision record), but the 2026-11-25 date is Daniel's plan with Phil's informal OK. Email 4 says "my plan" and asks Eric to say if he wants something different.
+- 2026-11-11: Daniel confirmed that an [X] after a name on the page marks an inactive person. The inactive account in the 52 was one of these. Plan: reply to Stephanie (Reply All) that she does not need to check the 51, then fold email 4 into the Week 3 status.
+- 2026-11-11: Exceptions checked against the page (Daniel): PM-10186 is Unassigned with no reporter; PM-10426 is Unassigned with an inactive reporter marked [X]. Both have nobody who can be reached, so the tool's 2 exceptions are right. No names recorded. All the structure checks against the page are done: 152 findings, 51 recipients, 2 exceptions.
+- 2026-11-11: Documented the recipient and exception logic (from `notifier.py`): who counts as reachable, the four cases, and that an issue with some reachable people is emailed and also listed. Added to guide v0.7 (section 7.4) and to the slice 2 changes (item 5b). Not on Confluence until Daniel pastes.
+- 2026-11-11: Dave replied to the Phase 6 filter question (reply on the AUTO-323 thread): the two US saved filters behind the Risk & Opportunities Audit Dashboard are "Missing Impact/Likelihood after 14 Days" and "Not Reviewed in 90 Days" (ids in docs/phase6-prep.md). Recorded in the Phase 6 notes and the tracker. Nothing built and nothing opened in Jira. NULSC filter ids not asked for yet.
+- 2026-11-11: Ran the test suite: 693 passed. Wrote two local working copies in docs/: `thursday-2026-11-12-checklist.md` (settings edits, the W46 command with `--period`, checks after the run, the W45 options) and `slice2-v0.11-changes-for-confluence.md` (changes to paste into the slice 2 requirements page; the repo copy v0.10 is untouched). Nothing committed.
+- 2026-11-11: Wrote docs/maintenance-guide-v0.7-for-confluence.md from v0.6 (local working copy, Confluence is the master, Daniel re-uploads it). Changes: structure routine (mail works, first tool send planned 2026-11-25, Inbox check as a step), SMTP login is the clock id with the domain (resolves the TBD), `own_address` as the test send path and a settings row, the weekly address and exception address rows, the approved structure wording and no label, the exception list goes only to the Odd Squad mailbox, `--resume` reruns the whole run and needs `--period`, and two failure rows. One new TBD: one email for both reports or one per report. v0.6 file kept.
+- 2026-11-11: Daniel replaced the AUTO-188 Maintenance guide page on Confluence with v0.7 (confirmed by Daniel). Still to paste: the AUTO-188 Biweekly structure report: requirements edits (v0.11, after checking the page is at v0.10), the AUTO-188 Weekly required-fields check: requirements edit (weekly address confirmed), and the open items page. The Confluence page titles are not "slice 1" and "slice 2".
+- 2026-11-11: Wrote full-page Confluence text so Daniel pastes whole pages instead of edits: `requirements-biweekly-v0.11-for-confluence.md` (AUTO-188 Biweekly structure report: requirements, v0.11), `requirements-weekly-v0.10-for-confluence.md` (AUTO-188 Weekly required-fields check: requirements, v0.10, weekly address confirmed), and updated `open-items-for-parent-page.md` (items 1, 3, 4, new 13). Page names replace "slice 1/2" in the text. Local working copies only. Nothing uploaded yet except the guide v0.7.
+- 2026-11-11: Daniel confirmed all Confluence pages updated (guide v0.7, AUTO-188 Biweekly structure report: requirements v0.11, AUTO-188 Weekly required-fields check: requirements v0.10, open items). Confluence is the master. The v0.10 paragraph on the biweekly page still says the first real send needs approval (Eric approved it 2026-11-03); left as history unless Daniel wants it changed.
+- 2026-11-11: Daniel replied to Stephanie about the 51 recipients (reply-all, Eric and Dave copied). The recipient count equals the page (52 less 1 inactive), the two exceptions match the page, and no answer is needed from her. Email 4 is folded into the Week 3 status (Friday 2026-11-13), not sent separately.
+- 2026-11-11: Daniel replied to Dave to thank him for the two Phase 6 US filter ids. Nothing else open on the Phase 6 filters except the NULSC ids, which are not asked for yet.
+- 2026-11-11: Dry run for 2026-W46 (Daniel, evening, obtained 2026-11-12 00:51 UTC): both filters read, 0 found each, none unavailable. Posted and sent nothing. The email line reminded that smtp.test_recipient is still set, so it must be commented out and the weekly address set before the real run on 2026-11-12. Real comparison with the report owner filters is tomorrow.
+- 2026-11-11: GitLab access granted (email from GitLab, 5:21 PM Pacific): Developer role in the group nelnetinc / nds / it-delivery / po-process-tools-metrics, a default role. Ticket RITM1091566 was due 2026-11-12. Not done yet: create the project for the gate code in that group and push. Confluence open item 6 still says access is pending.
+- 2026-11-11: Created the project gate-automation (private) in the group nelnetinc/nds/it-delivery/po-process-tools-metrics, with no README and no SAST or Secret Detection ticked. Scanned the 64 tracked files and 63 commits first: no secrets, hosts or real addresses. First push of main (HTTPS, browser sign-in) was refused: the default branch is protected and the Developer role cannot push the initial commit. Nothing changed on the project. Next: a Maintainer or Owner makes Daniel Maintainer or allows the first push, then push main again. Clock id still in tests/test_test_recipient.py and in commit author emails (Daniel has not decided).
+- 2026-11-11: Found who can change the project role. Members page filtered by role: two Maintainers at the it-delivery level (Frilot and Otto, both named Michael), and Baker (Phillip), a Maintainer through the po-process-tools-metrics group, active 2026-11-10. Popelka and one Eric are Developers, so they cannot help. Daniel is writing to Phil Baker (Dave and Eric copied) to ask for Maintainer on gate-automation or a first push to main for Developers. Waiting for the answer, then run git push -u origin main again.
+- 2026-11-11: Rewrote README.md (38 lines) while waiting for the GitLab role: what the two tools do, requirements, install, secret names only (no values), the dry run for each tool, tests, and where the Confluence pages are. No addresses, logins or filter ids. It names the Maintenance guide page but has no link yet, because the page address is not in the repo notes. 693 tests passed. Not committed.
+- 2026-11-11: Added the link to the AUTO-188 Scheduled adherence reports page (Odd Squad Automation space, page id 649480727) to the README "More" section. The page holds the guide, both requirements and the open items. It is a Confluence host name in a tracked file, which Daniel chose. Not committed.

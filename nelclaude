@@ -1912,3 +1912,9 @@ Here is what we did on 2026-11-11.
 - Hours: 8, as you gave them.
 
 Nothing is committed. Tomorrow is the W46 real run and the GitLab push, then the W45 decision.
+==#==========
+Yes, but keep it short and point to Confluence instead of copying the guide. Two copies of the guide will drift apart. Ask Nelnet Claude for this:
+
+"Write README.md, under 40 lines: what the two tools do in one line each, requirements (Python 3.13, the packages), install steps, where the token and SMTP secrets go (keyring names only, no values), the dry-run command for each tool, how to run the tests, and a link to the Maintenance guide on Confluence for everything else. No addresses, logins or filter ids."
+
+That's the page Stephanie lands on when she opens the GitLab link, so check it reads clearly to her.

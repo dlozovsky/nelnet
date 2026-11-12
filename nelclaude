@@ -1878,3 +1878,37 @@ All three are done: the tests, the Thursday checklist and the slice 2 text.
 Both files are in the git-ignored `docs/` folder, and nothing is uploaded or committed. I logged both in `docs/daily-log.md`.
 
 The weekly email wording ("Weekly required-fields check: issues to review") has not been shown to Stephanie. She agreed only to the address. The email goes to the Odd Squad mailbox, so the risk is low, but you might mention it to her.
+
+--------------------------------------
+Here is what we did on 2026-11-11.
+
+**Stephanie, the structure email**
+- Her wording is approved: her subject, a third-person opening, the two reasons it matters, "within two weeks of receiving this email", and "Thank you," then "Odd Squad". There is no Business Confidential label.
+- Two test sends to your mailbox worked.
+- She sends one Bcc email for both reports, so the tool will do the same once NULSC is added.
+- The weekly email goes to the Odd Squad help mailbox, the same one as the exception list.
+
+**Validating the counts against the page**
+- Findings: 152, which equals her total. The Epics gap (59 against 53) was timing, because the page queries refresh when they run.
+- Recipients: 51, which is the 52 distinct people on the page less one inactive person.
+- Exceptions: 2. PM-10186 has no assignee and no reporter. PM-10426 has no assignee and an inactive reporter. Both match the page.
+- We documented the recipient and exception logic, including the four-case table.
+- You replied to her about the 51. Email 4 goes into the Week 3 status on Friday 2026-11-13 instead of being sent separately.
+
+**Weekly check (W46)**
+- The dry run for `2026-W46` read both filters: 0 found each, none unavailable.
+- The Thursday checklist is written in `docs/thursday-2026-11-12-checklist.md`.
+
+**Phase 6**
+- Dave gave the two US filter ids (46290 and 46291). They are recorded in `docs/phase6-prep.md`, and you thanked him.
+
+**Documents**
+- On Confluence you updated the Maintenance guide to v0.7, the Biweekly structure report requirements to v0.11, the Weekly required-fields check requirements to v0.10, and the open items page.
+- Locally I added `docs/decision-record.md` rows for the wording and the Bcc decision. The tracker and the daily log are updated.
+
+**Other**
+- Tests: 693 passed with the network blocked.
+- NULSC: your laptop is ready to ship, but you still need the PIV card. We'll ask whether Stephanie can run NULSC later.
+- Hours: 8, as you gave them.
+
+Nothing is committed. Tomorrow is the W46 real run and the GitLab push, then the W45 decision.

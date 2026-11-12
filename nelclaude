@@ -1918,3 +1918,15 @@ Yes, but keep it short and point to Confluence instead of copying the guide. Two
 "Write README.md, under 40 lines: what the two tools do in one line each, requirements (Python 3.13, the packages), install steps, where the token and SMTP secrets go (keyring names only, no values), the dry-run command for each tool, how to run the tests, and a link to the Maintenance guide on Confluence for everything else. No addresses, logins or filter ids."
 
 That's the page Stephanie lands on when she opens the GitLab link, so check it reads clearly to her.
+
+==================
+There's a simpler route that needs no permission changes and fits how Eric wants roles kept:
+
+1. **Phil adds one file in the GitLab web UI** (for example, Add file > README). That creates `main`, and he can do it in one click from the empty project page.
+2. **You push your work to a new branch:** `git push -u origin gate-initial`. Developers can push to any branch that isn't protected.
+3. **You open a merge request into `main`, and Phil merges it.** If it conflicts on README, choose your version.
+
+Tell Phil: "Easiest fix: can you click Add README on the empty project? I'll push a branch and open a merge request for you to merge. No permission changes needed."
+
+The merge request also gives Eric his code review trail for free. Until it's merged, you can tell Stephanie to clone the branch, so her setup test doesn't have to wait.
+

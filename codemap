@@ -51,3 +51,45 @@ The maintenance guide, the open items and the requirements are on Confluence, in
 5. `smtp_sender.py` sends. A dry run stops before this step, and a test send goes only to the maintainer.
 
 To refresh the line counts, run `py -3.13 -m pytest --collect-only -q` for the test total. Count the lines of a file in PowerShell with `(Get-Content adherence\run.py).Count`. Do not use `Measure-Object -Line`, because it skips blank lines.
+
+==================================================
+Here is where today, 2026-11-12, stands.
+
+Weekly required-fields check (W46)
+
+Dry run the night before: both filters read, 0 found each.
+Fixed the weekly email wording in local settings. With when = "always" the old text said issues were found, even in a clean week. It is now neutral.
+Set the Odd Squad help mailbox as the weekly address and turned off test_recipient.
+First real weekly run: the page is published under the Odd Squad Automation parent. AUTO-188 has STARTED, PUBLISHED, one [gate-sent], [gate-result] (0 findings, 0 unavailable) and COMPLETED.
+The email arrived in the Odd Squad mailbox at 7:31 AM.
+Acceptance: both saved filters run by hand in Jira the same day returned no issues, so 0 and 0 match.
+W45: you added a hand [gate-note] comment on AUTO-188. W45 stays FAILED on purpose.
+Stephanie replied “Thank you, that is great!” to the W46 summary.
+
+GitLab
+
+Access arrived yesterday evening. You created the project gate-automation (private) in the po-process-tools-metrics group.
+First push of main was refused: the default branch is protected and the Developer role can’t push the initial commit.
+Phil Baker, a Maintainer, answered. Eric wants the permissions kept, with you as Developer and the Odd Squad as Maintainers. Your reply offers him two options: temporary Maintainer for you, or letting Developers push once.
+Waiting on Phil. Nothing is pushed yet.
+
+Code and docs
+
+No code changes today.
+README rewritten (38 lines) and linked to the Confluence documentation page. Two commits: a38f901 and 65021a9. 693 tests still pass.
+Confluence updated: maintenance guide v0.7, Biweekly structure report requirements v0.11, Weekly required-fields requirements v0.10, and open items.
+Local notes: decision record row for the weekly wording, daily log entries for all of the above, and 8 hours logged.
+
+Other threads
+
+Phil and Eric Ritchie: Eric is trying to send as the Odd Squad mailbox from his own script. You drafted a warm reply with the Send As details and the guide sections to read.
+Stephanie answered “50 people” against the tool’s 51, which could be timing. You plan to run the tool and compare on 2026-11-25. Your own run time is the open point, since 6 AM Pacific is too early.
+Dave thanked, Phase 6 US filter ids recorded.
+
+Still open
+
+The GitLab push (Phil).
+The Week 3 status on Friday.
+A question for Eric: does the tool send on 2026-11-25, and at what time?
+NULSC: PIV card, laptop shipping, N1, and written authorization.
+A labeled link for the weekly email is parked as polish.

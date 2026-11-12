@@ -66,3 +66,17 @@ DRAFT, NOT SENT. Written 2026-11-12. Update it on 2026-11-13 with Friday's work,
 - No real recipient has received a message from the tool yet. A bad address in Jira shows only as an Undeliverable notice after the send.
 - NULSC: the laptop is shipping, but the PIV card, clearance and your written authorization are still needed. Clearance is not the authorization. No NULSC data is on my laptop.
 - Thanksgiving falls in the last gate week. Both runs fall on 2026-11-25, so treat 2026-11-20 as the real finish.
+==========
+	•	shorten the opening and cut the mail-fix history to one paragraph
+	•	give the order of events for the block, so Eric isn't confused that it ran fine on the same day
+	•	describe the scan as "reviewed and dismissed by a Maintainer as test content"
+	•	reword the GitLab role row so it's clearly about Eric's role
+	•	no workarounds for the block: no renaming and no moving folders
+
+It missed three things your status should have:
+
+	1.	The time saved: about 30 minutes by hand against about 2 with the tool. It's the best line you have, and it isn't in the draft.
+	2.	Stephanie's setup run as next week's main item. Right now "Next week" has no one but you running the tool.
+	3.	Question 2 should give Eric the three NULSC options to choose from, not an open question.
+
+Cut the questions to four: the block, the gate date, the 11/25 send with the NULSC choice, and the maintainer with the Claude line. The GitLab role can be a single row in the blockers table.

@@ -1,0 +1,68 @@
+DRAFT, NOT SENT. Written 2026-11-12. Update it on 2026-11-13 with Friday's work, the hours, any answer on the application control request, and Eric's reply on the GitLab role. Remove this line before sending.
+
+# Weekly Status: Week 3
+
+**Dates:** 2026-11-09 to 2026-11-13 · **Gate week:** [TBD: Eric has not told me the clock start date]
+
+**Needs action before Thursday 2026-11-19:** my laptop's application control now blocks every Python file in the project (pop-up: "has been blocked from executing"). I submitted a Request Access on 2026-11-12 and have no answer. Until it clears I cannot run the tests or either tool, so the weekly run on 2026-11-19 and the send on 2026-11-25 are at risk. Could you back the request, or tell me who to ask? The code is safe on GitLab.
+
+## Gate progress
+| Automation | Stage | In use by | Maintenance doc |
+|---|---|---|---|
+| 1. Weekly required-fields check (AUTO-188) | First real run with the email, 2026-W46 on Thursday 2026-11-12. The page is published under the Automation Output page in the Odd Squad Automation space, one email reached the Odd Squad help mailbox, and both filters returned 0, the same as a manual run of the same two filters in Jira that day. Stephanie replied "Thank you, that is great!" | The Odd Squad gets the email. I start each run | Draft 0.8 on Confluence |
+| 2. Biweekly structure report email (AUTO-188) | The mail path works. Test sends to my own mailbox arrived on 2026-11-10 and 2026-11-11, the email and the exception list, with Stephanie's wording. The tool read 152 findings, 51 recipients and 2 on the exception list, the same as the page. No real recipient has received a message from the tool. Stephanie sent the 2026-11-11 email by hand. First send by the tool is planned for Wednesday 2026-11-25 | Nobody yet | Draft 0.8 on Confluence |
+| 3. GitLab | The project `gate-automation` exists and the code is on `main`, with the full history. The tests passed in the GitLab pipeline. A code map and three flow charts (`DIAGRAMS.md`) are in the repository | The Odd Squad team can read it. Changes go by merge request | Section 13 of the guide |
+
+693 tests passed with the network blocked, the last time I ran them locally, and they passed in the GitLab pipeline on 2026-11-12. The app is 15 files and 3,276 lines. The tests are 37 files and 5,823 lines. I cannot run the tests locally right now (see Blockers).
+
+36 hours this week.
+
+## Done this week
+- Mail fixed. On 2026-11-10 the mail team set Send As for my login on the on-premises Exchange and in AD for the group MBO_OddSquadHelp (Ken Hicks, then Steve Kindschuh). Kirk Beeman and Phil Baker helped find who owns each part. The last blocker was that my login name exists only in O365, so test mail to it bounced. I added an optional setting, `own_address`, for a test send to my own mailbox. It arrived on the same evening.
+- Stephanie asked for the link to show as "bi-weekly reports (US)". Built, tested (693 tests) and merged on 2026-11-10. It shows correctly in Outlook.
+- Stephanie approved the structure email wording on 2026-11-11: her subject, a third-person opening, the two reasons it matters, what to do, and "within two weeks". No Business Confidential label. She sends one Bcc email for both reports, so the tool will do the same when NULSC is added.
+- Counts checked against her report. Her epics were 59 and the tool's first run read 53. A dry run later the same day read 59 and 152 findings, equal to her total. The cause is timing. The 51 recipients are the 52 distinct people on the page less one inactive account. Both exceptions match the page. She has 50 people, which she thinks is timing.
+- Weekly check: Stephanie confirmed on 2026-11-11 that the email goes to the Odd Squad help mailbox. I changed the wording to be true in a clean week, because the email goes every week. W46 ran and was checked against Jira, the page and the mailbox. W45 stays FAILED. A comment added by hand on AUTO-188 says it was skipped on purpose.
+- GitLab. Access was granted on 2026-11-11 and I created the project. The first push was refused because `main` is protected and a Developer cannot push the initial commit. Phil created `main` on 2026-11-12 and the code went in by merge request with all the history kept. The security scan flagged 7 items. All were invented test tokens or a comment with the word "password". A Maintainer dismissed them. I also wrote a README that links to the Confluence documentation.
+- Documents. Maintenance guide Draft 0.8, the weekly requirements v0.10, the biweekly requirements v0.11 and the open items are on Confluence, with no "slice" names. The guide now has how to get the code, how to change it in GitLab, and a test email for the weekly check.
+- Phase 6 (AUTO-323). Stephanie answered the questions (monthly, not weekly; the 14-day check by email). Your rulings of 2026-11-10 are in the requirements (v0.5). Dave's filter ids arrived. No build yet, as you said.
+- Answered your Send As questions on 2026-11-12. Only a login that sends through a script or tool needs Send As on the mailbox. Sending by hand in Outlook is not affected. The next maintainer will need the same request to the mail team.
+
+## Next week
+- Weekly check, Thursday 2026-11-19, if my laptop can run Python again. If not, I tell Stephanie before.
+- Structure report: dry run on Tuesday 2026-11-24 and compare with Stephanie's counts. Send on Wednesday 2026-11-25, once you answer question 1.
+- Thanksgiving week: the weekly check and the structure email both go on Wednesday 2026-11-25, as Stephanie said. The day after Thanksgiving, 2026-11-27, the team works.
+- After a real send, check the sending login's Inbox for Undeliverable notices. Not known yet: whether every recipient address in Jira exists on the on-premises mail server.
+- Weekly requirements page: a v0.11 with the W46 result and the checks ticked.
+- NULSC: my laptop is being shipped (2026-11-12). I still need my PIV card to use it. After that comes the read-only test (N1) and your written authorization.
+- Plan the handoff meeting with the whole Odd Squad team, as you asked on 2026-11-12.
+- Phase 6 build starts after the gate. The requirements and filter ids are ready.
+
+## Blockers and asks
+| Blocker | Who can unblock | Needed by |
+|---|---|---|
+| Application control blocks every Python file on my laptop. The tests and both tools cannot run. Request Access submitted 2026-11-12, no answer. The request covers the whole project folder | IT security. Eric, could you back it? | Thursday 2026-11-19 |
+| Your GitLab role is Developer (as last checked, 2026-11-11). Only a Maintainer can merge, and you said you review and merge for now. Phil Baker or the help desk can change it | Phil Baker, help desk | Before the next merge request |
+| PIV card for the NULSC laptop, and your written authorization for the first NULSC run | Eric, security owner | Before N1 |
+| What date do you count as the gate start? [TBD] | Eric | [TBD] |
+
+## Questions for Eric
+1. Does the tool send the structure email on Wednesday 2026-11-25, or does Stephanie keep sending by hand? You approved the first real send on 2026-11-03, and Phil said 2026-11-25 is fine on 2026-11-10. If the tool sends, at what time? Stephanie's 8 am CST is 6 am for me, and a person has to start the run.
+2. NULSC in the first send: the tool is US only until you authorize NULSC in writing. Does the tool send the US email and Stephanie send the NULSC people a separate one, or does she keep sending the whole email by hand?
+3. Who on the team gets the Maintainer role in GitLab besides you, and who merges after the handoff? Section 14 of the guide has the row blank.
+4. I used Claude as a coding assistant on this project. 43 of 69 commits have a "Co-Authored-By: Claude" line, and a CLAUDE.md file with the project rules is in the repository. Is that fine, or is there a rule on how it shows? The "approved tools and data" line in CLAUDE.md is still TBD, so an answer closes that too. The data is invented, and no real tokens or addresses are in the repository.
+5. Who takes over as primary maintainer after me, and when is the handoff meeting? You said the whole Odd Squad team should be there.
+6. Gate date: does 2026-11-20 or 2026-11-30 hold, with Thanksgiving in the last week?
+
+## Decisions made
+- Stephanie: the structure email wording is approved. No label. One Bcc email for both reports. The weekly email goes to the Odd Squad help mailbox.
+- Eric (2026-11-09): the dry run is needed when testing, not for a routine run. The scan runs by itself in GitLab. The NULSC link goes in after your written authorization. Phase 6 comes before AUTO-56, after the gate.
+- Eric (2026-11-10): no comments and no owner mention on risk tickets, the status comments go on the monthly audit ticket, and the report is monthly.
+- Eric (2026-11-12): you review and merge changes in GitLab for now. The whole Odd Squad team joins the handoff meeting.
+- Under the 2026-11-06 rule, the tool pages need no approval first. The W46 page is under Automation Output in the Odd Squad Automation space. Please look at it when you can.
+
+## Risks to the gate
+- The application control block. If it stays, I cannot run the weekly check on 2026-11-19 or the send on 2026-11-25. A new maintainer's laptop could hit it too, so it goes in the guide once we know the fix.
+- No real recipient has received a message from the tool yet. A bad address in Jira shows only as an Undeliverable notice after the send.
+- NULSC: the laptop is shipping, but the PIV card, clearance and your written authorization are still needed. Clearance is not the authorization. No NULSC data is on my laptop.
+- Thanksgiving falls in the last gate week. Both runs fall on 2026-11-25, so treat 2026-11-20 as the real finish.

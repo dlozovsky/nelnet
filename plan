@@ -1,0 +1,104 @@
+Six-month plan for AUTO-188 and AUTO-56: draft for discussion
+Date: 2026-11-12 · Author: Daniel · For: Eric, and the team for discussion · Status: draft, nothing here is approved
+
+This is a working copy. Confluence is the master for requirements and the maintenance guide. Paste this page into Confluence if the team wants to discuss it there.
+
+1. Purpose
+Daniel is on the team for six months (2026-11-12 to mid-May 2027). This page proposes which phases of AUTO-188 and AUTO-56 he can finish in that time, why, and what each one needs from other people. It is a planning guide, not a commitment. Eric decides the order and the approvals.
+
+2. Summary
+Commit: AUTO-188 Phases 6, 9 and 7, closing the gaps in Phases 1 and 3, and AUTO-56 Phases 0 and 1.
+Stretch: AUTO-188 Phase 2 (US half only) and AUTO-56 Phase 3, the first Velocity release.
+Not planned in six months: AUTO-188 Phases 4, 5 and 8, and AUTO-56 Phases 2 and 4 to 9. Each waits on a decision or approval that is not Daniel's (hosting, model approval, viewer platform, Jira administrator work).
+Build effort: 79-135 engineer hours for the commit list, plus two items the tickets do not estimate (metric records and the Confluence Cloud client). The stretch items add 44-72 hours.
+What limits the plan: answers and approvals from other people, more than the build hours.
+3. Assumptions
+Capacity is about 2 to 3 days a week on this work, roughly 250-400 build hours over six months. This is an assumption. Daniel confirms his real allocation.
+Hours are the engineer ranges from the tickets, except where marked "planning estimate".
+The tickets assumed a build from nothing. Phases 1, 3 and 6 start from working code, so some ranges may be high. The gaps the tickets list that the slices do not cover (metric records, the Cloud client, the team-lead notifier) are not in the ranges.
+The ticket figures are judgment estimates, not measurements. Eric has said the AUTO-56 figures look high, and its Phase 0 re-baselines them.
+Time saved per year is the ticket's figure and is mostly Eric's estimate.
+4. Where things stand (2026-11-12)
+Phase	Ticket	Owner (expert or decision)	Engineer hours	Time saved per year	Status
+0 Design gate	AUTO-213	Stephanie, Nicolette	22-38	0	Assumed done. Confirm.
+1 Weekly required-fields check	AUTO-221	Stephanie	34-56	52 h	Slice 1 in real use. The 2026-W46 run completed and sent its email. Gaps: metric records, Confluence Cloud client.
+2 Monthly defect report	AUTO-223	Nicolette, Eric (NULSC)	20-32	96 h	Not started
+3 Structure report and notifier	AUTO-225	Stephanie	16-24	26 h	Slice 2 built, test sends only. Eric decides the first real send, planned 2026-11-25. Gap: team-lead notifier, which needs the Phase 7 team map.
+4 Ticket-triggered runs	AUTO-227	Eric (hosting), Odd Squad team lead, Jira administrator	16-24	0	Not started
+5 AI summary	AUTO-320	Odd Squad team lead, Jira administrator, Eric	20-30	52 h	Not started
+6 Risk adherence report	AUTO-323	Stephanie	12-20 (ticket), 25-35 (planning estimate)	52 h (unconfirmed, see section 7)	Planning done, build paused until the gate is finished or Eric okays it
+7 Team map from TDIR	AUTO-326	Odd Squad team lead, Eric	14-28	0	Not started
+8 Metrics viewer	AUTO-327	Eric	28-56	0	Not started
+9 Closed-ticket filter	AUTO-328	Stephanie	4-8	4 h	Not started
+Total			186-316	282 h	
+The ticket leaves every sub-task unassigned. The owners above are the experts and question owners named in the AUTO-188 ticket.
+
+5. What we plan to complete, and why
+AUTO-188, same code base (adherence/)
+Phase	Ticket	Engineer hours	In plan	Why	Depends on
+6 Risk adherence report	AUTO-323	25-35 (planning estimate)	Commit	The most prepared phase. Requirements v0.5 and design notes exist, the filters are known, and it follows the slice 2 pattern. Eric's order is Phase 6 next, before AUTO-56.	Gate finished or Eric's go-ahead. Report owner's email answers. Working mail.
+9 Closed-ticket filter	AUTO-328	4-8	Commit	Small. A rule added on top of Phases 1 and 3.	Stephanie's answer on Q17.
+Metric records	(inside AUTO-221)	Not estimated	Commit	A shared piece that Phases 5, 7 and 8 need. Neither slice emits records today. Build it once.	Record design from Phase 0.
+7 Team map from TDIR	AUTO-326	14-28	Commit	Needed for the Phase 3 team-lead notifier and the Phase 8 viewer.	TDIR access. Answers to Q14 and Q15.
+1 and 3, close the gaps	AUTO-221, AUTO-225	Not estimated	Commit	The slices work but do not cover the full tickets.	Phase 7 for the notifier. Eric's go-ahead for the first real structure send.
+Confluence Cloud client	(inside AUTO-221)	Not estimated	Commit	CLAUDE.md says the Cloud client must exist before the Q1 2027 move.	Cloud access and a service identity.
+2 Monthly defect report, US half	AUTO-223	20-32	Stretch	Reuses the Jira, settings and run-record code. The largest saving of the remaining phases (96 h a year).	Nicolette's time to match her figures. NULSC half waits for step N1 and written authorization, so it is not counted.
+AUTO-56, a new project
+Phase	Ticket	Engineer hours	In plan	Why	Depends on
+0 Baselines, access, spike	AUTO-58	16-28	Commit	The gate for everything else. Settles the stack, the model, the parity tolerance and the real estimates.	Skill files from Karen and Seth (Q1), the GitLab host (Q3).
+1 Skeleton, config, propose stage	AUTO-59	20-36	Commit	Builds the base the other phases use.	Phase 0. Jira statuses from an administrator (Q6).
+3 GitLab draft stage	AUTO-61	24-40	Stretch	The first release for Velocity.	Phase 1. GitLab access for branch writes, not set up today.
+2, 4, 5, 6, 7, 8, 9	AUTO-60, 62, 63, 289, 308, 309, 310	148-256 together	Not planned	Do not fit in six months alongside AUTO-188. Phase 5 also needs the hosting decision.	Earlier AUTO-56 phases.
+AUTO-56 estimate per phase: 0 is 16-28, 1 is 20-36, 2 is 24-40, 3 is 24-40, 4 is 16-28, 5 is 24-44, 6 is 20-36, 7 is 20-36, 8 is 24-40, 9 is 20-32. The total is 208-360 hours. The ticket's savings figure is 500-900 hours a year across the team. It is high variance and not reconciled, and the ticket says to replace it in Phase 0.
+
+Totals
+Group	Engineer hours	Time saved per year when done
+Commit: Phases 6, 9, 7, AUTO-56 Phases 0 and 1	79-135, plus metric records and the Cloud client	134 h from AUTO-188 Phases 1, 3, 6 and 9 (unconfirmed for Phase 6)
+Stretch: Phase 2 (US) and AUTO-56 Phase 3	44-72	96 h from Phase 2. AUTO-56 savings are not reconciled.
+Both	123-207, plus the two unestimated items	230 h from AUTO-188
+6. Timeline
+When	Work	Needs from others
+Nov to Dec 2026	Finish the gate (NULSC, handoff). First real structure send, planned 2026-11-25. Phase 6 build.	Eric's go-ahead for Phase 6. Report owner's email answers. Working mail.
+Dec 2026 to Jan 2027	Phase 9. Metric records.	Stephanie's answer on Q17.
+Jan to Feb 2027	Phase 2, US half. Confluence Cloud client.	Nicolette's time. Cloud access.
+Feb to Mar 2027	Phase 7. Finish Phase 2 if it slipped.	TDIR access. Q14 and Q15.
+Mar to Apr 2027	AUTO-56 Phase 0, then Phase 1.	Skill files. GitLab host. Jira statuses.
+Apr to May 2027	AUTO-56 Phase 3 if time allows.	GitLab write access.
+7. Phase 6 notes
+Two checks: Missing Impact/Likelihood after 14 days, and Not Reviewed in 90 Days. Both read saved filters from the Risk & Opportunities Audit Dashboard. The filter ids stay in local settings only.
+Both checks send email to the owner (the assignee, else the reporter). A ticket with no owner goes on an exception list to the Odd Squad. Nothing is written on any risk ticket, and no owner is mentioned (Eric, 2026-11-10).
+Status and record comments go on the monthly audit ticket. US reads PS and PSC. NULSC reads PS only, after written authorization.
+The planning estimate is higher than the ticket because the notifier and sent record must change from one message per kind per run date to one email per owner with a record per key. Without it, a retry after a partial failure would resend emails.
+The ticket describes a weekly report with a 52-hour saving. The report owner runs it monthly. Eric has not yet ruled on the saving, so treat 52 hours as unconfirmed.
+Still open: the 14-day email subject, greeting and signer, one email per ticket or per owner, whether she wants a Confluence page, and the time per month today.
+8. Code base and model use
+AUTO-188 stays in the existing repo. Each phase is a new module or report inside adherence/, with tests and settings. Exceptions: Phase 8 (the viewer) may be a separate project, and Phase 4 may need its own runtime, depending on the hosting decision. Neither is in the six-month plan.
+AUTO-56 is a new project, separate from this repo. The ticket does not fix a language. The proposal is a Python harness that does the deterministic work (Jira, GitLab, status triggers, logging, guardrails, tests) and calls a model API only where judgment is needed (identifying the manual location, writing the draft). Reusable gate pieces (Jira client, TOML settings, secret store, comments-only logging, "unavailable, never zero", network-blocked tests) would be copied and adapted.
+Why the API and not skills: the harness controls exactly which fields are sent, which model each step uses, and the cost. The model is a setting. Guardrails (never touch source tickets, never write to a default or publishing branch, never invent a location) stay in code. Tests use a fake model client.
+Model use in the plan: none in the AUTO-188 phases in the plan. AUTO-56 Phases 0, 1 and 3 use a model. The only AUTO-188 phase that uses one is Phase 5, which is not in the plan.
+Security: sending content through the API and through skills carries the same data question. The API gives more control and a clearer answer to "what leaves the building".
+9. Decisions and approvals needed
+From	Decision
+Eric	Release Phase 6 to build, or wait for the gate to finish.
+Eric	Priority when the gate work and AUTO-56 compete.
+Eric	AUTO-56 stack: Python harness with API calls. Language, any new dependency, and whether Phase 3 is the six-month target.
+Eric or the security owner	Whether ticket and manual text may go to a model API, which endpoint and model are approved, which fields are never sent, and where the key lives. CLAUDE.md marks approved tools and data as TBD.
+Eric	Where scheduled runs happen (hosting, AUTO-102). Needed for AUTO-188 Phase 4 and AUTO-56 Phase 5.
+Eric	The 52-hour saving for a monthly Phase 6, the second reminder as a later phase, and whether a first version without per-team counts counts as finished.
+Eric	NULSC authorization in writing. Needed before any NULSC work in Phases 2 and 6.
+Report owner (Stephanie)	The 14-day and 90-day email shape. Q17 for Phase 9.
+Nicolette	Time to match the monthly defect figures.
+Odd Squad team lead	TDIR segment and manager fields (Q14). Jira administrator for statuses.
+Karen and Seth	The skill files for AUTO-56 Phase 0.
+10. Risks
+Phase 6 starts late if the go-ahead or the report owner's answers are slow.
+The Q1 2027 move to Cloud may change Jira URLs and field ids and force the Cloud client earlier, which pushes Phase 2 or 7 back.
+AUTO-56 Phase 3 needs GitLab write access that is not set up. Without it the plan ends at Phase 1.
+Local pytest has been blocked on the laptop since 2026-11-12. Tests run in the GitLab pipeline on a merge request until IT clears the request.
+The estimates are judgment, not measurements. The phase ranges exclude experts' time and waits for access and approvals.
+Capacity is an assumption. If the real allocation is lower, the stretch items drop first, then AUTO-56 Phase 1.
+11. Discussion points
+Is the commit list the right set for six months, and is the order right?
+Should AUTO-56 Phase 0 start before AUTO-188 Phase 7, or after?
+Can the metric records and the Cloud client be estimated now, so they are in the plan?
+Who can answer the approval questions in section 9, and by when?

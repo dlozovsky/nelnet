@@ -184,3 +184,43 @@ So this probably isn't a redesign. The missing piece is a step that combines the
 
 The gate is not affected. The weekly check works, and the US structure report works.
 
+=====================================
+I agree with the first half and disagree with the second half.
+
+Where I agree.
+
+The tool reads one instance per run, set by source.instance in the settings file. I checked the code: adherence/ has no NULSC handling and no code that queries two instances in one run. That fits two laptops, since each laptop can run the tool on its own side.
+A single run that covers both would need a machine that reaches both networks, and that machine may not exist.
+The assumption that one machine could reach both was never checked. It came from how Stephanie sends the email by hand.
+
+Where I disagree.
+
+“Probably isn’t a redesign. The missing piece is a step that combines the outputs.”
+Each run holds recipients as opaque Jira ids in memory. It looks up an address only at send time and writes no address to disk.
+If the NULSC run saves a list for a combining step, that list is NULSC data, and the combining machine can’t look up NULSC addresses unless it can reach NULSC. Saving addresses breaks the no-addresses-on-disk rule. Saving ids leaves a step that can’t use them.
+So the combine step is not small code. It is a boundary decision for the security owner, and that is what options 2 and 3 in your status already say.
+Option 1 (two emails) is the only one with no boundary question.
+“The gate is not affected.”
+The weekly check and the US structure report do work.
+Whether the structure report counts toward the gate while its send stays manual is the question you put to Eric.
+N1 and any NULSC run also depend on the laptop, the PIV card and Eric’s written authorization.
+“Not affected” is premature. It depends on Eric’s answer.
+“I haven’t read the code.” I only checked that one-instance-per-run holds and that nothing handles NULSC. I haven’t sized the combine step either.
+
+I’d keep your status as it is. It already says combining needs the security owner and no addresses on disk. If you forward that text to Eric, cut the “probably isn’t a redesign” and “gate is not affected” lines.
+
+so basically the way the tool works is we can send US at any time if we are just sending US
+
+Yes, technically. The tool as built can send a US-only email whenever a person starts the run. The mail path works, Send As is in place, and test sends arrived on 2026-11-10 and 2026-11-11.
+
+Four things still stand between “can” and “should”:
+
+Eric’s authorization. A real send needs it, and the first real send hasn’t happened yet.
+Stephanie’s approval of the split. She approved one Bcc email for both reports. A US-only send from the tool is a split, which is why your status says “unless you and she approve the split.”
+A person starts it. There is no scheduler, so someone runs the command by hand. The send time is still TBD.
+The pre-send setup. exception_address must be set, test_recipient removed, and the dry run compared with Stephanie’s counts. After the send, check the sending login’s Inbox for Undeliverable notices.
+
+It also sends once per run date. After the send, the record comment on the ticket stops a second send for that date. So a US-only send on 2026-11-25 uses up that date for the US run.
+
+That is why I’d keep your status as it is. The question for Eric is not whether the tool can send US. It is whether a US-only email is acceptable while NULSC is out of reach.
+

@@ -554,3 +554,46 @@ o	(B) The tool sends the US part and Stephanie sends the NULSC people a separate
 2.	(Can wait.) Who takes over as primary maintainer after me, and when is the handoff meeting? You said the whole Odd Squad team should be there. Also, who merges in GitLab after the handoff? Section 14 of the guide has the row blank. One more thing to tell you: I used Claude as a coding assistant on this project. 43 of 69 commits have a "Co-Authored-By: Claude" line, and a CLAUDE.md file with the project rules is in the repository. Is that fine, or is there a rule on how it shows? The "approved tools and data" line in CLAUDE.md is still TBD, so your answer closes that too. The data is invented, and no real tokens or addresses are in the repository. I will merge it when you tell me the code is ready to review, I suspect it will be Phil or Tiffanie Schindelorz that maintains it to start with.
 3.	(Before Friday 2026-11-20.) Gate date: does 2026-11-20 or 2026-11-30 hold, with Thanksgiving in the last week? On 2026-11-06 you said the gate is running code someone else can run, and that the email send is not a gate blocker. Does the structure report still count toward the gate while its send stays manual, once someone other than me runs it? Also, I'm waiting on IT and NULSC. Do you want me to start the Phase 6 build now, or after the gate? The requirements and filter ids are ready, and I'm staying at planning until you say.   As long as the reports are automated, it counts.    Having Stephanie send the emails does not mean you don't hit the target.
 
+I’m recording Eric’s reply in the local tracker, decision record, open items text and guide copy, then I’ll answer his application-control question.
+
+Eric chose option A, so Stephanie sends the 2026-11-25 email by hand and the tool does not send. I’ve recorded this in the local tracker, decision record, open items text, guide copy and daily log. None of it is on Confluence yet.
+
+What he answered
+
+Question 1: Option A. The combined email waits for the NULSC laptop setup, the PIV card and his written authorization.
+Gate: “As long as the reports are automated, it counts. Having Stephanie send the emails does not mean you don’t hit the target.” So a manual send does not miss the gate.
+Maintainer: He will merge when you tell him the code is ready to review. He suspects Phil or Tiffanie Schindelorz will maintain it to start, which is not a final decision. His reply doesn’t say whether either has or will have clearance, a PIV card and a NULSC laptop.
+Application control: He asked whether the tool runs out of C:\neldevsrc, since anything under it should not be blocked.
+
+Still not answered: the gate date (11-20 or 11-30), whether to start the Phase 6 build now or after the gate, the Claude co-author question (so the TBD in CLAUDE.md stays open), and the handoff meeting date.
+
+His C:\neldevsrc question
+
+The tool runs from C:\Users\dlozovsky\Documents\Gate Automation.
+C:\neldevsrc was not found from my session. It may be a path on another laptop, or one that needs access.
+You could tell him: “No, it runs from Documents. Is C:\neldevsrc set up on my laptop, or on the new ones?”
+I haven’t moved anything. The guide still says not to move files to get around a block, and that now conflicts with his tip. Moving the folder also changes the path my session memory is keyed to.
+If he confirms it’s available, the clean test is a fresh clone under it, then py -3.13 -m pytest. If that works, the guide’s setup steps should say to clone there.
+
+What I updated
+
+docs/decision-record.md: two new decided rows, and the open decisions trimmed to what Eric has not answered.
+docs/outstanding.md: rows 2, 3, 5 and 6, plus the dates, including 11-25 and the refactor note.
+docs/open-items-for-parent-page.md: items 3, 5 and 13.
+docs/maintenance-guide-v0.8-for-confluence.md: the structure line.
+
+Not changed
+
+The biweekly requirements page. The v0.11 copy still has the TBD and the 11-25 tool-send wording (offered below).
+CLAUDE.md, the six-month plan and the Week 3 status.
+Dry run on 11-24. I left it as planned. Compare it against Stephanie’s counts, since she still sends by hand. That one is your call.
+
+Pending pastes to Confluence
+
+Guide v0.8 now includes the new pop-up row and this change.
+The open items page needs items 3, 5 and 13.
+Stephanie’s second-report email is still unsent. Your question to her still holds.
+
+Eric chose option A (Stephanie sends 2026-11-25 by hand) and said the structure report counts toward the gate. I recorded it in the decision record, tracker, open items text, guide copy and daily log. Not done: the biweekly requirements page, Confluence pastes, and his C:\neldevsrc question.
+
+Do you want a v0.12 changes text for the biweekly requirements page?

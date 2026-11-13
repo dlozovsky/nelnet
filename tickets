@@ -1,0 +1,368 @@
+AUTO-223, “Phase 2 — Monthly defect adherence report generation.” It’s a sub-task of AUTO-188, the parent for the scheduled adherence reports.
+
+Monthly defect adherence report (sanitized)
+
+What triggers it?
+It runs at the start of each month and covers the month that just ended, never the current one.
+Until the ticketing system creates that month’s ticket automatically, a person starts it by hand against the ticket.
+What does it read?
+Defect data for the closed prior month from two Jira instances, plus the prior month’s figures for comparison.
+Each figure traces to its query and fetch time.
+A source that cannot be read shows as unavailable, never zero.
+The existing dashboard is only a cross-check during the parallel run.
+What does it output, and to whom?
+Normal run: a team-level page on the company wiki with no personal names. The distribution list is told with the page link. The run is recorded as comments on that month’s ticket (period, sources, page link, whether it was held). No log files are written.
+Held run: if a month changes by more than the documented bound, or an input is missing, the page stays an unpublished draft. The owner is notified and the distribution list is not told.
+Who decides when it’s done?
+A person releases any held report.
+The subject-matter expert confirms the generated figures match the dashboard for the same month, or confirms the recorded reason for each difference.
+The owner of the exception bound is still an open question. Who owns it, and what month-to-month change counts as unusual, is undecided.
+
+I removed the names, ticket keys, internal URLs, and the hour estimates, and described the systems generically. I can name roles or systems back in if your audience needs them.
+
+Bi-weekly structure report and team-lead notifier (AUTO-225, sanitized)
+
+What triggers it?
+It runs every two weeks.
+Until the ticketing system creates each period’s ticket automatically, a person starts it by hand against that ticket.
+Once the email template and the team map are approved, no one approves individual runs.
+What does it read?
+The Initiative, Milestone, and Epic hierarchy in Jira, plus the findings from the weekly required-fields check.
+It also reads the team map, which says who the lead is for each team. The notifier never reads Jira itself, only the findings and that map.
+What does it output, and to whom?
+Page: a structure report on the company wiki, unrestricted and with no personal names. Its figures are stored as metric records.
+Emails: one message per team lead, sent from the shared team mailbox with one approved template. Each message holds only that team’s own findings.
+Findings with no known lead: these are listed on the period ticket and assigned to a named person, so none are dropped.
+Failed sends: these are recorded on the period ticket, then retried once or queued for a person.
+Run record: comments on the period ticket with counts only, no recipient addresses, and a link to the page. No log files are written.
+Who decides when it’s done?
+The subject-matter expert confirms the first parallel run matches their own results, or that each difference has a recorded reason.
+The report owner approves the email template and the team map before anything is sent, and approves any later change to either.
+Nothing sends from an unapproved template or map.
+One question is still open: which role counts as the team lead to notify (development manager, delivery lead, or another role). The Odd Squad team lead owns it, with the subject-matter expert advising.
+
+Ticket-triggered runs, publication hold, and parallel run (AUTO-227, sanitized)
+
+What triggers it?
+A new period ticket (weekly, monthly defect, or bi-weekly structure). A Jira automation rule creates these on a schedule, so changing when a report runs is a change in Jira, not in code.
+The harness polls Jira on a short interval for new tickets of the configured kinds.
+A ticket created by hand starts an extra run, for a re-run or a one-off.
+A ticket that already has a run comment is skipped, and a ticket that is not a configured kind never starts a run.
+Polling is still an assumption. If it fails the early validation, a Jira webhook is designed in its place.
+What does it read?
+The new period tickets, to find ones that need a run.
+A configuration that maps each kind of ticket (project, type, and a label or summary pattern) to a report and to a period rule. The weekly check covers the week just ended, the monthly report the prior month, and the bi-weekly report the fortnight just ended.
+The period comes from this configuration, never from free text in the ticket.
+It keeps no state outside Jira. The run comments on the ticket are its only memory.
+What does it output, and to whom?
+It starts the matching report for the right period. That report’s own outputs go where its own phase says.
+Each run, each hold, and each failure is recorded as a comment on the period ticket. No log files are written.
+Tripped hold: nothing is published and the owner is notified.
+Failed run: it is recorded on the ticket and a named owner is alerted.
+Credentials come from a service identity on a managed host and never appear in comments.
+Who decides when it’s done?
+The manual process is not retired until at least one full cycle matches. Outputs must equal the manual process, or each difference must have a recorded reason.
+The cutover is per report, so each report switches over on its own once its cycle matches.
+Three questions are still open, each with an owner:
+Where it runs: the report owner decides.
+Which automation rule creates each ticket: the team lead decides, with a Jira administrator. This includes who can edit the schedule and how a rule that failed to fire is noticed.
+Polling with a service identity: the early validation phase decides, with a Jira administrator.
+
+AI-drafted summary of the findings, approved by a person (AUTO-320, sanitized)
+
+What triggers it?
+It follows each published report (weekly, bi-weekly, monthly) for that period.
+The report’s figures publish on schedule as they do now. The summary never blocks or delays them.
+For the monthly report, the summary is drafted only after any hold on the report is released.
+The approval is a person running a Jira transition on the period ticket.
+A separate preview command regenerates the latest draft with the current guidance file and posts nothing.
+What does it read?
+Only figures the script has already computed, never raw data. These are team-level counts, comparisons with earlier periods (and the same month last year for the monthly report), the biggest movers, teams that are new, cleared, or unavailable, and anything outside the documented bound.
+Earlier periods come from the stored metric records. The first period has no history, and the summary says so.
+A guidance file in the code repository that the team edits to steer wording, emphasis, and order. The file can ask only for things the script already computes.
+No personal names and no ticket text go to the model.
+What does it output, and to whom?
+Draft: a short plain-language summary written by the Claude API, posted as a comment on the period ticket with the result of the number check. The ticket moves to a “waiting for approval” status.
+Approved: the text is added to the wiki page, labelled as AI-drafted. The approver is recorded on the ticket from its history.
+Declined: nothing is published and the reason is on the ticket.
+No action: the page carries figures only.
+Dropped: if any number in the draft is not in the computed facts, the draft is dropped and the ticket says so.
+API failure: the report publishes without a summary.
+Run comment on the ticket: it records the model, prompt version, guidance file version, who approved or declined, requests the script could not meet, and a count of the facts given. No log files are written.
+Who decides when it’s done?
+A member of the Odd Squad team approves or declines each summary with the Jira transition. Workflow permissions control who can do this, so there is no separate approver list.
+If they want different wording, they add a comment with the final text first, and that text is published instead of the draft.
+Nothing is published without that approval.
+The team edits the guidance file, and each change is a commit with its reason. The agent never edits it.
+The fixed rules live in code and the file cannot override them. These are: facts only, every number checked, no stated cause, no personal names, and an AI-drafted label.
+Two questions are still open, both owned by the Odd Squad team lead:
+Does an unapproved summary expire at the end of the period, or stay open?
+Which statuses and transition names go on the workflows, and which Jira administrator adds them on each instance?
+
+Leave out tickets that appear only because of a post-closure update (AUTO-328, sanitized)
+
+What triggers it?
+It is not a separate run. It is a rule added to every run of the weekly required-fields check and the bi-weekly structure report, on both Jira instances.
+It is built as its own phase so the requirements of the two existing reports do not change while they are still being built.
+What does it read?
+The change history (changelog) of each ticket the report would list, rather than the resolution date, which projects do not set consistently.
+Each project’s status configuration, to tell which statuses count as Done. It uses the Done category, not status names, because names differ between projects.
+A ticket is left out only if it entered a Done status before the period started and no later change moved it out. Tickets created in a Done status are judged from their creation date.
+A ticket closed during the period, or closed, reopened, and closed again during it, is kept.
+If a ticket’s history cannot be read, the report shows it as unavailable and names the missing input. It is never silently dropped.
+What does it output, and to whom?
+The same reports, minus the old closed tickets that only showed up because someone bulk-updated them. The team leads who read the reports stop seeing them.
+The run comment on the period ticket records how many tickets were left out, by team, so the filter stays visible and checkable.
+Who decides when it’s done?
+The subject-matter expert for these two reports confirms the exact rule before it is built. They confirm the weekly and structure results against their own run, or each difference has a recorded reason.
+Checks still needed before sign-off:
+Reading history for every ticket is slower than reading one field, so run time and API call counts must be checked.
+Each project’s closed statuses must actually sit in the Done category, or that project would not be filtered.
+
+Team map from the team directory (AUTO-326, sanitized)
+
+What triggers it?
+It is not a report. It is a shared building block that runs as part of each period’s run and refreshes the map from the directory.
+A snapshot of the map is stored for each period.
+It must be done before the team-lead notifier (which looks up leads from it) and the metrics viewer can work.
+What does it read?
+The team directory project on both Jira instances, read-only. Each Team ticket becomes a team record: team name, managers, director, segment, Jira projects, development projects, a count of team members, and whether the team is active.
+The mapping of systems to teams that already exists, and the owner list for wiki spaces.
+The hierarchy is team, manager, director, segment, IT Org.
+A gap in the directory (no director, no segment) is reported with the team’s name and never guessed or filled in.
+A Jira project, repository, system, or space that maps to no team goes to an “Unassigned” group, listed with its count and shown at the IT Org level. It is never dropped.
+What does it output, and to whom?
+The team map itself, used by every metric view, the notifier, and the viewer. It replaces the separate owner lists other tickets planned to build.
+A stored snapshot per period, so a past value rolls up through the structure of its own period. A view of the current structure is also available, for trends across a reorganization.
+Headcount is the number of team members on a ticket. Individual member names are only counted and never appear in any output.
+Incomplete teams are listed with the missing field.
+Each run is recorded as a comment on its ticket. The directory is never written to, and no log files are written.
+Who decides when it’s done?
+Done means every team has a manager, director, and segment in the map or is listed as incomplete with the missing field. Every project, repository, or system maps to one team or to Unassigned.
+A change in the directory shows up on the next run, and earlier snapshots stay unchanged.
+Four questions are still open:
+Which directory field holds the segment: the team lead decides. Segment may not be a field at all.
+Which manager counts when a team has two (development manager or product owner manager): the report owner decides.
+Whether the US and federal directories form one IT Org hierarchy: the report owner decides.
+Who keeps the directory accurate: the team lead decides.
+
+Harness and weekly required-fields check (AUTO-221, sanitized)
+
+What triggers it?
+A person runs the entry point by hand each week against that week’s period ticket.
+Once ticket-triggered runs are built (a later phase), a new period ticket starts it instead.
+New checks are added by writing a settings file, with no change to the runner.
+What does it read?
+Saved Jira filters for the weekly checks, on both Jira instances. The checks are Client Impact, Acceptance Criteria / Business Description, and (federal only) Design Evidence.
+The set of teams in scope comes from the team directory and is never hard-coded. A team removed from that set drops out through the directory, not through a code edit.
+The rules are written in a settings file. They are field filled in, value in an allowed list, and field filled only when another condition holds. The “at Done, not canceled or discarded” gate is one of the conditional rules.
+A source that cannot be fetched is reported as unavailable, with the missing input named. It is never zero.
+What does it output, and to whom?
+Wiki page: per-team counts and issue keys, on an unrestricted page with no personal names or workflow diagnosis. It links to the metrics viewer.
+Metric records: every figure is stored with its metric id, team, period, numerator, denominator, source, time obtained, and definition version. The records have no field for a person. An unavailable source is stored as unavailable, not zero.
+Run record: comments on the period ticket that link the page. A clean week creates no new ticket. No log files are written.
+The reader is the team leads and managers who look at the page and the viewer. The ticket does not name the readers.
+Who decides when it’s done?
+The subject-matter expert for this report confirms the rules, saved filters, and exclusions before the build. They confirm that the counts match their own run during the first parallel weeks, or that each difference has a recorded reason.
+Counts per team must equal a manual run of the same saved filter.
+Canceled and Discarded tickets must be excluded, and teams outside the set must not be reported.
+One question is open, and the expert owns it: should the weekly run also check workflow validators directly?
+
+Spike: inventory the checks and design the harness, metric record, and viewer (AUTO-213, sanitized)
+
+What triggers it?
+It is the first ticket the automation engineer works on, so it starts the whole project. It produces findings and designs, not code.
+Calendar time depends on access. These requests go out on day one: the instructions folder, the wiki space and service identity, the Jira automation rules, read access to the team directory, and time with the two subject-matter experts.
+The harness it designs would later start from a new period ticket created by a Jira automation rule. This ticket validates whether polling for new tickets works, and designs a Jira webhook if it does not.
+What does it read?
+Each report’s current instructions, saved filters, and the existing defect dashboard.
+The Jira automation rules that create the period tickets.
+The team directory on both Jira instances, to find which fields give team, manager, director, and segment.
+Every metric that the related projects will show, to design one common record format.
+Four candidate viewer platforms, and the existing DORA dashboards on the Datadog side.
+One past week and one past month, worked through by hand with the experts.
+Anything not found is recorded as unknown. A query is never guessed from a title.
+What does it output, and to whom?
+Written findings per report: query, population, exclusions, who acts on the result, where the output lives, and whether the report names individuals. The experts confirm these.
+Designs: the harness (settings-file rules, what needs custom code, data fetch with a completeness check, run recording) and how a run starts without running the same ticket twice. Also the metric record format with no field for a person, the rollup rules, and where records are stored. Also the wiki home (space, parent page, service identity, page layout).
+Viewer decision: a platform comparison with a recommendation, and a decision on whether to link to the Datadog DORA dashboards or recompute them.
+Go/no-go per report, plus a re-check of the later phases’ estimates against the design.
+Expected results for one past week and one past month, which the first build is tested against.
+The audience is the report owner, who decides, and the engineer who builds the later phases. No recipient addresses appear in the findings, and no log files are written. Results go on the period tickets as comments.
+Who decides when it’s done?
+Each report’s subject-matter expert confirms the findings for that report. They also confirm the expected results for the past week and month.
+The report owner decides the viewer platform and where the metric records are stored. They also approve the email template and the team map.
+A test must show that a service identity can find a newly created ticket on each Jira instance from the host’s network, or the webhook design is recorded instead.
+Five questions are open:
+Instructions folder access: the team lead grants it.
+Wiki space, parent page, and service identity owner: the team lead decides.
+Which automation rule creates each ticket, and how a missed rule is noticed: the team lead decides, with a Jira administrator.
+Whether polling works and how often to poll: this phase decides, with a Jira administrator.
+Where metric records are stored: this phase decides, with the report owner.
+
+Weekly risk adherence report (AUTO-323, sanitized)
+
+What triggers it?
+It runs weekly, for the week just ended.
+Until ticket-triggered runs are built, a person starts it by hand against that week’s ticket. After that, a new ticket created by a Jira automation rule starts it.
+It is done by hand today, about an hour a week.
+What does it read?
+Risk tickets in three Jira projects. Which Jira instance holds which project, and whether their statuses use the same names, is still to be confirmed.
+Two checks:
+Not assessed: a risk created more than two weeks ago whose status is not Accept, Mitigate, or Closed.
+Not updated: a risk that is not Closed and has not been updated in 90 days. This includes risks in Accept and Mitigate.
+Status names are configuration.
+Each risk’s owner is its assignee, or its reporter when the assignee is blank.
+The team map, to count each risk under the right team through its project.
+A source that cannot be read is reported as unavailable, never zero.
+What does it output, and to whom?
+Wiki page: per risk, its key, project, owner, status, created and last-updated dates, and which check it failed. The risk’s title and description are never copied.
+Owner names: the page is open to everyone who can read the wiki, and it is the one report allowed to list owner names. Names never go in a ticket comment or metric record.
+Run comment: on the weekly ticket, with counts only and no names.
+Metric records: counts of risks not assessed, not updated, and open, stored per team through the team map. Risks whose project maps to no team show under Unassigned.
+No owner: a risk with neither an assignee nor a reporter is listed as having no owner and goes to a named person. It is never dropped.
+No log files are written.
+The audience is the risk owners and whoever acts on the lists. Who is told when the page is published is an open question.
+Who decides when it’s done?
+The subject-matter expert confirms the two tests, the projects, and the owner rule before the build. They also confirm the first parallel weeks’ lists match the current report, or that each difference has a recorded reason.
+Two questions are open, and the expert owns both:
+Which recurring ticket the report runs from today, and who is told when the page is published.
+Which instance holds the three projects, and whether their risk statuses use the same names.
+The two test definitions should be shared with the existing monthly risk audit where they are the same, so there is no second definition. The current report may define them differently, which is a risk.
+
+Metrics viewer: one place to drill from IT Org to team (AUTO-327, sanitized)
+
+What triggers it?
+It refreshes from the stored metric records that each report run produces, so a refresh follows the reports rather than a schedule of its own.
+Each refresh is recorded as a comment on its ticket.
+It cannot be built until three things exist: the platform decision and record design from the spike, the stored records from the harness, and the team map.
+What does it read?
+The stored metric records from every report. Related projects will also feed it: the other report ideas, the application registry, the headcount work, and the DORA metrics.
+The team map, to roll values up through five levels: IT Org, segment, director, manager, team.
+Past periods use the structure that applied in their own period, and a current-structure view shows the trend across a reorganization.
+Rollups are computed from the underlying counts, numerators and denominators, or samples. They are never an average of averages.
+Core AI’s Datadog build already shows DORA metrics. Whether to link to it or recompute those figures here is an open question.
+What does it output, and to whom?
+A read-only site: every staff member who can sign on can see every level and every team size. Each level shows the same metrics rolled up from the level below, with a breadcrumb up and a list of groups down.
+Each value shows:
+its definition and version
+its source
+its period
+when it was obtained
+its trend against the group’s own history
+the same period last year
+a link to its source (the report page, the Jira ticket, or the Datadog dashboard)
+Names: it shows the names of managers, directors, and segment heads. It never shows individual engineers or team members, and no code path produces an individual’s value.
+Missing data: a group where some teams have no value shows “n of m teams reporting”. A missing team is never counted as zero and never hidden.
+Ordering: groups appear in a fixed order, with no ranking and no league table.
+Unassigned: items that map to no team show under Unassigned at the IT Org level, with their count.
+It meets the accessibility standard for colour, keyboard use, and text alternatives. No log files are written.
+Who decides when it’s done?
+The report owner decides the platform. The internal staff-sign-on site is the lead option, compared against a generated static site, a wiki page tree, and Datadog links.
+The design is done when every acceptance check passes. Counts roll up to the sum of the level below, and ratios and medians match the value computed over all the underlying data. Partial groups show “n of m”, and no name or value is shown for an individual.
+Three questions are open:
+Which platform: decided by the spike, with the report owner.
+Who maintains the viewer after the build: the team lead decides.
+Link to Datadog or recompute DORA here: the spike analysis decides.
+There is a risk that the viewer and Datadog give two different DORA answers. Another risk is that a team of one or two effectively shows one person’s value.
+
+Reconcile baselines, confirm the code host and access, spike doc identification (AUTO-58, sanitized)
+
+What triggers it?
+It is the first phase of the documentation agent and has no dependencies, so it starts first. Phase 1 needs its answers.
+The first step is copying the existing skill files from two people’s machines to a shared, access-controlled location. Every other step depends on that.
+The first release targets one product’s docs (Velocity), so that team’s repos are checked first.
+What does it read?
+Skill files: the existing instruction files for the weekly documentation sweep and for five related skills. They must be read directly, not taken from a description.
+Sweep history: the AI impact report and the weekly sweep ticket history, to replace the 500 to 900 hours-a-year savings range with a figure and a method.
+Other existing pieces: the Teams submission-form agent and the Copilot-based use case.
+Code host: the assumed host is confirmed, along with the access path an unattended agent can use (MCP, direct API, or wait). For each team’s source project, tracking project, and manual, it records whether the agent’s account can read the source, create tickets, and create branches and commit without merge rights.
+Real repos: documentation identification is run on two or three real repos, starting with the first-release team’s.
+Wiki read access: this is only a short confirmation. The agent’s account can already read the team documentation on both instances, so the check records the spaces, the account, and the date. This was later deferred to the phase that first uses the wiki.
+What does it output, and to whom?
+A written comparison of each existing tool: inputs, outputs, review step, and known gaps.
+The skill files in the shared location, with a date and owner.
+A measured savings figure with its source, or a note that it is still unmeasured.
+The code host and access path, each with an owner and date.
+The spike’s hit rate per repo, with each repo’s doc structure. If it falls below the writers’ bar, the consequence for the first-release phase is recorded and the other phases are re-planned.
+A written parity tolerance, defining what “matches” means for the old, non-deterministic skills.
+The exact request to a Jira administrator for the tracking project’s statuses (proposed, approved for draft, draft review, rejected), with owner and date.
+Re-baselined estimates for phases 1 to 6, with the basis. The owner thinks the current estimates look high.
+The audience is the report owner and the later phases’ builder.
+Who decides when it’s done?
+The people who own the existing skills agree the parity tolerance. Writers set the bar for the spike hit rate.
+A failed code host access check defers the draft stage (Phase 3). Because the first release’s docs are in that host, this phase now decides whether the first release can proceed.
+Risks:
+The skill files may depend on local files, connectors, or settings that are not in the skill itself.
+A spike on three repos may not represent the rest.
+
+Shared subagent skeleton, per-manual config, Jira tracking, and propose stage (AUTO-59, sanitized)
+
+What triggers it?
+The build starts after the spike phase (AUTO-58) answers its questions about access and the code host.
+Once built, the propose stage runs on a schedule.
+Personal access tokens are used to start. A service identity replaces them before scheduled runs, in a later phase.
+A dry-run mode prints what the agent would create and creates nothing in Jira.
+A writer moving a proposal to the approved status is the trigger for the draft stage, which is a later phase.
+What does it read?
+Per-team and per-manual configuration:
+source Jira projects and the query window
+discovery mode
+tracking project and status names
+writer
+confidence threshold
+for each manual, its own instance, code-host project and layout, and location convention
+A new team or manual is added by configuration only, with no code change. The definition is also meant to be reusable by the manual Q&A agent and extensible for the annual manual audit.
+Source tickets: the configured query over those projects.
+Prior proposals: already-proposed work is rebuilt from the tracking tickets and their links to source tickets. There is no local state.
+The agent never edits, comments on, or moves a source ticket.
+All Jira and code host access goes through one helper file per system.
+What does it output, and to whom?
+One tracking (proposal) ticket per documentation target:
+It links every source ticket, names the manual or manuals, and gives the reason and confidence.
+Several source tickets for the same target produce one proposal, and a second run over the same window creates no duplicate.
+A proposed manual location is marked unverified until checked against the live manual.
+Status workflow: proposed, approved for draft, draft review, and rejected. A Jira administrator creates these. A rejection or changed target carries a reason in a consistent form the agent can read, which feeds the later trainability phase.
+All logging is comments on the tracking tickets: what the agent did or decided and why. There are no log files and no local state, and no personal data, secrets, tokens, or raw payloads. If Jira cannot be reached, the run stops and reports a failure through the scheduler.
+Disagreements: if a source ticket’s own documentation field says “not required” and the agent disagrees, the disagreement is reported and no proposal is created.
+Audit tickets: the annual manual audit’s child tickets are this agent’s tracking tickets. They are created in the proposed status under an audit parent ticket, and a writer approves each. So a tracking ticket must sit under a parent and hold several items in one ticket (manual text, code evidence, proposed text, tier).
+New-manual marker: a person, not the agent, starts a new manual. Technical writers create the project, add the configuration, and create a new-manual ticket listing the inputs. The agent only needs a way to mark such a ticket, such as an issue type, label, or field.
+Who decides when it’s done?
+Each of the five subagents (discovery, identification, drafting, tracking, repo) must run alone against a recorded input and return its defined output. A manual added to configuration must be recognized on the next run.
+Writers approve or reject each proposal in Jira.
+A Jira administrator creates the statuses.
+One question is open, and this phase decides it with the report owner: tickets that are considered but not proposed (excluded, below the threshold, a disagreement, or unmatched to a manual) have no tracking ticket. The agent never comments on source tickets, so where is their reason recorded, and how are they not re-evaluated every run?
+Scope notes: this build is code host only. The read-only wiki helper and the new-manual marker moved to a later phase. The old tools stay untouched until then, to limit regression risk. Disregard the earlier idea of creating tickets already in the approved status.
+
+Code-host draft stage: status-triggered, branch per ticket (AUTO-61, sanitized)
+
+What triggers it?
+A writer moving a tracking ticket to the approved status. The draft stage looks for tickets in that status in the tracking project and does nothing for any other status.
+It is the first release for the Velocity team, whose docs are in the code host. It cannot start until the earlier phases are done: the tracking tickets and statuses, the proposals, code host access from the spike, and the spike result.
+A dry-run mode prints the planned branch and changes without writing to the code host or Jira.
+What does it read?
+The source tickets linked from the tracking ticket, and any change the reviewer made to the target manual.
+The manual’s repo, to find where in it the change belongs. Layouts vary (README, docs folder, wiki, inline), and each repo’s layout is configuration. Each manual names its own code host instance and project.
+The team’s guidance for style, which comes from the later trainability phase.
+A location it cannot verify against the repo is marked unverified. The agent does not guess.
+It reads only the code host, never the wiki.
+What does it output, and to whom?
+A draft in the repo: a Markdown or HTML update in the style of the target repo, committed to one branch per ticket named for it. Nothing is merged to the default branch.
+A Jira hand-back: the ticket moves to the review status, with a comment that summarizes what changed and why (no raw payloads) and links the branch.
+Failures: a comment on the same ticket. A failed code host write leaves the ticket where it was, not moved to review.
+Not found: if the docs cannot be located, the ticket says so and no branch is created.
+Stale branch: a stale branch from an earlier run of the same ticket is reused or flagged, never duplicated.
+No log or state files are written. The agent creates no repository, project, or configuration entry.
+The audience is the writer who reviews the draft.
+Who decides when it’s done?
+A person reviews and approves or rejects each draft. A rejection carries a reason, which is recorded for the trainability phase, and branch cleanup follows the policy set in the spike.
+The phase is done when all ten acceptance checks hold:
+the branch contains only the draft
+the default branch is unchanged
+the right ticket status moves
+credentials stay out of comments
+no log or state file is written
+Risks:
+Target host: it is not settled. One host is assumed from a backup, the repo is configured for another, and the old host may still serve some repos.
+Doc identification: quality varies by repo. Low confidence is flagged, not hidden.
+Permissions: the agent’s account needs permission to create branches and commit, with no permission to merge.

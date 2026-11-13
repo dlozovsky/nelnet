@@ -151,3 +151,27 @@ Weekly Status: Week 3
 - No real recipient has received a message from the tool yet. A bad address in Jira shows only as an Undeliverable notice after the send.
 - NULSC: the laptop has shipped, but the PIV card may take several weeks, and clearance and your written authorization are still needed. The team may also use separate laptops for US and NULSC, which would block one combined send. The NULSC date is open. Clearance is not the authorization. No NULSC data is on my laptop.
 
+========================================
+This may not be the problem it looks like. It is a design question for Eric, and I’d keep the options ready for when he answers.
+
+What the code does today.
+
+Each run reads one Jira instance, set by source.instance in the settings file. The code has no NULSC handling at all.
+So the combined Bcc email was never built, even for one machine. Stephanie’s one Bcc email is how she sends it by hand today. The status says the tool “will do the same when NULSC is added,” and that line needs rechecking.
+With two laptops, a combined email would mean NULSC recipients crossing to the US laptop or the reverse. CLAUDE.md says no NULSC data on the US laptop, and the security owner decides that.
+
+Options to send Eric if he confirms two laptops.
+
+Two emails. Each laptop’s run emails its own people with its own page link.
+This fits the code, and nothing crosses the boundary.
+Stephanie’s one email becomes two, which she has to agree to.
+A person with findings in both instances gets two emails.
+The NULSC laptop needs its own mail path, Send As and record ticket, which nobody has checked.
+Tool sends US only, Stephanie sends NULSC by hand. This is the earlier option A. It is the smallest change, but it is a split email too.
+Stephanie keeps sending the combined email by hand. The tool only prepares each page and its counts. Nothing crosses the boundary and nothing changes for her. Nothing is automated yet.
+One machine inside both boundaries, such as a server or VDI. This ties to your hosting email, and it only exists if Andres and the security owner say it can.
+
+My recommendation for Eric: for 2026-11-25, use option 3, since NULSC isn’t ready anyway. After NULSC is authorized and tested, use option 1 if Stephanie agrees to two emails. Treat option 4 as a later question for the hosting decision.
+
+Not changed yet. Question 1 and the “one Bcc email for both reports” line in the status still assume one tool run covers both. I’d wait for Eric’s answer before rewording them. Once he replies, I can revise question 1, the decisions line, the requirements wording and guide section 12.
+

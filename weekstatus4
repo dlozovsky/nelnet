@@ -67,3 +67,6 @@ DRAFT, NOT SENT. Written 2026-11-12. Update it on 2026-11-13 with Friday's work.
 
 =============================
 py -3.13 -c "import json,glob,csv; f=max(glob.glob('runs/biweekly_structure-*-dry-run.json')); d=json.load(open(f)); out=f.replace('-dry-run.json','-recipients.csv'); w=csv.writer(open(out,'w',newline='')); w.writerow(['display_name','user_id']); [w.writerow([x['display_name'],x['id']]) for x in sorted(d['recipients'], key=lambda x:(x['display_name'] or '~', x['id']))]; print('wrote', out)"
+
+===============
+Hi Eric, quick check. I just found out I'll need two laptops, one for US and one for NULSC. Is that how the team works today, with no single machine that can reach both? It affects how the structure email gets built: if the tool can't see both on one machine, it can't make the one combined Bcc email Stephanie sends. If that's right, I'll send you a few options. Stephanie keeps sending by hand on 11/25 either way.

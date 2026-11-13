@@ -64,3 +64,6 @@ DRAFT, NOT SENT. Written 2026-11-12. Update it on 2026-11-13 with Friday's work.
 - No real recipient has received a message from the tool yet. A bad address in Jira shows only as an Undeliverable notice after the send.
 - NULSC: the laptop has shipped, but the PIV card may take several weeks, and clearance and your written authorization are still needed. The NULSC date is open. Clearance is not the authorization. No NULSC data is on my laptop.
 - Thanksgiving falls in the last gate week. The weekly check falls on 2026-11-25, and the structure email would too, so treat 2026-11-20 as the real finish.
+
+=============================
+py -3.13 -c "import json,glob,csv; f=max(glob.glob('runs/biweekly_structure-*-dry-run.json')); d=json.load(open(f)); out=f.replace('-dry-run.json','-recipients.csv'); w=csv.writer(open(out,'w',newline='')); w.writerow(['display_name','user_id']); [w.writerow([x['display_name'],x['id']]) for x in sorted(d['recipients'], key=lambda x:(x['display_name'] or '~', x['id']))]; print('wrote', out)"

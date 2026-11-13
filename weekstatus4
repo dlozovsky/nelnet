@@ -459,3 +459,36 @@ DRAFT, NOT SENT. Written 2026-11-12, revised 2026-11-13 with the two-laptops que
 - Application control could block Python files again, for example on a new maintainer's laptop. The fix is the request in the pop-up, and the guide says so. If it blocks a run on 2026-11-19 or 2026-11-25, I tell Stephanie and you the same day.
 - No real recipient has received a message from the tool yet. A bad address in Jira shows only as an Undeliverable notice after the send.
 - NULSC: the laptop has shipped, but the PIV card may take several weeks, and clearance and your written authorization are still needed. The team may also use separate laptops for US and NULSC, which would block one combined send. The NULSC date is open. Clearance is not the authorization. No NULSC data is on my laptop.
+
+======================================
+Yes, for one email that covers both. I haven't sized it.
+
+- **What I checked.** A run reads one Jira instance, set by `source.instance` in the settings file. The code in `adherence/` has nothing for a second instance or for NULSC. CLAUDE.md calls NULSC "a second source entry," but the code reads a single `[source]` today.
+- **What the change would involve.** One run would have to read both instances, remove duplicate recipients across them, combine the exception lists, carry both page links, and record the send once. Tests would come first, as the project rules require. I haven't estimated the effort, and the status says so.
+- **The no-code route.** From the same NULSC laptop you could run the tool twice, once per instance, with a settings file for each. That sends two emails, not one combined email, so Stephanie would have to approve the split. That is what option B of question 1 describes.
+
+The status already says this in option A: "one run that covers US and NULSC needs a code change. I will size it once I have the laptop." I don't think it needs more.
+
+well he will ask why this was not architected a head of time
+
+Searched code
+He may ask. The honest answer is partly “it was designed that way” and partly “we missed one question.” Here is what the records show.
+
+What was decided on purpose.
+
+2026-10-27 plan: build US first, with the Jira instance as a setting. Add NULSC as a source entry only after the read-only test (N1) and Eric’s written authorization.
+One instance per run: this keeps each instance’s tokens apart, so a run never reads another instance’s token. It is a security choice as well as a design one.
+2026-10-30: Eric said a US-only release doesn’t meet the gate, to run against NULSC too, and to expect another person to do the run. So NULSC was always in scope, and the code reads one instance at a time by design.
+What was missed.
+
+Stephanie’s answer came late. On 2026-11-11 she said she sends one Bcc email for both reports. That was after the structure notifier was built.
+I didn’t connect it to the design then. Her answer meant one run would have to cover both instances, which the code can’t do today.
+I didn’t ask whether one machine reaches both. I assumed the combined email would be a later code change.
+Eric’s answer on 2026-11-13 closes that gap. One machine does reach both.
+A short version for Eric:
+
+“We built US first with the instance as a setting, as planned on 2026-10-27, and each run reads one instance by design. Stephanie told us on 2026-11-11 that she sends one email for both reports, after the notifier was built. I didn’t check then what that meant for the code, or whether one machine could reach both. You’ve confirmed it can, so what’s left is one code change, which I’ll size when I have the NULSC laptop.”
+
+This is plain and doesn’t blame anyone. It doesn’t claim the gap was planned, because it wasn’t.
+
+I haven’t added any of this to the status. Eric may ask for it, and the status already says the combined email needs a code change. If you’d rather answer it up front, one sentence in option A of question 1 would do. Tell me if you want it.

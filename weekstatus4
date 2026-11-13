@@ -492,3 +492,7 @@ A short version for Eric:
 This is plain and doesn’t blame anyone. It doesn’t claim the gap was planned, because it wasn’t.
 
 I haven’t added any of this to the status. Eric may ask for it, and the status already says the combined email needs a code change. If you’d rather answer it up front, one sentence in option A of question 1 would do. Tell me if you want it.
+
+======================
+Option A of question 1 (line 52): “The combined email waits for the NULSC laptop setup, the PIV card and your written authorization, and then comes from that laptop. Today a tool run reads one instance, so one run that covers US and NULSC needs a code change. I will size it once I have the laptop.”
+First row of the Blockers table (line 46): “A real combined send also needs a code change, because a run reads one instance today. I will size it once I have the laptop.”

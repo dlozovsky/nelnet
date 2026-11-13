@@ -175,3 +175,12 @@ My recommendation for Eric: for 2026-11-25, use option 3, since NULSC isn’t re
 
 Not changed yet. Question 1 and the “one Bcc email for both reports” line in the status still assume one tool run covers both. I’d wait for Eric’s answer before rewording them. Once he replies, I can revise question 1, the decisions line, the requirements wording and guide section 12.
 
+====##======
+The design looks sound for the two-laptops case, but one assumption went unchecked. It reads one instance per run, with the instance as a setting. That is the setup you need if US and NULSC are reached from separate laptops, because each laptop can run the tool on its own side. A tool that queried both in one run would need a machine that reaches both networks, and that may not exist.
+
+The unchecked assumption is that the combined email would come from one machine. We planned it as a later code change, but we never asked whether one machine could reach both. A NULSC laptop that ships separately was a hint, and I didn't connect it to the combined email either.
+
+So this probably isn't a redesign. The missing piece is a step that combines the outputs: each run saves its recipient list and page link, and one step builds the single email. I haven't read the code, so I can't say how big that step is. Nelnet Claude can size it once Eric answers the top question.
+
+The gate is not affected. The weekly check works, and the US structure report works.
+

@@ -224,3 +224,77 @@ It also sends once per run date. After the send, the record comment on the ticke
 
 That is why I’d keep your status as it is. The question for Eric is not whether the tool can send US. It is whether a US-only email is acceptable while NULSC is out of reach.
 
+===============================================
+DRAFT, NOT SENT. Written 2026-11-12, revised 2026-11-13 with the two-laptops question. Open TBDs: the gate start date (header and blockers) and the send time (question 1). Remove this line before sending.
+
+Weekly Status: Week 3
+Dates: 2026-11-09 to 2026-11-13 · Gate week: [TBD: Eric has not told me the clock start date]
+
+Needs action before Friday 2026-11-20:
+
+Two laptops. I learned this week that I will need two laptops, one for US and one for NULSC, and I do not know whether the team has any single machine that reaches both. Is that how the team works today? If it is, the tool cannot build the one combined Bcc email Stephanie sends today, because each laptop sees only its own list. Which do you want?
+
+(1) Two emails, one per network, each run from its own laptop. No code redesign, but Stephanie has to approve the split.
+(2) The tool runs on each laptop, and a person merges the two lists and sends one email by hand. This needs the security owner's okay, because NULSC recipient data would reach a US machine, and a way to make a list without writing addresses to disk.
+(3) A supported way for one host to reach both, or a central location approved for both, where each run writes its list and one step combines them. Both are security and hosting questions.
+Also, on 2026-11-06 you said the gate is running code someone else can run, and that the email send is not a gate blocker. Does the structure report still count toward the gate while its send stays manual, once someone other than me runs it?
+
+Who sends on 2026-11-25. See question 1 below. I recommend that Stephanie sends by hand.
+
+Gate progress
+Automation	Stage	In use by	Maintenance doc
+1. Weekly required-fields check (AUTO-188)	First real run with the email, 2026-W46 on Thursday 2026-11-12. The page is published under the Automation Output page in the Odd Squad Automation space, one email reached the Odd Squad help mailbox, and both filters returned 0, the same as a manual run of the same two filters in Jira that day. Stephanie replied "Thank you, that is great!" The run takes under 2 minutes	The Odd Squad gets the email. I start each run	Draft 0.8 on Confluence
+2. Biweekly structure report email (AUTO-188)	The mail path works. Test sends to my own mailbox arrived on 2026-11-10 and 2026-11-11, the email and the exception list, with Stephanie's wording. The tool read 152 findings, 51 recipients and 2 on the exception list, the same as the page. No real recipient has received a message from the tool. Stephanie sent the 2026-11-11 email by hand. No send by the tool is scheduled. The combined email for both reports needs NULSC, which is not set up or authorized, and US and NULSC may be reached from separate laptops (top question and question 1)	Nobody yet	Draft 0.8 on Confluence
+3. GitLab	The project gate-automation exists and the code is on main, with the full history. The tests passed in the GitLab pipeline. A code map and three flow charts (DIAGRAMS.md) are in the repository	The Odd Squad team can read it. Changes go by merge request	Section 13 of the guide
+693 tests passed with the network blocked on my laptop on 2026-11-13 (6 seconds), and they passed in the GitLab pipeline on 2026-11-12. The app is 15 files and 3,276 lines. The tests are 37 files and 5,823 lines.
+
+36 hours this week. I took a partial sick day on Monday, recovering from an ER visit over the weekend.
+
+Done this week
+Mail fixed. On 2026-11-10 the mail team set Send As for my login on the on-premises Exchange and in AD for the group MBO_OddSquadHelp (Ken Hicks, then Steve Kindschuh, with Phil Baker and Kirk Beeman finding who owns each part). My login name exists only in O365, so test mail to it bounced. A new optional setting, own_address, sends a test to my own mailbox, and it arrived that evening.
+Stephanie asked for the link to show as "bi-weekly reports (US)". It is built, tested and merged, and it shows correctly in Outlook.
+Stephanie approved the structure email wording on 2026-11-11: her subject, a third-person opening, the two reasons it matters, what to do, and "within two weeks". No Business Confidential label. She sends one Bcc email for both reports, so a tool send has to cover both (see the top question).
+Counts checked against her report. Her epics were 59 and the tool's first run read 53. A dry run later the same day read 59 and 152 findings, equal to her total, so the cause is timing. The 51 recipients are the 52 distinct people on the page less one inactive account. Both exceptions match the page. She counts 50 people and thinks that is timing.
+Weekly check: Stephanie confirmed on 2026-11-11 that the email goes to the Odd Squad help mailbox. I changed the wording to be true in a clean week, because the email goes every week. W46 was checked against Jira, the page and the mailbox. W45 stays FAILED, with a comment added by hand on AUTO-188 that says it was skipped on purpose.
+GitLab. Access was granted on 2026-11-11 and I created the project. The first push was refused because main is protected and a Developer cannot push the initial commit. Phil created main on 2026-11-12, and the code went in by merge request with all the history kept. The security scan flagged 7 items. A Maintainer reviewed them and dismissed them as false positives (six invented test tokens and one comment with the word "password"). I also wrote a README that links to the Confluence documentation.
+Documents. I updated the Confluence pages this week: Maintenance guide Draft 0.8, the weekly requirements v0.11 (with the W46 result and the checks ticked), the biweekly requirements v0.11 and the open items. None uses the word "slice". The guide now has how to get the code, how to change it in GitLab, a test email for the weekly check, a "Check your setup" section with commands that print True or False and no values, and a fix for the blocked Python file pop-up.
+Automation registry. I created a one-page registry that says what each automation is, who owns it, what it touches, who approved it and how to stop it. It has entries for both gate tools and Phase 6. From now on an entry changes in the same change as the automation, every automation gets an entry before its first real run, and the page is reviewed monthly. It is a draft for your review, and it later moves to Confluence next to the maintenance guides.
+Phase 6 (AUTO-323). Stephanie answered the questions (monthly, not weekly; the 14-day check by email). Your rulings of 2026-11-10 are in the requirements (v0.5). Dave's filter ids arrived. No build yet, as you said.
+Application control, fixed. On the afternoon of 2026-11-12, after the weekly run, Windows blocked reading the Python files for the tests, and a pop-up said conftest.py was blocked from executing. The tools still ran. I submitted a request through IT's internal request tool that day and did not work around it. IT approved it, so it is fixed, and on 2026-11-13 the tests ran again: 693 passed. The guide now has a failure row: if the pop-up appears, click the request, fill it out and submit it.
+Answered your Send As questions on 2026-11-12. Only a login that sends through a script or tool needs Send As on the mailbox. Sending by hand in Outlook is not affected. The next maintainer will need the same request to the mail team.
+Next week
+Weekly check, Thursday 2026-11-19.
+Structure report: dry run on Tuesday 2026-11-24 and compare with Stephanie's counts. Who sends the email on 2026-11-25 is question 1.
+Thanksgiving week: the weekly check goes on Wednesday 2026-11-25, as Stephanie said, and the structure email goes then too, sent by whoever you choose in question 1. The day after Thanksgiving, 2026-11-27, the team works.
+After a real send, check the sending login's Inbox for Undeliverable notices. Not known yet: whether every recipient address in Jira exists on the on-premises mail server.
+NULSC: my laptop has shipped (UPS Ground, signature required), and I expect it next week. The PIV card may take several weeks, and I do not have a date. The read-only NULSC test (N1) needs both, and then your written authorization. I am not promising a NULSC date.
+Plan the handoff meeting with the whole Odd Squad team, as you asked on 2026-11-12.
+Phase 6 build starts after the gate. The requirements and filter ids are ready.
+I drafted a roadmap for the rest of my contract, after the gate. Nothing in it is decided, and I will bring it to you to discuss once the gate is finished.
+Blockers and asks
+Blocker	Who can unblock	Needed by
+NULSC access, in this order: (1) my laptop, expected next week; (2) the PIV card, which may take several weeks, no date; (3) your written authorization for the first NULSC run; (4) the read-only NULSC test (N1); (5) only then a real send. Each step waits on the one before it, so this will take weeks. A real combined send also depends on your answer to the two-laptops question, because US and NULSC may not be reachable from one machine	Eric, security owner	Before N1
+What date do you count as the gate start? [TBD]	Eric	[TBD]
+Where a scheduled run could be hosted, and whether an unattended service account is allowed. My email of 2026-11-06 lists the options (Windows server with Task Scheduler first, a persistent VDI second). I need who owns the host and the service account	Eric and Andres	After the gate. Not needed to finish it
+Questions for Eric
+Who sends the structure email on Wednesday 2026-11-25? Stephanie sends one Bcc email for both reports. I will not have NULSC access by then (see the first blocker row), and US and NULSC may need separate laptops (see the top question), so the tool cannot build the combined email. I will not send a US-only email, because that splits the one email Stephanie approved, unless you and she approve the split. Which do you want?
+
+(A) Recommended. Stephanie sends it by hand, as she does now. The tool does not send. What takes over later depends on your answer to the top question.
+(B) Someone else on the team sends the US part with the tool and Stephanie sends the NULSC people a separate one. This is the split in top option (1), so Stephanie has to approve it. That person has to set the tool up on their own laptop and test it first (guide section 12 and a test send), so it needs time before the 25th.
+The tool has no scheduler, so a person starts every run by hand. The send time is [TBD]. A scheduled send needs a host and an unattended service account, which is the open hosting decision (see the last row under Blockers). The weekly check is not affected.
+
+Who takes over as primary maintainer after me, and when is the handoff meeting? You said the whole Odd Squad team should be there. Also, who merges in GitLab after the handoff? Section 14 of the guide has the row blank. One more thing to tell you: I used Claude as a coding assistant on this project. 43 of 69 commits have a "Co-Authored-By: Claude" line, and a CLAUDE.md file with the project rules is in the repository. Is that fine, or is there a rule on how it shows? The "approved tools and data" line in CLAUDE.md is still TBD, so your answer closes that too. The data is invented, and no real tokens or addresses are in the repository.
+
+Gate date: does 2026-11-20 or 2026-11-30 hold, with Thanksgiving in the last week? Also, I'm waiting on IT and NULSC. Do you want me to start the Phase 6 build now, or after the gate? The requirements and filter ids are ready, and I'm staying at planning until you say. Also, the plan's estimate for Phase 6 is 52 hours a year saved, written for a weekly report. Stephanie runs the audit monthly. Do you keep 52, or should I ask her for the time one monthly run takes and use that? If a run takes an hour, a monthly report saves about 12 hours a year.
+
+Decisions made
+Stephanie: the structure email wording is approved. No label. One Bcc email for both reports. The weekly email goes to the Odd Squad help mailbox.
+Eric (2026-11-09): the dry run is needed when testing, not for a routine run. The scan runs by itself in GitLab. The NULSC link goes in after your written authorization. Phase 6 comes before AUTO-56, after the gate.
+Eric (2026-11-10): no comments and no owner mention on risk tickets, the status comments go on the monthly audit ticket, and the report is monthly.
+Eric (2026-11-12): you review and merge changes in GitLab for now, with your Owner account. The whole Odd Squad team joins the handoff meeting.
+Under the 2026-11-06 rule, the tool pages need no approval first. The W46 page is under Automation Output in the Odd Squad Automation space. Please look at it when you can.
+Risks to the gate
+Application control could block Python files again, for example on a new maintainer's laptop. The fix is the request in the pop-up, and the guide says so. If it blocks a run on 2026-11-19 or 2026-11-25, I tell Stephanie and you the same day.
+No real recipient has received a message from the tool yet. A bad address in Jira shows only as an Undeliverable notice after the send.
+NULSC: the laptop has shipped, but the PIV card may take several weeks, and clearance and your written authorization are still needed. The team may also use separate laptops for US and NULSC, which would block one combined send. The NULSC date is open. Clearance is not the authorization. No NULSC data is on my laptop.
+

@@ -504,3 +504,14 @@ Yes, both work. Two small tweaks:
 - **Blockers row:** this repeats option A, so cut it to "Plus the planned code change for the combined send (see question 1)."
 
 Saying it once in full and pointing to it from the other place keeps the status brief, which is what Eric asked for.
+
+=================
+Yes, ask her. This one is on the gate path, since Eric counts NULSC in the gate. Building the combined run on invented test data now means it's ready the day NULSC is authorized, rather than starting then. Keep two limits: no NULSC connection or real NULSC data until Eric's written authorization, and mention the work in the status so it isn't a surprise.
+
+Ask Stephanie, in one message:
+1. Are the NULSC structure rules the same as US (same finding rules, story rule, and exceptions)?
+2. Does NULSC have its own report page, with the same layout?
+3. If someone has findings on both sides, do they get one line or two in her email?
+4. Do the two sides share the inactive-account and no-address handling?
+
+If all four answers are "same," the change is mostly reading two sources and removing duplicate recipients. Any "different" answer means you need a NULSC rules table before coding.

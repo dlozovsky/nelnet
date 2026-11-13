@@ -515,3 +515,33 @@ Ask Stephanie, in one message:
 4. Do the two sides share the inactive-account and no-address handling?
 
 If all four answers are "same," the change is mostly reading two sources and removing duplicate recipients. Any "different" answer means you need a NULSC rules table before coding.
+
+========
+Subject: Second report in the structure email: please confirm my understanding
+
+Stephanie,
+
+I want to check that my understanding is right before I plan how the tool covers the second report in the same email. Nothing is built for it yet, and the tool does not touch it until Eric authorizes that in writing. A yes, or a correction, is enough for each point.
+
+The second report uses the same rules as the first: the same sections, the same story rule and the same exceptions. Is that right? If anything differs, what is it?
+Your email has a link to each report page. The second page has the same layout and the same section names as the first. The tool reads each section’s query from its page. Is that right?
+From your answer on Nov 11, one Bcc email goes to everyone with a finding in either report, so a person with findings in both reports gets one email, not two. Is that right?
+A person who is no longer active, or who has no email address, is handled the same way in both reports: the issue goes on the exception list for the Odd Squad. Is that right?
+
+No rush. This is for planning only.
+
+Thanks,
+Daniel
+
+What I changed from the pasted version
+
+“The second report” instead of NULSC. That is the rule your 2026-11-11 emails to her already followed.
+Dropped “one line or two”. The email carries the page links only, with no per-person lines. Question 3 now confirms her 2026-11-11 answer (“one Bcc email for both reports”) instead of asking it again.
+Question 2 starts from what she already said. Her email has both links, so the question only checks the layout and section names.
+
+Two caveats on the pasted advice
+
+Building now conflicts with the status. It says to build on invented data now. The status tells Eric “I will plan and size it once I have the laptop,” and CLAUDE.md says open decisions go to Eric. Asking Stephanie starts no work. I would start code only after Eric answers question 1, and then change that sentence in the status.
+“Mostly reading two sources” is not established. A run reads one instance, and the tokens, settings and mail path are all per instance. I’d size the change after her answers and a read of the code, and not before.
+
+You can Cc Eric so the status doesn’t surprise him. Whether you do is your call.

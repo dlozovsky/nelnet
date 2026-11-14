@@ -763,3 +763,27 @@ Wait for his answer to question 2. If he says the gate closes on the US side, th
 Don’t start until he says yes. I haven’t written any code, and I won’t start without his okay.
 
 I’d send the line as a short follow-up on the same thread, or fold it into his reply to question 2.
+
+===========================
+Eric, one more on the gate, with a size.
+
+The PIV card has no date, and the code for one email covering US and NULSC is the longest part left. The laptop does not help until the PIV card is issued, so I cannot start the NULSC work from it before then.
+
+Ask: may I write that code now, on invented data with tests, through a merge request, so only the NULSC test waits for the PIV card?
+
+Size (my estimate from reading the code):
+
+22 to 40 hours here, about 3 to 5 working days.
+After the PIV card, 8 to 16 hours on the NULSC laptop for the read-only test and fixes.
+Nothing uses NULSC data until your written authorization. The US run and its 693 tests stay as they are.
+
+Three decisions I need from you. None blocks starting.
+
+The exception list email and the record comment carry issue keys. With NULSC, those keys would reach a US mailbox and a US ticket. Is that allowed, or should NULSC show counts only, or have its own list?
+Which ticket holds the record for the combined email?
+The mail server must be reachable from the NULSC laptop with Send As. Who do I ask?
+
+Fallback, if the combined run is not wanted: no code for a combined email. The US run sends the US email from my laptop, and a separate NULSC run sends the NULSC email from the NULSC laptop. Each run keeps its data on its own side and records on a ticket in its own Jira. The code is up to about 4 hours (settings and the NULSC link wording). The cost is that a person with findings in both gets two emails instead of one. Stephanie sends one Bcc email for both today, so she would have to approve the split. The NULSC laptop also needs its own mail path, and the NULSC exception list needs a mailbox.
+
+Thanks,
+Daniel

@@ -615,3 +615,151 @@ Good, send it. Three small tweaks:
 1. **Number the questions 1, 2 and 3** so he can reply "1 Dec 1, 2 yes, 3 right" in one line.
 2. **Q1:** four weeks from Monday Nov 3 ends Friday Nov 28, since Dec 1 is the first day of week five. Say "Nov 28 (end of week four) or Dec 1?" so he picks the exact day.
 3. **Q3:** add what the tool does, so "counts" is tied to something: "...the tool builds the report and counts, and Stephanie sending the Nov 25 email by hand still counts."
+===================
+what did you understand from Erics answers in regard to the gate
+
+Here is my understanding, with what each point rests on and where I’m unsure.
+
+What Eric has said
+
+Start date: the gate started on 2026-11-03. That is his reply of 11-13 on your email to Stephanie. He added that he thought he had told you.
+Manual send: “As long as the reports are automated, it counts. Having Stephanie send the emails does not mean you don’t hit the target.” That is his reply on the Week 3 status. He also chose option A, so Stephanie sends the 11-25 email by hand and the tool does not send.
+Earlier statements that still stand:
+On 2026-10-30 he said a US-only release does not meet the gate, that NULSC is in the gate, and that Nov 20 stands. He added “revisit if it becomes a big anchor.”
+On 2026-11-06 he said the gate is running code someone else can run, and that the email send is not a gate blocker.
+
+What I conclude from that
+
+Weekly check: it is the one in real use, with 2026-W46 run for real, and nothing in his replies changes it.
+Structure report: a manual send by Stephanie should not stop the gate from closing. The tool does not need to send for it to count.
+NULSC: nothing he has said so far withdraws it from the gate. Option A only says the combined email waits for the laptop, the PIV card and his written authorization.
+
+What I don’t know
+
+End date: he gave the start but not the end. Nov 20 was his answer on 10-30, which assumed a different start. The candidates are Nov 20, Nov 27 (end of week four) and Dec 1 (28 days from Nov 3).
+What “automated” means to him: I’m not sure whether he means the tool reading the page and writing the email, or something more. No tool send has gone to a real recipient yet, so the structure report has no real use yet. Question 3 in your email asks him to confirm this.
+Whether the gate can close on the US side: this is the open question. His 10-30 answer says no, and your PIV card has no date. Question 2 in your email asks him.
+Phase 6 start: I haven’t heard an answer, and I’m not treating it as answered.
+
+I haven’t seen a reply to the three questions you emailed him. Until he answers, I’d treat the end date and the US-only close as unknown and not plan around either.
+
+right now the tool will only send US data which will not help since Stephanie sends both in one email
+
+Agreed, and that is why Eric’s option A makes sense. A US-only tool send would split the one email Stephanie sends today. Anyone with findings in both reports would get two emails, and she would still have to send the NULSC one herself. It saves her nothing, and she approved one email, not two.
+
+What the tool can do for her until the combined email exists
+
+Dry run on 11-24: it gives her the US counts and the recipient count to check against her own report. She compares, as she did on 11-11.
+Recipient list: the tool cannot give her a list of email addresses to paste into Outlook. The rule is that addresses are never written to disk. The dry-run file holds display names only, and she already builds her list from the report page.
+
+What this means for the gate
+
+The structure report’s real value comes only with the combined email. That needs the code change, the NULSC laptop, the PIV card and Eric’s written authorization.
+Eric said a manual send still counts. But until the combined email exists, “in use by Eric’s team” for the structure report is thin, since nobody on the team runs the tool for a real send.
+That is why your question 2 to Eric matters. It decides whether the gate waits for the combined email or closes on the US side.
+
+I wouldn’t change any plan on this. It confirms the status wording: option A, and the combined email later.
+
+Let me ask you hypothatically what if we print out the emails and on screen and she copies them into the BCC herself for only US side
+
+It could work technically, but I wouldn’t build it. It breaks a project rule, and it saves Stephanie little while the combined email is still missing.
+
+Why it’s a problem
+
+Rule: the tool looks up an address only at send time, and writes none to a comment, a page or disk. The console never carries a name. Printing addresses on screen is a new behavior, and CLAUDE.md says open decisions go to Eric. It would need his okay, a code change and new tests, none of which are in the plan.
+Small saving: the on-screen list would cover US only. She would still add the NULSC people herself and send both in one email, as she does now. She already builds her list from the report page. What she gains is removing inactive accounts and duplicates, and the tool already does that.
+Gate: Eric said a manual send counts, so the gate doesn’t need it.
+
+A safer variant that needs no code change
+
+The dry-run file already holds the display names of the people who would get the email. That list excludes inactive accounts and duplicates.
+You could give her the names, joined with semicolons, to paste into Bcc. Outlook resolves names to addresses when she clicks Check Names, so the tool never handles an address.
+It’s untested. Two people with the same name would come up as a choice in Outlook, and I don’t know how your names are formatted.
+The names go from the file to Stephanie, who already sees them on the page. Delete the file afterward, as the guide says.
+
+If you want to try it, do it on the 11-24 dry run. Ask Stephanie first whether pasting a list of names would save her any time. If she says no, the idea ends there.
+
+in regard to this Gate: Eric said a manual send counts, so the gate doesn’t need it.  does that mean that when we have both nuslc and us than manual send counts
+
+Probably yes, but it isn’t confirmed.
+
+What he said
+
+His words were “As long as the reports are automated, it counts. Having Stephanie send the emails does not mean you don’t hit the target.”
+That is about who presses send. He didn’t limit it to US-only, so read literally it would also hold once US and NULSC are both covered.
+
+What’s still open
+
+Whether NULSC is required. His answer says nothing on this, and his 10-30 answer says it is required. That is question 2 in your email, and it matters more than the manual send.
+What “automated” means when the tool doesn’t send. If the tool only reads the page, finds the recipients and writes the email, it isn’t clear to me what Stephanie takes from it. That is question 3, and his reply should settle it.
+A combined run would still be needed. If NULSC counts, “both” means one run that covers US and NULSC, which is the code change. A manual send only removes the sending step. It doesn’t remove the need to read both instances.
+
+What you can say today: Eric has told you a manual send doesn’t miss the target, and the three questions you sent him should confirm that it holds once NULSC is added. Don’t promise it yet.
+
+to build nulsc I will need PIV card which might take several weeks
+
+That’s right for testing and running against NULSC, but it isn’t true for writing the code.
+
+What needs the PIV card
+
+Logging in to the NULSC laptop and reaching the NULSC systems.
+N1, the read-only test against real NULSC data, and Eric’s written authorization for it.
+Testing the combined run for real.
+
+What doesn’t
+
+Writing the combined-run code and its tests. I’ve said it could be done here with invented data, and the 693 tests run with the network blocked.
+Merging it through GitLab, where the pipeline runs the tests.
+
+What this means
+
+The gate: with a PIV card that is weeks away, NULSC probably won’t be tested before any of the end dates (Nov 20, Nov 27 or Dec 1). That is why question 2 to Eric matters.
+When to start the code: you told Eric in the status that you’d plan and size the change “once I have the laptop”. I held back from starting it for that reason. The sizing doesn’t need the laptop, though, only the code. If Eric agrees, the work could be ready when the card arrives, and the NULSC test would be the only step left.
+Eric’s okay: I’d ask him before starting, since the status said otherwise and the change isn’t sized. One line would do: “May I write the combined-run code now on invented data, so only the NULSC test waits for the PIV card?”
+
+If you want, add that line to the email you sent him as a follow-up.
+
+so the questions that I asked stephanie will be enaough to generate nulsc using test data
+
+Enough to start, not enough to finish, and she hasn’t answered yet.
+
+What her four answers settle
+
+Rules and sections: whether the second report uses the same rules, sections and exceptions.
+Layout: whether the second page has the same layout and section names.
+Duplicates: whether a person in both reports gets one email.
+Unreachable people: whether inactive and no-address people are handled the same way.
+
+If she says “same” to all four, I can build the combined run with invented fixtures: two fake instances, a person who appears in both, an inactive person, and a finding with no recipient. The code would read two sources and remove duplicate recipients. A “different” answer on any point means I need a rules table for that difference before coding.
+
+What her answers won’t tell us
+
+NULSC technical facts: these don’t go in the repo or in invented data, and they come out at the N1 test with real NULSC data. They are:
+the real field ids and the parent link field;
+the Confluence page id and the exact section headings;
+what the NULSC user lookup returns for an address.
+The mail path from the NULSC laptop. That is a separate question for Eric and the mail team, not for Stephanie.
+The extra weekly filter that NULSC has.
+Anything she doesn’t know. She is the report owner and may not know how the tool treats inactive accounts. That is behavior in the code, which I’d assume is the same for both instances.
+
+Her answers give me the assumptions to code against. N1 checks them. Eric’s okay to start is still needed before I write anything.
+
+did we ask eric permission to start or not yet
+
+Not yet. You haven’t asked him.
+
+What Eric has been told
+
+In the Week 3 status, option A says “I will plan and size it once I have the laptop.” He chose option A, so he has read that sentence as the plan.
+The email you sent him on 2026-11-13 asks three things: the gate end date, whether the gate can close on the US side, and whether a manual send counts. None of them asks about starting the code.
+
+What he hasn’t been asked: whether you may write the combined-run code now, on invented data, before the laptop and PIV card arrive. That is the line I suggested earlier:
+
+May I write the combined-run code now on invented data, so only the NULSC test waits for the PIV card?
+
+Before you ask
+
+Wait for his answer to question 2. If he says the gate closes on the US side, the combined email moves after the gate. Starting it now would then compete with Phase 6 and the handoff.
+Don’t start until he says yes. I haven’t written any code, and I won’t start without his okay.
+
+I’d send the line as a short follow-up on the same thread, or fold it into his reply to question 2.

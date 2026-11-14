@@ -787,3 +787,29 @@ Fallback, if the combined run is not wanted: no code for a combined email. The U
 
 Thanks,
 Daniel
+
+=========
+Here's the fixed version:
+
+---
+Eric, one more on the gate.
+
+**Ask:** may I write the code for one email covering US and NULSC now, on invented data with tests, through a merge request? Then only the NULSC test waits for the PIV card. If the gate can close on the US side (question 2 in my earlier email), I'll do this after the gate instead.
+
+**Why now:** the PIV card has no date, and this code is the longest part left. The NULSC laptop doesn't help until the card is issued.
+
+**Size (my estimate from reading the code):**
+- 22 to 40 hours now, about 3 to 5 working days.
+- 8 to 16 hours on the NULSC laptop after the PIV card, for the read-only test and fixes.
+- Nothing uses NULSC data until you authorize it in writing. The US run and its 693 tests don't change.
+
+**Three decisions I need. None of them blocks starting:**
+1. The exception list email and the record comment include issue keys. With NULSC, those keys would reach a US mailbox and a US ticket. Is that allowed, or should NULSC show counts only, or have its own list?
+2. Which ticket holds the record for the combined email?
+3. The mail server has to be reachable from the NULSC laptop with Send As. Who do I ask about that?
+
+**Fallback:** separate US and NULSC emails, each sent from its own laptop. That's about 4 hours of code. The costs: people with findings in both get two emails, which Stephanie would have to approve, and the NULSC laptop needs its own mail path.
+
+Thanks,
+Daniel
+---
